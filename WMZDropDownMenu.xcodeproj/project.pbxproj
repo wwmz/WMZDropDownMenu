@@ -1,0 +1,842 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F31BFAC12392C5B500A60D4D /* WMZDropMenu.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F31BFAC02392C5B500A60D4D /* WMZDropMenu.bundle */; };
+		F31EFA3A238BD815000C9258 /* MeiTuanDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F31EFA39238BD815000C9258 /* MeiTuanDemo.m */; };
+		F325D478238CC5080018705E /* TaoBaoDdemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F325D477238CC5080018705E /* TaoBaoDdemo.m */; };
+		F325D47F238CF56D0018705E /* ElMentDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F325D47E238CF56D0018705E /* ElMentDemo.m */; };
+		F325D483238D1EE20018705E /* PinDDDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F325D482238D1EE20018705E /* PinDDDemo.m */; };
+		F35F1CEC2390FE3F00F740C6 /* WeiPinDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F35F1CEB2390FE3F00F740C6 /* WeiPinDemo.m */; };
+		F35F1CF023911EEA00F740C6 /* YiTaoDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F35F1CEF23911EEA00F740C6 /* YiTaoDemo.m */; };
+		F3615333238E07C3006DFFB2 /* MeiTuanWMDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615332238E07C3006DFFB2 /* MeiTuanWMDemo.m */; };
+		F3615336238E16FB006DFFB2 /* BaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615335238E16FB006DFFB2 /* BaseVC.m */; };
+		F361533A238E1CD8006DFFB2 /* BossDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615339238E1CD8006DFFB2 /* BossDemo.m */; };
+		F3B4C897238C185100684AB8 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B4C896238C185000684AB8 /* Aspects.m */; };
+		F3C871D52384D70600351CA9 /* WMZDropMenuBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C871D42384D70600351CA9 /* WMZDropMenuBtn.m */; };
+		F3D8F5F82383BCEE000FF9B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F5F72383BCEE000FF9B4 /* AppDelegate.m */; };
+		F3D8F5FE2383BCEE000FF9B4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F5FD2383BCEE000FF9B4 /* ViewController.m */; };
+		F3D8F6012383BCEE000FF9B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D8F5FF2383BCEE000FF9B4 /* Main.storyboard */; };
+		F3D8F6032383BCF2000FF9B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D8F6022383BCF2000FF9B4 /* Assets.xcassets */; };
+		F3D8F6062383BCF2000FF9B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D8F6042383BCF2000FF9B4 /* LaunchScreen.storyboard */; };
+		F3D8F6092383BCF2000FF9B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F6082383BCF2000FF9B4 /* main.m */; };
+		F3D8F6132383BCF3000FF9B4 /* WMZDropDownMenuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F6122383BCF3000FF9B4 /* WMZDropDownMenuTests.m */; };
+		F3D8F61E2383BCF3000FF9B4 /* WMZDropDownMenuUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F61D2383BCF3000FF9B4 /* WMZDropDownMenuUITests.m */; };
+		F3D8F62E2383BE37000FF9B4 /* WMZDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F62D2383BE37000FF9B4 /* WMZDropDownMenu.m */; };
+		F3D8F6352383C17E000FF9B4 /* WMZDropMenuParam.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F6342383C17E000FF9B4 /* WMZDropMenuParam.m */; };
+		F3D8F6382383C60E000FF9B4 /* WMZDropMenuBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F6372383C60E000FF9B4 /* WMZDropMenuBase.m */; };
+		F3D8F63B2383C6AE000FF9B4 /* WMZDropMenuTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F63A2383C6AE000FF9B4 /* WMZDropMenuTool.m */; };
+		F3DC8687238A6E4A0055BA98 /* JingDongDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DC8686238A6E4A0055BA98 /* JingDongDemo.m */; };
+		F3DC868B238ACB510055BA98 /* XianYuDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DC868A238ACB510055BA98 /* XianYuDemo.m */; };
+		F3DC868F238ACB7A0055BA98 /* ShowDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DC868E238ACB7A0055BA98 /* ShowDemo.m */; };
+		F3EDDAA5238D5C0700F9C608 /* JianShuDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EDDAA4238D5C0700F9C608 /* JianShuDemo.m */; };
+		F3EDDAA9238D646400F9C608 /* GanJiDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EDDAA8238D646400F9C608 /* GanJiDemo.m */; };
+		F3F5CB0023898F08001A0F17 /* WMZDropCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F5CAFF23898F08001A0F17 /* WMZDropCustomView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F3D8F60F2383BCF3000FF9B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3D8F5EB2383BCEE000FF9B4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3D8F5F22383BCEE000FF9B4;
+			remoteInfo = WMZDropDownMenu;
+		};
+		F3D8F61A2383BCF3000FF9B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3D8F5EB2383BCEE000FF9B4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3D8F5F22383BCEE000FF9B4;
+			remoteInfo = WMZDropDownMenu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F31BFAC02392C5B500A60D4D /* WMZDropMenu.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WMZDropMenu.bundle; sourceTree = "<group>"; };
+		F31EFA38238BD815000C9258 /* MeiTuanDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeiTuanDemo.h; sourceTree = "<group>"; };
+		F31EFA39238BD815000C9258 /* MeiTuanDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeiTuanDemo.m; sourceTree = "<group>"; };
+		F325D476238CC5080018705E /* TaoBaoDdemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaoBaoDdemo.h; sourceTree = "<group>"; };
+		F325D477238CC5080018705E /* TaoBaoDdemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaoBaoDdemo.m; sourceTree = "<group>"; };
+		F325D47D238CF56D0018705E /* ElMentDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElMentDemo.h; sourceTree = "<group>"; };
+		F325D47E238CF56D0018705E /* ElMentDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ElMentDemo.m; sourceTree = "<group>"; };
+		F325D481238D1EE20018705E /* PinDDDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PinDDDemo.h; sourceTree = "<group>"; };
+		F325D482238D1EE20018705E /* PinDDDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PinDDDemo.m; sourceTree = "<group>"; };
+		F35F1CEA2390FE3F00F740C6 /* WeiPinDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeiPinDemo.h; sourceTree = "<group>"; };
+		F35F1CEB2390FE3F00F740C6 /* WeiPinDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeiPinDemo.m; sourceTree = "<group>"; };
+		F35F1CEE23911EEA00F740C6 /* YiTaoDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YiTaoDemo.h; sourceTree = "<group>"; };
+		F35F1CEF23911EEA00F740C6 /* YiTaoDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YiTaoDemo.m; sourceTree = "<group>"; };
+		F3615331238E07C3006DFFB2 /* MeiTuanWMDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeiTuanWMDemo.h; sourceTree = "<group>"; };
+		F3615332238E07C3006DFFB2 /* MeiTuanWMDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeiTuanWMDemo.m; sourceTree = "<group>"; };
+		F3615334238E16FB006DFFB2 /* BaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseVC.h; sourceTree = "<group>"; };
+		F3615335238E16FB006DFFB2 /* BaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseVC.m; sourceTree = "<group>"; };
+		F3615338238E1CD8006DFFB2 /* BossDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BossDemo.h; sourceTree = "<group>"; };
+		F3615339238E1CD8006DFFB2 /* BossDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BossDemo.m; sourceTree = "<group>"; };
+		F37A48A323842BA500DB173C /* WMZDropMenuDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuDelegate.h; sourceTree = "<group>"; };
+		F3B4C895238C185000684AB8 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		F3B4C896238C185000684AB8 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
+		F3C871D32384D70600351CA9 /* WMZDropMenuBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuBtn.h; sourceTree = "<group>"; };
+		F3C871D42384D70600351CA9 /* WMZDropMenuBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropMenuBtn.m; sourceTree = "<group>"; };
+		F3D8F5F32383BCEE000FF9B4 /* WMZDropDownMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WMZDropDownMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3D8F5F62383BCEE000FF9B4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F3D8F5F72383BCEE000FF9B4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F3D8F5FC2383BCEE000FF9B4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F3D8F5FD2383BCEE000FF9B4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F3D8F6002383BCEE000FF9B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F3D8F6022383BCF2000FF9B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3D8F6052383BCF2000FF9B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F3D8F6072383BCF2000FF9B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3D8F6082383BCF2000FF9B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F3D8F60E2383BCF3000FF9B4 /* WMZDropDownMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMZDropDownMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3D8F6122383BCF3000FF9B4 /* WMZDropDownMenuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropDownMenuTests.m; sourceTree = "<group>"; };
+		F3D8F6142383BCF3000FF9B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3D8F6192383BCF3000FF9B4 /* WMZDropDownMenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMZDropDownMenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3D8F61D2383BCF3000FF9B4 /* WMZDropDownMenuUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropDownMenuUITests.m; sourceTree = "<group>"; };
+		F3D8F61F2383BCF3000FF9B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3D8F62C2383BE37000FF9B4 /* WMZDropDownMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropDownMenu.h; sourceTree = "<group>"; };
+		F3D8F62D2383BE37000FF9B4 /* WMZDropDownMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropDownMenu.m; sourceTree = "<group>"; };
+		F3D8F62F2383BE50000FF9B4 /* WMZDropDwonMenuConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropDwonMenuConfig.h; sourceTree = "<group>"; };
+		F3D8F6332383C17E000FF9B4 /* WMZDropMenuParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuParam.h; sourceTree = "<group>"; };
+		F3D8F6342383C17E000FF9B4 /* WMZDropMenuParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropMenuParam.m; sourceTree = "<group>"; };
+		F3D8F6362383C60E000FF9B4 /* WMZDropMenuBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuBase.h; sourceTree = "<group>"; };
+		F3D8F6372383C60E000FF9B4 /* WMZDropMenuBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropMenuBase.m; sourceTree = "<group>"; };
+		F3D8F6392383C6AE000FF9B4 /* WMZDropMenuTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuTool.h; sourceTree = "<group>"; };
+		F3D8F63A2383C6AE000FF9B4 /* WMZDropMenuTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropMenuTool.m; sourceTree = "<group>"; };
+		F3DC8685238A6E4A0055BA98 /* JingDongDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JingDongDemo.h; sourceTree = "<group>"; };
+		F3DC8686238A6E4A0055BA98 /* JingDongDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JingDongDemo.m; sourceTree = "<group>"; };
+		F3DC8689238ACB510055BA98 /* XianYuDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XianYuDemo.h; sourceTree = "<group>"; };
+		F3DC868A238ACB510055BA98 /* XianYuDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XianYuDemo.m; sourceTree = "<group>"; };
+		F3DC868D238ACB7A0055BA98 /* ShowDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowDemo.h; sourceTree = "<group>"; };
+		F3DC868E238ACB7A0055BA98 /* ShowDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowDemo.m; sourceTree = "<group>"; };
+		F3EDDAA3238D5C0700F9C608 /* JianShuDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JianShuDemo.h; sourceTree = "<group>"; };
+		F3EDDAA4238D5C0700F9C608 /* JianShuDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JianShuDemo.m; sourceTree = "<group>"; };
+		F3EDDAA7238D646400F9C608 /* GanJiDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GanJiDemo.h; sourceTree = "<group>"; };
+		F3EDDAA8238D646400F9C608 /* GanJiDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GanJiDemo.m; sourceTree = "<group>"; };
+		F3F5CAFE23898F08001A0F17 /* WMZDropCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropCustomView.h; sourceTree = "<group>"; };
+		F3F5CAFF23898F08001A0F17 /* WMZDropCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropCustomView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F3D8F5F02383BCEE000FF9B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D8F60B2383BCF3000FF9B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D8F6162383BCF3000FF9B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F31EFA37238BD7FB000C9258 /* 美团 */ = {
+			isa = PBXGroup;
+			children = (
+				F31EFA38238BD815000C9258 /* MeiTuanDemo.h */,
+				F31EFA39238BD815000C9258 /* MeiTuanDemo.m */,
+			);
+			path = "美团";
+			sourceTree = "<group>";
+		};
+		F325D475238CC4FA0018705E /* 淘宝 */ = {
+			isa = PBXGroup;
+			children = (
+				F325D476238CC5080018705E /* TaoBaoDdemo.h */,
+				F325D477238CC5080018705E /* TaoBaoDdemo.m */,
+			);
+			path = "淘宝";
+			sourceTree = "<group>";
+		};
+		F325D47C238CF55B0018705E /* 饿了么 */ = {
+			isa = PBXGroup;
+			children = (
+				F325D47D238CF56D0018705E /* ElMentDemo.h */,
+				F325D47E238CF56D0018705E /* ElMentDemo.m */,
+			);
+			path = "饿了么";
+			sourceTree = "<group>";
+		};
+		F325D480238D1ECC0018705E /* 拼多多 */ = {
+			isa = PBXGroup;
+			children = (
+				F325D481238D1EE20018705E /* PinDDDemo.h */,
+				F325D482238D1EE20018705E /* PinDDDemo.m */,
+			);
+			path = "拼多多";
+			sourceTree = "<group>";
+		};
+		F35F1CE92390FE3800F740C6 /* 唯品会 */ = {
+			isa = PBXGroup;
+			children = (
+				F35F1CEA2390FE3F00F740C6 /* WeiPinDemo.h */,
+				F35F1CEB2390FE3F00F740C6 /* WeiPinDemo.m */,
+			);
+			path = "唯品会";
+			sourceTree = "<group>";
+		};
+		F35F1CED23911ED200F740C6 /* 一淘 */ = {
+			isa = PBXGroup;
+			children = (
+				F35F1CEE23911EEA00F740C6 /* YiTaoDemo.h */,
+				F35F1CEF23911EEA00F740C6 /* YiTaoDemo.m */,
+			);
+			path = "一淘";
+			sourceTree = "<group>";
+		};
+		F3615330238E07A4006DFFB2 /* 美团外卖 */ = {
+			isa = PBXGroup;
+			children = (
+				F3615331238E07C3006DFFB2 /* MeiTuanWMDemo.h */,
+				F3615332238E07C3006DFFB2 /* MeiTuanWMDemo.m */,
+			);
+			path = "美团外卖";
+			sourceTree = "<group>";
+		};
+		F3615337238E1CC4006DFFB2 /* Boss直聘 */ = {
+			isa = PBXGroup;
+			children = (
+				F3615338238E1CD8006DFFB2 /* BossDemo.h */,
+				F3615339238E1CD8006DFFB2 /* BossDemo.m */,
+			);
+			path = "Boss直聘";
+			sourceTree = "<group>";
+		};
+		F3D8F5EA2383BCEE000FF9B4 = {
+			isa = PBXGroup;
+			children = (
+				F3D8F5F52383BCEE000FF9B4 /* WMZDropDownMenu */,
+				F3D8F6112383BCF3000FF9B4 /* WMZDropDownMenuTests */,
+				F3D8F61C2383BCF3000FF9B4 /* WMZDropDownMenuUITests */,
+				F3D8F5F42383BCEE000FF9B4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F3D8F5F42383BCEE000FF9B4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F3D8F5F32383BCEE000FF9B4 /* WMZDropDownMenu.app */,
+				F3D8F60E2383BCF3000FF9B4 /* WMZDropDownMenuTests.xctest */,
+				F3D8F6192383BCF3000FF9B4 /* WMZDropDownMenuUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F3D8F5F52383BCEE000FF9B4 /* WMZDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				F3D8F62B2383BD0F000FF9B4 /* WMZDropDownMenu */,
+				F3DC8683238A4C860055BA98 /* demo */,
+				F3D8F5F62383BCEE000FF9B4 /* AppDelegate.h */,
+				F3D8F5F72383BCEE000FF9B4 /* AppDelegate.m */,
+				F3D8F5FC2383BCEE000FF9B4 /* ViewController.h */,
+				F3D8F5FD2383BCEE000FF9B4 /* ViewController.m */,
+				F3D8F5FF2383BCEE000FF9B4 /* Main.storyboard */,
+				F3D8F6022383BCF2000FF9B4 /* Assets.xcassets */,
+				F3D8F6042383BCF2000FF9B4 /* LaunchScreen.storyboard */,
+				F3D8F6072383BCF2000FF9B4 /* Info.plist */,
+				F3D8F6082383BCF2000FF9B4 /* main.m */,
+			);
+			path = WMZDropDownMenu;
+			sourceTree = "<group>";
+		};
+		F3D8F6112383BCF3000FF9B4 /* WMZDropDownMenuTests */ = {
+			isa = PBXGroup;
+			children = (
+				F3D8F6122383BCF3000FF9B4 /* WMZDropDownMenuTests.m */,
+				F3D8F6142383BCF3000FF9B4 /* Info.plist */,
+			);
+			path = WMZDropDownMenuTests;
+			sourceTree = "<group>";
+		};
+		F3D8F61C2383BCF3000FF9B4 /* WMZDropDownMenuUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F3D8F61D2383BCF3000FF9B4 /* WMZDropDownMenuUITests.m */,
+				F3D8F61F2383BCF3000FF9B4 /* Info.plist */,
+			);
+			path = WMZDropDownMenuUITests;
+			sourceTree = "<group>";
+		};
+		F3D8F62B2383BD0F000FF9B4 /* WMZDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				F3D8F62F2383BE50000FF9B4 /* WMZDropDwonMenuConfig.h */,
+				F37A48A323842BA500DB173C /* WMZDropMenuDelegate.h */,
+				F3D8F62C2383BE37000FF9B4 /* WMZDropDownMenu.h */,
+				F3D8F62D2383BE37000FF9B4 /* WMZDropDownMenu.m */,
+				F3D8F6362383C60E000FF9B4 /* WMZDropMenuBase.h */,
+				F3D8F6372383C60E000FF9B4 /* WMZDropMenuBase.m */,
+				F3F5CAFE23898F08001A0F17 /* WMZDropCustomView.h */,
+				F3F5CAFF23898F08001A0F17 /* WMZDropCustomView.m */,
+				F3C871D32384D70600351CA9 /* WMZDropMenuBtn.h */,
+				F3C871D42384D70600351CA9 /* WMZDropMenuBtn.m */,
+				F3D8F6332383C17E000FF9B4 /* WMZDropMenuParam.h */,
+				F3D8F6342383C17E000FF9B4 /* WMZDropMenuParam.m */,
+				F3D8F6392383C6AE000FF9B4 /* WMZDropMenuTool.h */,
+				F3D8F63A2383C6AE000FF9B4 /* WMZDropMenuTool.m */,
+				F3B4C895238C185000684AB8 /* Aspects.h */,
+				F3B4C896238C185000684AB8 /* Aspects.m */,
+				F31BFAC02392C5B500A60D4D /* WMZDropMenu.bundle */,
+			);
+			path = WMZDropDownMenu;
+			sourceTree = "<group>";
+		};
+		F3DC8683238A4C860055BA98 /* demo */ = {
+			isa = PBXGroup;
+			children = (
+				F3DC868C238ACB720055BA98 /* 展示全部属性和代理 */,
+				F3DC8688238ACB450055BA98 /* 闲鱼 */,
+				F31EFA37238BD7FB000C9258 /* 美团 */,
+				F325D475238CC4FA0018705E /* 淘宝 */,
+				F325D47C238CF55B0018705E /* 饿了么 */,
+				F3DC8684238A4C860055BA98 /* 京东 */,
+				F325D480238D1ECC0018705E /* 拼多多 */,
+				F3EDDAA2238D5BF900F9C608 /* 简书 */,
+				F3EDDAA6238D645300F9C608 /* 赶集网 */,
+				F3615330238E07A4006DFFB2 /* 美团外卖 */,
+				F3615337238E1CC4006DFFB2 /* Boss直聘 */,
+				F35F1CE92390FE3800F740C6 /* 唯品会 */,
+				F35F1CED23911ED200F740C6 /* 一淘 */,
+			);
+			path = demo;
+			sourceTree = "<group>";
+		};
+		F3DC8684238A4C860055BA98 /* 京东 */ = {
+			isa = PBXGroup;
+			children = (
+				F3DC8685238A6E4A0055BA98 /* JingDongDemo.h */,
+				F3DC8686238A6E4A0055BA98 /* JingDongDemo.m */,
+			);
+			path = "京东";
+			sourceTree = "<group>";
+		};
+		F3DC8688238ACB450055BA98 /* 闲鱼 */ = {
+			isa = PBXGroup;
+			children = (
+				F3DC8689238ACB510055BA98 /* XianYuDemo.h */,
+				F3DC868A238ACB510055BA98 /* XianYuDemo.m */,
+			);
+			path = "闲鱼";
+			sourceTree = "<group>";
+		};
+		F3DC868C238ACB720055BA98 /* 展示全部属性和代理 */ = {
+			isa = PBXGroup;
+			children = (
+				F3DC868D238ACB7A0055BA98 /* ShowDemo.h */,
+				F3DC868E238ACB7A0055BA98 /* ShowDemo.m */,
+				F3615334238E16FB006DFFB2 /* BaseVC.h */,
+				F3615335238E16FB006DFFB2 /* BaseVC.m */,
+			);
+			path = "展示全部属性和代理";
+			sourceTree = "<group>";
+		};
+		F3EDDAA2238D5BF900F9C608 /* 简书 */ = {
+			isa = PBXGroup;
+			children = (
+				F3EDDAA3238D5C0700F9C608 /* JianShuDemo.h */,
+				F3EDDAA4238D5C0700F9C608 /* JianShuDemo.m */,
+			);
+			path = "简书";
+			sourceTree = "<group>";
+		};
+		F3EDDAA6238D645300F9C608 /* 赶集网 */ = {
+			isa = PBXGroup;
+			children = (
+				F3EDDAA7238D646400F9C608 /* GanJiDemo.h */,
+				F3EDDAA8238D646400F9C608 /* GanJiDemo.m */,
+			);
+			path = "赶集网";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F3D8F5F22383BCEE000FF9B4 /* WMZDropDownMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3D8F6222383BCF3000FF9B4 /* Build configuration list for PBXNativeTarget "WMZDropDownMenu" */;
+			buildPhases = (
+				F3D8F5EF2383BCEE000FF9B4 /* Sources */,
+				F3D8F5F02383BCEE000FF9B4 /* Frameworks */,
+				F3D8F5F12383BCEE000FF9B4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WMZDropDownMenu;
+			productName = WMZDropDownMenu;
+			productReference = F3D8F5F32383BCEE000FF9B4 /* WMZDropDownMenu.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F3D8F60D2383BCF3000FF9B4 /* WMZDropDownMenuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3D8F6252383BCF3000FF9B4 /* Build configuration list for PBXNativeTarget "WMZDropDownMenuTests" */;
+			buildPhases = (
+				F3D8F60A2383BCF3000FF9B4 /* Sources */,
+				F3D8F60B2383BCF3000FF9B4 /* Frameworks */,
+				F3D8F60C2383BCF3000FF9B4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3D8F6102383BCF3000FF9B4 /* PBXTargetDependency */,
+			);
+			name = WMZDropDownMenuTests;
+			productName = WMZDropDownMenuTests;
+			productReference = F3D8F60E2383BCF3000FF9B4 /* WMZDropDownMenuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F3D8F6182383BCF3000FF9B4 /* WMZDropDownMenuUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3D8F6282383BCF3000FF9B4 /* Build configuration list for PBXNativeTarget "WMZDropDownMenuUITests" */;
+			buildPhases = (
+				F3D8F6152383BCF3000FF9B4 /* Sources */,
+				F3D8F6162383BCF3000FF9B4 /* Frameworks */,
+				F3D8F6172383BCF3000FF9B4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3D8F61B2383BCF3000FF9B4 /* PBXTargetDependency */,
+			);
+			name = WMZDropDownMenuUITests;
+			productName = WMZDropDownMenuUITests;
+			productReference = F3D8F6192383BCF3000FF9B4 /* WMZDropDownMenuUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3D8F5EB2383BCEE000FF9B4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = wmz;
+				TargetAttributes = {
+					F3D8F5F22383BCEE000FF9B4 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+					F3D8F60D2383BCF3000FF9B4 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = F3D8F5F22383BCEE000FF9B4;
+					};
+					F3D8F6182383BCF3000FF9B4 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = F3D8F5F22383BCEE000FF9B4;
+					};
+				};
+			};
+			buildConfigurationList = F3D8F5EE2383BCEE000FF9B4 /* Build configuration list for PBXProject "WMZDropDownMenu" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F3D8F5EA2383BCEE000FF9B4;
+			productRefGroup = F3D8F5F42383BCEE000FF9B4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F3D8F5F22383BCEE000FF9B4 /* WMZDropDownMenu */,
+				F3D8F60D2383BCF3000FF9B4 /* WMZDropDownMenuTests */,
+				F3D8F6182383BCF3000FF9B4 /* WMZDropDownMenuUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F3D8F5F12383BCEE000FF9B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D8F6062383BCF2000FF9B4 /* LaunchScreen.storyboard in Resources */,
+				F3D8F6032383BCF2000FF9B4 /* Assets.xcassets in Resources */,
+				F31BFAC12392C5B500A60D4D /* WMZDropMenu.bundle in Resources */,
+				F3D8F6012383BCEE000FF9B4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D8F60C2383BCF3000FF9B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D8F6172383BCF3000FF9B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F3D8F5EF2383BCEE000FF9B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3615336238E16FB006DFFB2 /* BaseVC.m in Sources */,
+				F3C871D52384D70600351CA9 /* WMZDropMenuBtn.m in Sources */,
+				F325D47F238CF56D0018705E /* ElMentDemo.m in Sources */,
+				F3B4C897238C185100684AB8 /* Aspects.m in Sources */,
+				F35F1CEC2390FE3F00F740C6 /* WeiPinDemo.m in Sources */,
+				F3DC868B238ACB510055BA98 /* XianYuDemo.m in Sources */,
+				F3D8F62E2383BE37000FF9B4 /* WMZDropDownMenu.m in Sources */,
+				F3D8F6352383C17E000FF9B4 /* WMZDropMenuParam.m in Sources */,
+				F3D8F63B2383C6AE000FF9B4 /* WMZDropMenuTool.m in Sources */,
+				F3EDDAA5238D5C0700F9C608 /* JianShuDemo.m in Sources */,
+				F3D8F6382383C60E000FF9B4 /* WMZDropMenuBase.m in Sources */,
+				F3D8F5FE2383BCEE000FF9B4 /* ViewController.m in Sources */,
+				F3615333238E07C3006DFFB2 /* MeiTuanWMDemo.m in Sources */,
+				F3DC868F238ACB7A0055BA98 /* ShowDemo.m in Sources */,
+				F3D8F5F82383BCEE000FF9B4 /* AppDelegate.m in Sources */,
+				F325D483238D1EE20018705E /* PinDDDemo.m in Sources */,
+				F325D478238CC5080018705E /* TaoBaoDdemo.m in Sources */,
+				F35F1CF023911EEA00F740C6 /* YiTaoDemo.m in Sources */,
+				F3F5CB0023898F08001A0F17 /* WMZDropCustomView.m in Sources */,
+				F3DC8687238A6E4A0055BA98 /* JingDongDemo.m in Sources */,
+				F3D8F6092383BCF2000FF9B4 /* main.m in Sources */,
+				F3EDDAA9238D646400F9C608 /* GanJiDemo.m in Sources */,
+				F31EFA3A238BD815000C9258 /* MeiTuanDemo.m in Sources */,
+				F361533A238E1CD8006DFFB2 /* BossDemo.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D8F60A2383BCF3000FF9B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D8F6132383BCF3000FF9B4 /* WMZDropDownMenuTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D8F6152383BCF3000FF9B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D8F61E2383BCF3000FF9B4 /* WMZDropDownMenuUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F3D8F6102383BCF3000FF9B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3D8F5F22383BCEE000FF9B4 /* WMZDropDownMenu */;
+			targetProxy = F3D8F60F2383BCF3000FF9B4 /* PBXContainerItemProxy */;
+		};
+		F3D8F61B2383BCF3000FF9B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3D8F5F22383BCEE000FF9B4 /* WMZDropDownMenu */;
+			targetProxy = F3D8F61A2383BCF3000FF9B4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F3D8F5FF2383BCEE000FF9B4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F3D8F6002383BCEE000FF9B4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F3D8F6042383BCF2000FF9B4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F3D8F6052383BCF2000FF9B4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F3D8F6202383BCF3000FF9B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F3D8F6212383BCF3000FF9B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F3D8F6232383BCF3000FF9B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDropDownMenu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDropDownMenu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3D8F6242383BCF3000FF9B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDropDownMenu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDropDownMenu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F3D8F6262383BCF3000FF9B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDropDownMenuTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDropDownMenuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WMZDropDownMenu.app/WMZDropDownMenu";
+			};
+			name = Debug;
+		};
+		F3D8F6272383BCF3000FF9B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDropDownMenuTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDropDownMenuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WMZDropDownMenu.app/WMZDropDownMenu";
+			};
+			name = Release;
+		};
+		F3D8F6292383BCF3000FF9B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDropDownMenuUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDropDownMenuUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WMZDropDownMenu;
+			};
+			name = Debug;
+		};
+		F3D8F62A2383BCF3000FF9B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDropDownMenuUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDropDownMenuUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WMZDropDownMenu;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F3D8F5EE2383BCEE000FF9B4 /* Build configuration list for PBXProject "WMZDropDownMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D8F6202383BCF3000FF9B4 /* Debug */,
+				F3D8F6212383BCF3000FF9B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3D8F6222383BCF3000FF9B4 /* Build configuration list for PBXNativeTarget "WMZDropDownMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D8F6232383BCF3000FF9B4 /* Debug */,
+				F3D8F6242383BCF3000FF9B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3D8F6252383BCF3000FF9B4 /* Build configuration list for PBXNativeTarget "WMZDropDownMenuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D8F6262383BCF3000FF9B4 /* Debug */,
+				F3D8F6272383BCF3000FF9B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3D8F6282383BCF3000FF9B4 /* Build configuration list for PBXNativeTarget "WMZDropDownMenuUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D8F6292383BCF3000FF9B4 /* Debug */,
+				F3D8F62A2383BCF3000FF9B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F3D8F5EB2383BCEE000FF9B4 /* Project object */;
+}
