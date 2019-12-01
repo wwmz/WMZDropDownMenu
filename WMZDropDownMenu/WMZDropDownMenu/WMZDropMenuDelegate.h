@@ -37,11 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray*)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
 @optional
 
-/*
-*特殊数据 json数据 用于多级联动的列表
- 如果使用此代理  此代理中的数据优先级>代理(dataForRowAtDropIndexPath)
-*/
-- (NSDictionary*)menu:(WMZDropDownMenu *)menu jsonDatInSection:(NSInteger)section;
 
 /*
  *返回setion行标题有多少列 默认1列

@@ -720,9 +720,6 @@ static NSString* const notificationRemove = @"notificationRemove";
         }
     }
     if (!exist) return;
-    for (WMZDropTree *tree in self.selectArr) {
-        NSLog(@"%@",tree.name);
-    }
     if (!self.selectArr.count) {
         //没有选中的项 取消预选
          [self dealDataWithDelete:MenuDataDelete btn:self.selectTitleBtn];
@@ -1268,7 +1265,6 @@ static NSString* const notificationRemove = @"notificationRemove";
     self.selectArr = [NSMutableArray new];
     [self dealDataWithDelete:MenuDataInsert btn:self.selectTitleBtn];
     for (WMZDropTree *tree in self.selectArr) {
-        NSLog(@"%@",tree.rangeArr);
         if ([tree.rangeArr[0] length]&&[tree.rangeArr[1] length]) {
             if ([tree.rangeArr[1] floatValue]<[tree.rangeArr[0] floatValue]) {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"%@不能大于%@",tree.lowPlaceholder,tree.highPlaceholder] preferredStyle:UIAlertControllerStyleAlert];

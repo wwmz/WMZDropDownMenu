@@ -14,13 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //初始化
 WMZDropMenuParam * MenuParam(void);
-
-
-
 //标题视图是否显示边框 default NO
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wBorderShow)
-//固定弹出显示数据层的高度  default 自动计算~>最大为屏幕高度的0.4倍
-WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wFixDataViewHeight)
 //固定标题的宽度 default 80
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wFixBtnWidth)
 //标题等分个数  用来控制标题的宽度 default 4
@@ -29,9 +24,10 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSInteger,  
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wMenuLine)
 
 
+//固定弹出显示数据层的高度  default 自动计算~>最大为屏幕高度的0.4倍
+WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wFixDataViewHeight)
 //弹窗视图的圆角 默认0
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wMainRadius)
-
 //最大屏幕宽度系数 default 0.9
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wMaxWidthScale)
 //最大屏幕高度系数 default 0.4
