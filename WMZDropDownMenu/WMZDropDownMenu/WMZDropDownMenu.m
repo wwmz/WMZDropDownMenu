@@ -127,7 +127,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         btn.selectColor = selectColor;
         [btn setImage:normalImage?[UIImage bundleImage:normalImage]:nil forState:UIControlStateNormal];
         [btn setImage:seletImage?[UIImage bundleImage:seletImage]:nil forState:UIControlStateSelected];
-        btn.frame = CGRectMake(tmp?CGRectGetMaxX(tmp.frame):0, 0, self.titleView.frame.size.width/self.param.wMenuTitleEqualCount, self.titleView.frame.size.height);
+        btn.frame = CGRectMake(tmp?CGRectGetMaxX(tmp.frame):0, 0, self.titleView.frame.size.width/(self.param.wMenuTitleEqualCount<self.titleArr.count?self.titleArr.count:self.param.wMenuTitleEqualCount), self.titleView.frame.size.height);
         //外部自定义标题按钮
         NSDictionary *config = nil;
         if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:customTitleInSection:withTitleBtn:)]) {
