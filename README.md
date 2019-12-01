@@ -59,7 +59,7 @@
 ### 一淘筛选菜单
 ![一淘.gif](https://upload-images.jianshu.io/upload_images/9163368-ea885fce6c81c9fa.gif?imageMogr2/auto-orient/strip)
 
-#我手机我这么一些app了。。~ ~ 总之，目前的app的筛选样式几乎都能实现，当然细节要自己去调
+#我手机只有这么一些app了。。~ ~ 总之，目前的app的筛选样式几乎都能实现，当然细节要自己去调
 
 用法（组装全在一些代理里,代理方法可能有点多~ ~,不过只有两个是必实现的,其他的都是可选的）
 ==============
