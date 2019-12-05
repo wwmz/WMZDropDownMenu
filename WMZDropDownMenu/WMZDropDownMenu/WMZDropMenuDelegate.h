@@ -147,6 +147,11 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (BOOL)menu:(WMZDropDownMenu *)menu dropIndexPathConnectInSection:(NSInteger)section;
 
+/*
+*互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)
+*/
+- (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu;
+
 #pragma -mark 交互自定义代理
 /*
 *cell点击方法

@@ -25,8 +25,8 @@
             filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1251"
-            endingLineNumber = "1251"
+            startingLineNumber = "1252"
+            endingLineNumber = "1252"
             landmarkName = "-addHeadFootView:screnFrame:"
             landmarkType = "7">
          </BreakpointContent>
@@ -41,9 +41,9 @@
             filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "897"
-            endingLineNumber = "897"
-            landmarkName = "-updateSubView:"
+            startingLineNumber = "898"
+            endingLineNumber = "898"
+            landmarkName = "-cellTap:data:indexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -99,6 +99,14 @@
     return NO;
 }
 
+/*
+*互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)
+*/
+- (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu{
+    return @[@(0),@(1)];
+}
+
+
 - (CGFloat)menu:(WMZDropDownMenu *)menu heightAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath AtIndexPath:(NSIndexPath *)indexpath{
     if (dropIndexPath.section == 0 || dropIndexPath.section == 1) {
         return 50;

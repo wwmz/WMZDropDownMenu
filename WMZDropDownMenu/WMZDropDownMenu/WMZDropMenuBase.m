@@ -287,6 +287,13 @@
     return _dataDic;
 }
 
+- (NSMutableArray *)mutuallyExclusiveArr{
+    if (!_mutuallyExclusiveArr) {
+        _mutuallyExclusiveArr = [NSMutableArray new];
+    }
+    return _mutuallyExclusiveArr;
+}
+
 - (void)setDelegate:(id<WMZDropMenuDelegate>)delegate{
     _delegate = delegate;
 }

@@ -81,6 +81,13 @@ static NSString* const notificationRemove = @"notificationRemove";
     } error:NULL];
     self.userInteractionEnabled = YES;
     [self addSubview:self.titleView];
+    
+    NSArray *indexArr = @[];
+    //相互排斥的标题
+    if (self.delegate && [self.delegate respondsToSelector:@selector(mutuallyExclusiveSectionsWithMenu:)]) {
+        indexArr =  [self.delegate mutuallyExclusiveSectionsWithMenu:self];
+    }
+    
     UIButton *tmp = nil;
     for (int i = 0; i<self.titleArr.count; i++) {
         id dic = self.titleArr[i];
@@ -168,8 +175,14 @@ static NSString* const notificationRemove = @"notificationRemove";
         if ([self.titleBtnArr indexOfObject:btn] == NSNotFound) {
             [self.titleBtnArr addObject:btn];
         }
+        if ([self.mutuallyExclusiveArr indexOfObject:btn] == NSNotFound&&
+           [indexArr indexOfObject:@(i)]!=NSNotFound) {
+            [self.mutuallyExclusiveArr addObject:btn];
+        }
         tmp = btn;
     }
+    
+    NSLog(@"%@",self.mutuallyExclusiveArr);
     
     //阴影层
     self.shadowView.backgroundColor = self.param.wShadowColor;
@@ -792,7 +805,8 @@ static NSString* const notificationRemove = @"notificationRemove";
 - (void)changeTitleArr:(BOOL)clear update:(BOOL)update{
     [self.titleBtnArr enumerateObjectsUsingBlock:^(WMZDropMenuBtn  * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.tag!=self.selectTitleBtn.tag) {
-            if ([self getTitleFirstDropWthTitleBtn:obj].connect) {
+            if ([self getTitleFirstDropWthTitleBtn:obj].connect ||
+                ([self.mutuallyExclusiveArr indexOfObject:obj]!=NSNotFound&&[self.mutuallyExclusiveArr indexOfObject:self.selectTitleBtn]!=NSNotFound)) {
                 obj.selected = NO;
                 obj.click = NO;
                 obj.selectType = 0;
@@ -809,6 +823,8 @@ static NSString* const notificationRemove = @"notificationRemove";
         }
     }];
 }
+
+
 #pragma -mark 改变标题颜色和文字
 - (void)changeTitleConfig:(NSDictionary*)config{
     if (config[@"name"]) {

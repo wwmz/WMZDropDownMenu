@@ -378,6 +378,13 @@
 }
 
 /*
+*互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)
+*/
+- (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu{
+    return @[];
+}
+
+/*
 *WMZDropIndexPath上的内容点击 是否关闭视图
 */
 - (BOOL)menu:(WMZDropDownMenu *)menu closeWithTapAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath{

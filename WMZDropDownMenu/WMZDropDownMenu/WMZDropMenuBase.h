@@ -146,6 +146,12 @@ NS_ASSUME_NONNULL_BEGIN
 *选中的数据源
 */
 @property(nonatomic,strong)NSMutableArray *selectArr;
+
+/*
+*相互排斥的标题数组
+*/
+@property(nonatomic,strong)NSMutableArray *mutuallyExclusiveArr;
+
 /*
  *初始化方法
  */
