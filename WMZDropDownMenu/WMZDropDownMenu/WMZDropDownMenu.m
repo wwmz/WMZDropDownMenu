@@ -24,15 +24,49 @@ static NSString* const notificationRemove = @"notificationRemove";
 @implementation WMZDropDownMenu
 #pragma -mark 更新数据
 - (void)updateData:(NSArray*)arr ForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath{
-    
     WMZDropIndexPath *currentDrop = dropIndexPath;
-    //下一层
+       //下一层
     for (WMZDropIndexPath *tmpDrop in self.dropPathArr) {
-       if (tmpDrop.section == dropIndexPath.section && tmpDrop.row == (dropIndexPath.row+1)) {
-           currentDrop = tmpDrop;
-           break;
-       }
+        if (tmpDrop.section == dropIndexPath.section && tmpDrop.row == (dropIndexPath.row+1)) {
+            currentDrop = tmpDrop;
+            break;
+        }
     }
+    [self updateWithData:arr dropPath:currentDrop normalDropPath:dropIndexPath more:YES];
+}
+- (void)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row{
+    WMZDropIndexPath *currentDrop = nil;
+    for (WMZDropIndexPath *tmpDrop in self.dropPathArr) {
+        if (tmpDrop.section == section && tmpDrop.row == row) {
+            currentDrop = tmpDrop;
+            break;
+        }
+    }
+    if (currentDrop.section!= [self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].section) {
+        for (WMZDropMenuBtn *btn in self.titleBtnArr) {
+            if ((btn.tag - 1000) == currentDrop.section) {
+                NSArray *arr = [self.dataDic objectForKey:currentDrop.key];
+                BOOL hadSelect = NO;
+                for (WMZDropTree *tree in arr) {
+                    if (tree.isSelected) {
+                        hadSelect = YES; break;
+                    }
+                }
+                if (hadSelect) {
+                    [btn setTitle:self.selectTitleBtn.normalTitle forState:UIControlStateNormal];
+                    [btn setTitleColor:self.selectTitleBtn.normalColor forState:UIControlStateNormal];
+                    [btn setTitleColor:self.selectTitleBtn.normalColor forState:UIControlStateSelected];
+                }
+            }
+        }
+    }
+    
+    if (currentDrop) {
+        [self updateWithData:arr dropPath:currentDrop normalDropPath:currentDrop more:NO];
+    }
+}
+- (void)updateWithData:(NSArray*)arr dropPath:(WMZDropIndexPath*)currentDrop normalDropPath:(WMZDropIndexPath*)dropIndexPath more:(BOOL)more{
+   
     NSMutableArray *treeArr = [NSMutableArray new];
     if (arr.count) {
         for (id dic in arr) {
@@ -62,7 +96,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     if (currentDrop.key&&treeArr) {
         self.selectArr = [NSMutableArray new];
         [self.dataDic setObject:treeArr forKey:currentDrop.key];
-        [self updateSubView:dropIndexPath];
+        [self updateSubView:dropIndexPath more:more];
     }
 }
 #pragma -mark UI
@@ -182,7 +216,6 @@ static NSString* const notificationRemove = @"notificationRemove";
         tmp = btn;
     }
     
-    NSLog(@"%@",self.mutuallyExclusiveArr);
     
     //阴影层
     self.shadowView.backgroundColor = self.param.wShadowColor;
@@ -700,7 +733,10 @@ static NSString* const notificationRemove = @"notificationRemove";
        if ([sender isSelected]) {
             self.selectArr = [NSMutableArray new];
            if (!self.close&&self.lastSelectIndex>=0) {
-               [self dealDataWithDelete:MenuDataDelete btn:self.titleBtnArr[self.lastSelectIndex]];
+               WMZDropMenuBtn *lastBtn = self.titleBtnArr[self.lastSelectIndex];
+               if (lastBtn.titleLabel.text == lastBtn.normalTitle) {
+                   [self dealDataWithDelete:MenuDataDelete btn:self.titleBtnArr[self.lastSelectIndex]];
+               }
            }
            [self openView];
        }else{
@@ -756,7 +792,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     [self closeAction];
     self.selectTitleBtn.selected = NO;
 }
-#pragma -mark 关闭方法 不处理数据
+#pragma -mark 关闭方法
 - (void)closeAction{
      WMZDropIndexPath *currentDrop = [self getTitleFirstDropWthTitleBtn:self.selectTitleBtn];
       if (self.hook) {
@@ -770,6 +806,22 @@ static NSString* const notificationRemove = @"notificationRemove";
       }];
       [self.shadowView removeFromSuperview];
       self.close = YES;
+    
+    //获取全部选中
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:getAllSelectData:)]) {
+        NSMutableArray *allSelectArr = [NSMutableArray new];
+        for (WMZDropIndexPath *drop in self.dropPathArr) {
+            NSArray *arr = [self.dataDic objectForKey:drop.key];
+            [arr enumerateObjectsUsingBlock:^(WMZDropTree*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isKindOfClass:[WMZDropTree class]]) {
+                    if (obj.isSelected) {
+                        [allSelectArr addObject:obj];
+                    }
+                  }
+            }];
+        }
+        [self.delegate menu:self getAllSelectData:[NSArray arrayWithArray:allSelectArr]];
+    }
 }
 #pragma -mark 开启筛选
 - (void)openView{
@@ -902,16 +954,24 @@ static NSString* const notificationRemove = @"notificationRemove";
         [self.delegate menu:self didSelectRowAtDropIndexPath:dropPath dataIndexPath:indexPath data:tree];
     }
     
-    [self updateSubView:dropPath];
+    [self updateSubView:dropPath more:YES];
 }
 
 #pragma -mark 更新dropPath之后的视图
-- (void)updateSubView:(WMZDropIndexPath*)dropPath{
-    //获取需要更新的drop
+- (void)updateSubView:(WMZDropIndexPath*)dropPath more:(BOOL)more{
+      //获取需要更新的drop
       NSMutableArray *updateDrop = [NSMutableArray new];
       for (WMZDropIndexPath *tmpDrop in self.dropPathArr) {
-          if (tmpDrop.section == dropPath.section && (tmpDrop.row >= dropPath.row)) {
-              [updateDrop addObject:tmpDrop];continue;
+          if (tmpDrop.section == dropPath.section ) {
+              if (more) {
+                  if(tmpDrop.row >= dropPath.row) {
+                     [updateDrop addObject:tmpDrop];continue;
+                  }
+              }else{
+                  if(tmpDrop.row == dropPath.row) {
+                     [updateDrop addObject:tmpDrop];continue;
+                  }
+              }
           }
       }
       //更新
@@ -1317,7 +1377,7 @@ static NSString* const notificationRemove = @"notificationRemove";
 #pragma -mark 重置方法
 - (void)reSetAction{
     [self dealDataWithDelete:MenuDataDelete btn:self.selectTitleBtn];
-    [self updateSubView:[self getTitleFirstDropWthTitleBtn:self.selectTitleBtn]];
+    [self updateSubView:[self getTitleFirstDropWthTitleBtn:self.selectTitleBtn] more:YES];
 }
 #pragma -mark 获取当前标题对应的首个drop
 - (WMZDropIndexPath*)getTitleFirstDropWthTitleBtn:(WMZDropMenuBtn*)btn{

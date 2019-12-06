@@ -472,6 +472,13 @@
     confirmView.resetBtn.layer.cornerRadius = confirmView.frame.size.height/2;
 }
 
+/*
+*获取所有选中的数据
+*/
+- (void)menu:(WMZDropDownMenu *)menu getAllSelectData:(NSArray*)selectData{
+    NSLog(@"%@",selectData);
+}
+
 @end
 
 

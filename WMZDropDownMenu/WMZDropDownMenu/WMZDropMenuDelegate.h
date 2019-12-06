@@ -169,6 +169,11 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)menu:(WMZDropDownMenu *)menu didConfirmAtSection:(NSInteger)section selectNoramelData:(NSMutableArray*)selectNoramalData selectStringData:(NSMutableArray*)selectData;
 
+/*
+*获取所有选中的数据
+*/
+- (void)menu:(WMZDropDownMenu *)menu getAllSelectData:(NSArray*)selectData;
+
 
 /*
 *自定义标题按钮视图  返回配置 参数说明

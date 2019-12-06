@@ -162,6 +162,15 @@
     [confirmView.confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
+
+
+-  (void)menu:(WMZDropDownMenu *)menu didSelectRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath dataIndexPath:(NSIndexPath *)indexpath data:(WMZDropTree *)data{
+    if (dropIndexPath.section == 0 && dropIndexPath.row == 1) {
+        //更新第一列的数据如有需要
+//        [menu updateData:@[@"1",@"1",@"2",@"3"] AtDropIndexPathSection:1 AtDropIndexPathRow:0];
+    }
+}
+
 @end
 
 

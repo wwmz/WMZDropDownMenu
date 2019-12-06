@@ -11,9 +11,16 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface WMZDropDownMenu : WMZDropMenuBase
 /*
-*更新数据
+*更新数据 下一列的数据
 */
 - (void)updateData:(NSArray*)arr ForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
+
+
+/*
+*更新所有位置的数据 section表示所在行 row表示所在列
+*/
+- (void)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row;
+
 
 /*
 *更新所有UI和数据
