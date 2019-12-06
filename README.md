@@ -328,7 +328,7 @@
 [简书地址](https://www.jianshu.com/p/366d5bb08766)
 
 
-###更新日记
+### 更新日记
 - 20191206 新增代理 - (void)menu:(WMZDropDownMenu *)menu getAllSelectData:(NSArray*)selectData;（获取所有选中的数据）
 - 20191206 新增代理 - (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu;（互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)）
 - 20191206 新增实例方法 - (void)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row （更新所有位置的数据 section表示所在行 row表示所在列）
