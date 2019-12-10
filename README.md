@@ -23,6 +23,8 @@
 #目前已经用这控件实现的效果图
 ⚠️⚠️⚠️⚠️无须改变源码 只需要调用我的代理组合功能即可⚠️⚠️⚠️⚠️
 
+### 注意：如果弹出的视图的y值不准确 你可以手动设置menu的menuOrignY属性 
+
 ### 仿闲鱼筛选菜单
 ![闲鱼1.gif](https://upload-images.jianshu.io/upload_images/9163368-0a03c6a2fc69c113.gif?imageMogr2/auto-orient/strip)
 
