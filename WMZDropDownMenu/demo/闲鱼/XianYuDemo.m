@@ -24,7 +24,7 @@
     .wCollectionViewCellSelectBgColorSet(MenuColor(0xfff2f0))
     .wCollectionViewCellSelectTitleColorSet([UIColor orangeColor]);
     
-    WMZDropDownMenu *menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 0) withParam:param];
+    WMZDropDownMenu *menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];
     menu.delegate = self;
     menu.tag = 111;
     [self.view addSubview:menu];
