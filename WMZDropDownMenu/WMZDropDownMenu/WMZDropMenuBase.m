@@ -58,8 +58,6 @@
 - (WMZDropTableView*)getTableVieww:(WMZDropIndexPath*)path{
     WMZDropTableView *tableView = [[WMZDropTableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.estimatedRowHeight = 0.01;
-    tableView.estimatedSectionFooterHeight = 0.01;
-    tableView.estimatedSectionHeaderHeight = 0.01;
     tableView.scrollsToTop = NO;
     tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -92,6 +90,30 @@
         collection.dropIndex = path;
     }
     return collection;
+}
+#pragma -mark 解析树形数据
+- (void)runTimeSetDataWith:(NSDictionary*)dic withTree:(WMZDropTree*)tree{
+    unsigned int outCount, i;
+    NSMutableArray *propertyArr = [NSMutableArray new];
+    objc_property_t * properties = class_copyPropertyList([tree class], &outCount);
+    //获取所有属性
+    for (i = 0; i < outCount; i++) {
+        objc_property_t property =properties[i];
+        NSString *propertyName = [[NSString alloc] initWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
+        if (propertyName) {
+            [propertyArr addObject:propertyName];
+        }
+    }
+    if (properties)
+    free(properties);
+    [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    //存在该属性赋值
+        for (NSString *name in propertyArr) {
+            if ([name isEqualToString:key]) {
+                [tree setValue:obj forKey:key];
+            }
+        }
+    }];
 }
 /*
 *出现的动画
@@ -128,6 +150,20 @@
           block();
        }
     }
+}
+#pragma -mark 改变标题颜色和文字
+- (void)changeTitleConfig:(NSDictionary*)config withBtn:(WMZDropMenuBtn*)currentBtn{
+    if (config[@"name"]) {
+       [currentBtn setTitle:config[@"name"] forState:UIControlStateNormal];
+    }
+    [currentBtn setTitleColor:currentBtn.selectColor forState:UIControlStateNormal];
+    [currentBtn setTitleColor:currentBtn.selectColor forState:UIControlStateSelected];
+}
+#pragma -mark 回复原来的标题和文字
+- (void)changeNormalConfig:(NSDictionary*)config withBtn:(WMZDropMenuBtn*)currentBtn{
+    [currentBtn setTitle:currentBtn.normalTitle forState:UIControlStateNormal];
+    [currentBtn setTitleColor:currentBtn.normalColor forState:UIControlStateNormal];
+    [currentBtn setTitleColor:currentBtn.normalColor forState:UIControlStateSelected];
 }
 
 - (void)layoutSubviews{
@@ -222,6 +258,7 @@
 - (void)closeView{}
 - (void)confirmAction{}
 - (void)reSetAction{}
+- (void)updateSubView:(WMZDropIndexPath*)dropPath more:(BOOL)more{}
 
 - (CGFloat)menuOrignY{
     if (!_menuOrignY) {

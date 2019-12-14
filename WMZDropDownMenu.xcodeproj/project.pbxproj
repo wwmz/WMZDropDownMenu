@@ -17,6 +17,8 @@
 		F3615333238E07C3006DFFB2 /* MeiTuanWMDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615332238E07C3006DFFB2 /* MeiTuanWMDemo.m */; };
 		F3615336238E16FB006DFFB2 /* BaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615335238E16FB006DFFB2 /* BaseVC.m */; };
 		F361533A238E1CD8006DFFB2 /* BossDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615339238E1CD8006DFFB2 /* BossDemo.m */; };
+		F3AEAC9E23A4A4DD0052A9F1 /* WMZDropDownMenu+UpdateData.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEAC9D23A4A4DD0052A9F1 /* WMZDropDownMenu+UpdateData.m */; };
+		F3AEACA123A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACA023A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m */; };
 		F3B4C897238C185100684AB8 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B4C896238C185000684AB8 /* Aspects.m */; };
 		F3C871D52384D70600351CA9 /* WMZDropMenuBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C871D42384D70600351CA9 /* WMZDropMenuBtn.m */; };
 		F3D8F5F82383BCEE000FF9B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D8F5F72383BCEE000FF9B4 /* AppDelegate.m */; };
@@ -77,6 +79,10 @@
 		F3615338238E1CD8006DFFB2 /* BossDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BossDemo.h; sourceTree = "<group>"; };
 		F3615339238E1CD8006DFFB2 /* BossDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BossDemo.m; sourceTree = "<group>"; };
 		F37A48A323842BA500DB173C /* WMZDropMenuDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuDelegate.h; sourceTree = "<group>"; };
+		F3AEAC9C23A4A4DD0052A9F1 /* WMZDropDownMenu+UpdateData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDropDownMenu+UpdateData.h"; sourceTree = "<group>"; };
+		F3AEAC9D23A4A4DD0052A9F1 /* WMZDropDownMenu+UpdateData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDropDownMenu+UpdateData.m"; sourceTree = "<group>"; };
+		F3AEAC9F23A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDropDownMenu+DealDelegate.h"; sourceTree = "<group>"; };
+		F3AEACA023A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDropDownMenu+DealDelegate.m"; sourceTree = "<group>"; };
 		F3B4C895238C185000684AB8 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
 		F3B4C896238C185000684AB8 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		F3C871D32384D70600351CA9 /* WMZDropMenuBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuBtn.h; sourceTree = "<group>"; };
@@ -280,6 +286,10 @@
 				F37A48A323842BA500DB173C /* WMZDropMenuDelegate.h */,
 				F3D8F62C2383BE37000FF9B4 /* WMZDropDownMenu.h */,
 				F3D8F62D2383BE37000FF9B4 /* WMZDropDownMenu.m */,
+				F3AEAC9C23A4A4DD0052A9F1 /* WMZDropDownMenu+UpdateData.h */,
+				F3AEAC9D23A4A4DD0052A9F1 /* WMZDropDownMenu+UpdateData.m */,
+				F3AEAC9F23A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.h */,
+				F3AEACA023A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m */,
 				F3D8F6362383C60E000FF9B4 /* WMZDropMenuBase.h */,
 				F3D8F6372383C60E000FF9B4 /* WMZDropMenuBase.m */,
 				F3F5CAFE23898F08001A0F17 /* WMZDropCustomView.h */,
@@ -508,6 +518,8 @@
 				F3D8F6382383C60E000FF9B4 /* WMZDropMenuBase.m in Sources */,
 				F3D8F5FE2383BCEE000FF9B4 /* ViewController.m in Sources */,
 				F3615333238E07C3006DFFB2 /* MeiTuanWMDemo.m in Sources */,
+				F3AEACA123A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m in Sources */,
+				F3AEAC9E23A4A4DD0052A9F1 /* WMZDropDownMenu+UpdateData.m in Sources */,
 				F3DC868F238ACB7A0055BA98 /* ShowDemo.m in Sources */,
 				F3D8F5F82383BCEE000FF9B4 /* AppDelegate.m in Sources */,
 				F325D483238D1EE20018705E /* PinDDDemo.m in Sources */,

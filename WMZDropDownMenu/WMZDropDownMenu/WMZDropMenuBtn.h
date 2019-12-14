@@ -9,6 +9,7 @@
 #import "WMZDropMenuTool.h"
 #import "WMZDropDwonMenuConfig.h"
 #import <objc/runtime.h>
+#import "WMZDropMenuParam.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDropMenuBtn : UIButton
@@ -30,6 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *selectImage;
 //双重点击的图片
 @property(nonatomic,copy)NSString *reSelectImage;
+//参数
+@property(nonatomic,strong)WMZDropMenuParam *param;
+
+//设置按钮配置
+- (void)setUpParam:(WMZDropMenuParam*)param withDic:(id)dic;
+
 @end
 
 @interface WMZDropMenuBtn (WMZLine)

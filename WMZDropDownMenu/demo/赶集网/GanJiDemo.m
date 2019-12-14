@@ -102,9 +102,9 @@
 /*
 *互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)
 */
-- (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu{
-    return @[@(0),@(1)];
-}
+//- (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu{
+//    return @[@(0),@(1)];
+//}
 
 
 - (CGFloat)menu:(WMZDropDownMenu *)menu heightAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath AtIndexPath:(NSIndexPath *)indexpath{
@@ -134,6 +134,7 @@
       }
       return MenuShowAnimalBottom;
 }
+
 
 - (UITableViewCell*)menu:(WMZDropDownMenu *)menu cellForUITableView:(WMZDropTableView *)tableView AtIndexPath:(NSIndexPath *)indexpath dataForIndexPath:(WMZDropTree *)model{
     if (tableView.dropIndex.section == 1) {
@@ -166,8 +167,9 @@
 
 -  (void)menu:(WMZDropDownMenu *)menu didSelectRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath dataIndexPath:(NSIndexPath *)indexpath data:(WMZDropTree *)data{
     if (dropIndexPath.section == 0 && dropIndexPath.row == 1) {
-        //更新第一列的数据如有需要
-//        [menu updateData:@[@"1",@"1",@"2",@"3"] AtDropIndexPathSection:1 AtDropIndexPathRow:0];
+        if (indexpath.row == 0) {
+            [menu updateDataConfig:@{@"isSelected":@(NO)} AtDropIndexPathSection:2 AtDropIndexPathRow:0 AtIndexPathRow:2];
+        }
     }
 }
 

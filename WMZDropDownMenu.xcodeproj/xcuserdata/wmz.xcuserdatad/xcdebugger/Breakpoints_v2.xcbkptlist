@@ -18,22 +18,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6AC38F10-A037-476D-ACC8-6E2E8FCBBC02"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1350"
-            endingLineNumber = "1350"
-            landmarkName = "-addHeadFootView:screnFrame:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "749C1D16-AA77-444B-9D6E-7D84EBA621E7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -41,9 +25,9 @@
             filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "977"
-            endingLineNumber = "977"
-            landmarkName = "-cellTap:data:indexPath:"
+            startingLineNumber = "747"
+            endingLineNumber = "747"
+            landmarkName = "-addTableView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

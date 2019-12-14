@@ -168,7 +168,6 @@ NS_ASSUME_NONNULL_BEGIN
  selectData 字符串数据
 */
 - (void)menu:(WMZDropDownMenu *)menu didConfirmAtSection:(NSInteger)section selectNoramelData:(NSMutableArray*)selectNoramalData selectStringData:(NSMutableArray*)selectData;
-
 /*
 *获取所有选中的数据
 */

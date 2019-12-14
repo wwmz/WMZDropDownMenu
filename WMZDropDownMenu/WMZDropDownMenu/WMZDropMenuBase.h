@@ -33,7 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSDictionary *config;
 //是否选中
 @property(nonatomic,assign)BOOL isSelected;
-
 //范围
 @property(nonatomic,strong)NSMutableArray *rangeArr;
 //初始范围
@@ -58,7 +57,18 @@ NS_ASSUME_NONNULL_BEGIN
 *配置
 */
 @property(nonatomic,strong)WMZDropMenuParam *param;
-
+/*
+*标题数组
+*/
+@property(nonatomic,strong)NSArray *titleArr;
+/*
+*DeopindexPath的数组
+*/
+@property(nonatomic,strong)NSMutableArray *dropPathArr;
+/*
+*显示的view的数组
+*/
+@property(nonatomic,strong)NSMutableArray *showView;
 /*
 *代理
 */
@@ -174,18 +184,27 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)reSetAction;
 
-
-/**
- 配置贝塞尔曲线
+#pragma -mark  内部方法
+/*
+ *解析树形数据
  */
-- (UIBezierPath*)getMyDownPath;
-- (UIBezierPath*)getMyDownRightPath;
-
+- (void)runTimeSetDataWith:(NSDictionary*)dic withTree:(WMZDropTree*)tree;
+/*
+*改变标题颜色和文字
+*/
+- (void)changeTitleConfig:(NSDictionary*)config withBtn:(WMZDropMenuBtn*)currentBtn;
+/*
+*回复原来的标题和文字
+*/
+- (void)changeNormalConfig:(NSDictionary*)config withBtn:(WMZDropMenuBtn*)currentBtn;
+/*
+ *更新dropPath之后的视图
+ */
+- (void)updateSubView:(WMZDropIndexPath*)dropPath more:(BOOL)more;
 /*
 *tableviewView
 */
 - (WMZDropTableView*)getTableVieww:(WMZDropIndexPath*)path;
-
 /*
 *collectionView
 */
@@ -200,12 +219,11 @@ NS_ASSUME_NONNULL_BEGIN
 *消失的动画
 */
 - (void)hideAnimal:(MenuHideAnimalStyle)animalStyle  view:(UIView*)view durtion:(NSTimeInterval)durtion block:(DropMenuAnimalBlock)block;
-
-
-
-
-
-
+/**
+ 配置贝塞尔曲线
+ */
+- (UIBezierPath*)getMyDownPath;
+- (UIBezierPath*)getMyDownRightPath;
 @end
 
 NS_ASSUME_NONNULL_END
