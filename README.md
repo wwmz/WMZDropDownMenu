@@ -1,4 +1,4 @@
-# WMZDropDownMenu
+# WMZDropDownMenu (pod 已更新至1.0.2)
 
 实现功能
 ==============
@@ -335,3 +335,4 @@
 - 20191206 新增代理 - (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu;（互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)）
 - 20191206 新增实例方法 - (void)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row （更新所有位置的数据 section表示所在行 row表示所在列）
 - 20191206 cocopods 更新至1.0.1
+- 20191213 cocopods 更新至1.0.2  新增更新任意数据的方法
