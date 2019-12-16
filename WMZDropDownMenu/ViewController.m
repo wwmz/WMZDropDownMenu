@@ -24,7 +24,12 @@
     
     UITableView *ta = [[UITableView alloc]initWithFrame:CGRectMake(0, Menu_NavigationBar, self.view.frame.size.width,self.view.frame.size.height-Menu_NavigationBar) style:UITableViewStylePlain];
     [self.view addSubview:ta];
-    ta.estimatedRowHeight = 0.01;
+    if (@available(iOS 11.0, *)) {
+       ta.estimatedRowHeight = 0.01;
+       ta.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     ta.dataSource = self;
     ta.delegate = self;
     self.ta = ta;

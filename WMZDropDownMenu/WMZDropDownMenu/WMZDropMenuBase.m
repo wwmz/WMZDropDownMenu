@@ -57,13 +57,13 @@
 //获取tableviewView
 - (WMZDropTableView*)getTableVieww:(WMZDropIndexPath*)path{
     WMZDropTableView *tableView = [[WMZDropTableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
-    tableView.estimatedRowHeight = 0.01;
     tableView.scrollsToTop = NO;
     tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView registerClass:[WMZDropTableViewHeadView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([WMZDropTableViewHeadView class])];
     [tableView registerClass:[WMZDropTableViewFootView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([WMZDropTableViewFootView class])];
     if (@available(iOS 11.0, *)) {
+        tableView.estimatedRowHeight = 0.01;
         tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     if (path&&path.key) {

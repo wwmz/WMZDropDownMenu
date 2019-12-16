@@ -386,7 +386,7 @@ static NSString* const notificationRemove = @"notificationRemove";
 
 #pragma -mark 标题点击方法
 - (void)titleAction:(WMZDropMenuBtn*)sender{
-    if (self.selectTitleBtn&&self.selectTitleBtn!=sender&&[self.selectTitleBtn isSelected]) {
+    if (self.selectTitleBtn&&self.selectTitleBtn.tag!=sender.tag&&[self.selectTitleBtn isSelected]) {
         [self.selectTitleBtn hidenLine];
         WMZDropIndexPath *currentDrop = [self getTitleFirstDropWthTitleBtn:self.selectTitleBtn];
         if (currentDrop.editStyle != MenuEditReSetCheck&&
