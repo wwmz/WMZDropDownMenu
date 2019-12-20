@@ -18,4 +18,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = MenuColor(0x00A6FF);
 }
+- (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
+    return @[];
+}
+/*
+*返回WMZDropIndexPath每行 每列的数据
+*/
+- (NSArray*)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath{
+    return @[];
+}
 @end

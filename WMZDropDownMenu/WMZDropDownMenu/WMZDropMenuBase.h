@@ -151,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*
 *全部的数据源
 */
-@property(nonatomic,strong)NSCache *dataDic;
+@property(nonatomic,strong)NSMutableDictionary *dataDic;
 /*
 *选中的数据源
 */
