@@ -1,4 +1,4 @@
-# WMZDropDownMenu (pod 已更新至1.0.2)
+# WMZDropDownMenu (pod 已更新至1.0.3)
 
 实现功能
 ==============
@@ -336,3 +336,4 @@
 - 20191206 新增实例方法 - (void)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row （更新所有位置的数据 section表示所在行 row表示所在列）
 - 20191206 cocopods 更新至1.0.1
 - 20191213 cocopods 更新至1.0.2  新增更新任意数据的方法
+- 20191220 cocopods 更新至1.0.3  修复退出后台数据源被自动清理掉的bug
