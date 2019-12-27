@@ -33,19 +33,7 @@
 
 //通知
 - (void)notifications{
-    
-//    [self aspect_hookSelector:@selector(upda:) withOptions:AspectOptionAutomaticRemoval usingBlock:^(id<AspectInfo> aspectInfo)
-//    {
-//        MenuStrongSelf(weakObject);
-//        strongObject.hook = YES;
-//        [strongObject closeView];
-//    } error:NULL];
 
-    
-//    - (BOOL)updateData:(NSArray*)arr ForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath{return YES;}
-//    - (BOOL)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row{return YES;}
-//    - (BOOL)updateDataConfig:(NSDictionary*)changeData AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row AtIndexPathRow:(NSInteger)indexPathRow{return YES;}
-//    
     //监听键盘出现
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     //监听键盘出现

@@ -155,4 +155,8 @@
     [confirmView.confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
+- (void)menu:(WMZDropDownMenu *)menu didConfirmAtSection:(NSInteger)section selectNoramelData:(NSMutableArray *)selectNoramalData selectStringData:(NSMutableArray *)selectData{
+    NSLog(@"%@",selectData);
+}
+
 @end

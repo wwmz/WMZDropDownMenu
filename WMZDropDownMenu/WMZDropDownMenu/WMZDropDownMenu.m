@@ -34,14 +34,16 @@ static NSString* const notificationRemove = @"notificationRemove";
     self.backgroundColor = menuMainClor;
     //移除
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeView) name:notificationRemove object:nil];
-    //hook监听当前控制器消失
-    MenuWeakSelf(self)
-    [[WMZDropMenuTool getCurrentVC] aspect_hookSelector:@selector(viewWillDisappear:) withOptions:AspectOptionAutomaticRemoval usingBlock:^(id<AspectInfo> aspectInfo)
-    {
-        MenuStrongSelf(weakObject);
-        strongObject.hook = YES;
-        [strongObject closeView];
-    } error:NULL];
+    if([[WMZDropMenuTool getCurrentVC] respondsToSelector:@selector(viewWillDisappear:)]){
+        //hook监听当前控制器消失
+        MenuWeakSelf(self)
+        [[WMZDropMenuTool getCurrentVC] aspect_hookSelector:@selector(viewWillDisappear:) withOptions:AspectOptionAutomaticRemoval usingBlock:^(id<AspectInfo> aspectInfo)
+        {
+          MenuStrongSelf(weakObject);
+          strongObject.hook = YES;
+          [strongObject closeView];
+        } error:NULL];
+    }
     self.userInteractionEnabled = YES;
     [self addSubview:self.titleView];
     
@@ -573,9 +575,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     
     [MenuWindow addSubview:self.shadowView];
     [MenuWindow addSubview:self.dataView];
-         NSLog(@"%@",[MenuWindow subviews]);
     [self addTableView];
-            NSLog(@"%@",[MenuWindow subviews]);
     if (self.dataView.frame.size.height <= 0.1) {
         CGRect rect = self.shadowView.frame;
         rect.size.height = 0;
@@ -585,7 +585,6 @@ static NSString* const notificationRemove = @"notificationRemove";
     [self dealDataWithDelete:MenuDataDefault btn:self.selectTitleBtn];
     //动画
     [self showAnimal:currentDrop.showAnimalStyle view:self.dataView durtion:menuAnimalTime block:^{}];
-        NSLog(@"%@",[MenuWindow subviews]);
 }
 
 #pragma -mark 改变titleBtnArr中数据的状态
@@ -1084,7 +1083,13 @@ static NSString* const notificationRemove = @"notificationRemove";
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:didConfirmAtSection:selectNoramelData:selectStringData:)]) {
         NSMutableArray *nameArr = [NSMutableArray new];
         for (WMZDropTree *tree in self.selectArr) {
-            [nameArr addObject:tree.name];
+            if (!tree.name) {
+                if (tree.rangeArr) {
+                    [nameArr addObject:tree.rangeArr];
+                }
+            }else{
+                [nameArr addObject:tree.name];
+            }
         }
         [self.delegate menu:self didConfirmAtSection:self.selectTitleBtn.tag - 1000 selectNoramelData:self.selectArr selectStringData:nameArr];
     }
