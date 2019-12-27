@@ -25,41 +25,20 @@
 
 ### 注意：如果弹出的视图的y值不准确 你可以手动设置menu的menuOrignY属性 
 
-### 仿闲鱼筛选菜单
-![闲鱼1.gif](https://upload-images.jianshu.io/upload_images/9163368-0a03c6a2fc69c113.gif?imageMogr2/auto-orient/strip)
+| app筛选菜单                | 图片                       |
+|-----------------------|-----------------------------------------------------|
+| 仿闲鱼筛选菜单               | ![xianyu.gif](https://upload-images.jianshu.io/upload_images/9163368-3df9ac4b45352b4b.gif?imageMogr2/auto-orient/strip)|
+| 仿美团筛选菜单               | ![meituan.gif](https://upload-images.jianshu.io/upload_images/9163368-fc0d363e925e9b84.gif?imageMogr2/auto-orient/strip)|
+| 饿了么筛选菜单              |![eleme.gif](https://upload-images.jianshu.io/upload_images/9163368-ab4ba51a21353c50.gif?imageMogr2/auto-orient/strip)|
+ | 京东筛选菜单              | ![Jingdong.gif](https://upload-images.jianshu.io/upload_images/9163368-797e824e4cf89b5a.gif?imageMogr2/auto-orient/strip)|
+|拼多多筛选菜单              |![pinduoduo.gif](https://upload-images.jianshu.io/upload_images/9163368-00eba09306587483.gif?imageMogr2/auto-orient/strip) |
+| 简书筛选菜单             |![jianshu.gif](https://upload-images.jianshu.io/upload_images/9163368-086566f77b9bdab7.gif?imageMogr2/auto-orient/strip) |
+| 赶集网筛选菜单              |![ganjiwang.gif](https://upload-images.jianshu.io/upload_images/9163368-8de1befc145ee6f7.gif?imageMogr2/auto-orient/strip) |
+|美团外卖筛选菜单              | ![meituanwaimai.gif](https://upload-images.jianshu.io/upload_images/9163368-fa0d57fa3b89bf9e.gif?imageMogr2/auto-orient/strip)|
+|Boss直聘筛选菜单           |![Boss.gif](https://upload-images.jianshu.io/upload_images/9163368-289df75bc0c8e07b.gif?imageMogr2/auto-orient/strip) |
+|唯品会筛选菜单          | ![weipinhui.gif](https://upload-images.jianshu.io/upload_images/9163368-bfab522a0eb631a3.gif?imageMogr2/auto-orient/strip)|
+|一淘筛选菜单          | ![yitao.gif](https://upload-images.jianshu.io/upload_images/9163368-56393dc9b1003fdf.gif?imageMogr2/auto-orient/strip)|
 
-### 仿美团筛选菜单
- ![美团.gif](https://upload-images.jianshu.io/upload_images/9163368-af9d4c05f703f309.gif?imageMogr2/auto-orient/strip)
-
-### 仿淘宝筛选菜单
-![淘宝.gif](https://upload-images.jianshu.io/upload_images/9163368-64fa9419acc07992.gif?imageMogr2/auto-orient/strip)
-
-### 饿了么筛选菜单
-![饿了么.gif](https://upload-images.jianshu.io/upload_images/9163368-554a3805a1cb1d8b.gif?imageMogr2/auto-orient/strip)
-
-### 京东筛选菜单
-![京东.gif](https://upload-images.jianshu.io/upload_images/9163368-dedba78704246959.gif?imageMogr2/auto-orient/strip)
-
-### 拼多多筛选菜单
-![拼多多1.gif](https://upload-images.jianshu.io/upload_images/9163368-bbc3246bb8a10ec7.gif?imageMogr2/auto-orient/strip)
-
-### 简书筛选菜单
-![简书.gif](https://upload-images.jianshu.io/upload_images/9163368-c1a446591ccd5eae.gif?imageMogr2/auto-orient/strip)
-
-### 赶集网筛选菜单
-![赶集网.gif](https://upload-images.jianshu.io/upload_images/9163368-b06baad72ae259e6.gif?imageMogr2/auto-orient/strip)
-
-### 美团外卖筛选菜单
-![美团外卖.gif](https://upload-images.jianshu.io/upload_images/9163368-901a88b8d5dd0b36.gif?imageMogr2/auto-orient/strip)
-
-### Boss直聘筛选菜单
-![Boss直聘.gif](https://upload-images.jianshu.io/upload_images/9163368-162c065ae0f2dfef.gif?imageMogr2/auto-orient/strip)
-
-### 唯品会筛选菜单
-![唯品会.gif](https://upload-images.jianshu.io/upload_images/9163368-1cd346d22ed24a0f.gif?imageMogr2/auto-orient/strip)
-
-### 一淘筛选菜单
-![一淘.gif](https://upload-images.jianshu.io/upload_images/9163368-ea885fce6c81c9fa.gif?imageMogr2/auto-orient/strip)
 
 #我手机只有这么一些app了。。~ ~ 总之，目前的app的筛选样式几乎都能实现，当然细节要自己去调
 
