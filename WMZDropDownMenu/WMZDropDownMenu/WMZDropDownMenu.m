@@ -455,6 +455,9 @@ static NSString* const notificationRemove = @"notificationRemove";
     
     if ([self.selectTitleBtn isSelected]&&self.param.wMenuLine) {
         [self.selectTitleBtn showLine:@{}];
+        if (self.param.wJDCustomLine) {
+            self.param.wJDCustomLine(self.selectTitleBtn.line);
+        }
     }else{
         [self.selectTitleBtn hidenLine];
     }
@@ -483,6 +486,9 @@ static NSString* const notificationRemove = @"notificationRemove";
              if (btn!=self.selectTitleBtn) {
                 if ([btn isSelected]&&self.param.wMenuLine) {
                     [btn showLine:@{}];
+                    if (self.param.wJDCustomLine) {
+                        self.param.wJDCustomLine(btn.line);
+                    }
                 }
             }
          }
@@ -493,6 +499,9 @@ static NSString* const notificationRemove = @"notificationRemove";
          [self changeTitleConfig:@{} withBtn:self.selectTitleBtn];
          if (self.param.wMenuLine) {
             [self.selectTitleBtn showLine:@{}];
+             if (self.param.wJDCustomLine) {
+                 self.param.wJDCustomLine(self.selectTitleBtn.line);
+             }
          }
     }
     

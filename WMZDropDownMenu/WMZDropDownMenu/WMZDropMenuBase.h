@@ -41,7 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *lowPlaceholder;
 //高位提示语
 @property(nonatomic,copy)NSString *highPlaceholder;
-
 //子集
 @property(nonatomic,strong)NSMutableArray<WMZDropTree *> *children;
 //原来传过来的数据模型

@@ -25,7 +25,10 @@
 }
 
 - (void)loadMyData{
-    self.close = YES;
+    if (self.param.wPopOraignY) {
+        self.menuOrignY = self.param.wPopOraignY;
+    }
+     self.close = YES;
      self.lastSelectIndex = -999;
      [self notifications];
 }
@@ -264,6 +267,7 @@
 - (CGFloat)menuOrignY{
     if (!_menuOrignY) {
         _menuOrignY = CGRectGetMaxY(self.frame);
+        
     }
     return _menuOrignY;
 }

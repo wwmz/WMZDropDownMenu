@@ -77,6 +77,8 @@ _Pragma("clang diagnostic pop") \
 #define MenuStrongSelf(obj) __strong typeof(obj) strongObject = weakObject;
 
 
+typedef void (^MenuCustomLine)(UIView *customLine);
+
 /*
  * UI样式
  */

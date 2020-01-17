@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 //初始化
 WMZDropMenuParam * MenuParam(void);
+
+//如果弹出位置不准确自行设置此属性 default CGRectGetMaxY(menu.frame)
+WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wPopOraignY)
+
 //标题视图是否显示边框 default NO
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wBorderShow)
 //固定标题的宽度 default 80
@@ -54,6 +58,9 @@ WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, NSArray* ,  
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSTextAlignment,  wTextAlignment)
 //tableViewCell 选中显示打钩图片 default YES
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wCellSelectShowCheck)
+//京东样式自定义底部划线
+WMZMenuStatementAndPropSetFuncStatement(copy,     WMZDropMenuParam, MenuCustomLine,                wJDCustomLine)
+
 
 
 //注册自定义的collectionViewCell  如果使用了自定义collectionView 必填否则会崩溃

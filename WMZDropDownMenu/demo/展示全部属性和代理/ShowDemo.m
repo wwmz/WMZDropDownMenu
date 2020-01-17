@@ -20,7 +20,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    WMZDropMenuParam *param = MenuParam()
+    WMZDropMenuParam *param =
+    MenuParam()
     //collctionCell 间距
     .wCollectionViewCellSpaceSet(10)
     //collectionCell 背景颜色
@@ -63,6 +64,12 @@
     .wShadowCanTapSet(YES)
     //遮罩层是否显示
     .wShadowShowSet(YES)
+    //京东样式底部线自定义修改
+    .wJDCustomLineSet(^(UIView *customLine) {
+        
+    })
+    //如果弹出位置不准确可以设置此属性
+//    .wPopOraignYSet(200)
     ;
 
     WMZDropDownMenu *menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];
