@@ -57,7 +57,7 @@
 
 - (NSArray *)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
       if (dropIndexPath.section == 0){
-          if (dropIndexPath.row == 0) return @[@"附近",@"区域",@"地铁",@"学校"];
+          if (dropIndexPath.row == 0) return @[@"附近",@{@"name":@"区域"},@"地铁",@"学校"];
           if (dropIndexPath.row == 1) return @[@"1号线",@"2号线",@"3号线",@"4号线",@"5号线",
                                                @"1号线",@"2号线",@"3号线",@"4号线",@"5号线",
                                                @"1号线",@"2号线",@"3号线",@"4号线",@"5号线"];
@@ -99,12 +99,22 @@
     return NO;
 }
 
+//- (NSDictionary*)menu:(WMZDropDownMenu *)menu  customTitleInSection:(NSInteger)section withTitleBtn:(WMZDropMenuBtn*)menuBtn{
+//    if (section == 1) {
+//        //选中中间清除其他所有选中
+//        menuBtn.clear = YES;
+//    }
+//    return @{};
+//}
+
+
 /*
 *互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)
 */
 //- (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu{
 //    return @[@(0),@(1)];
 //}
+
 
 
 - (CGFloat)menu:(WMZDropDownMenu *)menu heightAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath AtIndexPath:(NSIndexPath *)indexpath{

@@ -17,6 +17,7 @@
 		F3615333238E07C3006DFFB2 /* MeiTuanWMDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615332238E07C3006DFFB2 /* MeiTuanWMDemo.m */; };
 		F3615336238E16FB006DFFB2 /* BaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615335238E16FB006DFFB2 /* BaseVC.m */; };
 		F361533A238E1CD8006DFFB2 /* BossDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615339238E1CD8006DFFB2 /* BossDemo.m */; };
+		F38738762408B44100D4D2AD /* DemoOne.m in Sources */ = {isa = PBXBuildFile; fileRef = F38738742408B44100D4D2AD /* DemoOne.m */; };
 		F3AEACA123A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACA023A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m */; };
 		F3B4C897238C185100684AB8 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B4C896238C185000684AB8 /* Aspects.m */; };
 		F3C871D52384D70600351CA9 /* WMZDropMenuBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C871D42384D70600351CA9 /* WMZDropMenuBtn.m */; };
@@ -78,6 +79,8 @@
 		F3615338238E1CD8006DFFB2 /* BossDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BossDemo.h; sourceTree = "<group>"; };
 		F3615339238E1CD8006DFFB2 /* BossDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BossDemo.m; sourceTree = "<group>"; };
 		F37A48A323842BA500DB173C /* WMZDropMenuDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuDelegate.h; sourceTree = "<group>"; };
+		F38738742408B44100D4D2AD /* DemoOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoOne.m; sourceTree = "<group>"; };
+		F38738752408B44100D4D2AD /* DemoOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoOne.h; sourceTree = "<group>"; };
 		F3AEAC9F23A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDropDownMenu+DealDelegate.h"; sourceTree = "<group>"; };
 		F3AEACA023A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDropDownMenu+DealDelegate.m"; sourceTree = "<group>"; };
 		F3B4C895238C185000684AB8 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
@@ -220,6 +223,15 @@
 			path = "Boss直聘";
 			sourceTree = "<group>";
 		};
+		F38738732408B42700D4D2AD /* 实际项目实例1 */ = {
+			isa = PBXGroup;
+			children = (
+				F38738752408B44100D4D2AD /* DemoOne.h */,
+				F38738742408B44100D4D2AD /* DemoOne.m */,
+			);
+			path = "实际项目实例1";
+			sourceTree = "<group>";
+		};
 		F3D8F5EA2383BCEE000FF9B4 = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +330,7 @@
 				F3615337238E1CC4006DFFB2 /* Boss直聘 */,
 				F35F1CE92390FE3800F740C6 /* 唯品会 */,
 				F35F1CED23911ED200F740C6 /* 一淘 */,
+				F38738732408B42700D4D2AD /* 实际项目实例1 */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -521,6 +534,7 @@
 				F35F1CF023911EEA00F740C6 /* YiTaoDemo.m in Sources */,
 				F3F5CB0023898F08001A0F17 /* WMZDropCustomView.m in Sources */,
 				F3DC8687238A6E4A0055BA98 /* JingDongDemo.m in Sources */,
+				F38738762408B44100D4D2AD /* DemoOne.m in Sources */,
 				F3D8F6092383BCF2000FF9B4 /* main.m in Sources */,
 				F3EDDAA9238D646400F9C608 /* GanJiDemo.m in Sources */,
 				F31EFA3A238BD815000C9258 /* MeiTuanDemo.m in Sources */,

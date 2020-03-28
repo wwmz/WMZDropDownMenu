@@ -7,7 +7,9 @@
 //
 #import "WMZDropDownMenu.h"
 static NSString* const notificationRemove = @"notificationRemove";
-@interface WMZDropDownMenu()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface WMZDropDownMenu()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>{
+    BOOL checkMore;
+}
 @end
 @implementation WMZDropDownMenu
 #pragma -mark 重置UI
@@ -67,7 +69,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         }
         CGFloat offset = config[@"offset"]?[config[@"offset"] floatValue]:0;
         CGFloat y = config[@"y"]?[config[@"y"] floatValue]:0;
-        btn.frame = CGRectMake(tmp?(CGRectGetMaxX(tmp.frame)+offset):offset, y, btn.frame.size.width-offset, btn.frame.size.height-y*2);
+        btn.frame = CGRectMake(tmp?(CGRectGetMaxX(tmp.frame)+offset):offset, y, btn.frame.size.width-offset-offset/self.titleArr.count, btn.frame.size.height-y*2);
         [WMZDropMenuTool TagSetImagePosition:btn.position spacing:1 button:btn];
         [btn addTarget:self action:@selector(titleAction:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = 1000+i;
@@ -83,7 +85,7 @@ static NSString* const notificationRemove = @"notificationRemove";
                 self.titleView.contentSize = CGSizeMake(CGRectGetMaxX(tmp.frame), 0);
                 btn.backgroundColor = menuMainClor;
             }else{
-                btn.frame = CGRectMake(CGRectGetWidth(self.frame)-self.param.wFixBtnWidth, y, self.param.wFixBtnWidth, tmp.frame.size.height);
+                btn.frame = CGRectMake(CGRectGetMaxX(tmp.frame)+offset, y, tmp.frame.size.width, tmp.frame.size.height);
                 if ([[self.titleView subviews] indexOfObject:btn] == NSNotFound) {
                     [self.titleView addSubview:btn];
                 }
@@ -124,12 +126,12 @@ static NSString* const notificationRemove = @"notificationRemove";
             [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathRight PathWidth:1 heightScale:0.5 button:btn];
         }
     }];
-     [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathTop PathWidth:1 heightScale:1 button:self];
-     [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathBottom PathWidth:1 heightScale:1 button:self];
+    [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathTop PathWidth:1 heightScale:1 button:self];
+    [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathBottom PathWidth:1 heightScale:1 button:self];
 }
 #pragma -mark tablViewDeleagte
 - (NSInteger)tableView:(WMZDropTableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSArray *data = [self.dataDic objectForKey:tableView.dropIndex.key];
+    NSArray *data = [self getArrWithKey:tableView.dropIndex.key withoutHide:YES];
     if (tableView.dropIndex.row>0) {
         WMZDropIndexPath *lastDrop = nil;
         for (WMZDropIndexPath *tmpDrop in self.dropPathArr) {
@@ -141,7 +143,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         }
         BOOL hadSelected = NO;
         if (lastDrop) {
-            NSArray *lastData = [self.dataDic objectForKey:lastDrop.key];
+            NSArray *lastData = [self getArrWithKey:lastDrop.key withoutHide:YES];
             for (WMZDropTree *tree in lastData) {
                 if (tree.isSelected) {
                     hadSelected = YES;
@@ -159,7 +161,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     return data.count;
 }
 - (UITableViewCell *)tableView:(WMZDropTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *data = [self.dataDic objectForKey:tableView.dropIndex.key];
+    NSArray *data = [self getArrWithKey:tableView.dropIndex.key withoutHide:YES];
     WMZDropTree *tree = data[indexPath.row];
     //自定义
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:cellForUITableView:AtIndexPath:dataForIndexPath:)]) {
@@ -236,7 +238,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     return headView;
 }
 - (CGFloat)tableView:(WMZDropTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *data = [self.dataDic objectForKey:tableView.dropIndex.key];
+    NSArray *data = [self getArrWithKey:tableView.dropIndex.key withoutHide:YES];
     WMZDropTree *tree = data[indexPath.row];
     return tree.cellHeight;
 }
@@ -244,7 +246,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     if (self.keyBoardShow) {
        [[[UIApplication sharedApplication] keyWindow] endEditing:YES]; return;
     };
-    NSArray *data = [self.dataDic objectForKey:tableView.dropIndex.key];
+    NSArray *data = [self getArrWithKey:tableView.dropIndex.key withoutHide:YES];
     //点击处理
     [self cellTap:tableView.dropIndex data:data indexPath:indexPath];
 }
@@ -252,7 +254,7 @@ static NSString* const notificationRemove = @"notificationRemove";
 #pragma -mark collectionDelagete
 - (UICollectionViewCell *)collectionView:(WMZDropCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
-    NSArray *arr = [self.dataDic objectForKey:path.key];
+    NSArray *arr = [self getArrWithKey:path.key withoutHide:YES];
     WMZDropTree *tree = arr[indexPath.row];
     
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:cellForUICollectionView:AtDropIndexPath:AtIndexPath:dataForIndexPath:)]) {
@@ -303,12 +305,15 @@ static NSString* const notificationRemove = @"notificationRemove";
           //默认视图
          WMZMenuCell *cell = (WMZMenuCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([WMZMenuCell class]) forIndexPath:indexPath];
          if ([tree isKindOfClass:[WMZDropTree class]]) {
-             cell.btn.backgroundColor =  tree.isSelected? self.param.wCollectionViewCellSelectBgColor:self.param.wCollectionViewCellBgColor;
-             [cell.btn setTitleColor:tree.isSelected? self.param.wCollectionViewCellSelectTitleColor:self.param.wCollectionViewCellTitleColor forState:UIControlStateNormal];
+             cell.btn.backgroundColor = tree.checkMore?[UIColor whiteColor]:
+             (tree.isSelected? self.param.wCollectionViewCellSelectBgColor:
+              self.param.wCollectionViewCellBgColor);
+             [cell.btn setTitleColor:tree.checkMore?self.param.wCollectionViewCellSelectTitleColor:(
+              tree.isSelected? self.param.wCollectionViewCellSelectTitleColor:self.param.wCollectionViewCellTitleColor) forState:UIControlStateNormal];
              [cell.btn setTitle:tree.name forState:UIControlStateNormal];
              [cell.btn setImage:tree.image?[UIImage bundleImage:tree.image]:nil forState:UIControlStateNormal];
-             cell.btn.layer.borderColor = tree.isSelected? self.param.wCollectionViewCellSelectTitleColor.CGColor:self.param.wCollectionViewCellTitleColor.CGColor;
-             cell.btn.layer.borderWidth = tree.isSelected?self.param.wCollectionViewCellBorderWith:0;
+             cell.btn.layer.borderColor = tree.checkMore?[UIColor whiteColor].CGColor:(tree.isSelected? self.param.wCollectionViewCellSelectTitleColor.CGColor:self.param.wCollectionViewCellTitleColor.CGColor);
+             cell.btn.layer.borderWidth = tree.checkMore?0:(tree.isSelected?self.param.wCollectionViewCellBorderWith:0);
          }
          return cell;
     }
@@ -316,7 +321,7 @@ static NSString* const notificationRemove = @"notificationRemove";
 - (NSInteger)collectionView:(WMZDropCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
    WMZDropIndexPath *path = collectionView.dropArr[section];
-    NSInteger count = [[self.dataDic objectForKey:path.key] count];
+    NSInteger count = [[self getArrWithKey:path.key withoutHide:YES] count];
     if (!path.expand) {
         if (count>=self.param.wCollectionViewSectionRecycleCount) {
             count = self.param.wCollectionViewSectionRecycleCount;
@@ -382,7 +387,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     };
     //点击处理
     WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
-    NSArray *arr = [self.dataDic objectForKey:path.key];
+    NSArray *arr = [self getArrWithKey:path.key withoutHide:YES];
     [self cellTap:path data:arr indexPath:indexPath];
 }
 
@@ -426,7 +431,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         if (!self.close) {
             [self closeView];
         }
-        [self.selectTitleBtn setTitleColor:self.param.wCollectionViewCellSelectTitleColor forState:UIControlStateSelected];
+        [self.selectTitleBtn setTitleColor:self.selectTitleBtn.selectColor forState:UIControlStateSelected];
         if (currentDrop.editStyle == MenuEditCheck) {
             sender.selected = ![sender isSelected];
         }else{
@@ -435,8 +440,8 @@ static NSString* const notificationRemove = @"notificationRemove";
         [self changeTitleArr:YES update:YES];
     }else{
        sender.selected = ![sender isSelected];
+        NSLog(@"%d",[sender isSelected]);
        if ([sender isSelected]) {
-           
            if (!self.close&&self.lastSelectIndex>=0) {
                WMZDropMenuBtn *lastBtn = self.titleBtnArr[self.lastSelectIndex];
                [self dataChangeAction:[self getTitleFirstDropWthTitleBtn:lastBtn].section];
@@ -478,8 +483,23 @@ static NSString* const notificationRemove = @"notificationRemove";
     }
     if (!exist) return;
     if (!self.selectArr.count) {
-        //没有选中的项 取消预选
-         [self dealDataWithDelete:MenuDataDelete btn:self.selectTitleBtn];
+        //查看更多取消选中 单独处理
+        if (checkMore) {
+            NSArray *arr = [self getArrWithKey:moreTableViewKey withoutHide:NO];
+            [arr enumerateObjectsUsingBlock:^(WMZDropTree*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isKindOfClass:[WMZDropTree class]]) {
+                    obj.isSelected = NO;
+                    obj.rangeArr = [NSMutableArray arrayWithObjects:@"",@"",nil];
+                    obj.normalRangeArr = [NSArray new];
+                    if ([self.selectArr indexOfObject:obj]!=NSNotFound) {
+                        [self.selectArr removeObject:obj];
+                    }
+                  }
+            }];
+        }else{
+            //没有选中的项 取消预选
+            [self dealDataWithDelete:MenuDataDelete btn:self.selectTitleBtn];
+        }
          [self changeNormalConfig:@{} withBtn:self.selectTitleBtn];
          [self.selectTitleBtn hidenLine];
          for (WMZDropMenuBtn *btn in self.titleBtnArr) {
@@ -493,27 +513,55 @@ static NSString* const notificationRemove = @"notificationRemove";
             }
          }
     }else{
-        [self dataChangeAction:[self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].section];
-        
-         [self changeTitleArr:YES update:YES];
-         [self changeTitleConfig:@{} withBtn:self.selectTitleBtn];
-         if (self.param.wMenuLine) {
+        if (checkMore) {
+            [self dataChangeActionWithKey:moreTableViewKey];
+        }else{
+           [self dataChangeAction:[self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].section];
+        }
+        [self changeTitleArr:YES update:YES];
+        [self changeTitleConfig:@{} withBtn:self.selectTitleBtn];
+        if (self.param.wMenuLine) {
             [self.selectTitleBtn showLine:@{}];
              if (self.param.wJDCustomLine) {
                  self.param.wJDCustomLine(self.selectTitleBtn.line);
              }
          }
     }
-    
+  
     [self closeAction];
     self.selectTitleBtn.selected = NO;
+    
 }
 
 - (void)dataChangeAction:(NSInteger)section{
     //判断
     for (WMZDropIndexPath *drop in self.dropPathArr) {
         if (drop.section == section) {
-            NSArray *arr = [self.dataDic objectForKey:drop.key];
+            NSArray *arr = [self getArrWithKey:drop.key withoutHide:YES];
+            [arr enumerateObjectsUsingBlock:^(WMZDropTree*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isKindOfClass:[WMZDropTree class]]) {
+                    if (obj.isSelected) {
+                        if ([self.selectArr indexOfObject:obj] == NSNotFound) {
+                             obj.isSelected = NO;
+                             obj.rangeArr = [NSMutableArray arrayWithObjects:@"",@"",nil];
+                             obj.normalRangeArr = [NSArray new];
+                        }
+                    }else{
+                        if ([self.selectArr indexOfObject:obj]!=NSNotFound&&drop.UIStyle!=MenuUITableView) {
+                             obj.isSelected = YES;
+                        }
+                    }
+                  }
+            }];
+        }
+    }
+}
+
+- (void)dataChangeActionWithKey:(NSString*)key{
+    //判断
+    for (WMZDropIndexPath *drop in self.dropPathArr) {
+        if ([drop.key isEqualToString:key]) {
+            NSArray *arr = [self getArrWithKey:drop.key withoutHide:YES];
             [arr enumerateObjectsUsingBlock:^(WMZDropTree*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([obj isKindOfClass:[WMZDropTree class]]) {
                     if (obj.isSelected) {
@@ -535,9 +583,18 @@ static NSString* const notificationRemove = @"notificationRemove";
 
 #pragma -mark 关闭方法
 - (void)closeAction{
-     WMZDropIndexPath *currentDrop = [self getTitleFirstDropWthTitleBtn:self.selectTitleBtn];
+      WMZDropIndexPath *currentDrop = [self getTitleFirstDropWthTitleBtn:self.selectTitleBtn];
       if (self.hook) {
           currentDrop.hideAnimalStyle = MenuHideAnimalNone;
+      }
+     if ([MenuWindow viewWithTag:10088]!=nil) {
+        //动画
+        MenuWeakSelf(self)
+         [self hideAnimal:currentDrop.hideAnimalStyle view:self.moreView durtion:menuAnimalTime block:^{
+            MenuStrongSelf(weakObject)
+            [strongObject.moreView removeFromSuperview];
+        }];
+         return;
       }
       //动画
       MenuWeakSelf(self)
@@ -552,7 +609,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:getAllSelectData:)]) {
         NSMutableArray *allSelectArr = [NSMutableArray new];
         for (WMZDropIndexPath *drop in self.dropPathArr) {
-            NSArray *arr = [self.dataDic objectForKey:drop.key];
+            NSArray *arr = [self getArrWithKey:drop.key withoutHide:NO];
             [arr enumerateObjectsUsingBlock:^(WMZDropTree*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([obj isKindOfClass:[WMZDropTree class]]) {
                     if (obj.isSelected) {
@@ -593,6 +650,8 @@ static NSString* const notificationRemove = @"notificationRemove";
     
     [self dealDataWithDelete:MenuDataDefault btn:self.selectTitleBtn];
     //动画
+    NSLog(@"%@ %@",self.dataView,self.shadowView);
+    NSLog(@"%@",[MenuWindow subviews]);
     [self showAnimal:currentDrop.showAnimalStyle view:self.dataView durtion:menuAnimalTime block:^{}];
 }
 
@@ -601,7 +660,9 @@ static NSString* const notificationRemove = @"notificationRemove";
     [self.titleBtnArr enumerateObjectsUsingBlock:^(WMZDropMenuBtn  * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.tag!=self.selectTitleBtn.tag) {
             if ([self getTitleFirstDropWthTitleBtn:obj].connect ||
-                ([self.mutuallyExclusiveArr indexOfObject:obj]!=NSNotFound&&[self.mutuallyExclusiveArr indexOfObject:self.selectTitleBtn]!=NSNotFound)) {
+                ([self.mutuallyExclusiveArr indexOfObject:obj]!=NSNotFound&&
+                 [self.mutuallyExclusiveArr indexOfObject:self.selectTitleBtn]!=NSNotFound) ||
+                self.selectTitleBtn.clear) {
                 obj.selected = NO;
                 obj.click = NO;
                 obj.selectType = 0;
@@ -621,8 +682,8 @@ static NSString* const notificationRemove = @"notificationRemove";
 #pragma -mark 处理选中的数据 删除或者加入
 - (void)dealDataWithDelete:(MenuDataStyle)style btn:(WMZDropMenuBtn*)btn{
     for (WMZDropIndexPath *drop in self.dropPathArr) {
-        if (drop.section == btn.tag - 1000) {
-            NSArray *arr = [self.dataDic objectForKey:drop.key];
+        if (drop.section == btn.tag - 1000 && ![drop.key isEqualToString:moreTableViewKey]) {
+            NSArray *arr = [self getArrWithKey:drop.key withoutHide:NO];
             [arr enumerateObjectsUsingBlock:^(WMZDropTree*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([obj isKindOfClass:[WMZDropTree class]]) {
                     if (obj.isSelected) {
@@ -653,38 +714,56 @@ static NSString* const notificationRemove = @"notificationRemove";
 - (void)cellTap:(WMZDropIndexPath*)dropPath data:(NSArray*)arr indexPath:(NSIndexPath*)indexPath{
     WMZDropTree *tree = arr[indexPath.row];
     if (dropPath.UIStyle == MenuUICollectionRangeTextField) return;
-    //编辑事件
-    if (dropPath.editStyle == MenuEditOneCheck) {
-        if ([self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].UIStyle == MenuUICollectionView) {
-            tree.isSelected = !tree.isSelected;
-        }else{
-            tree.isSelected = YES;
-        }
-        for (WMZDropTree *tmpTree in arr) {
-            if (tmpTree != tree) {
-                tmpTree.isSelected = NO;
-            }
-        }
-        
-        if (dropPath.tapClose&&tree.isSelected) {
-            for (WMZDropIndexPath *drop in self.dropPathArr) {
-                if (drop.section == dropPath.section) {
-                    NSArray *arr = [self.dataDic objectForKey:drop.key];
-                    [arr enumerateObjectsUsingBlock:^(WMZDropTree *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj.isSelected) {
-                            if ([self.selectArr indexOfObject:obj]==NSNotFound) {
-                                [self.selectArr addObject:obj];
-                            }
-                        }
-                    }];
+    if ([dropPath.key isEqualToString:moreTableViewKey]){
+        if (dropPath.editStyle == MenuEditOneCheck) {
+            for (WMZDropTree *tmpTree in arr) {
+                if (tmpTree != tree) {
+                    tmpTree.isSelected = NO;
+                }else{
+                    tmpTree.isSelected = YES;
                 }
             }
-            
-            [self changeTitleConfig:@{@"name":tree.name} withBtn:self.selectTitleBtn];
-            [self closeView];
+        }else if (dropPath.editStyle == MenuEditMoreCheck) {
+            tree.isSelected = !tree.isSelected;
         }
-    }else if (dropPath.editStyle == MenuEditMoreCheck){
-        tree.isSelected = !tree.isSelected;
+    }else{
+        //编辑事件
+           if (dropPath.editStyle == MenuEditOneCheck) {
+               if ([self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].UIStyle == MenuUICollectionView) {
+                   tree.isSelected = !tree.isSelected;
+               }else{
+                   tree.isSelected = YES;
+               }
+               for (WMZDropTree *tmpTree in arr) {
+                   if (tmpTree != tree) {
+                       tmpTree.isSelected = NO;
+                   }
+               }
+               
+               if (dropPath.tapClose&&tree.isSelected) {
+                   for (WMZDropIndexPath *drop in self.dropPathArr) {
+                       if (drop.section == dropPath.section) {
+                           NSArray *arr = [self getArrWithKey:drop.key withoutHide:NO];
+                           [arr enumerateObjectsUsingBlock:^(WMZDropTree *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                               if (obj.isSelected) {
+                                   if ([self.selectArr indexOfObject:obj]==NSNotFound) {
+                                       [self.selectArr addObject:obj];
+                                   }
+                               }
+                           }];
+                       }
+                   }
+                   
+                   [self changeTitleConfig:@{@"name":tree.name} withBtn:self.selectTitleBtn];
+                   [self closeView];
+               }
+           }else if (dropPath.editStyle == MenuEditMoreCheck){
+               tree.isSelected = !tree.isSelected;
+           }
+    }
+    if (tree.checkMore) {
+        tree.isSelected = NO;
+        [self setUpMoreView:dropPath];
     }
     
     //点击代理
@@ -695,19 +774,105 @@ static NSString* const notificationRemove = @"notificationRemove";
     [self updateSubView:dropPath more:YES];
 }
 
+#pragma -mark 查看更多
+- (void)setUpMoreView:(WMZDropIndexPath*)dropPath{
+    [MenuWindow addSubview:self.moreView];
+    self.moreView.frame = self.dataView.frame;
+    [self showAnimal:dropPath.showAnimalStyle view:self.moreView durtion:menuAnimalTime block:^{}];
+    WMZDropIndexPath *path = nil;
+    for (WMZDropIndexPath *tmpPath in self.dropPathArr) {
+        if ([tmpPath.key isEqualToString:moreTableViewKey]) {
+            path = tmpPath; break;
+        }
+    }
+    if (!path) {
+        path = [WMZDropIndexPath new];
+        path.key = moreTableViewKey;
+        path.editStyle = dropPath.editStyle;
+        path.headViewHeight = dropPath.headViewHeight;
+        path.UIStyle = MenuUITableView;
+        [self.dropPathArr addObject:path];
+    }
+    
+    WMZDropTableView *tableView = [self getTableVieww:path];
+    tableView.frame = CGRectMake(0, Menu_StatusBarHeight, self.moreView.frame.size.width, self.moreView.frame.size.height - (Menu_StatusBarHeight+(MenuisIphoneX?20:0)+self.confirmView.frame.size.height));
+    if (self.delegate && [self.delegate respondsToSelector:@selector(menu:moreDataForRowAtDropIndexPath:)]) {
+        NSArray *arr = [self.delegate menu:self moreDataForRowAtDropIndexPath:dropPath];
+        NSMutableArray *treeArr = [NSMutableArray new];
+        if (![self getArrWithKey:moreTableViewKey withoutHide:NO]) {
+            
+            for (int k = 0; k<arr.count; k++) {
+                id dic = arr[k];
+                WMZDropTree *tree = [WMZDropTree new];
+                //cell高度
+                if (self.delegate && [self.delegate respondsToSelector:@selector(menu:heightAtDropIndexPath:AtIndexPath:)]) {
+                    if ([dic isKindOfClass:[NSDictionary class]]) {
+                        [self runTimeSetDataWith:dic withTree:tree];
+                            //原来的值
+                        tree.originalData = dic;
+                    }else if ([dic isKindOfClass:[NSString class]]){
+                        tree.name = dic;
+                        tree.originalData = dic;
+                    }
+                    tree.hide = YES;
+                    [treeArr addObject:tree];
+                }
+            }
+            if (treeArr) {
+                [self.dataDic setObject:treeArr forKey:path.key];
+                NSArray *nowArr = [self getArrWithKey:dropPath.key withoutHide:YES];
+                NSMutableArray *marr = [NSMutableArray arrayWithArray:nowArr];
+                for (WMZDropTree *tree in treeArr) {
+                    if (tree) {
+                        [marr addObject:tree];
+                    }
+                }
+                
+                [self.dataDic setObject:marr forKey:dropPath.key];
+            }
+        }
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        [self.moreView addSubview:tableView];
+        [self.showView addObject:tableView];
+    }
+    WMZDropConfirmView *footView = [WMZDropConfirmView new];
+    [footView.confirmBtn addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
+    footView.confirmBtn.tag = 10089;
+    [footView.resetBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    footView.confirmBtn.backgroundColor = self.param.wCollectionViewCellSelectTitleColor;
+    footView.frame = self.confirmView.frame;
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:customDefauultCollectionFootView:)]) {
+        [self.delegate menu:self customDefauultCollectionFootView:footView];
+        [footView layoutSubviews];
+        footView.frame = CGRectMake(footView.frame.origin.x, self.confirmView.frame.origin.y, footView.frame.size.width, self.param.wDefaultConfirmHeight);
+    }
+    [footView.resetBtn setTitle:@"返回" forState:UIControlStateNormal];
+    [self.moreView addSubview:footView];
+}
+
+#pragma -mark 查看更多 返回上一级
+- (void)backAction{
+    [self closeView];
+}
+
 #pragma -mark 更新dropPath之后的视图
 - (void)updateSubView:(WMZDropIndexPath*)dropPath more:(BOOL)more{
       //获取需要更新的drop
       NSMutableArray *updateDrop = [NSMutableArray new];
-      for (WMZDropIndexPath *tmpDrop in self.dropPathArr) {
-          if (tmpDrop.section == dropPath.section ) {
-              if (more) {
-                  if(tmpDrop.row >= dropPath.row) {
-                     [updateDrop addObject:tmpDrop];continue;
-                  }
-              }else{
-                  if(tmpDrop.row == dropPath.row) {
-                     [updateDrop addObject:tmpDrop];continue;
+      if ([dropPath.key isEqualToString:moreTableViewKey]) {
+          [updateDrop addObject:dropPath];
+      }else{
+          for (WMZDropIndexPath *tmpDrop in self.dropPathArr) {
+              if (tmpDrop.section == dropPath.section ) {
+                  if (more) {
+                      if(tmpDrop.row >= dropPath.row) {
+                         [updateDrop addObject:tmpDrop];continue;
+                      }
+                  }else{
+                      if(tmpDrop.row == dropPath.row) {
+                         [updateDrop addObject:tmpDrop];continue;
+                      }
                   }
               }
           }
@@ -722,9 +887,10 @@ static NSString* const notificationRemove = @"notificationRemove";
                   }];
               }
           }else if ([view isKindOfClass:[WMZDropCollectionView class]]){
+              WMZDropCollectionView *collectionView = (WMZDropCollectionView*)view;
               [UIView performWithoutAnimation:^{
-                 [self.collectionView reloadData];
-              }]; break;
+                 [collectionView reloadData];
+              }];
           }
       }
 }
@@ -747,16 +913,18 @@ static NSString* const notificationRemove = @"notificationRemove";
     self.showView = [NSMutableArray new];
     
     //判断显示的UI类型
-    MenuUIStyle showType = MenuUINone;
+    MenuUIStyle showType = MenuUITableView;
     //判断需要显示的WMZDropIndexPath
     NSInteger index = self.selectTitleBtn.tag - 1000;
     NSMutableArray *dorpArr = [NSMutableArray new];
     for (WMZDropIndexPath *path in self.dropPathArr) {
-        if (path.section == index) {
+        if (path.section == index&&![path.key isEqualToString:moreTableViewKey]) {
             [dorpArr addObject:path];
             showType = path.UIStyle;
         }
     }
+
+    
     //添加UI
     [self addDropPathUI:[NSArray arrayWithArray:dorpArr] type:showType];
 }
@@ -786,7 +954,7 @@ static NSString* const notificationRemove = @"notificationRemove";
                     if (path.showAnimalStyle == MenuShowAnimalPop) {
                         pop = YES;
                     }
-                    NSArray *dataArr = [self.dataDic objectForKey:path.key];
+                    NSArray *dataArr = [self getArrWithKey:path.key withoutHide:YES];
                     CGFloat sonHeight = 0;
                     for (WMZDropTree *tree in dataArr) {
                         if ([tree isKindOfClass:[WMZDropTree class]]) {
@@ -847,7 +1015,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         
         if (height == 0) {
             for (WMZDropIndexPath *path in dropArr) {
-                NSArray *arr = [self.dataDic objectForKey:path.key];
+                NSArray *arr = [self getArrWithKey:path.key withoutHide:YES];
                 if (arr.count) {
                     if (path.showAnimalStyle == MenuShowAnimalLeft||
                         path.showAnimalStyle == MenuShowAnimalRight||
@@ -1046,7 +1214,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         }
         if (!insert) return;
         WMZDropConfirmView *footView = [WMZDropConfirmView new];
-        [footView.confirmBtn addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+        [footView.confirmBtn addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
         [footView.resetBtn addTarget:self action:@selector(reSetAction) forControlEvents:UIControlEventTouchUpInside];
         footView.confirmBtn.backgroundColor = self.param.wCollectionViewCellSelectTitleColor;
         for (UIView *connectView in connectViews) {
@@ -1076,7 +1244,8 @@ static NSString* const notificationRemove = @"notificationRemove";
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:head.dropIndexPath.row]];
 }
 #pragma -mark 确定方法
-- (void)confirmAction{
+- (void)confirmAction:(UIButton*)sender{
+    checkMore = (sender.tag == 10089);
     self.selectArr = [NSMutableArray new];
     [self dealDataWithDelete:MenuDataInsert btn:self.selectTitleBtn];
     for (WMZDropTree *tree in self.selectArr) {
@@ -1117,6 +1286,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     }
     self.selectTitleBtn.selected = NO;
     [self closeView];
+    
 }
 #pragma -mark 重置方法
 - (void)reSetAction{
@@ -1174,7 +1344,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     }
     [self updateWithData:arr dropPath:currentDrop normalDropPath:currentDrop more:NO];
     //更新标题
-    [self updateTitle:currentDrop changeArr:[self.dataDic objectForKey:currentDrop.key] changeTree:nil];
+    [self updateTitle:currentDrop changeArr:[self getArrWithKey:currentDrop.key withoutHide:YES] changeTree:nil];
     return result;
 }
 
@@ -1194,7 +1364,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         return result;
     }
     __block WMZDropTree *tree = nil;
-    NSArray *dataArr = [self.dataDic objectForKey:currentDrop.key];
+    NSArray *dataArr = [self getArrWithKey:currentDrop.key withoutHide:YES];
     __weak WMZDropDownMenu *weak = self;
     [dataArr enumerateObjectsUsingBlock:^(WMZDropTree *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx == indexPathRow) {
@@ -1204,7 +1374,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         }
     }];
     //更新标题
-    [self updateTitle:currentDrop changeArr:[self.dataDic objectForKey:currentDrop.key] changeTree:tree];
+    [self updateTitle:currentDrop changeArr:[self getArrWithKey:currentDrop.key withoutHide:YES] changeTree:tree];
     return result;
 }
 //自动增加数组的配置
@@ -1251,7 +1421,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     for (WMZDropIndexPath *dropPath in self.dropPathArr) {
         if (dropPath.section == currentDrop.section) {
             [dropArr addObject:dropPath];
-            NSArray *data = [self.dataDic objectForKey:dropPath.key];
+            NSArray *data = [self getArrWithKey:dropPath.key withoutHide:YES];
             NSMutableArray *sectionSelectArr = [NSMutableArray new];
             [data enumerateObjectsUsingBlock:^(WMZDropTree * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (obj.isSelected) {
@@ -1283,7 +1453,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         NSString *showTitle = nil;
         if (currentDrop.UIStyle == MenuUITableView) {
             WMZDropIndexPath *lastDrop = dropArr.lastObject;
-            NSArray *arr = [self.dataDic objectForKey:lastDrop.key];
+            NSArray *arr = [self getArrWithKey:lastDrop.key withoutHide:YES];
             NSMutableArray *lastSelectArr = [NSMutableArray new];
             [selectArr enumerateObjectsUsingBlock:^(WMZDropTree *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([arr indexOfObject:obj]!=NSNotFound) {
@@ -1310,5 +1480,24 @@ static NSString* const notificationRemove = @"notificationRemove";
     }else{
         [self changeNormalConfig:@{} withBtn:currentBtn];
     }
+}
+
+- (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide{
+    if ([key isEqualToString:moreTableViewKey]) {
+        return [self.dataDic objectForKey:key];
+    }
+    NSMutableArray *marr = [NSMutableArray new];
+    NSArray *arr = [self.dataDic objectForKey:key];
+    [arr enumerateObjectsUsingBlock:^(WMZDropTree * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (hide) {
+            if (!obj.hide) {
+                [marr addObject:obj];
+            }
+        }else{
+            [marr addObject:obj];
+        }
+    }];
+    
+    return [NSArray arrayWithArray:marr];
 }
 @end

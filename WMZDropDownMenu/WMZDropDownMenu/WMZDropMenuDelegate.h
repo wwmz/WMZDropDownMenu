@@ -152,6 +152,10 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu;
 
+/*
+*查看更多的数据
+*/
+- (NSArray*)menu:(WMZDropDownMenu *)menu moreDataForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
 #pragma -mark 交互自定义代理
 /*
 *cell点击方法

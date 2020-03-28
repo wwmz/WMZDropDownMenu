@@ -58,7 +58,8 @@
 
 - (NSArray *)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 0) {
-        return @[@"综合排序",@"评论数从高到低"];
+        //默认选中
+        return @[@{@"name":@"综合排序",@"isSelected":@(YES)},@"评论数从高到低"];
     }else if (dropIndexPath.section == 3) {
         if (dropIndexPath.row == 0)
             return @[@"京东物流",@"货到d付款",@"仅看有货",@"促销",@"京东国际",@"Plus专项",
@@ -69,7 +70,13 @@
                      @"索尼\nSONY",@"华为\nHUAWEI",@"索尼\nSONY",@"华为\nHUAWEI",@"索尼\nSONY",@"索尼\nSONY",@"索尼\nSONY",
                      @"索尼\nSONY",@"华为\nHUAWEI",@"索尼\nSONY"];
         if (dropIndexPath.row == 3)
-        return @[@"手机配件",@"影音娱乐",@"更多分类"];
+        return @[
+                 @"手机配件",
+                 @"影音娱乐",
+                 ////查看更多 checkMore传YES
+                 @{@"name":@"更多分类>>",@"checkMore":@(YES)
+                 }
+        ];
         if (dropIndexPath.row == 4)
         return @[@"京东物流",@"货到d付款",@"仅看有货",@"促销",@"京东国际",@"Plus专项",
         @"搭配全球",@"京东超市",@"拍拍二手"];
@@ -84,6 +91,8 @@
 - (NSString*)menu:(WMZDropDownMenu *)menu titleForHeadViewAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath{
     if (dropIndexPath.section == 3) {
         return titleArr[dropIndexPath.row];
+    }else if ([dropIndexPath.key isEqualToString:moreTableViewKey]) {
+        return @"全部分类";
     }
     return @"";
 }
@@ -142,6 +151,22 @@
     return nil;
 }
 
+- (UITableViewCell*)menu:(WMZDropDownMenu *)menu cellForUITableView:(WMZDropTableView*)tableView AtIndexPath:(NSIndexPath*)indexpath dataForIndexPath:(WMZDropTree*)model{
+    //自定义查看更多的样式 其他自定义代理也是根据这个判断
+    if ([tableView.dropIndex.key isEqualToString:moreTableViewKey]) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        }
+        cell.accessoryType = model.isSelected?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.text = model.name;
+        cell.textLabel.textColor = model.isSelected?[UIColor redColor]:[UIColor blackColor];
+        return cell;
+    }
+    return nil;
+}
+
 - (MenuUIStyle)menu:(WMZDropDownMenu *)menu uiStyleForRowIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 0) {
         return MenuUITableView;
@@ -156,13 +181,15 @@
 
 - (MenuEditStyle)menu:(WMZDropDownMenu *)menu editStyleForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 2)  return MenuEditReSetCheck;
+    else if (dropIndexPath.section == 0)  return MenuEditOneCheck;
     else  if (dropIndexPath.section == 1)  return MenuEditNone;
-    return MenuEditOneCheck;
+    return MenuEditMoreCheck
+    ;
 }
 
 - (BOOL)menu:(WMZDropDownMenu *)menu showExpandAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 3) {
-        if (dropIndexPath.row>2) {
+        if (dropIndexPath.row>3) {
             return YES;
         }
     }
@@ -170,7 +197,7 @@
 }
 
 - (void)menu:(WMZDropDownMenu *)menu customDefauultCollectionFootView:(WMZDropConfirmView *)confirmView{
-  confirmView.showBorder = NO;
+   confirmView.showBorder = NO;
    confirmView.resetFrame = [NSValue valueWithCGRect:CGRectMake(confirmView.frame.size.width*0.025, 0,confirmView.frame.size.width*0.45 , confirmView.frame.size.height)];
    confirmView.confirmFrame = [NSValue valueWithCGRect:CGRectMake(confirmView.frame.size.width*0.525, 0,confirmView.frame.size.width*0.45 , confirmView.frame.size.height)];
     confirmView.resetBtn.backgroundColor = MenuColor(0xffffff);
@@ -182,6 +209,29 @@
     confirmView.resetBtn.layer.borderColor = MenuColor(0x999999).CGColor;
     confirmView.resetBtn.layer.borderWidth = MenuK1px;
     confirmView.confirmBtn.layer.cornerRadius = confirmView.frame.size.height/2;
+}
+
+- (NSDictionary*)menu:(WMZDropDownMenu *)menu  customTitleInSection:(NSInteger)section withTitleBtn:(WMZDropMenuBtn*)menuBtn{
+    if (section == 0) {
+        [menu changeTitleConfig:@{} withBtn:menuBtn];
+        [menuBtn showLine:@{}];
+    }
+    return @{};
+}
+
+//查看更多
+- (NSArray *)menu:(WMZDropDownMenu *)menu moreDataForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
+    if (dropIndexPath.section == 3 && dropIndexPath.row == 3) {
+        return @[
+            @{@"name":@"手机",@"cellHeight":@(50)},
+            @{@"name":@"手机111",@"cellHeight":@(50)},
+            @{@"name":@"手机222",@"cellHeight":@(50)},
+            @{@"name":@"手机333",@"cellHeight":@(50)},
+            @{@"name":@"手机444",@"cellHeight":@(50)},
+            @{@"name":@"手机555",@"cellHeight":@(50)},
+            @{@"name":@"手机0000000",@"cellHeight":@(50)}];
+    }
+    return @[];
 }
 
 @end

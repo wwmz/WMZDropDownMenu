@@ -13,6 +13,7 @@
 #import "Aspects.h"
 #define footHeadHeight 35
 #define menuAnimalTime 0.3
+#define moreTableViewKey @"moreTableViewKey"
 #define menuMainClor [UIColor whiteColor]
 NS_ASSUME_NONNULL_BEGIN
 //树形节点model  传入对应的字典键值对就能获取相应的属性
@@ -45,6 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<WMZDropTree *> *children;
 //原来传过来的数据模型
 @property(nonatomic,strong)id originalData;
+//点击查看更多 default NO
+@property(nonatomic,assign)BOOL checkMore;
+//数据存在但不显示 default NO
+@property(nonatomic,assign)BOOL hide;
 
 - (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID;
 @end
@@ -88,6 +93,10 @@ NS_ASSUME_NONNULL_BEGIN
  *阴影
  */
 @property(nonatomic,strong)UIView *shadowView;
+/*
+ *更多的页面
+ */
+@property(nonatomic,strong)UIView *moreView;
 /*
  *titleView
  */
@@ -160,7 +169,6 @@ NS_ASSUME_NONNULL_BEGIN
 *相互排斥的标题数组
 */
 @property(nonatomic,strong)NSMutableArray *mutuallyExclusiveArr;
-
 /*
  *初始化方法
  */

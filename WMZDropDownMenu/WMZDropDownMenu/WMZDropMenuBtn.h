@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 //参数
 @property(nonatomic,strong)WMZDropMenuParam *param;
 
+@property(nonatomic,assign)BOOL clear;
+
 //设置按钮配置
 - (void)setUpParam:(WMZDropMenuParam*)param withDic:(id)dic;
 

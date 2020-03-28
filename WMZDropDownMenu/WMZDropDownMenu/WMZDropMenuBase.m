@@ -36,7 +36,6 @@
 
 //通知
 - (void)notifications{
-
     //监听键盘出现
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     //监听键盘出现
@@ -300,7 +299,15 @@
     }
     return _dataView;
 }
-
+- (UIView *)moreView{
+    if (!_moreView) {
+        _moreView = [UIView new];
+        _moreView.backgroundColor = [UIColor whiteColor];
+        _moreView.layer.masksToBounds = YES;
+        _moreView.tag = 10088;
+    }
+    return _moreView;
+}
 - (UIView *)emptyView{
     if (!_emptyView) {
         _emptyView = [UIView new];
@@ -356,6 +363,7 @@
     return self;
 }
 
+
 - (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID{
     if (self = [super init]) {
         _depth = depth;
@@ -385,6 +393,10 @@
         _children = [NSMutableArray new];
     }
     return _children;
+}
+
+- (NSString *)description{
+    return [NSString stringWithFormat:@"name = %@ ，isSeleted = %d",self.name,self.isSelected];
 }
 
 @end
