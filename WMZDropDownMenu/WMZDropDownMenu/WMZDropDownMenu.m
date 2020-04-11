@@ -1390,6 +1390,8 @@ static NSString* const notificationRemove = @"notificationRemove";
             }else if ([dic isKindOfClass:[NSString class]]){
                 tree.name = dic;
                 tree.originalData = dic;
+            }else if ([dic isKindOfClass:[WMZDropTree class]]){
+                tree = (WMZDropTree*)dic;
             }
             //cell高度
             if (self.delegate && [self.delegate respondsToSelector:@selector(menu:heightAtDropIndexPath:AtIndexPath:)]) {

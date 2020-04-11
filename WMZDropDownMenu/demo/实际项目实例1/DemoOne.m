@@ -67,7 +67,7 @@
         else if (dropIndexPath.row == 2)
             return @[@"南",@"北",@"东",@"西"];
         else if (dropIndexPath.row == 3)
-        return @[@"优家2.0",@"优家3.0",@"优家4.0",@"优家5.0",@"优家6.0",@"优家7.0",@"优家8.0"];
+        return @[@"全部",@"优家3.0",@"优家4.0",@"优家5.0",@"优家6.0",@"优家7.0",@"优家8.0"];
     }else if (dropIndexPath.section == 1) {
         return @[@"整租",@"合租"];
     }else if (dropIndexPath.section == 2) {
@@ -199,6 +199,23 @@
         }
     }];
 }
+
+- (void)menu:(WMZDropDownMenu *)menu didSelectRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath dataIndexPath:(NSIndexPath *)indexpath data:(WMZDropTree *)data{
+    //有个特殊场景 点击全部 取消其他选中 点击其他 取消全部
+    if (dropIndexPath.section == 3 && dropIndexPath.row == 3) {
+        if (indexpath.row == 0) {
+            NSArray *arr = [menu.dataDic objectForKey:dropIndexPath.key];
+            [arr enumerateObjectsUsingBlock:^(WMZDropTree * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+              if (idx != 0 && obj.isSelected) {
+                [menu updateDataConfig:@{@"isSelected":@(NO)} AtDropIndexPathSection:dropIndexPath.section AtDropIndexPathRow:dropIndexPath.row AtIndexPathRow:idx];
+                }
+            }];
+        }else{
+            [menu updateDataConfig:@{@"isSelected":@(NO)} AtDropIndexPathSection:dropIndexPath.section AtDropIndexPathRow:dropIndexPath.row AtIndexPathRow:0];
+        }
+    }
+}
+
 @end
 
 @implementation DemoOneCell
