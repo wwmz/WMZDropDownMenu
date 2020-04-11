@@ -30,7 +30,7 @@
 | 仿闲鱼筛选菜单               | ![xianyu.gif](https://upload-images.jianshu.io/upload_images/9163368-3df9ac4b45352b4b.gif?imageMogr2/auto-orient/strip)|
 | 仿美团筛选菜单               | ![meituan.gif](https://upload-images.jianshu.io/upload_images/9163368-fc0d363e925e9b84.gif?imageMogr2/auto-orient/strip)|
 | 饿了么筛选菜单              |![eleme.gif](https://upload-images.jianshu.io/upload_images/9163368-ab4ba51a21353c50.gif?imageMogr2/auto-orient/strip)|
- | 京东筛选菜单              | ![Jingdong.gif](https://upload-images.jianshu.io/upload_images/9163368-797e824e4cf89b5a.gif?imageMogr2/auto-orient/strip)|
+ | 京东筛选菜单              | ![Jingdong.gif](https://upload-images.jianshu.io/upload_images/9163368-52beb31fc6f2f0bf.gif?imageMogr2/auto-orient/strip)|
 |拼多多筛选菜单              |![pinduoduo.gif](https://upload-images.jianshu.io/upload_images/9163368-00eba09306587483.gif?imageMogr2/auto-orient/strip) |
 | 简书筛选菜单             |![jianshu.gif](https://upload-images.jianshu.io/upload_images/9163368-086566f77b9bdab7.gif?imageMogr2/auto-orient/strip) |
 | 赶集网筛选菜单              |![ganjiwang.gif](https://upload-images.jianshu.io/upload_images/9163368-8de1befc145ee6f7.gif?imageMogr2/auto-orient/strip) |
@@ -318,3 +318,4 @@
 - 20191220 cocopods 更新至1.0.3  修复退出后台数据源被自动清理掉的bug
 - 20200117 cocopods 更新至1.0.4  过年前更一波
 - 20200328 cocopods 更新至1.0.5  新增查看更多功能 详情看京东demo
+- 20200328 cocopods 更新至1.0.6  修复bug
