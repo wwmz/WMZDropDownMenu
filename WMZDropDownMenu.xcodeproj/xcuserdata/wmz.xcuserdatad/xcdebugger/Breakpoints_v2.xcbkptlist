@@ -57,8 +57,8 @@
             filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "804"
-            endingLineNumber = "804"
+            startingLineNumber = "822"
+            endingLineNumber = "822"
             landmarkName = "-setUpMoreView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -140,22 +140,6 @@
             startingLineNumber = "652"
             endingLineNumber = "652"
             landmarkName = "-openView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D1B4860D-F213-4027-8135-F59D606CA20D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "939"
-            endingLineNumber = "939"
-            landmarkName = "-addDropPathUI:type:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

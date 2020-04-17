@@ -440,7 +440,6 @@ static NSString* const notificationRemove = @"notificationRemove";
         [self changeTitleArr:YES update:YES];
     }else{
        sender.selected = ![sender isSelected];
-        NSLog(@"%d",[sender isSelected]);
        if ([sender isSelected]) {
            if (!self.close&&self.lastSelectIndex>=0) {
                WMZDropMenuBtn *lastBtn = self.titleBtnArr[self.lastSelectIndex];
@@ -650,8 +649,6 @@ static NSString* const notificationRemove = @"notificationRemove";
     
     [self dealDataWithDelete:MenuDataDefault btn:self.selectTitleBtn];
     //动画
-    NSLog(@"%@ %@",self.dataView,self.shadowView);
-    NSLog(@"%@",[MenuWindow subviews]);
     [self showAnimal:currentDrop.showAnimalStyle view:self.dataView durtion:menuAnimalTime block:^{}];
 }
 
@@ -772,6 +769,24 @@ static NSString* const notificationRemove = @"notificationRemove";
     }
     
     [self updateSubView:dropPath more:YES];
+}
+
+
+- (void)closeWith:(WMZDropIndexPath*)dropPath row:(NSInteger)row data:(WMZDropTree*)tree{
+    for (WMZDropIndexPath *drop in self.dropPathArr) {
+        if (drop.section == dropPath.section) {
+            NSArray *arr = [self getArrWithKey:drop.key withoutHide:NO];
+            [arr enumerateObjectsUsingBlock:^(WMZDropTree *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.isSelected) {
+                if ([self.selectArr indexOfObject:obj]==NSNotFound) {
+                    [self.selectArr addObject:obj];
+                }
+            }
+            }];
+        }
+    }
+    [self changeTitleConfig:@{@"name":tree.name} withBtn:self.selectTitleBtn];
+    [self closeView];
 }
 
 #pragma -mark 查看更多

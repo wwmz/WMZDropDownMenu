@@ -33,6 +33,12 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)updateUI;
 
+
+/*
+*手动关闭
+*/
+- (void)closeWith:(WMZDropIndexPath*)dropPath row:(NSInteger)row data:(WMZDropTree*)tree;
+
 @end
 
 

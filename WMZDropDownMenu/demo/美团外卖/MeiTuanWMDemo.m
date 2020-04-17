@@ -133,6 +133,10 @@
     //手动更新二级联动数据
     if (dropIndexPath.section == 1) {
         if (dropIndexPath.row == 0) {
+            NSArray *arr = self.dataDic[data.name];
+            if (arr.count == 0) {
+                [menu closeWith:dropIndexPath row:indexpath.row data:data];
+            }
             [menu updateData:self.dataDic[data.name] ForRowAtDropIndexPath:dropIndexPath];
         }
     }
@@ -147,7 +151,8 @@
 - (NSDictionary*)dataDic{
     if (!_dataDic) {
         _dataDic = @{
-                  @"全部品类":@[@"全部",@"水果",@"蔬菜",@"冷冻速食",@"肉禽奶蛋",@"肉饼加墨"],
+//            @[@"全部",@"水果",@"蔬菜",@"冷冻速食",@"肉禽奶蛋",@"肉饼加墨"]
+                  @"全部品类":@[],
                   @"美食":@[@"全部",@"水果1",@"蔬菜1",@"冷冻速食1",@"肉禽奶蛋1",@"肉饼加墨1"],
                   @"甜点饮品":@[@"全部",@"水果2",@"蔬菜2",@"肉禽奶蛋2",@"肉饼加墨2"],
                   @"超市便利":@[@"全部",@"水果3",@"蔬菜3",@"肉饼加墨3"],
