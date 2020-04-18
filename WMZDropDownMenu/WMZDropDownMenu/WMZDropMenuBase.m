@@ -67,7 +67,8 @@
     [tableView registerClass:[WMZDropTableViewFootView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([WMZDropTableViewFootView class])];
     if (@available(iOS 11.0, *)) {
         tableView.estimatedRowHeight = 0.01;
-        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        tableView.estimatedSectionHeaderHeight = 0.01;
+        tableView.estimatedSectionFooterHeight = 0.01;
     }
     if (path&&path.key) {
         tableView.dropIndex = path;

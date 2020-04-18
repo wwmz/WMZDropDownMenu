@@ -28,7 +28,6 @@ static NSString* const notificationRemove = @"notificationRemove";
     }
     [self.shadowView removeFromSuperview];
     [self.dataView removeFromSuperview];
-    
 }
 #pragma -mark UI
 - (void)updateUI{
@@ -117,6 +116,10 @@ static NSString* const notificationRemove = @"notificationRemove";
     //显示边框
     if (self.param.wBorderShow) {
         [self addBoder];
+    }
+    
+    if (@available(iOS 11.0, *)) {
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
 }
 #pragma -mark 添加边框
