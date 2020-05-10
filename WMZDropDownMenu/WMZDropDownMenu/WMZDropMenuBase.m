@@ -360,6 +360,7 @@
 - (instancetype)init{
     if (self = [super init]) {
         self.cellHeight = footHeadHeight;
+        self.tapClose = YES;
     }
     return self;
 }

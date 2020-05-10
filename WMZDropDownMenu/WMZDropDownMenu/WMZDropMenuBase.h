@@ -50,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL checkMore;
 //数据存在但不显示 default NO
 @property(nonatomic,assign)BOOL hide;
+//点击关闭 default YES
+@property(nonatomic,assign)BOOL tapClose;
 
 - (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID;
 @end

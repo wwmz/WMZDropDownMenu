@@ -740,7 +740,8 @@ static NSString* const notificationRemove = @"notificationRemove";
                    }
                }
                
-               if (dropPath.tapClose&&tree.isSelected) {
+               if (dropPath.tapClose&&tree.isSelected&&tree.tapClose) {
+                   
                    for (WMZDropIndexPath *drop in self.dropPathArr) {
                        if (drop.section == dropPath.section) {
                            NSArray *arr = [self getArrWithKey:drop.key withoutHide:NO];

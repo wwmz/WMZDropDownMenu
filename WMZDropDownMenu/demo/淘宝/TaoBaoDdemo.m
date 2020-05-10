@@ -54,7 +54,8 @@
 
 - (NSArray *)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 0) {
-        return @[@"综合",@"信用",@"价格降序",@"价格升序"];
+        //tapClose 默认开启 传NO 则表示点击不关闭
+        return @[@{@"name":@"综合",@"tapClose":@(NO)},@"信用",@"价格降序",@"价格升序"];
     }else if (dropIndexPath.section == 4) {
         if (dropIndexPath.row == 0) return @[@"Apple/苹果",@"华为",@"vivo",@"小米",@"OPPO",@"三星"];
         if (dropIndexPath.row == 1) return @[@"包邮",@"天猫",@"淘金币抵钱",@"全球购",@"天猫国际",@"天猫奢品",@"天猫超市",@"天猫国际",@"消费品保障",@"极速发货",@"货到付款",@"7+退货"];
