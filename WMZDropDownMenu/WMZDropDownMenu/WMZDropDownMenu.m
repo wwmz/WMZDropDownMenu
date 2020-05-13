@@ -622,6 +622,10 @@ static NSString* const notificationRemove = @"notificationRemove";
         }
         [self.delegate menu:self getAllSelectData:[NSArray arrayWithArray:allSelectArr]];
     }
+    
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:closeWithBtn:index:)]) {
+        [self.delegate menu:self closeWithBtn:self.selectTitleBtn index:[self.titleBtnArr indexOfObject:self.selectTitleBtn]];
+    }
 }
 #pragma -mark 开启筛选
 - (void)openView{
@@ -653,6 +657,11 @@ static NSString* const notificationRemove = @"notificationRemove";
     [self dealDataWithDelete:MenuDataDefault btn:self.selectTitleBtn];
     //动画
     [self showAnimal:currentDrop.showAnimalStyle view:self.dataView durtion:menuAnimalTime block:^{}];
+    
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:openWithBtn:index:)]) {
+        [self.delegate menu:self openWithBtn:self.selectTitleBtn index:[self.titleBtnArr indexOfObject:self.selectTitleBtn]];
+    }
+    
 }
 
 #pragma -mark 改变titleBtnArr中数据的状态

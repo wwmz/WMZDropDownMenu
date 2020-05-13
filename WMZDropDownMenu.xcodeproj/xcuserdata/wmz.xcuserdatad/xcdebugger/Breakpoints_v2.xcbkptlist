@@ -41,8 +41,8 @@
             filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "762"
-            endingLineNumber = "762"
+            startingLineNumber = "767"
+            endingLineNumber = "767"
             landmarkName = "-cellTap:data:indexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -57,8 +57,8 @@
             filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "823"
-            endingLineNumber = "823"
+            startingLineNumber = "828"
+            endingLineNumber = "828"
             landmarkName = "-setUpMoreView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -73,8 +73,8 @@
             filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "666"
-            endingLineNumber = "666"
+            startingLineNumber = "671"
+            endingLineNumber = "671"
             landmarkName = "-changeTitleArr:update:"
             landmarkType = "7">
          </BreakpointContent>
@@ -91,8 +91,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "630"
             endingLineNumber = "630"
-            landmarkName = "-openView"
-            landmarkType = "7">
+            landmarkName = "WMZDropDownMenu"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -190,6 +190,16 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)menu:(WMZDropDownMenu *)menu  customDefauultCollectionFootView:(WMZDropConfirmView*)confirmView;
 
+
+/*
+*监听关闭视图 可做修改标题文本和颜色的操作
+*/
+- (void)menu:(WMZDropDownMenu *)menu closeWithBtn:(WMZDropMenuBtn*)selectBtn   index:(NSInteger )index;
+/*
+*监听打开视图 可做修改标题文本和颜色的操作
+*/
+- (void)menu:(WMZDropDownMenu *)menu openWithBtn:(WMZDropMenuBtn*)selectBtn   index:(NSInteger )index;
+
 @end
 
 NS_ASSUME_NONNULL_END

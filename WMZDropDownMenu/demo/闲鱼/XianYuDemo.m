@@ -28,6 +28,7 @@
     menu.delegate = self;
     menu.tag = 111;
     [self.view addSubview:menu];
+
 }
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
@@ -161,6 +162,20 @@
         }else if (dropIndexPath.row  == 1) {  //更新第三层
             [menu updateData:[self twoData][data.name] ForRowAtDropIndexPath:dropIndexPath];
         }
+    }
+}
+
+//如果要改变标题颜色和内容 在关闭和开启的方法里修改
+- (void)menu:(WMZDropDownMenu *)menu closeWithBtn:(WMZDropMenuBtn *)selectBtn index:(NSInteger)index{
+    if (index == 0) {
+        [selectBtn setTitleColor:selectBtn.normalColor forState:UIControlStateNormal];
+        [selectBtn setTitleColor:selectBtn.normalColor forState:UIControlStateSelected];
+    }
+}
+- (void)menu:(WMZDropDownMenu *)menu openWithBtn:(WMZDropMenuBtn *)selectBtn index:(NSInteger)index{
+    if (index == 0) {
+        [selectBtn setTitleColor:selectBtn.normalColor forState:UIControlStateNormal];
+        [selectBtn setTitleColor:selectBtn.normalColor forState:UIControlStateSelected];
     }
 }
 
