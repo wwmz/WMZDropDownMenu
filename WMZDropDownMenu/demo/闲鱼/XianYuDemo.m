@@ -10,7 +10,9 @@
 
 #import "XianYuDemo.h"
 @interface XianYuDemo ()
-
+{
+    BOOL click;
+}
 @end
 
 @implementation XianYuDemo
@@ -163,21 +165,27 @@
             [menu updateData:[self twoData][data.name] ForRowAtDropIndexPath:dropIndexPath];
         }
     }
+    
+//    if (dropIndexPath.section == 0) {
+//        click = YES;
+//    }
 }
 
-//如果要改变标题颜色和内容 在关闭和开启的方法里修改
-- (void)menu:(WMZDropDownMenu *)menu closeWithBtn:(WMZDropMenuBtn *)selectBtn index:(NSInteger)index{
-    if (index == 0) {
-        [selectBtn setTitleColor:selectBtn.normalColor forState:UIControlStateNormal];
-        [selectBtn setTitleColor:selectBtn.normalColor forState:UIControlStateSelected];
-    }
-}
-- (void)menu:(WMZDropDownMenu *)menu openWithBtn:(WMZDropMenuBtn *)selectBtn index:(NSInteger)index{
-    if (index == 0) {
-        [selectBtn setTitleColor:selectBtn.normalColor forState:UIControlStateNormal];
-        [selectBtn setTitleColor:selectBtn.normalColor forState:UIControlStateSelected];
-    }
-}
+////如果要改变标题颜色和内容 在关闭和开启的方法里修改
+//- (void)menu:(WMZDropDownMenu *)menu closeWithBtn:(WMZDropMenuBtn *)selectBtn index:(NSInteger)index{
+//    if (index == 0 && !click) {
+//        [selectBtn setTitle:@"全部" forState:UIControlStateNormal];
+//        [selectBtn setTitleColor:selectBtn.selectColor forState:UIControlStateNormal];
+//        [selectBtn setTitleColor:selectBtn.selectColor forState:UIControlStateSelected];
+//    }
+//}
+//- (void)menu:(WMZDropDownMenu *)menu openWithBtn:(WMZDropMenuBtn *)selectBtn index:(NSInteger)index{
+////    if (index == 0) {
+////        [selectBtn setTitle:@"全部" forState:UIControlStateNormal];
+////        [selectBtn setTitleColor:selectBtn.selectColor forState:UIControlStateNormal];
+////        [selectBtn setTitleColor:selectBtn.selectColor forState:UIControlStateSelected];
+////    }
+//}
 
 - (NSDictionary*)oneData{
     return @{

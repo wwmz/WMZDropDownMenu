@@ -723,6 +723,7 @@ static NSString* const notificationRemove = @"notificationRemove";
 - (void)cellTap:(WMZDropIndexPath*)dropPath data:(NSArray*)arr indexPath:(NSIndexPath*)indexPath{
     WMZDropTree *tree = arr[indexPath.row];
     if (dropPath.UIStyle == MenuUICollectionRangeTextField) return;
+    BOOL close = NO;
     if ([dropPath.key isEqualToString:moreTableViewKey]){
         if (dropPath.editStyle == MenuEditOneCheck) {
             for (WMZDropTree *tmpTree in arr) {
@@ -763,9 +764,8 @@ static NSString* const notificationRemove = @"notificationRemove";
                            }];
                        }
                    }
-                   
+                   close = YES;
                    [self changeTitleConfig:@{@"name":tree.name} withBtn:self.selectTitleBtn];
-                   [self closeView];
                }
            }else if (dropPath.editStyle == MenuEditMoreCheck){
                tree.isSelected = !tree.isSelected;
@@ -782,6 +782,10 @@ static NSString* const notificationRemove = @"notificationRemove";
     }
     
     [self updateSubView:dropPath more:YES];
+    
+    if (close) {
+       [self closeView];
+    }
 }
 
 
