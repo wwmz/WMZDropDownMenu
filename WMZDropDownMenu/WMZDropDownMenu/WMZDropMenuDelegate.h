@@ -167,6 +167,12 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)menu:(WMZDropDownMenu *)menu didSelectTitleInSection:(NSInteger)section btn:(WMZDropMenuBtn*)selectBtn;
 /*
+*标题点击方法 多了一个block 用于网络请求完数据 再打开 block() 为请求数据结束的标识
+*/
+- (void)menu:(WMZDropDownMenu *)menu didSelectTitleInSection:(NSInteger)section btn:(WMZDropMenuBtn*)selectBtn networkBlock:(MenuAfterTime)block;
+
+
+/*
 *确定方法 多个选择
  selectNoramalData 转化后的的模型数据
  selectData 字符串数据
@@ -184,6 +190,7 @@ NS_ASSUME_NONNULL_BEGIN
  y            按钮的y坐标   自动会居中
 */
 - (NSDictionary*)menu:(WMZDropDownMenu *)menu  customTitleInSection:(NSInteger)section withTitleBtn:(WMZDropMenuBtn*)menuBtn;
+
 
 /*
 *自定义修改默认collectionView尾部视图

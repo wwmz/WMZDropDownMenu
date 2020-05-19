@@ -165,27 +165,31 @@
             [menu updateData:[self twoData][data.name] ForRowAtDropIndexPath:dropIndexPath];
         }
     }
-    
-//    if (dropIndexPath.section == 0) {
-//        click = YES;
-//    }
 }
 
-////如果要改变标题颜色和内容 在关闭和开启的方法里修改
-//- (void)menu:(WMZDropDownMenu *)menu closeWithBtn:(WMZDropMenuBtn *)selectBtn index:(NSInteger)index{
-//    if (index == 0 && !click) {
-//        [selectBtn setTitle:@"全部" forState:UIControlStateNormal];
-//        [selectBtn setTitleColor:selectBtn.selectColor forState:UIControlStateNormal];
-//        [selectBtn setTitleColor:selectBtn.selectColor forState:UIControlStateSelected];
-//    }
-//}
-//- (void)menu:(WMZDropDownMenu *)menu openWithBtn:(WMZDropMenuBtn *)selectBtn index:(NSInteger)index{
-////    if (index == 0) {
-////        [selectBtn setTitle:@"全部" forState:UIControlStateNormal];
-////        [selectBtn setTitleColor:selectBtn.selectColor forState:UIControlStateNormal];
-////        [selectBtn setTitleColor:selectBtn.selectColor forState:UIControlStateSelected];
-////    }
-//}
+//模拟点击标题网络请求数据
+- (void)menu:(WMZDropDownMenu *)menu didSelectTitleInSection:(NSInteger)section btn:(WMZDropMenuBtn *)selectBtn networkBlock:(MenuAfterTime)block{
+    if (section == 0) {
+        //判断是否是选中的状态 选中的状态则直接block
+        if ([selectBtn isSelected]) {
+             block();
+        }else{
+            UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyleGray)];
+            [self.view addSubview:activityIndicator];
+            activityIndicator.frame= CGRectMake((self.view.frame.size.width - 100)/2, 100, 100, 100);
+            activityIndicator.color = [UIColor redColor];
+            [activityIndicator startAnimating];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [activityIndicator stopAnimating];
+                [menu updateData:@[@"综合排序",@"价格从低到高1",@"价格从高到低",@"最新发布",@"离我最近"] AtDropIndexPathSection:0 AtDropIndexPathRow:0];
+                block();  //结束的标志
+            });
+        }
+    }else{
+        block();
+    }
+}
+
 
 - (NSDictionary*)oneData{
     return @{

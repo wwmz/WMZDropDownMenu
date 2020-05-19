@@ -396,80 +396,93 @@ static NSString* const notificationRemove = @"notificationRemove";
 
 #pragma -mark 标题点击方法
 - (void)titleAction:(WMZDropMenuBtn*)sender{
-    
-    if (self.selectTitleBtn&&self.selectTitleBtn.tag!=sender.tag&&[self.selectTitleBtn isSelected]) {
-        [self.selectTitleBtn hidenLine];
-        WMZDropIndexPath *currentDrop = [self getTitleFirstDropWthTitleBtn:self.selectTitleBtn];
-        if (currentDrop.editStyle != MenuEditReSetCheck&&
-            currentDrop.editStyle != MenuEditCheck&&
-            currentDrop.editStyle != MenuEditNone) {
-            self.selectTitleBtn.selected = NO;
-            self.lastSelectIndex = self.selectTitleBtn.tag - 1000;
-        }
-    }
-    self.selectTitleBtn = sender;
-    WMZDropIndexPath *currentDrop = [self getTitleFirstDropWthTitleBtn:sender];
-    //两种选中状态
-    if (currentDrop.editStyle == MenuEditReSetCheck) {
-       if (!self.close) {
-           [self closeView];
-       }
-        [self.selectTitleBtn setTitleColor:self.param.wCollectionViewCellSelectTitleColor forState:UIControlStateSelected];
-        sender.selected = YES;
-       if (!sender.click) {
-           [sender setImage:[UIImage bundleImage:sender.selectImage] forState:UIControlStateSelected];
-           [sender setImage:[UIImage bundleImage:sender.selectImage] forState:UIControlStateSelected | UIControlStateHighlighted];
-       }else{
-           [sender setImage:[UIImage bundleImage:sender.reSelectImage] forState:UIControlStateSelected];
-                         [sender setImage:[UIImage bundleImage:sender.reSelectImage] forState:UIControlStateSelected | UIControlStateHighlighted];
-       }
-       sender.click = !sender.click;
-       if (sender.click) {
-           sender.selectType = 1;
-       }else{
-           sender.selectType = 2;
-       }
-       [self changeTitleArr:YES update:YES];
-    }else if(currentDrop.editStyle == MenuEditCheck||currentDrop.editStyle == MenuEditNone){
-        if (!self.close) {
-            [self closeView];
-        }
-        [self.selectTitleBtn setTitleColor:self.selectTitleBtn.selectColor forState:UIControlStateSelected];
-        if (currentDrop.editStyle == MenuEditCheck) {
-            sender.selected = ![sender isSelected];
-        }else{
-            sender.selected = YES;
-        }
-        [self changeTitleArr:YES update:YES];
-    }else{
-       sender.selected = ![sender isSelected];
-       if ([sender isSelected]) {
-           if (!self.close&&self.lastSelectIndex>=0) {
-               WMZDropMenuBtn *lastBtn = self.titleBtnArr[self.lastSelectIndex];
-               [self dataChangeAction:[self getTitleFirstDropWthTitleBtn:lastBtn].section];
-           }
-            self.selectArr = [NSMutableArray new];
-           [self openView];
-       }else{
-           [self closeView];
-       }
-   }
-    
     //点击代理
-    if (self.delegate && [self.delegate respondsToSelector:@selector(menu:didSelectTitleInSection:btn:)]) {
+    if (self.delegate &&
+        [self.delegate respondsToSelector:@selector(menu:didSelectTitleInSection:btn:)]) {
         [self.delegate menu:self didSelectTitleInSection:sender.tag-1000 btn:sender];
     }
-    
-    if ([self.selectTitleBtn isSelected]&&self.param.wMenuLine) {
-        [self.selectTitleBtn showLine:@{}];
-        if (self.param.wJDCustomLine) {
-            self.param.wJDCustomLine(self.selectTitleBtn.line);
-        }
+    MenuWeakSelf(self)
+    //点击标题网络请求
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:didSelectTitleInSection:btn:networkBlock:)]) {
+        [self.delegate menu:self didSelectTitleInSection:sender.tag-1000 btn:sender networkBlock:^{
+            MenuStrongSelf(weakObject)
+            [strongObject judgeBtnTitle:sender];
+        }];
     }else{
-        [self.selectTitleBtn hidenLine];
+        [self judgeBtnTitle:sender];
     }
-
 }
+
+- (void)judgeBtnTitle:(WMZDropMenuBtn*)sender{
+    if (self.selectTitleBtn&&self.selectTitleBtn.tag!=sender.tag&&[self.selectTitleBtn isSelected]) {
+           [self.selectTitleBtn hidenLine];
+           WMZDropIndexPath *currentDrop = [self getTitleFirstDropWthTitleBtn:self.selectTitleBtn];
+           if (currentDrop.editStyle != MenuEditReSetCheck&&
+               currentDrop.editStyle != MenuEditCheck&&
+               currentDrop.editStyle != MenuEditNone) {
+               self.selectTitleBtn.selected = NO;
+               self.lastSelectIndex = self.selectTitleBtn.tag - 1000;
+           }
+       }
+       self.selectTitleBtn = sender;
+       WMZDropIndexPath *currentDrop = [self getTitleFirstDropWthTitleBtn:sender];
+       //两种选中状态
+       if (currentDrop.editStyle == MenuEditReSetCheck) {
+          if (!self.close) {
+              [self closeView];
+          }
+           [self.selectTitleBtn setTitleColor:self.param.wCollectionViewCellSelectTitleColor forState:UIControlStateSelected];
+           sender.selected = YES;
+          if (!sender.click) {
+              [sender setImage:[UIImage bundleImage:sender.selectImage] forState:UIControlStateSelected];
+              [sender setImage:[UIImage bundleImage:sender.selectImage] forState:UIControlStateSelected | UIControlStateHighlighted];
+          }else{
+              [sender setImage:[UIImage bundleImage:sender.reSelectImage] forState:UIControlStateSelected];
+                            [sender setImage:[UIImage bundleImage:sender.reSelectImage] forState:UIControlStateSelected | UIControlStateHighlighted];
+          }
+          sender.click = !sender.click;
+          if (sender.click) {
+              sender.selectType = 1;
+          }else{
+              sender.selectType = 2;
+          }
+          [self changeTitleArr:YES update:YES];
+       }else if(currentDrop.editStyle == MenuEditCheck||currentDrop.editStyle == MenuEditNone){
+           if (!self.close) {
+               [self closeView];
+           }
+           [self.selectTitleBtn setTitleColor:self.selectTitleBtn.selectColor forState:UIControlStateSelected];
+           if (currentDrop.editStyle == MenuEditCheck) {
+               sender.selected = ![sender isSelected];
+           }else{
+               sender.selected = YES;
+           }
+           [self changeTitleArr:YES update:YES];
+       }else{
+          sender.selected = ![sender isSelected];
+          if ([sender isSelected]) {
+              if (!self.close&&self.lastSelectIndex>=0) {
+                  WMZDropMenuBtn *lastBtn = self.titleBtnArr[self.lastSelectIndex];
+                  [self dataChangeAction:[self getTitleFirstDropWthTitleBtn:lastBtn].section];
+              }
+               self.selectArr = [NSMutableArray new];
+              [self openView];
+          }else{
+              [self closeView];
+          }
+      }
+       
+       
+       if ([self.selectTitleBtn isSelected]&&self.param.wMenuLine) {
+           [self.selectTitleBtn showLine:@{}];
+           if (self.param.wJDCustomLine) {
+               self.param.wJDCustomLine(self.selectTitleBtn.line);
+           }
+       }else{
+           [self.selectTitleBtn hidenLine];
+       }
+}
+
 #pragma -mark 关闭方法
 - (void)closeView{
     if (self.keyBoardShow) {

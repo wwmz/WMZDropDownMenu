@@ -76,6 +76,7 @@ _Pragma("clang diagnostic pop") \
 #define MenuWeakSelf(obj) __weak typeof(obj) weakObject = obj;
 #define MenuStrongSelf(obj) __strong typeof(obj) strongObject = weakObject;
 
+typedef void (^MenuAfterTime)();
 
 typedef void (^MenuCustomLine)(UIView *customLine);
 
