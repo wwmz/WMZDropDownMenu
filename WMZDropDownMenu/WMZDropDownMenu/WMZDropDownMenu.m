@@ -69,10 +69,11 @@ static NSString* const notificationRemove = @"notificationRemove";
         CGFloat offset = config[@"offset"]?[config[@"offset"] floatValue]:0;
         CGFloat y = config[@"y"]?[config[@"y"] floatValue]:0;
         btn.frame = CGRectMake(tmp?(CGRectGetMaxX(tmp.frame)+offset):offset, y, btn.frame.size.width-offset-offset/self.titleArr.count, btn.frame.size.height-y*2);
+        
         [WMZDropMenuTool TagSetImagePosition:btn.position spacing:1 button:btn];
         [btn addTarget:self action:@selector(titleAction:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = 1000+i;
-        if (i == self.titleArr.count - 1) {
+        if (i == self.titleArr.count - 1&&i!=0) {
             if (dictionary&&dic[@"lastFix"]) {
                 btn.frame = CGRectMake(CGRectGetWidth(self.frame)-self.param.wFixBtnWidth, 0, self.param.wFixBtnWidth, self.titleView.frame.size.height);
                 if ([[self subviews] indexOfObject:btn] == NSNotFound) {
