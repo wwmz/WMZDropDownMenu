@@ -1,4 +1,4 @@
-# WMZDropDownMenu (pod 已更新至1.0.5)
+# WMZDropDownMenu (pod 已更新至1.0.7)
 
 实现功能
 ==============
@@ -319,4 +319,5 @@
 - 20200117 cocopods 更新至1.0.4  过年前更一波
 - 20200328 cocopods 更新至1.0.5  新增查看更多功能 详情看京东demo
 - 20200328 cocopods 更新至1.0.6  修复bug
+- 20200606 cocopods 更新至1.0.7  新增一些代理方法
 
