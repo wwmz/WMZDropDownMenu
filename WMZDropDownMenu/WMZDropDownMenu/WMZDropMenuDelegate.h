@@ -98,11 +98,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma -mark 自定义用户交互的每行的头尾视图
 /*
-*自定义每行全局头部视图 多用于交互事件
+*自定义每行全局头部视图 多用于交互事件 传入[UIView new]为不需要此头部 传入nil为默认的头部
 */
 - (UIView*)menu:(WMZDropDownMenu *)menu userInteractionHeadViewInSection:(NSInteger)section;
 /*
-*自定义每行全局尾部视图 多用于交互事件
+*自定义每行全局尾部视图 多用于交互事件 传入[UIView new]为不需要此尾部 传入nil为默认的尾部
 */
 - (UIView*)menu:(WMZDropDownMenu *)menu userInteractionFootViewInSection:(NSInteger)section;
 #pragma -mark 样式动画相关代理

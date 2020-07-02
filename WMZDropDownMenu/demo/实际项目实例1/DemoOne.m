@@ -215,6 +215,11 @@
         }
     }
 }
+//隐藏默认底部示例
+//- (UIView *)menu:(WMZDropDownMenu *)menu userInteractionFootViewInSection:(NSInteger)section{
+//    if (section == 1) return [UIView new];
+//    return nil;
+//}
 
 @end
 

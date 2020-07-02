@@ -1208,21 +1208,11 @@ static NSString* const notificationRemove = @"notificationRemove";
             }
             self.tableVieHeadView = headView;
             [self.dataView addSubview:self.tableVieHeadView];
+        }else{
+            [self addDefaultHeadView:connectViews screnFrame:screnFrame];
         }
     }else{
-        if (screnFrame == MenuShowAnimalBoss) {
-            WMZDropBossHeadView *bossHeadView = [WMZDropBossHeadView new];
-            [bossHeadView.leftBtn addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];
-            bossHeadView.frame = CGRectMake(0, Menu_StatusBarHeight, self.dataView.frame.size.width, 50);
-            for (UIView *connectView in connectViews) {
-                CGRect rect = connectView.frame;
-                rect.origin.y+=CGRectGetMaxY(bossHeadView.frame);
-                rect.size.height-= CGRectGetMaxY(bossHeadView.frame);
-                connectView.frame = rect;
-            }
-            self.tableVieHeadView = bossHeadView;
-            [self.dataView addSubview:self.tableVieHeadView];
-        }
+       [self addDefaultHeadView:connectViews screnFrame:screnFrame];
     }
     //尾部
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:userInteractionFootViewInSection:)]) {
@@ -1240,46 +1230,69 @@ static NSString* const notificationRemove = @"notificationRemove";
             }
             self.confirmView = footView;
             [self.dataView addSubview:self.confirmView];
+        }else{
+            [self addDefaultFootView:connectViews screnFrame:screnFrame];
         }
     }else{
-        
-        BOOL insert = NO;
-        for (UIView *connectView in connectViews) {
-            if ([connectView isKindOfClass:[UICollectionView class]]) {
-                insert = YES;
-                break;
-            }else if ([connectView isKindOfClass:[WMZDropTableView class]]) {
-                WMZDropTableView *ta = (WMZDropTableView*)connectView;
-                if (ta.dropIndex.editStyle == MenuEditMoreCheck) {
-                    insert = YES; break;
-                }
-                if (ta.dropIndex.tapClose) {
-                    insert = NO;
-                }
-            }
-        }
-        if (!insert) return;
-        WMZDropConfirmView *footView = [WMZDropConfirmView new];
-        [footView.confirmBtn addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
-        [footView.resetBtn addTarget:self action:@selector(reSetAction) forControlEvents:UIControlEventTouchUpInside];
-        footView.confirmBtn.backgroundColor = self.param.wCollectionViewCellSelectTitleColor;
-        for (UIView *connectView in connectViews) {
-            if (!connectView.frame.size.height) break;
-                if (screnFrame) {
-                    CGRect rect = connectView.frame;
-                    rect.size.height -= (self.param.wDefaultConfirmHeight+(MenuisIphoneX?(self.param.wCollectionViewDefaultFootViewMarginY>=20?0:(20-self.param.wCollectionViewDefaultFootViewMarginY)):0)+self.param.wCollectionViewDefaultFootViewMarginY+self.param.wCollectionViewDefaultFootViewPaddingY);
-                    connectView.frame = rect;
-                }
-                footView.frame = CGRectMake(0, CGRectGetMaxY(connectView.frame)+self.param.wCollectionViewDefaultFootViewPaddingY, self.dataView.frame.size.width, self.param.wDefaultConfirmHeight);
-                if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:customDefauultCollectionFootView:)]) {
-                    [self.delegate menu:self customDefauultCollectionFootView:footView];
-                    [footView layoutSubviews];
-                    footView.frame = CGRectMake(footView.frame.origin.x, CGRectGetMaxY(connectView.frame)+self.param.wCollectionViewDefaultFootViewPaddingY, footView.frame.size.width, self.param.wDefaultConfirmHeight);
-                }
-        }
-        self.confirmView = footView;
-        [self.dataView addSubview:self.confirmView];
+        [self addDefaultFootView:connectViews screnFrame:screnFrame];
     }
+}
+#pragma -mark 默认footView
+- (void)addDefaultFootView:(NSArray*)connectViews
+                screnFrame:(MenuShowAnimalStyle)screnFrame{
+   BOOL insert = NO;
+   for (UIView *connectView in connectViews) {
+       if ([connectView isKindOfClass:[UICollectionView class]]) {
+           insert = YES;
+           break;
+       }else if ([connectView isKindOfClass:[WMZDropTableView class]]) {
+           WMZDropTableView *ta = (WMZDropTableView*)connectView;
+           if (ta.dropIndex.editStyle == MenuEditMoreCheck) {
+               insert = YES; break;
+           }
+           if (ta.dropIndex.tapClose) {
+               insert = NO;
+           }
+       }
+   }
+   if (!insert) return;
+   WMZDropConfirmView *footView = [WMZDropConfirmView new];
+   [footView.confirmBtn addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
+   [footView.resetBtn addTarget:self action:@selector(reSetAction) forControlEvents:UIControlEventTouchUpInside];
+   footView.confirmBtn.backgroundColor = self.param.wCollectionViewCellSelectTitleColor;
+   for (UIView *connectView in connectViews) {
+       if (!connectView.frame.size.height) break;
+           if (screnFrame) {
+               CGRect rect = connectView.frame;
+               rect.size.height -= (self.param.wDefaultConfirmHeight+(MenuisIphoneX?(self.param.wCollectionViewDefaultFootViewMarginY>=20?0:(20-self.param.wCollectionViewDefaultFootViewMarginY)):0)+self.param.wCollectionViewDefaultFootViewMarginY+self.param.wCollectionViewDefaultFootViewPaddingY);
+               connectView.frame = rect;
+           }
+           footView.frame = CGRectMake(0, CGRectGetMaxY(connectView.frame)+self.param.wCollectionViewDefaultFootViewPaddingY, self.dataView.frame.size.width, self.param.wDefaultConfirmHeight);
+           if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:customDefauultCollectionFootView:)]) {
+               [self.delegate menu:self customDefauultCollectionFootView:footView];
+               [footView layoutSubviews];
+               footView.frame = CGRectMake(footView.frame.origin.x, CGRectGetMaxY(connectView.frame)+self.param.wCollectionViewDefaultFootViewPaddingY, footView.frame.size.width, self.param.wDefaultConfirmHeight);
+           }
+   }
+   self.confirmView = footView;
+   [self.dataView addSubview:self.confirmView];
+}
+#pragma -mark 默认headView
+- (void)addDefaultHeadView:(NSArray*)connectViews
+                screnFrame:(MenuShowAnimalStyle)screnFrame{
+    if (screnFrame == MenuShowAnimalBoss) {
+       WMZDropBossHeadView *bossHeadView = [WMZDropBossHeadView new];
+       [bossHeadView.leftBtn addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];
+       bossHeadView.frame = CGRectMake(0, Menu_StatusBarHeight, self.dataView.frame.size.width, 50);
+       for (UIView *connectView in connectViews) {
+           CGRect rect = connectView.frame;
+           rect.origin.y+=CGRectGetMaxY(bossHeadView.frame);
+           rect.size.height-= CGRectGetMaxY(bossHeadView.frame);
+           connectView.frame = rect;
+       }
+       self.tableVieHeadView = bossHeadView;
+       [self.dataView addSubview:self.tableVieHeadView];
+   }
 }
 
 #pragma -mark 展开方法
