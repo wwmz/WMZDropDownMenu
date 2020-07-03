@@ -758,9 +758,15 @@ static NSString* const notificationRemove = @"notificationRemove";
                }else{
                    tree.isSelected = YES;
                }
+
                for (WMZDropTree *tmpTree in arr) {
                    if (tmpTree != tree) {
                        tmpTree.isSelected = NO;
+                   }
+                   if (!tmpTree.isSelected) {
+                       if ([self.selectArr indexOfObject:tmpTree]!=NSNotFound) {
+                           [self.selectArr removeObject:tmpTree];
+                       }
                    }
                }
                
