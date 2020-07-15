@@ -17,8 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = MenuColor(0x00A6FF);
-    self.navigationController.navigationBar.translucent = NO;
-    
     self.taData = @[@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",
                       @"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",
                      @"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",
