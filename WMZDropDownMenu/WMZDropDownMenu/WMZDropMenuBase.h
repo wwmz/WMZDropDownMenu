@@ -9,54 +9,10 @@
 #import "WMZDropMenuParam.h"
 #import "WMZDropMenuBtn.h"
 #import "WMZDropMenuDelegate.h"
-#import "WMZDropCustomView.h"
+#import "WMZDropTableView.h"
+#import "WMZDropCollectionView.h"
 #import "Aspects.h"
-#define footHeadHeight 35
-#define menuAnimalTime 0.3
-#define moreTableViewKey @"moreTableViewKey"
-#define menuMainClor [UIColor whiteColor]
 NS_ASSUME_NONNULL_BEGIN
-//树形节点model  传入对应的字典键值对就能获取相应的属性
-@interface WMZDropTree:NSObject
-//深度
-@property(nonatomic,assign)NSInteger depth;
-//名字
-@property(nonatomic,copy)NSString *name;
-//图片
-@property(nonatomic,copy)NSString *image;
-//对应id 唯一
-@property(nonatomic,copy)NSString *ID;
-//Cell高度 default 35
-@property(nonatomic,assign)CGFloat cellHeight;
-//其他携带数据
-@property(nonatomic,strong)id otherData;
-//配置
-@property(nonatomic,strong)NSDictionary *config;
-//是否选中
-@property(nonatomic,assign)BOOL isSelected;
-//范围
-@property(nonatomic,strong)NSMutableArray *rangeArr;
-//初始范围
-@property(nonatomic,strong)NSArray *normalRangeArr;
-//低位提示语
-@property(nonatomic,copy)NSString *lowPlaceholder;
-//高位提示语
-@property(nonatomic,copy)NSString *highPlaceholder;
-//子集
-@property(nonatomic,strong)NSMutableArray<WMZDropTree *> *children;
-//原来传过来的数据模型
-@property(nonatomic,strong)id originalData;
-//点击查看更多 default NO
-@property(nonatomic,assign)BOOL checkMore;
-//数据存在但不显示 default NO
-@property(nonatomic,assign)BOOL hide;
-//点击关闭 default YES
-@property(nonatomic,assign)BOOL tapClose;
-
-- (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID;
-@end
-
-
 //基类
 @interface WMZDropMenuBase : UIView
 /*
@@ -233,6 +189,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (UIBezierPath*)getMyDownPath;
 - (UIBezierPath*)getMyDownRightPath;
+
+- (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide withInfo:(NSDictionary*)info;
+- (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide;
+//点击选中方法
+- (void)cellTap:(WMZDropIndexPath*)dropPath data:(NSArray*)arr indexPath:(NSIndexPath*)indexPath;
 @end
 
 NS_ASSUME_NONNULL_END

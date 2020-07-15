@@ -151,8 +151,8 @@ static BOOL aspect_remove(AspectIdentifier *aspect, NSError **error) {
             aspect.block = nil;
             aspect.selector = NULL;
         }else {
-            NSString *errrorDesc = [NSString stringWithFormat:@"Unable to deregister hook. Object already deallocated: %@", aspect];
-            AspectError(AspectErrorRemoveObjectAlreadyDeallocated, errrorDesc);
+//            NSString *errrorDesc = [NSString stringWithFormat:@"Unable to deregister hook. Object already deallocated: %@", aspect];
+//            AspectError(AspectErrorRemoveObjectAlreadyDeallocated, errrorDesc);
         }
     });
     return success;

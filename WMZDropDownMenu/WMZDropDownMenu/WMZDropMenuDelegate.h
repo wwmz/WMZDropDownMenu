@@ -11,7 +11,6 @@
 @class WMZDropDownMenu,WMZDropIndexPath,WMZDropDwonMenuConfig,WMZDropTree,WMZDropTableView,WMZDropCollectionView,WMZDropConfirmView;
 
 NS_ASSUME_NONNULL_BEGIN
-
 @protocol WMZDropMenuDelegate <NSObject>
 #pragma -mark data相关代理
 @required
@@ -38,10 +37,24 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 
+#pragma -mark 视图相关 新增
+/*
+ 弹出视图的Y值 可动态改变 （例如滚动时候动态改变此值,放在scrollView/collectionview上有效）
+*/
+- (CGFloat)popFrameY;
+
+/*
+ 放在scrollView/tableview/collectionview上 放tableview等视图必传
+*/
+- (UIScrollView*)inScrollView;
+
+
+
 /*
  *返回setion行标题有多少列 默认1列
  */
 - (NSInteger)menu:(WMZDropDownMenu *)menu numberOfRowsInSection:(NSInteger)section;
+
 
 #pragma -mark cell相关代理
 
@@ -105,6 +118,7 @@ NS_ASSUME_NONNULL_BEGIN
 *自定义每行全局尾部视图 多用于交互事件 传入[UIView new]为不需要此尾部 传入nil为默认的尾部
 */
 - (UIView*)menu:(WMZDropDownMenu *)menu userInteractionFootViewInSection:(NSInteger)section;
+
 #pragma -mark 样式动画相关代理
 /*
 *返回WMZDropIndexPath每行 每列的UI样式  默认MenuUITableView
@@ -171,7 +185,6 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)menu:(WMZDropDownMenu *)menu didSelectTitleInSection:(NSInteger)section btn:(WMZDropMenuBtn*)selectBtn networkBlock:(MenuAfterTime)block;
 
-
 /*
 *确定方法 多个选择
  selectNoramalData 转化后的的模型数据
@@ -191,12 +204,10 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (NSDictionary*)menu:(WMZDropDownMenu *)menu  customTitleInSection:(NSInteger)section withTitleBtn:(WMZDropMenuBtn*)menuBtn;
 
-
 /*
 *自定义修改默认collectionView尾部视图
 */
 - (void)menu:(WMZDropDownMenu *)menu  customDefauultCollectionFootView:(WMZDropConfirmView*)confirmView;
-
 
 /*
 *监听关闭视图 可做修改标题文本和颜色的操作

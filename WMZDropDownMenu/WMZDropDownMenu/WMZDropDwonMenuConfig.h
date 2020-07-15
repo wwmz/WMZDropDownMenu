@@ -76,7 +76,14 @@ _Pragma("clang diagnostic pop") \
 #define MenuWeakSelf(obj) __weak typeof(obj) weakObject = obj;
 #define MenuStrongSelf(obj) __strong typeof(obj) strongObject = weakObject;
 
-typedef void (^MenuAfterTime)();
+
+#define footHeadHeight 35
+#define menuAnimalTime 0.3
+#define moreTableViewKey @"moreTableViewKey"
+#define menuMainClor [UIColor whiteColor]
+
+
+typedef void (^MenuAfterTime)(void);
 
 typedef void (^MenuCustomLine)(UIView *customLine);
 
@@ -134,5 +141,13 @@ typedef enum : NSUInteger{
     MenuDataInsert,                   //添加
     MenuDataDefault,                  //默认添加已选中的
 }MenuDataStyle;
+
+
+typedef enum : NSUInteger{
+    MenuInViewNormal,              //普通视图 无须处理
+    MenuInViewTableView,           //tableview上
+    MenuInViewCollectionView,      //collectionView上
+    MenuInViewScrollView,          //scrollview上
+}MenuInView;
 
 #endif /* WMZDropDwonMenuConfig_h */

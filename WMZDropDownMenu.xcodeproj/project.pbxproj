@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F31399A724BD9A88007161B2 /* WMZDropTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F31399A624BD9A88007161B2 /* WMZDropTableView.m */; };
+		F31399AA24BD9AC9007161B2 /* WMZDropCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F31399A924BD9AC9007161B2 /* WMZDropCollectionView.m */; };
+		F31399AD24BD9B9A007161B2 /* WMZDropIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = F31399AC24BD9B9A007161B2 /* WMZDropIndexPath.m */; };
 		F31BFAC12392C5B500A60D4D /* WMZDropMenu.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F31BFAC02392C5B500A60D4D /* WMZDropMenu.bundle */; };
 		F31EFA3A238BD815000C9258 /* MeiTuanDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F31EFA39238BD815000C9258 /* MeiTuanDemo.m */; };
 		F325D478238CC5080018705E /* TaoBaoDdemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F325D477238CC5080018705E /* TaoBaoDdemo.m */; };
@@ -18,6 +21,10 @@
 		F3615336238E16FB006DFFB2 /* BaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615335238E16FB006DFFB2 /* BaseVC.m */; };
 		F361533A238E1CD8006DFFB2 /* BossDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615339238E1CD8006DFFB2 /* BossDemo.m */; };
 		F38738762408B44100D4D2AD /* DemoOne.m in Sources */ = {isa = PBXBuildFile; fileRef = F38738742408B44100D4D2AD /* DemoOne.m */; };
+		F395FCBD24BEA74400CAC7FE /* WMZDropDownMenu+DealLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FCBC24BEA74400CAC7FE /* WMZDropDownMenu+DealLogic.m */; };
+		F395FCC024BEA83B00CAC7FE /* WMZDropDownMenu+MoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FCBF24BEA83B00CAC7FE /* WMZDropDownMenu+MoreView.m */; };
+		F395FCC324BEAA0300CAC7FE /* WMZDropDownMenu+FootHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FCC224BEAA0300CAC7FE /* WMZDropDownMenu+FootHeaderView.m */; };
+		F395FCC624BEAC6100CAC7FE /* WMZDropDownMenu+NormalView.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FCC524BEAC6100CAC7FE /* WMZDropDownMenu+NormalView.m */; };
 		F3AEACA123A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACA023A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m */; };
 		F3B4C897238C185100684AB8 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B4C896238C185000684AB8 /* Aspects.m */; };
 		F3C871D52384D70600351CA9 /* WMZDropMenuBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C871D42384D70600351CA9 /* WMZDropMenuBtn.m */; };
@@ -38,7 +45,6 @@
 		F3DC868F238ACB7A0055BA98 /* ShowDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DC868E238ACB7A0055BA98 /* ShowDemo.m */; };
 		F3EDDAA5238D5C0700F9C608 /* JianShuDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EDDAA4238D5C0700F9C608 /* JianShuDemo.m */; };
 		F3EDDAA9238D646400F9C608 /* GanJiDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3EDDAA8238D646400F9C608 /* GanJiDemo.m */; };
-		F3F5CB0023898F08001A0F17 /* WMZDropCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F5CAFF23898F08001A0F17 /* WMZDropCustomView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +65,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F31399A524BD9A88007161B2 /* WMZDropTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropTableView.h; sourceTree = "<group>"; };
+		F31399A624BD9A88007161B2 /* WMZDropTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropTableView.m; sourceTree = "<group>"; };
+		F31399A824BD9AC9007161B2 /* WMZDropCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropCollectionView.h; sourceTree = "<group>"; };
+		F31399A924BD9AC9007161B2 /* WMZDropCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropCollectionView.m; sourceTree = "<group>"; };
+		F31399AB24BD9B9A007161B2 /* WMZDropIndexPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropIndexPath.h; sourceTree = "<group>"; };
+		F31399AC24BD9B9A007161B2 /* WMZDropIndexPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropIndexPath.m; sourceTree = "<group>"; };
 		F31BFAC02392C5B500A60D4D /* WMZDropMenu.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WMZDropMenu.bundle; sourceTree = "<group>"; };
 		F31EFA38238BD815000C9258 /* MeiTuanDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeiTuanDemo.h; sourceTree = "<group>"; };
 		F31EFA39238BD815000C9258 /* MeiTuanDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeiTuanDemo.m; sourceTree = "<group>"; };
@@ -81,6 +93,14 @@
 		F37A48A323842BA500DB173C /* WMZDropMenuDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuDelegate.h; sourceTree = "<group>"; };
 		F38738742408B44100D4D2AD /* DemoOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoOne.m; sourceTree = "<group>"; };
 		F38738752408B44100D4D2AD /* DemoOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoOne.h; sourceTree = "<group>"; };
+		F395FCBB24BEA74400CAC7FE /* WMZDropDownMenu+DealLogic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDropDownMenu+DealLogic.h"; sourceTree = "<group>"; };
+		F395FCBC24BEA74400CAC7FE /* WMZDropDownMenu+DealLogic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDropDownMenu+DealLogic.m"; sourceTree = "<group>"; };
+		F395FCBE24BEA83B00CAC7FE /* WMZDropDownMenu+MoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDropDownMenu+MoreView.h"; sourceTree = "<group>"; };
+		F395FCBF24BEA83B00CAC7FE /* WMZDropDownMenu+MoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDropDownMenu+MoreView.m"; sourceTree = "<group>"; };
+		F395FCC124BEAA0300CAC7FE /* WMZDropDownMenu+FootHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDropDownMenu+FootHeaderView.h"; sourceTree = "<group>"; };
+		F395FCC224BEAA0300CAC7FE /* WMZDropDownMenu+FootHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDropDownMenu+FootHeaderView.m"; sourceTree = "<group>"; };
+		F395FCC424BEAC6100CAC7FE /* WMZDropDownMenu+NormalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDropDownMenu+NormalView.h"; sourceTree = "<group>"; };
+		F395FCC524BEAC6100CAC7FE /* WMZDropDownMenu+NormalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDropDownMenu+NormalView.m"; sourceTree = "<group>"; };
 		F3AEAC9F23A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDropDownMenu+DealDelegate.h"; sourceTree = "<group>"; };
 		F3AEACA023A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDropDownMenu+DealDelegate.m"; sourceTree = "<group>"; };
 		F3B4C895238C185000684AB8 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
@@ -122,8 +142,6 @@
 		F3EDDAA4238D5C0700F9C608 /* JianShuDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JianShuDemo.m; sourceTree = "<group>"; };
 		F3EDDAA7238D646400F9C608 /* GanJiDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GanJiDemo.h; sourceTree = "<group>"; };
 		F3EDDAA8238D646400F9C608 /* GanJiDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GanJiDemo.m; sourceTree = "<group>"; };
-		F3F5CAFE23898F08001A0F17 /* WMZDropCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropCustomView.h; sourceTree = "<group>"; };
-		F3F5CAFF23898F08001A0F17 /* WMZDropCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropCustomView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,10 +315,16 @@
 				F3D8F62D2383BE37000FF9B4 /* WMZDropDownMenu.m */,
 				F3AEAC9F23A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.h */,
 				F3AEACA023A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m */,
+				F395FCBB24BEA74400CAC7FE /* WMZDropDownMenu+DealLogic.h */,
+				F395FCBC24BEA74400CAC7FE /* WMZDropDownMenu+DealLogic.m */,
+				F395FCBE24BEA83B00CAC7FE /* WMZDropDownMenu+MoreView.h */,
+				F395FCBF24BEA83B00CAC7FE /* WMZDropDownMenu+MoreView.m */,
+				F395FCC124BEAA0300CAC7FE /* WMZDropDownMenu+FootHeaderView.h */,
+				F395FCC224BEAA0300CAC7FE /* WMZDropDownMenu+FootHeaderView.m */,
+				F395FCC424BEAC6100CAC7FE /* WMZDropDownMenu+NormalView.h */,
+				F395FCC524BEAC6100CAC7FE /* WMZDropDownMenu+NormalView.m */,
 				F3D8F6362383C60E000FF9B4 /* WMZDropMenuBase.h */,
 				F3D8F6372383C60E000FF9B4 /* WMZDropMenuBase.m */,
-				F3F5CAFE23898F08001A0F17 /* WMZDropCustomView.h */,
-				F3F5CAFF23898F08001A0F17 /* WMZDropCustomView.m */,
 				F3C871D32384D70600351CA9 /* WMZDropMenuBtn.h */,
 				F3C871D42384D70600351CA9 /* WMZDropMenuBtn.m */,
 				F3D8F6332383C17E000FF9B4 /* WMZDropMenuParam.h */,
@@ -309,6 +333,12 @@
 				F3D8F63A2383C6AE000FF9B4 /* WMZDropMenuTool.m */,
 				F3B4C895238C185000684AB8 /* Aspects.h */,
 				F3B4C896238C185000684AB8 /* Aspects.m */,
+				F31399A524BD9A88007161B2 /* WMZDropTableView.h */,
+				F31399A624BD9A88007161B2 /* WMZDropTableView.m */,
+				F31399A824BD9AC9007161B2 /* WMZDropCollectionView.h */,
+				F31399A924BD9AC9007161B2 /* WMZDropCollectionView.m */,
+				F31399AB24BD9B9A007161B2 /* WMZDropIndexPath.h */,
+				F31399AC24BD9B9A007161B2 /* WMZDropIndexPath.m */,
 				F31BFAC02392C5B500A60D4D /* WMZDropMenu.bundle */,
 			);
 			path = WMZDropDownMenu;
@@ -513,30 +543,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F31399AA24BD9AC9007161B2 /* WMZDropCollectionView.m in Sources */,
 				F3615336238E16FB006DFFB2 /* BaseVC.m in Sources */,
 				F3C871D52384D70600351CA9 /* WMZDropMenuBtn.m in Sources */,
 				F325D47F238CF56D0018705E /* ElMentDemo.m in Sources */,
 				F3B4C897238C185100684AB8 /* Aspects.m in Sources */,
 				F35F1CEC2390FE3F00F740C6 /* WeiPinDemo.m in Sources */,
+				F395FCC624BEAC6100CAC7FE /* WMZDropDownMenu+NormalView.m in Sources */,
 				F3DC868B238ACB510055BA98 /* XianYuDemo.m in Sources */,
 				F3D8F62E2383BE37000FF9B4 /* WMZDropDownMenu.m in Sources */,
+				F395FCC024BEA83B00CAC7FE /* WMZDropDownMenu+MoreView.m in Sources */,
+				F395FCBD24BEA74400CAC7FE /* WMZDropDownMenu+DealLogic.m in Sources */,
 				F3D8F6352383C17E000FF9B4 /* WMZDropMenuParam.m in Sources */,
 				F3D8F63B2383C6AE000FF9B4 /* WMZDropMenuTool.m in Sources */,
 				F3EDDAA5238D5C0700F9C608 /* JianShuDemo.m in Sources */,
+				F31399AD24BD9B9A007161B2 /* WMZDropIndexPath.m in Sources */,
 				F3D8F6382383C60E000FF9B4 /* WMZDropMenuBase.m in Sources */,
 				F3D8F5FE2383BCEE000FF9B4 /* ViewController.m in Sources */,
 				F3615333238E07C3006DFFB2 /* MeiTuanWMDemo.m in Sources */,
 				F3AEACA123A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m in Sources */,
+				F31399A724BD9A88007161B2 /* WMZDropTableView.m in Sources */,
 				F3DC868F238ACB7A0055BA98 /* ShowDemo.m in Sources */,
 				F3D8F5F82383BCEE000FF9B4 /* AppDelegate.m in Sources */,
 				F325D483238D1EE20018705E /* PinDDDemo.m in Sources */,
 				F325D478238CC5080018705E /* TaoBaoDdemo.m in Sources */,
 				F35F1CF023911EEA00F740C6 /* YiTaoDemo.m in Sources */,
-				F3F5CB0023898F08001A0F17 /* WMZDropCustomView.m in Sources */,
 				F3DC8687238A6E4A0055BA98 /* JingDongDemo.m in Sources */,
 				F38738762408B44100D4D2AD /* DemoOne.m in Sources */,
 				F3D8F6092383BCF2000FF9B4 /* main.m in Sources */,
 				F3EDDAA9238D646400F9C608 /* GanJiDemo.m in Sources */,
+				F395FCC324BEAA0300CAC7FE /* WMZDropDownMenu+FootHeaderView.m in Sources */,
 				F31EFA3A238BD815000C9258 /* MeiTuanDemo.m in Sources */,
 				F361533A238E1CD8006DFFB2 /* BossDemo.m in Sources */,
 			);

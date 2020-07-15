@@ -65,14 +65,16 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView registerClass:[WMZDropTableViewHeadView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([WMZDropTableViewHeadView class])];
     [tableView registerClass:[WMZDropTableViewFootView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([WMZDropTableViewFootView class])];
+    tableView.estimatedRowHeight = 100;
     if (@available(iOS 11.0, *)) {
-        tableView.estimatedRowHeight = 0.01;
         tableView.estimatedSectionHeaderHeight = 0.01;
         tableView.estimatedSectionFooterHeight = 0.01;
     }
     if (path&&path.key) {
         tableView.dropIndex = path;
     }
+    tableView.delegate = (id)tableView;
+    tableView.dataSource = (id)tableView;
     return tableView;
 }
 //获取collectionView
@@ -170,46 +172,6 @@
     [currentBtn setTitleColor:currentBtn.normalColor forState:UIControlStateSelected];
 }
 
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    UIView *view = self;
-    UITableView *ta = nil;
-    if (!self.tableView) {
-        while (view.superview) {
-            view = view.superview;
-            if ([view isKindOfClass:[UITableView class]]) {
-                ta = (UITableView*)view;
-            }
-        }
-    }
-    if (!self.tableView&&ta) {
-        self.tableView = ta;
-        [self.tableView layoutIfNeeded];
-        [self.tableView layoutSubviews];
-        CGRect rectInTableView = [self.tableView rectForHeaderInSection:self.tableViewHeadSection];
-        CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
-        self.menuOrignY = CGRectGetMaxY(rect);
-        [self.tableView pageAddObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-    }
-}
-
-//监听子控制器中的滚动视图
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"contentOffset"]) {
-       CGRect rectInTableView = [self.tableView rectForHeaderInSection:self.tableViewHeadSection];
-       CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
-        if (rect.origin.y<0) {
-            rect.origin.y = self.tableView.frame.origin.y;
-        }
-        self.menuOrignY = CGRectGetMaxY(rect);
-        if (!self.close) {
-            [self closeView];
-        }
-    }
-}
-
-
-
 //不同动画frame不同 dataView的frame
 - (NSMutableDictionary*)dataViewFrameDic{
     _dataViewFrameDic = [NSMutableDictionary dictionaryWithDictionary:@{
@@ -235,7 +197,27 @@
     }];
     return _shadomViewFrameDic;
 }
+- (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide withInfo:(NSDictionary*)info{
+    if ([key isEqualToString:moreTableViewKey]) {
+        return [info objectForKey:key];
+    }
+    NSMutableArray *marr = [NSMutableArray new];
+    NSArray *arr = [info objectForKey:key];
+    [arr enumerateObjectsUsingBlock:^(WMZDropTree * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (hide) {
+            if (!obj.hide) {
+                [marr addObject:obj];
+            }
+        }else{
+            [marr addObject:obj];
+        }
+    }];
+    return [NSArray arrayWithArray:marr];
+}
 
+- (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide{
+    return [self getArrWithKey:key withoutHide:hide withInfo:self.dataDic];
+}
 /**
  配置贝塞尔曲线
  */
@@ -263,6 +245,7 @@
 - (void)confirmAction{}
 - (void)reSetAction{}
 - (void)updateSubView:(WMZDropIndexPath*)dropPath more:(BOOL)more{}
+- (void)cellTap:(WMZDropIndexPath *)dropPath data:(NSArray *)arr indexPath:(NSIndexPath *)indexPath{}
 
 - (CGFloat)menuOrignY{
     if (!_menuOrignY) {
@@ -351,54 +334,6 @@
 - (void)dealloc{
     [self removeAllObserverdKeyPath:self withKey:@"contentOffset"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-@end
-
-@implementation WMZDropTree
-
-- (instancetype)init{
-    if (self = [super init]) {
-        self.cellHeight = footHeadHeight;
-        self.tapClose = YES;
-    }
-    return self;
-}
-
-
-- (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID{
-    if (self = [super init]) {
-        _depth = depth;
-        _name = name;
-        _ID = ID;
-    }
-    return self;
-}
-
-- (NSMutableArray *)rangeArr{
-    if (!_rangeArr) {
-        _rangeArr = [NSMutableArray arrayWithObjects:@"",@"",nil];
-    }
-    return _rangeArr;
-}
-
-
-- (NSDictionary *)config{
-    if (!_config) {
-        _config = [NSDictionary new];
-    }
-    return _config;
-}
-
-- (NSMutableArray<WMZDropTree *> *)children{
-    if (!_children) {
-        _children = [NSMutableArray new];
-    }
-    return _children;
-}
-
-- (NSString *)description{
-    return [NSString stringWithFormat:@"name = %@ ，isSeleted = %d",self.name,self.isSelected];
 }
 
 @end

@@ -33,11 +33,20 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)updateUI;
 
-
 /*
 *手动关闭
 */
 - (void)closeWith:(WMZDropIndexPath*)dropPath row:(NSInteger)row data:(WMZDropTree*)tree;
+
+/*
+*获取某一行 所有列选中的数据
+*/
+- (NSArray*)getSelectArrWithPathSection:(NSInteger)section;
+
+/*
+*获取某一行 某一列选中的数据
+*/
+- (NSArray*)getSelectArrWithPathSection:(NSInteger)section row:(NSInteger)row;
 
 @end
 

@@ -18,6 +18,12 @@ WMZDropMenuParam * MenuParam(void);
 //如果弹出位置不准确自行设置此属性 default CGRectGetMaxY(menu.frame)
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wPopOraignY)
 
+
+
+//以下三个为新增属性 适配放在tableview/collectionview上的情况
+//所在父视图的类型 放在tableview/collectionview/scrollview上 可以传此属性
+//WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, MenuInView,             wTapViewType)
+
 //标题视图是否显示边框 default NO
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wBorderShow)
 //固定标题的宽度 default 80

@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = MenuColor(0x00A6FF);
-    
+    self.navigationController.navigationBar.translucent = NO;
     
     self.taData = @[@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",
                       @"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",@"测试数据1",
@@ -35,6 +35,11 @@
     .wCollectionViewCellSelectTitleColorSet(MenuColor(0xFF003c))
     .wMenuTitleEqualCountSet(5);
 
+}
+
+//返回所在视图
+- (UIScrollView *)inScrollView{
+    return self.ta;
 }
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{

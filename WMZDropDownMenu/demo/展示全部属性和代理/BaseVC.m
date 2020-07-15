@@ -27,4 +27,7 @@
 - (NSArray*)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath{
     return @[];
 }
+- (void)dealloc{
+    
+}
 @end
