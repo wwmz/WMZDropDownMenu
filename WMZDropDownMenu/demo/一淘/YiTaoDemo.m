@@ -10,6 +10,7 @@
 #import "WMZDropDownMenu.h"
 @interface YiTaoDemo ()<WMZDropMenuDelegate>
 @property(nonatomic,strong)WMZDropMenuParam *param;
+@property(nonatomic,strong)WMZDropDownMenu *menu ;
 @end
 
 @implementation YiTaoDemo
@@ -27,11 +28,15 @@
     self.ta.tableHeaderView = headView;
     [self.ta registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"UITableViewHeaderFooterView"];
     
+    
+    
     self.param =
     MenuParam()
     .wMainRadiusSet(0)
     .wCollectionViewCellSelectTitleColorSet(MenuColor(0xFF003c))
     .wMenuTitleEqualCountSet(5);
+    self.menu = [[WMZDropDownMenu alloc]initWithFrame:CGRectMake(0, 0, Menu_Width, 40) withParam:self.param];
+    self.menu.delegate = self;
 
 }
 
@@ -132,11 +137,9 @@
     if (!headView) {
         headView =  [[UITableViewHeaderFooterView alloc]initWithReuseIdentifier:@"UITableViewHeaderFooterView"];
     }
-    WMZDropDownMenu *menu = [[WMZDropDownMenu alloc]initWithFrame:CGRectMake(0, 0, Menu_Width, 40) withParam:self.param];
     //多个headView的时候 要传section
-//    menu.tableViewHeadSection = section;
-    menu.delegate = self;
-    [headView addSubview:menu];
+//    self.menu.tableViewHeadSection = section;
+    [headView addSubview:self.menu];
     return headView;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

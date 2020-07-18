@@ -20,6 +20,7 @@
 		F3615333238E07C3006DFFB2 /* MeiTuanWMDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615332238E07C3006DFFB2 /* MeiTuanWMDemo.m */; };
 		F3615336238E16FB006DFFB2 /* BaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615335238E16FB006DFFB2 /* BaseVC.m */; };
 		F361533A238E1CD8006DFFB2 /* BossDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3615339238E1CD8006DFFB2 /* BossDemo.m */; };
+		F3620EA824C2EC8900544A9D /* YiTaoOneDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3620EA724C2EC8900544A9D /* YiTaoOneDemo.m */; };
 		F38738762408B44100D4D2AD /* DemoOne.m in Sources */ = {isa = PBXBuildFile; fileRef = F38738742408B44100D4D2AD /* DemoOne.m */; };
 		F395FCBD24BEA74400CAC7FE /* WMZDropDownMenu+DealLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FCBC24BEA74400CAC7FE /* WMZDropDownMenu+DealLogic.m */; };
 		F395FCC024BEA83B00CAC7FE /* WMZDropDownMenu+MoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FCBF24BEA83B00CAC7FE /* WMZDropDownMenu+MoreView.m */; };
@@ -90,6 +91,8 @@
 		F3615335238E16FB006DFFB2 /* BaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseVC.m; sourceTree = "<group>"; };
 		F3615338238E1CD8006DFFB2 /* BossDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BossDemo.h; sourceTree = "<group>"; };
 		F3615339238E1CD8006DFFB2 /* BossDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BossDemo.m; sourceTree = "<group>"; };
+		F3620EA624C2EC8900544A9D /* YiTaoOneDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YiTaoOneDemo.h; sourceTree = "<group>"; };
+		F3620EA724C2EC8900544A9D /* YiTaoOneDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YiTaoOneDemo.m; sourceTree = "<group>"; };
 		F37A48A323842BA500DB173C /* WMZDropMenuDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuDelegate.h; sourceTree = "<group>"; };
 		F38738742408B44100D4D2AD /* DemoOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoOne.m; sourceTree = "<group>"; };
 		F38738752408B44100D4D2AD /* DemoOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoOne.h; sourceTree = "<group>"; };
@@ -241,6 +244,15 @@
 			path = "Boss直聘";
 			sourceTree = "<group>";
 		};
+		F3620EA224C2EA1100544A9D /* 一淘_1 */ = {
+			isa = PBXGroup;
+			children = (
+				F3620EA624C2EC8900544A9D /* YiTaoOneDemo.h */,
+				F3620EA724C2EC8900544A9D /* YiTaoOneDemo.m */,
+			);
+			path = "一淘_1";
+			sourceTree = "<group>";
+		};
 		F38738732408B42700D4D2AD /* 实际项目实例1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,6 +372,7 @@
 				F3615337238E1CC4006DFFB2 /* Boss直聘 */,
 				F35F1CE92390FE3800F740C6 /* 唯品会 */,
 				F35F1CED23911ED200F740C6 /* 一淘 */,
+				F3620EA224C2EA1100544A9D /* 一淘_1 */,
 				F38738732408B42700D4D2AD /* 实际项目实例1 */,
 			);
 			path = demo;
@@ -544,6 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F31399AA24BD9AC9007161B2 /* WMZDropCollectionView.m in Sources */,
+				F3620EA824C2EC8900544A9D /* YiTaoOneDemo.m in Sources */,
 				F3615336238E16FB006DFFB2 /* BaseVC.m in Sources */,
 				F3C871D52384D70600351CA9 /* WMZDropMenuBtn.m in Sources */,
 				F325D47F238CF56D0018705E /* ElMentDemo.m in Sources */,
