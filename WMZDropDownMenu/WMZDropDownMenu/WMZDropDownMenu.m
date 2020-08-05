@@ -380,7 +380,14 @@ static NSString* const notificationRemove = @"notificationRemove";
     self.shadowView.frame = [[self.shadomViewFrameDic objectForKey:@(currentDrop.showAnimalStyle)] CGRectValue];
     //数据层视图frame改变
     self.dataView.frame = [[self.dataViewFrameDic objectForKey:@(currentDrop.showAnimalStyle)] CGRectValue];
-    
+    if (self.param.wCustomDataViewRect) {
+        CGRect rect =  self.param.wCustomDataViewRect(self.dataView.frame);
+        self.dataView.frame = rect;
+    }
+    if (self.param.wCustomShadomViewRect) {
+        CGRect rect =  self.param.wCustomShadomViewRect(self.shadowView.frame);
+        self.shadowView.frame = rect;
+    }
     [MenuWindow addSubview:self.shadowView];
     [MenuWindow addSubview:self.dataView];
     [self addTableView];
@@ -397,6 +404,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:openWithBtn:index:)]) {
         [self.delegate menu:self openWithBtn:self.selectTitleBtn index:[self.titleBtnArr indexOfObject:self.selectTitleBtn]];
     }
+    
 }
 #pragma -mark 弹出的位置
 - (void)getPopY{

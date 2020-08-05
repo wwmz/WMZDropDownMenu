@@ -87,6 +87,10 @@ typedef void (^MenuAfterTime)(void);
 
 typedef void (^MenuCustomLine)(UIView *customLine);
 
+typedef CGRect (^MenuCusotmDataViewRect)(CGRect currentRect);
+
+typedef CGRect (^MenuCusotmShadomViewRect)(CGRect currentRect);
+
 /*
  * UI样式
  */

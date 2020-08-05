@@ -215,7 +215,12 @@
     CGRect rect = [[self.dataViewFrameDic objectForKey:@([self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].showAnimalStyle)] CGRectValue];
     rect.size.height  = height;
     self.dataView.frame = rect;
-
+    if (self.param.wCustomDataViewRect) {
+        CGRect rect =  self.param.wCustomDataViewRect(self.dataView.frame);
+        self.dataView.frame = rect;
+    }
+    
+    
     //动画是pop
     self.dataView.layer.masksToBounds = !pop;
     self.shadowView.backgroundColor = pop?[UIColor clearColor]:self.param.wShadowColor;

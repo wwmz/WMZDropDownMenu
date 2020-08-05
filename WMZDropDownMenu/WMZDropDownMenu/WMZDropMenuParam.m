@@ -42,6 +42,8 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, NSInteger,          wMenuTitleEqu
 WMZMenuSetFuncImplementation(WMZDropMenuParam, NSInteger,          wCollectionViewSectionShowExpandCount)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, NSInteger,          wCollectionViewSectionRecycleCount)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, MenuCustomLine,                wJDCustomLine)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, MenuCusotmDataViewRect,                wCustomDataViewRect)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, MenuCusotmShadomViewRect,                wCustomShadomViewRect)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wShadowCanTap)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wShadowShow)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wBorderShow)

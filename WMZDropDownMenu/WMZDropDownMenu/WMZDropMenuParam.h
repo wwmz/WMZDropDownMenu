@@ -46,6 +46,10 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,    
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wDefaultConfirmHeight)
 //弹出动画为pop时候 视图的宽度  default 屏幕宽度/3
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wPopViewWidth)
+//自定义弹出视图的frame 配合弹出底部阴影frame使用
+WMZMenuStatementAndPropSetFuncStatement(copy,     WMZDropMenuParam, MenuCusotmDataViewRect,                wCustomDataViewRect)
+//自定义弹出底部阴影的frame
+WMZMenuStatementAndPropSetFuncStatement(copy,     WMZDropMenuParam, MenuCusotmShadomViewRect,                wCustomShadomViewRect)
 
 
 //遮罩层颜色 default 333333
