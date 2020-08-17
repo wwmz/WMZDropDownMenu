@@ -24,9 +24,11 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,    
 //所在父视图的类型 放在tableview/collectionview/scrollview上 可以传此属性
 //WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, MenuInView,             wTapViewType)
 
-//标题视图是否显示边框 default NO
+//标题视图是否显示边框 default NO （显示标题右边框）
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wBorderShow)
-//固定标题的宽度 default 80
+//标题视图是否显示上下边框 default NO
+WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wBorderUpDownShow)
+//最右边固定标题的宽度 default 80
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wFixBtnWidth)
 //标题等分个数  用来控制标题的宽度 default 4
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSInteger,        wMenuTitleEqualCount)

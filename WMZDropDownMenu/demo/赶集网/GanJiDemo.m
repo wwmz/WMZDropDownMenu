@@ -26,6 +26,7 @@
     .wCollectionViewSectionRecycleCountSet(3)
     .wMaxHeightScaleSet(0.6)
     .wBorderShowSet(YES)
+    .wBorderUpDownShowSet(YES)
     .wCellSelectShowCheckSet(NO);
     
     WMZDropDownMenu *menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];

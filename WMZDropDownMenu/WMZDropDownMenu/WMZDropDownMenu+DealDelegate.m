@@ -14,9 +14,16 @@
 #pragma -mark 处理delegate的data
 - (void)setDelegate:(id<WMZDropMenuDelegate>)delegate{
     [super setDelegate:delegate];
-    [self dealData];
-    [self updateUI];
+    [self UISetup];
 }
+
+- (void)UISetup{
+    [self dealData];
+    MenuSuppressPerformSelectorLeakWarning(
+    [self performSelector:NSSelectorFromString(@"resetConfig")];
+                                           );
+}
+
 - (void)dealData{
     self.dropPathArr = [NSMutableArray new];
     //标题

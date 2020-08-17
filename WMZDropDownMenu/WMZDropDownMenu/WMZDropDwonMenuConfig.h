@@ -82,6 +82,14 @@ _Pragma("clang diagnostic pop") \
 #define moreTableViewKey @"moreTableViewKey"
 #define menuMainClor [UIColor whiteColor]
 
+#define MenuSuppressPerformSelectorLeakWarning(Stuff) \
+do { \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+    Stuff; \
+    _Pragma("clang diagnostic pop") \
+} while (0)
+
 
 typedef void (^MenuAfterTime)(void);
 

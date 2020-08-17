@@ -49,6 +49,7 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wShadowShow)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wBorderShow)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wCellSelectShowCheck)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wMenuLine)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wBorderUpDownShow)
 - (instancetype)init{
     if (self = [super init]) {
         _wShadowAlpha = 0.4f;

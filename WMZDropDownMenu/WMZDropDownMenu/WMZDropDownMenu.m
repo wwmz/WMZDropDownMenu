@@ -33,96 +33,109 @@ static NSString* const notificationRemove = @"notificationRemove";
     }
     [self.shadowView removeFromSuperview];
     [self.dataView removeFromSuperview];
+    
+    [self menuTitle];
 }
+
+- (void)menuTitle{
+    self.backgroundColor = menuMainClor;
+       //移除
+   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeView) name:notificationRemove object:nil];
+   if([[WMZDropMenuTool getCurrentVC] respondsToSelector:@selector(viewWillDisappear:)]){
+       //hook监听当前控制器消失
+       MenuWeakSelf(self)
+       [[WMZDropMenuTool getCurrentVC] aspect_hookSelector:@selector(viewWillDisappear:) withOptions:AspectOptionAutomaticRemoval usingBlock:^(id<AspectInfo> aspectInfo)
+       {
+         MenuStrongSelf(weakObject);
+         strongObject.hook = YES;
+         [strongObject closeView];
+       } error:NULL];
+   }
+   self.userInteractionEnabled = YES;
+   [self addSubview:self.titleView];
+   
+   NSArray *indexArr = @[];
+   //相互排斥的标题
+   if (self.delegate && [self.delegate respondsToSelector:@selector(mutuallyExclusiveSectionsWithMenu:)]) {
+       indexArr =  [self.delegate mutuallyExclusiveSectionsWithMenu:self];
+   }
+   
+   UIButton *tmp = nil;
+   for (int i = 0; i<self.titleArr.count; i++) {
+       id dic = self.titleArr[i];
+       BOOL dictionary = [dic isKindOfClass:[NSDictionary class]];
+       WMZDropMenuBtn *btn = [WMZDropMenuBtn buttonWithType:UIButtonTypeCustom];
+       [btn setUpParam:self.param withDic:dic];
+       btn.frame = CGRectMake(tmp?CGRectGetMaxX(tmp.frame):0, 0, self.titleView.frame.size.width/(self.param.wMenuTitleEqualCount<self.titleArr.count?self.titleArr.count:self.param.wMenuTitleEqualCount), self.titleView.frame.size.height);
+       //外部自定义标题按钮
+       NSDictionary *config = nil;
+       if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:customTitleInSection:withTitleBtn:)]) {
+           config =  [self.delegate menu:self customTitleInSection:i withTitleBtn:btn];
+       }
+       CGFloat offset = config[@"offset"]?[config[@"offset"] floatValue]:0;
+       CGFloat y = config[@"y"]?[config[@"y"] floatValue]:0;
+       btn.frame = CGRectMake(tmp?(CGRectGetMaxX(tmp.frame)+offset):offset, y, btn.frame.size.width-offset-offset/self.titleArr.count, btn.frame.size.height-y*2);
+       
+       [WMZDropMenuTool TagSetImagePosition:btn.position spacing:1 button:btn];
+       [btn addTarget:self action:@selector(titleAction:) forControlEvents:UIControlEventTouchUpInside];
+       btn.tag = 1000+i;
+       if (i == self.titleArr.count - 1&&i!=0) {
+           if (dictionary&&dic[@"lastFix"]) {
+               btn.frame = CGRectMake(CGRectGetWidth(self.frame)-self.param.wFixBtnWidth, 0, self.param.wFixBtnWidth, self.titleView.frame.size.height);
+               if ([[self subviews] indexOfObject:btn] == NSNotFound) {
+                   [self addSubview:btn];
+               }
+               CGRect rect = self.titleView.frame;
+               rect.size.width -= self.param.wFixBtnWidth;
+               self.titleView.frame = rect;
+               self.titleView.contentSize = CGSizeMake(CGRectGetMaxX(tmp.frame), 0);
+               btn.backgroundColor = menuMainClor;
+           }else{
+               btn.frame = CGRectMake(CGRectGetMaxX(tmp.frame)+offset, y, tmp.frame.size.width, tmp.frame.size.height);
+               if ([[self.titleView subviews] indexOfObject:btn] == NSNotFound) {
+                   [self.titleView addSubview:btn];
+               }
+               self.titleView.contentSize = CGSizeMake(CGRectGetMaxX(btn.frame), 0);
+           }
+            [WMZDropMenuTool TagSetImagePosition:btn.position spacing:1 button:btn];
+       }else{
+           if ([[self.titleView subviews] indexOfObject:btn] == NSNotFound) {
+               [self.titleView addSubview:btn];
+           }
+       }
+       if ([self.titleBtnArr indexOfObject:btn] == NSNotFound) {
+           [self.titleBtnArr addObject:btn];
+       }
+       if ([self.mutuallyExclusiveArr indexOfObject:btn] == NSNotFound&&
+          [indexArr indexOfObject:@(i)]!=NSNotFound) {
+           [self.mutuallyExclusiveArr addObject:btn];
+       }
+       tmp = btn;
+   }
+   //阴影层
+   self.shadowView.backgroundColor = self.param.wShadowColor;
+   self.shadowView.alpha = self.param.wShadowAlpha;
+   if (self.param.wShadowCanTap) {
+       self.shadowView.userInteractionEnabled = YES;
+       UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
+       [self.shadowView addGestureRecognizer:tap];
+   }
+   //显示边框
+   if (self.param.wBorderShow) {
+       [self addBoder];
+   }
+    //显示边框
+    if (self.param.wBorderUpDownShow) {
+        [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathTop PathWidth:1 heightScale:1 button:self];
+        [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathBottom PathWidth:1 heightScale:1 button:self];
+    }
+}
+
 #pragma -mark UI
 - (void)updateUI{
-    [self resetConfig];
-    self.backgroundColor = menuMainClor;
-    //移除
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeView) name:notificationRemove object:nil];
-    if([[WMZDropMenuTool getCurrentVC] respondsToSelector:@selector(viewWillDisappear:)]){
-        //hook监听当前控制器消失
-        MenuWeakSelf(self)
-        [[WMZDropMenuTool getCurrentVC] aspect_hookSelector:@selector(viewWillDisappear:) withOptions:AspectOptionAutomaticRemoval usingBlock:^(id<AspectInfo> aspectInfo)
-        {
-          MenuStrongSelf(weakObject);
-          strongObject.hook = YES;
-          [strongObject closeView];
-        } error:NULL];
-    }
-    self.userInteractionEnabled = YES;
-    [self addSubview:self.titleView];
-    
-    NSArray *indexArr = @[];
-    //相互排斥的标题
-    if (self.delegate && [self.delegate respondsToSelector:@selector(mutuallyExclusiveSectionsWithMenu:)]) {
-        indexArr =  [self.delegate mutuallyExclusiveSectionsWithMenu:self];
-    }
-    
-    UIButton *tmp = nil;
-    for (int i = 0; i<self.titleArr.count; i++) {
-        id dic = self.titleArr[i];
-        BOOL dictionary = [dic isKindOfClass:[NSDictionary class]];
-        WMZDropMenuBtn *btn = [WMZDropMenuBtn buttonWithType:UIButtonTypeCustom];
-        [btn setUpParam:self.param withDic:dic];
-        btn.frame = CGRectMake(tmp?CGRectGetMaxX(tmp.frame):0, 0, self.titleView.frame.size.width/(self.param.wMenuTitleEqualCount<self.titleArr.count?self.titleArr.count:self.param.wMenuTitleEqualCount), self.titleView.frame.size.height);
-        //外部自定义标题按钮
-        NSDictionary *config = nil;
-        if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:customTitleInSection:withTitleBtn:)]) {
-            config =  [self.delegate menu:self customTitleInSection:i withTitleBtn:btn];
-        }
-        CGFloat offset = config[@"offset"]?[config[@"offset"] floatValue]:0;
-        CGFloat y = config[@"y"]?[config[@"y"] floatValue]:0;
-        btn.frame = CGRectMake(tmp?(CGRectGetMaxX(tmp.frame)+offset):offset, y, btn.frame.size.width-offset-offset/self.titleArr.count, btn.frame.size.height-y*2);
-        
-        [WMZDropMenuTool TagSetImagePosition:btn.position spacing:1 button:btn];
-        [btn addTarget:self action:@selector(titleAction:) forControlEvents:UIControlEventTouchUpInside];
-        btn.tag = 1000+i;
-        if (i == self.titleArr.count - 1&&i!=0) {
-            if (dictionary&&dic[@"lastFix"]) {
-                btn.frame = CGRectMake(CGRectGetWidth(self.frame)-self.param.wFixBtnWidth, 0, self.param.wFixBtnWidth, self.titleView.frame.size.height);
-                if ([[self subviews] indexOfObject:btn] == NSNotFound) {
-                    [self addSubview:btn];
-                }
-                CGRect rect = self.titleView.frame;
-                rect.size.width -= self.param.wFixBtnWidth;
-                self.titleView.frame = rect;
-                self.titleView.contentSize = CGSizeMake(CGRectGetMaxX(tmp.frame), 0);
-                btn.backgroundColor = menuMainClor;
-            }else{
-                btn.frame = CGRectMake(CGRectGetMaxX(tmp.frame)+offset, y, tmp.frame.size.width, tmp.frame.size.height);
-                if ([[self.titleView subviews] indexOfObject:btn] == NSNotFound) {
-                    [self.titleView addSubview:btn];
-                }
-                self.titleView.contentSize = CGSizeMake(CGRectGetMaxX(btn.frame), 0);
-            }
-             [WMZDropMenuTool TagSetImagePosition:btn.position spacing:1 button:btn];
-        }else{
-            if ([[self.titleView subviews] indexOfObject:btn] == NSNotFound) {
-                [self.titleView addSubview:btn];
-            }
-        }
-        if ([self.titleBtnArr indexOfObject:btn] == NSNotFound) {
-            [self.titleBtnArr addObject:btn];
-        }
-        if ([self.mutuallyExclusiveArr indexOfObject:btn] == NSNotFound&&
-           [indexArr indexOfObject:@(i)]!=NSNotFound) {
-            [self.mutuallyExclusiveArr addObject:btn];
-        }
-        tmp = btn;
-    }
-    //阴影层
-    self.shadowView.backgroundColor = self.param.wShadowColor;
-    self.shadowView.alpha = self.param.wShadowAlpha;
-    if (self.param.wShadowCanTap) {
-        self.shadowView.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
-        [self.shadowView addGestureRecognizer:tap];
-    }
-    //显示边框
-    if (self.param.wBorderShow) {
-        [self addBoder];
-    }
+    MenuSuppressPerformSelectorLeakWarning(
+    [self performSelector:NSSelectorFromString(@"UISetup")];
+    );
 }
 #pragma -mark 添加边框
 - (void)addBoder{
@@ -131,8 +144,6 @@ static NSString* const notificationRemove = @"notificationRemove";
             [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathRight PathWidth:1 heightScale:0.5 button:btn];
         }
     }];
-    [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathTop PathWidth:1 heightScale:1 button:self];
-    [WMZDropMenuTool viewPathWithColor:MenuColor(0x999999) PathType:MenuShadowPathBottom PathWidth:1 heightScale:1 button:self];
 }
 #pragma -mark 标题点击方法
 - (void)titleAction:(WMZDropMenuBtn*)sender{
