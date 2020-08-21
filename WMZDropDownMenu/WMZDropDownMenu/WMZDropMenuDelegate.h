@@ -49,7 +49,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIScrollView*)inScrollView;
 
 
-
 /*
  *返回setion行标题有多少列 默认1列
  */
@@ -196,6 +195,10 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)menu:(WMZDropDownMenu *)menu getAllSelectData:(NSArray*)selectData;
 
+/*
+*重置方法
+*/
+- (void)menu:(WMZDropDownMenu *)menu didReSetAtSection:(NSInteger)section;
 
 /*
 *自定义标题按钮视图  返回配置 参数说明

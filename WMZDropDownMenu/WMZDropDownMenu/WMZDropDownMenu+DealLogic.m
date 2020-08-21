@@ -81,6 +81,7 @@
     }];
     //更新标题
     [self updateTitle:currentDrop changeArr:[self getArrWithKey:currentDrop.key withoutHide:YES] changeTree:tree];
+    [self updateSubView:currentDrop more:NO];
     return result;
 }
 //自动增加数组的配置

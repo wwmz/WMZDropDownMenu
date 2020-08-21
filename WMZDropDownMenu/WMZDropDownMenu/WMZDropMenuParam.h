@@ -30,10 +30,12 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,       
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wBorderUpDownShow)
 //最右边固定标题的宽度 default 80
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wFixBtnWidth)
-//标题等分个数  用来控制标题的宽度 default 4
+//标题等分个数  用来控制标题的宽度 default 4 （此方法才是设置标题宽度的方法）
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSInteger,        wMenuTitleEqualCount)
 //标题按钮添加下划线 dfault NO
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wMenuLine)
+// 标题图文间距 default 2
+WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wMenuTitleSpace)
 
 
 //固定弹出显示数据层的高度  default 自动计算~>最大为屏幕高度的0.4倍

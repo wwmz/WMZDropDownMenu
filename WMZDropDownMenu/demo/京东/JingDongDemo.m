@@ -234,6 +234,13 @@
     return @[];
 }
 
+- (BOOL)menu:(WMZDropDownMenu *)menu dropIndexPathConnectInSection:(NSInteger)section{
+    if (section == 2) {
+        return NO;
+    }
+    return YES;
+}
+
 @end
 
 

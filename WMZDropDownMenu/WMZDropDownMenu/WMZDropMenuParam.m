@@ -38,6 +38,7 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wCollectionVi
 WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wCollectionViewDefaultFootViewPaddingY)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wPopOraignY)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wDefaultConfirmHeight)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wMenuTitleSpace)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, NSInteger,          wMenuTitleEqualCount)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, NSInteger,          wCollectionViewSectionShowExpandCount)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, NSInteger,          wCollectionViewSectionRecycleCount)
@@ -52,6 +53,7 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wMenuLine)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wBorderUpDownShow)
 - (instancetype)init{
     if (self = [super init]) {
+        _wMenuTitleSpace = 2;
         _wShadowAlpha = 0.4f;
         _wMainRadius = 15.0f;
         _wShadowColor = MenuColor(0x333333);

@@ -69,9 +69,9 @@
     return _position;
 }
 
-- (void)setTitle:(NSString *)title forState:(UIControlState)state{\
+- (void)setTitle:(NSString *)title forState:(UIControlState)state{
     [super setTitle:title forState:state];
-    [WMZDropMenuTool TagSetImagePosition:self.position spacing:1 button:self];
+    [WMZDropMenuTool TagSetImagePosition:self.position spacing:self.param.wMenuTitleSpace button:self];
 }
 @end
 

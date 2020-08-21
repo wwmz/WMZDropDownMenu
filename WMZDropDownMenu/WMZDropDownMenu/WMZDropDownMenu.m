@@ -76,7 +76,7 @@ static NSString* const notificationRemove = @"notificationRemove";
        CGFloat y = config[@"y"]?[config[@"y"] floatValue]:0;
        btn.frame = CGRectMake(tmp?(CGRectGetMaxX(tmp.frame)+offset):offset, y, btn.frame.size.width-offset-offset/self.titleArr.count, btn.frame.size.height-y*2);
        
-       [WMZDropMenuTool TagSetImagePosition:btn.position spacing:1 button:btn];
+       [WMZDropMenuTool TagSetImagePosition:btn.position spacing:self.param.wMenuTitleSpace button:btn];
        [btn addTarget:self action:@selector(titleAction:) forControlEvents:UIControlEventTouchUpInside];
        btn.tag = 1000+i;
        if (i == self.titleArr.count - 1&&i!=0) {
@@ -97,7 +97,7 @@ static NSString* const notificationRemove = @"notificationRemove";
                }
                self.titleView.contentSize = CGSizeMake(CGRectGetMaxX(btn.frame), 0);
            }
-            [WMZDropMenuTool TagSetImagePosition:btn.position spacing:1 button:btn];
+            [WMZDropMenuTool TagSetImagePosition:btn.position spacing:self.param.wMenuTitleSpace button:btn];
        }else{
            if ([[self.titleView subviews] indexOfObject:btn] == NSNotFound) {
                [self.titleView addSubview:btn];
@@ -637,6 +637,9 @@ static NSString* const notificationRemove = @"notificationRemove";
 }
 #pragma -mark 重置方法
 - (void)reSetAction{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:didReSetAtSection:)]) {
+        [self.delegate menu:self didReSetAtSection:[self.titleBtnArr indexOfObject:self.selectTitleBtn]];
+    }
     [self dealDataWithDelete:MenuDataDelete btn:self.selectTitleBtn];
     [self updateSubView:[self getTitleFirstDropWthTitleBtn:self.selectTitleBtn] more:YES];
 }
