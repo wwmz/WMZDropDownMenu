@@ -45,7 +45,7 @@
     NSArray *data = [self.menu getArrWithKey:tableView.dropIndex.key withoutHide:YES  withInfo:self.menu.dataDic];
     WMZDropTree *tree = data[indexPath.row];
     //自定义
-    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:cellForUITableView:AtIndexPath:dataForIndexPath:)]) {
+    if (self.menu.delegate&&[self.menu.delegate respondsToSelector:@selector(menu:cellForUITableView:AtIndexPath:dataForIndexPath:)]) {
         UITableViewCell *cell = [self.menu.delegate menu:self.menu cellForUITableView:tableView AtIndexPath:indexPath dataForIndexPath:tree];
         if (cell&&[cell isKindOfClass:[UITableViewCell class]]) {
             return cell;
@@ -89,14 +89,14 @@
     return tableView.dropIndex.headViewHeight == 0?0.01:tableView.dropIndex.headViewHeight;
 }
 - (UIView*)tableView:(WMZDropTableView *)tableView viewForFooterInSection:(NSInteger)section{
-    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:footViewForUITableView:AtDropIndexPath:)]) {
+    if (self.menu.delegate&&[self.menu.delegate respondsToSelector:@selector(menu:footViewForUITableView:AtDropIndexPath:)]) {
         UITableViewHeaderFooterView *footView = [self.menu.delegate menu:self.menu footViewForUITableView:tableView AtDropIndexPath:tableView.dropIndex];
         if (footView&&[footView isKindOfClass:[UITableViewHeaderFooterView class]]) {
             return footView;
         }
     }
     WMZDropTableViewFootView *footView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([WMZDropTableViewFootView class])];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(menu:titleForFootViewAtDropIndexPath:)]) {
+    if (self.menu.delegate && [self.menu.delegate respondsToSelector:@selector(menu:titleForFootViewAtDropIndexPath:)]) {
         NSString *title = [self.menu.delegate menu:self.menu titleForFootViewAtDropIndexPath:tableView.dropIndex];
         footView.textLa.text = title;
     }
@@ -104,7 +104,7 @@
     
 }
 - (UIView*)tableView:(WMZDropTableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:headViewForUITableView:AtDropIndexPath:)]) {
+    if (self.menu.delegate&&[self.menu.delegate respondsToSelector:@selector(menu:headViewForUITableView:AtDropIndexPath:)]) {
            UITableViewHeaderFooterView *headView = [self.menu.delegate menu:self.menu headViewForUITableView:tableView AtDropIndexPath:tableView.dropIndex];
         if (headView&&[headView isKindOfClass:[UITableViewHeaderFooterView class]]) {
             return headView;
@@ -112,7 +112,7 @@
     }
     WMZDropTableViewHeadView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([WMZDropTableViewHeadView class])];
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(menu:titleForHeadViewAtDropIndexPath:)]) {
+    if (self.menu.delegate && [self.menu.delegate respondsToSelector:@selector(menu:titleForHeadViewAtDropIndexPath:)]) {
         NSString *title = [self.menu.delegate menu:self.menu titleForHeadViewAtDropIndexPath:tableView.dropIndex];
         headView.textLa.text = title;
     }
