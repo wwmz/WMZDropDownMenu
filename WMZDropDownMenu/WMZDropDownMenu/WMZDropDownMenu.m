@@ -187,9 +187,17 @@ static NSString* const notificationRemove = @"notificationRemove";
           if (!sender.click) {
               [sender setImage:[UIImage bundleImage:sender.selectImage] forState:UIControlStateSelected];
               [sender setImage:[UIImage bundleImage:sender.selectImage] forState:UIControlStateSelected | UIControlStateHighlighted];
+              if (sender.selectTitle) {
+                  [sender setTitle:sender.selectTitle forState:UIControlStateSelected];
+                  [sender setTitle:sender.selectTitle forState:UIControlStateSelected | UIControlStateHighlighted];
+              }
           }else{
               [sender setImage:[UIImage bundleImage:sender.reSelectImage] forState:UIControlStateSelected];
-                            [sender setImage:[UIImage bundleImage:sender.reSelectImage] forState:UIControlStateSelected | UIControlStateHighlighted];
+              [sender setImage:[UIImage bundleImage:sender.reSelectImage] forState:UIControlStateSelected | UIControlStateHighlighted];
+              if (sender.reSelectTitle) {
+                  [sender setTitle:sender.reSelectTitle forState:UIControlStateSelected];
+                  [sender setTitle:sender.reSelectTitle forState:UIControlStateSelected | UIControlStateHighlighted];
+              }
           }
           sender.click = !sender.click;
           if (sender.click) {
@@ -421,11 +429,11 @@ static NSString* const notificationRemove = @"notificationRemove";
 - (void)getPopY{
     if (self.delegate && [self.delegate respondsToSelector:@selector(inScrollView)]) {
         UIScrollView *sc = [self.delegate inScrollView];
-        if (sc) {
-            [sc layoutIfNeeded];
-            [sc layoutSubviews];
-        }
         if ([sc isMemberOfClass:[UITableView class]]) {
+            if (sc) {
+                [sc layoutIfNeeded];
+                [sc layoutSubviews];
+            }
             CGRect rectInTableView = [(UITableView*)sc rectForHeaderInSection:self.tableViewHeadSection];
             CGRect rect = [(UITableView*)sc convertRect:rectInTableView toView:[(UITableView*)sc superview]];
             if (rect.origin.y<0) {
@@ -433,10 +441,9 @@ static NSString* const notificationRemove = @"notificationRemove";
             }
             rect.origin.y+= (sc.superview.frame.origin.y);
             self.menuOrignY = CGRectGetMaxY(rect);
-        }else if ([sc isMemberOfClass:[UICollectionView class]]) {
-            if (self.delegate&&[self.delegate respondsToSelector:@selector(popFrameY)]) {
-                self.menuOrignY = [self.delegate popFrameY];
-            }
+        }
+        if (self.delegate&&[self.delegate respondsToSelector:@selector(popFrameY)]) {
+           self.menuOrignY = [self.delegate popFrameY];
         }
     }
 }

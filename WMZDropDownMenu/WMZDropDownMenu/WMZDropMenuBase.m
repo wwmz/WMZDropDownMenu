@@ -159,17 +159,21 @@
 }
 #pragma -mark 改变标题颜色和文字
 - (void)changeTitleConfig:(NSDictionary*)config withBtn:(WMZDropMenuBtn*)currentBtn{
-    if (config[@"name"]) {
-       [currentBtn setTitle:config[@"name"] forState:UIControlStateNormal];
+    if (currentBtn.selectTitle) {
+        [currentBtn setTitle:currentBtn.selectTitle forState:UIControlStateNormal];
+    }else{
+        if (config[@"name"]) {
+            [currentBtn setTitle:config[@"name"]?:@"" forState:UIControlStateNormal];
+        }
     }
     [currentBtn setTitleColor:currentBtn.selectColor forState:UIControlStateNormal];
     [currentBtn setTitleColor:currentBtn.selectColor forState:UIControlStateSelected];
 }
 #pragma -mark 回复原来的标题和文字
 - (void)changeNormalConfig:(NSDictionary*)config withBtn:(WMZDropMenuBtn*)currentBtn{
-    [currentBtn setTitle:currentBtn.normalTitle forState:UIControlStateNormal];
     [currentBtn setTitleColor:currentBtn.normalColor forState:UIControlStateNormal];
     [currentBtn setTitleColor:currentBtn.normalColor forState:UIControlStateSelected];
+    [currentBtn setTitle:currentBtn.normalTitle forState:UIControlStateNormal];
 }
 
 //不同动画frame不同 dataView的frame

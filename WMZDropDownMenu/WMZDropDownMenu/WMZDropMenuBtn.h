@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL click;
 //初始标题
 @property(nonatomic,copy)NSString *normalTitle;
+//select标题
+@property(nonatomic,copy)NSString *selectTitle;
+//双重点击的标题
+@property(nonatomic,copy)NSString *reSelectTitle;
 //普通状态下的颜色
 @property(nonatomic,strong)UIColor *normalColor;
 //selected颜色

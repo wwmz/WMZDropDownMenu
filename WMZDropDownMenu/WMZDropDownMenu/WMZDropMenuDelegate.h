@@ -20,13 +20,17 @@ NS_ASSUME_NONNULL_BEGIN
  2 可传带字典的数组
  字典参数@{
  @"name":@"标题",
+ @"selectTitle":@"选中的标题",
+ @"reSelectTitle":@"选中状态下再次点中的标题",
  @"font":@(15)(字体大小)
+ @"fontObject":UIFont对象 优先级大于font
  @"normalColor":[UIColor blackClor](普通状态下的字体颜色)
  @"selectColor":[UIColor redColor](选中状态下的字体颜色)
  @"normalImage":@"1"(普通状态下的图片)
  @"selectImage":@"2"(选中状态下的图片)
  @"reSelectImage":@"3"(选中状态下再点击的图片~>用于点击两次才回到原来的场景)
  @"lastFix":@(YES) (最后一个固定在在右边,仅最后一个有效)
+ @"hideDefatltImage":@(YES) (隐藏默认给的图标)
  }
 */
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu;
@@ -35,6 +39,13 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (NSArray*)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
 @optional
+
+/*
+ *返回setion行标题有多少列 默认1列
+ */
+- (NSInteger)menu:(WMZDropDownMenu *)menu numberOfRowsInSection:(NSInteger)section;
+
+
 
 
 #pragma -mark 视图相关 新增
@@ -47,12 +58,6 @@ NS_ASSUME_NONNULL_BEGIN
  放在scrollView/tableview/collectionview上 放tableview等视图必传
 */
 - (UIScrollView*)inScrollView;
-
-
-/*
- *返回setion行标题有多少列 默认1列
- */
-- (NSInteger)menu:(WMZDropDownMenu *)menu numberOfRowsInSection:(NSInteger)section;
 
 
 #pragma -mark cell相关代理
@@ -118,6 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (UIView*)menu:(WMZDropDownMenu *)menu userInteractionFootViewInSection:(NSInteger)section;
 
+
 #pragma -mark 样式动画相关代理
 /*
 *返回WMZDropIndexPath每行 每列的UI样式  默认MenuUITableView
@@ -169,6 +175,7 @@ NS_ASSUME_NONNULL_BEGIN
 *查看更多的数据
 */
 - (NSArray*)menu:(WMZDropDownMenu *)menu moreDataForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
+
 #pragma -mark 交互自定义代理
 /*
 *cell点击方法

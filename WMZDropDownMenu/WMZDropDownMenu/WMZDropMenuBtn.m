@@ -26,17 +26,27 @@
     }
     CGFloat font = 14.0;
     if (dictionary&&dic[@"font"]) {font = [dic[@"font"]floatValue];}
+    if (dictionary&&dic[@"fontObject"]&&[dic[@"fontObject"] isKindOfClass:[UIFont class]]) {
+        self.titleLabel.font = dic[@"fontObject"];
+    }else{
+        self.titleLabel.font = [UIFont systemFontOfSize:font];
+    }
     UIColor *normalColor = self.param.wCollectionViewCellTitleColor;
     if (dictionary&&dic[@"normalColor"]) {normalColor = dic[@"normalColor"];}
     UIColor *selectColor = self.param.wCollectionViewCellSelectTitleColor;
     if (dictionary&&dic[@"selectColor"]) {selectColor = dic[@"selectColor"];}
     if (dictionary&&dic[@"reSelectImage"]) {self.reSelectImage = dic[@"reSelectImage"];}
+    if (dictionary&&dic[@"selectTitle"]) {self.selectTitle = dic[@"selectTitle"];}
+    if (dictionary&&dic[@"reSelectTitle"]) {self.reSelectTitle = dic[@"reSelectTitle"];}
     NSString *seletImage = nil;
     if (dictionary&&dic[@"selectImage"]) {
         seletImage = dic[@"selectImage"];
     }else{
         if (dictionary) {
-            seletImage = @"menu_xiangshang";
+            if (!dic[@"hideDefatltImage"]||
+                (dic[@"hideDefatltImage"]&&![dic[@"hideDefatltImage"] boolValue])) {
+                 seletImage = @"menu_xiangshang";
+            }
         }
     }
     NSString *normalImage = nil;
@@ -44,13 +54,15 @@
         normalImage = dic[@"normalImage"];
     }else{
         if (dictionary) {
-            normalImage = @"menu_xiangxia";
+            if (!dic[@"hideDefatltImage"]||
+                (dic[@"hideDefatltImage"]&&![dic[@"hideDefatltImage"] boolValue])) {
+                normalImage = @"menu_xiangxia";
+            }
         }
     }
     if ((dictionary&&dic[@"normalImage"])&&(dictionary&&!dic[@"selectImage"])) {
         seletImage = dic[@"normalImage"];
     }
-    self.titleLabel.font = [UIFont systemFontOfSize:font];
     [self setTitleColor:normalColor forState:UIControlStateNormal];
     self.normalImage = normalImage;
     self.selectImage = seletImage;
@@ -60,6 +72,9 @@
     [self setImage:seletImage?[UIImage bundleImage:seletImage]:nil forState:UIControlStateSelected];
     [self setTitleColor:normalColor forState:UIControlStateSelected];
     self.normalTitle = [self titleForState:UIControlStateNormal];
+    if (self.selectTitle) {
+        [self setTitle:self.selectTitle forState:UIControlStateSelected];
+    }
 }
 
 - (MenuBtnPosition)position{

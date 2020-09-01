@@ -169,6 +169,7 @@
                     [lastSelectArr addObject:obj];
                 }
             }];
+            
             if (lastSelectArr.count) {
                 if (lastSelectArr.count == 1) {
                     WMZDropTree *tree = lastSelectArr[0];
@@ -185,7 +186,9 @@
                 showTitle = @"多选";
             }
         }
-         [self changeTitleConfig:@{@"name":showTitle} withBtn:currentBtn];
+        if (showTitle) {
+           [self changeTitleConfig:@{@"name":showTitle} withBtn:currentBtn];
+        }
     }else{
          [self changeNormalConfig:@{} withBtn:currentBtn];
     }

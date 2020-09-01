@@ -36,10 +36,14 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-        @{@"name":@"综合"},
-         @"销量",
-        @{@"name":@"距离价格",@"normalImage":@"menu_shangxia",
-          @"selectImage":@"menu_xiangshang",@"reSelectImage":@"menu_xiangxia"},
+        @{@"name":@"综合",@"selectTitle":@"改变"},
+        @{@"name":@"销量",@"selectTitle":@"改变",@"hideDefatltImage":@(YES)},
+        @{@"name":@"距离价格",
+          @"selectTitle":@"由小到大",
+          @"reSelectTitle":@"由大到小",
+          @"normalImage":@"menu_shangxia",
+          @"selectImage":@"menu_xiangshang",
+          @"reSelectImage":@"menu_xiangxia"},
          @{@"name":@"筛选",@"normalImage":@"menu_shaixuan"},
     ];
 }
@@ -235,12 +239,8 @@
 }
 
 - (BOOL)menu:(WMZDropDownMenu *)menu dropIndexPathConnectInSection:(NSInteger)section{
-    if (section == 2) {
-        return NO;
-    }
     return YES;
 }
-
 @end
 
 
