@@ -30,6 +30,17 @@
     WMZDropDownMenu *menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];
     menu.delegate = self;
     [self.view addSubview:menu];
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [menu.titleBtnArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            if (idx == menu.titleBtnArr.count-1) {
+//                WMZDropMenuBtn *btn = (WMZDropMenuBtn*)obj;
+//                if ([btn isKindOfClass:[WMZDropMenuBtn class]]) {
+//                    [btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+//                }
+//            }
+//        }];
+//    });
 }
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{

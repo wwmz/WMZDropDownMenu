@@ -68,8 +68,14 @@
                 screnFrame:(MenuShowAnimalStyle)screnFrame{
    BOOL insert = NO;
    for (UIView *connectView in connectViews) {
-       if ([connectView isKindOfClass:[UICollectionView class]]) {
+       if ([connectView isKindOfClass:[WMZDropCollectionView class]]) {
+           WMZDropCollectionView *collectionView = (WMZDropCollectionView*)connectView;
            insert = YES;
+           for (WMZDropIndexPath *path in collectionView.dropArr) {
+               if (path.tapClose) {
+                   insert = NO;break;
+               }
+           }
            break;
        }else if ([connectView isKindOfClass:[WMZDropTableView class]]) {
            WMZDropTableView *ta = (WMZDropTableView*)connectView;
@@ -100,6 +106,7 @@
                footView.frame = CGRectMake(footView.frame.origin.x, CGRectGetMaxY(connectView.frame)+self.param.wCollectionViewDefaultFootViewPaddingY, footView.frame.size.width, self.param.wDefaultConfirmHeight);
            }
    }
+    
    self.confirmView = footView;
    [self.dataView addSubview:self.confirmView];
 }
