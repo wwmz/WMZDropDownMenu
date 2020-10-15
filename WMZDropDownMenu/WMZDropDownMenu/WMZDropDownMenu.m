@@ -600,7 +600,7 @@ static NSString* const notificationRemove = @"notificationRemove";
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:head.dropIndexPath.row]];
 }
 #pragma -mark 确定方法
-- (void)confirmAction:(UIButton*)sender{
+- (void)confirmAction:(nullable UIButton*)sender{
     checkMore = (sender.tag == 10089);
     self.selectArr = [NSMutableArray new];
     [self dealDataWithDelete:MenuDataInsert btn:self.selectTitleBtn];
@@ -639,6 +639,8 @@ static NSString* const notificationRemove = @"notificationRemove";
     }else{
         [self changeNormalConfig:@{} withBtn:self.selectTitleBtn];
     }
+    
+    
     self.selectTitleBtn.selected = NO;
     [self closeView];
 }

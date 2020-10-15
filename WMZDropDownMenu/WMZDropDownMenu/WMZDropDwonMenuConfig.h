@@ -126,6 +126,7 @@ typedef enum : NSUInteger{
 typedef enum : NSUInteger{
     MenuShowAnimalNone = 0,           //无动画
     MenuShowAnimalBottom,             //向下移动出现
+//    MenuShowAnimalTop,                //向上移动出现
     MenuShowAnimalLeft,               //从左侧滑出现
     MenuShowAnimalRight ,             //向右侧滑出现
     MenuShowAnimalPop ,               //pop弹出
@@ -139,8 +140,9 @@ typedef enum : NSUInteger{
 typedef enum : NSUInteger{
     MenuHideAnimalNone = 0,          //无动画
     MenuHideAnimalTop,               //向上移动消失
+//    MenuHideAnimalBottom,            //向下移动消失
     MenuHideAnimalRight,             //向右侧滑消失
-    MenuHideAnimalLeft ,             //向左侧滑出现
+    MenuHideAnimalLeft ,             //向左侧滑消失
     MenuHideAnimalBoss ,             //boss直聘样式 全屏
 }MenuHideAnimalStyle;
 

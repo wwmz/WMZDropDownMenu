@@ -246,7 +246,7 @@
 
 
 - (void)closeView{}
-- (void)confirmAction{}
+- (void)confirmAction:(nullable UIButton*)sender{}
 - (void)reSetAction{}
 - (void)updateSubView:(WMZDropIndexPath*)dropPath more:(BOOL)more{}
 - (void)cellTap:(WMZDropIndexPath *)dropPath data:(NSArray *)arr indexPath:(NSIndexPath *)indexPath{}

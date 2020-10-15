@@ -189,6 +189,33 @@ void verticalMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAn
         }
     }];
 }
+
+//垂直从下移动出现
+void verticalBottomMoveShowAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){    
+    CGRect rect = view.frame;
+    view.frame = CGRectMake(rect.origin.x, [UIScreen mainScreen].bounds.size.height , rect.size.width, rect.size.height);
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        view.frame = rect;
+    } completion:^(BOOL finished) {
+        if (block) {
+            block();
+        }
+    }];
+}
+
+//垂直从上移动消失
+void verticalTopMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){
+    CGRect rect = view.frame;
+    rect.size.height = 0;
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        view.frame = rect;
+    } completion:^(BOOL finished) {
+        if (block) {
+            block();
+        }
+    }];
+}
+
 //横向移动
 void landscapeMoveShowAnimation(UIView *view ,NSTimeInterval duration,BOOL right,DropMenuAnimalBlock block){
     CGRect rect = view.frame;

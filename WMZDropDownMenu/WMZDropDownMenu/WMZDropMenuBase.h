@@ -143,7 +143,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*
 *确定方法
 */
-- (void)confirmAction;
+- (void)confirmAction:(nullable UIButton*)sender;
 /*
 *重置方法
 */

@@ -63,6 +63,10 @@ void landscapeMoveHideAnimation(UIView *view ,NSTimeInterval duration,BOOL right
 void BossMoveShowAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block);
 //Boss样式移动消失
 void BossMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block);
+//垂直从下移动出现
+void verticalBottomMoveShowAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block);
+//垂直从上移动消失
+void verticalTopMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block);
 @end
 
 //渐变色
