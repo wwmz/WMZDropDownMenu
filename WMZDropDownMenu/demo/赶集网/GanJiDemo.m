@@ -11,7 +11,10 @@
 
 #import "GanJiDemo.h"
 @interface GanJiDemo ()
-
+{
+    WMZDropDownMenu *menu;
+    BOOL showDetail;
+}
 @end
 
 @implementation GanJiDemo
@@ -29,9 +32,31 @@
     .wBorderUpDownShowSet(YES)
     .wCellSelectShowCheckSet(NO);
     
-    WMZDropDownMenu *menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];
+    menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];
     menu.delegate = self;
     [self.view addSubview:menu];
+}
+
+
+- (void)showData:(BOOL)show{
+    if (showDetail == show) return;
+    [menu updateData:show?@[@"不限",@"一室",@"两室",@"三室",@"四室及以上"]:nil AtDropIndexPathSection:2 AtDropIndexPathRow:1];
+    CGFloat timeHeight = show?150:-150;
+    CGRect dataViewRect = menu.dataView.frame;
+    dataViewRect.size.height += timeHeight;
+    menu.dataView.frame = dataViewRect;
+    for (UICollectionView *collectionView in menu.showView) {
+        if ([collectionView isKindOfClass:[UICollectionView class]]) {
+            CGRect collectionViewRect = collectionView.frame;
+            collectionViewRect.size.height += timeHeight;
+            collectionView.frame = collectionViewRect;
+            [collectionView reloadData];
+        }
+   }
+  CGRect confirmViewRect = menu.confirmView.frame;
+  confirmViewRect.origin.y += timeHeight;
+  menu.confirmView.frame = confirmViewRect;
+  showDetail = show;
 }
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
@@ -65,8 +90,7 @@
       }else if (dropIndexPath.section == 1){
           return @[@"500元以下",@"500-1000",@"1000-1500",@"1500-2000",@"2500-3000",@"2500-3000",@"2500-3000",];
       }else if (dropIndexPath.section == 2){
-           if (dropIndexPath.row == 0) return @[@"不限",@"主卧",@"次卧"];
-           if (dropIndexPath.row == 1) return @[@"不限",@"一室",@"两室",@"三室",@"四室及以上"];
+           if (dropIndexPath.row == 0) return @[@"展开",@"收缩"];
       }else if (dropIndexPath.section == 3){
            if (dropIndexPath.row == 0) return @[@"不限",@"个人",@"经纪人",@"品牌公寓"];
            if (dropIndexPath.row == 1) return @[@"不限",@"安选"];
@@ -180,6 +204,12 @@
     if (dropIndexPath.section == 0 && dropIndexPath.row == 1) {
         if (indexpath.row == 0) {
             [menu updateDataConfig:@{@"isSelected":@(NO)} AtDropIndexPathSection:2 AtDropIndexPathRow:0 AtIndexPathRow:2];
+        }
+    }else if (dropIndexPath.section == 2 && dropIndexPath.row == 0) {
+        if (indexpath.row == 0) {
+            data.isSelected?[self showData:YES]:[self showData:NO];
+        }else{
+            data.isSelected?[self showData:NO]:[self showData:YES];
         }
     }
 }

@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = MenuColor(0x00A6FF);
+    if (@available(iOS 11.0, *)) {
+
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[];

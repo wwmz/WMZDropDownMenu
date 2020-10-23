@@ -53,7 +53,7 @@ static NSString *const CollectionViewCell = @"CollectionViewCell";
 - (void)menu:(WMZDropDownMenu *)menu didSelectTitleInSection:(NSInteger)section btn:(WMZDropMenuBtn *)selectBtn{
     if (section == 0) {
         //动画关闭
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+//        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     }
 }
 
@@ -186,6 +186,11 @@ static NSString *const CollectionViewCell = @"CollectionViewCell";
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
+        if (@available(iOS 11.0, *)) {
+           _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
     }
     return _collectionView;
 }

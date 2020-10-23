@@ -27,7 +27,7 @@ return self;                                                                    
 #define MenuisIphoneX ({\
 BOOL isPhoneX = NO;\
 if (@available(iOS 11.0, *)) {\
-if ([[[UIApplication sharedApplication] delegate] window].safeAreaInsets.bottom > 0.0) {\
+if (MenuWindow.safeAreaInsets.bottom > 0.0) {\
 isPhoneX = YES;\
 }\
 }\
@@ -62,6 +62,22 @@ _Pragma("clang diagnostic pop") \
 })\
 
 
+#define  MenuWindow \
+({\
+UIApplication *app = [UIApplication sharedApplication];     \
+UIWindow *window = nil; \
+if ([app.delegate respondsToSelector:@selector(window)]) { \
+    window =  [app.delegate window];\
+}else{    \
+    if (![app keyWindow]) { \
+        window =  app.windows.firstObject;  \
+    } \
+    window =  [app keyWindow]; \
+} \
+(window); \
+})\
+
+
 #define Menu_Height [UIScreen mainScreen].bounds.size.height
 #define Menu_Width  [UIScreen mainScreen].bounds.size.width
 #define Menu_StatusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
@@ -70,7 +86,7 @@ _Pragma("clang diagnostic pop") \
 #define MenuColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define MenuK1px (1 / UIScreen.mainScreen.scale)
 
-#define  MenuWindow        [UIApplication sharedApplication].keyWindow
+//#define  MenuWindow        [UIApplication sharedApplication].keyWindow
 
 
 #define MenuWeakSelf(obj) __weak typeof(obj) weakObject = obj;

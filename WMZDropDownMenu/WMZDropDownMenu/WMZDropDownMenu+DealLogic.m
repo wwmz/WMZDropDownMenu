@@ -193,6 +193,7 @@
          [self changeNormalConfig:@{} withBtn:currentBtn];
     }
 }
+
 //获取某一行 所有列选中的数据
 - (NSArray*)getSelectArrWithPathSection:(NSInteger)section{
     return [self getSelectArrWithPathSection:section row:-1];

@@ -166,14 +166,34 @@
             [currentBtn setTitle:config[@"name"]?:@"" forState:UIControlStateNormal];
         }
     }
+    WMZDropIndexPath *path = config[@"dropPath"];
+    NSNumber *row = config[@"row"];
     [currentBtn setTitleColor:currentBtn.selectColor forState:UIControlStateNormal];
     [currentBtn setTitleColor:currentBtn.selectColor forState:UIControlStateSelected];
+    
+    if(self.delegate&&[self.delegate respondsToSelector:@selector(menu:changeTitle:selectBtn:atDropIndexPath:dataIndexPath:)]){
+        id customInfo =  [self.delegate menu:(WMZDropDownMenu*)self changeTitle:[currentBtn titleForState:UIControlStateNormal]  selectBtn:currentBtn atDropIndexPath:path dataIndexPath:row?[row integerValue]:NSNotFound];
+        if (customInfo) {
+            if ([customInfo isKindOfClass:[NSDictionary class]]) {
+                if (customInfo[@"name"]) {
+                    [currentBtn setTitle:customInfo[@"name"] forState:UIControlStateNormal];
+                }
+                if (customInfo[@"selectColor"]) {
+                    [currentBtn setTitleColor:customInfo[@"selectColor"] forState:UIControlStateNormal];
+                    [currentBtn setTitleColor:customInfo[@"selectColor"] forState:UIControlStateSelected];
+                }
+            }else if ([customInfo isKindOfClass:[NSString class]]){
+               [currentBtn setTitle:(NSString*)customInfo forState:UIControlStateNormal];
+            }
+        }
+    }
 }
 #pragma -mark 回复原来的标题和文字
 - (void)changeNormalConfig:(NSDictionary*)config withBtn:(WMZDropMenuBtn*)currentBtn{
     [currentBtn setTitleColor:currentBtn.normalColor forState:UIControlStateNormal];
     [currentBtn setTitleColor:currentBtn.normalColor forState:UIControlStateSelected];
     [currentBtn setTitle:currentBtn.normalTitle forState:UIControlStateNormal];
+    
 }
 
 //不同动画frame不同 dataView的frame

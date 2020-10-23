@@ -36,6 +36,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu;
 /*
 *返回WMZDropIndexPath每行 每列的数据
+ 可传@[@{},@{},@{}] 带字典的数组
+ 如果要传model过去可以这么传
+ @[
+   @{@"name":@"1",@"otherData":model},
+   @{@"name":@"1",@"otherData":model},
+   @{@"name":@"1",@"otherData":model}
+ ]
+ 字典里 WMZDropTree类的属性都可以传 为对应的key
+ 例如@{@"isSelected":@(YES),@"ID":@""...1}
 */
 - (NSArray*)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
 @optional
@@ -46,11 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)menu:(WMZDropDownMenu *)menu numberOfRowsInSection:(NSInteger)section;
 
 
-
-
 #pragma -mark 视图相关 新增
 /*
- 弹出视图的Y值 可动态改变 （例如滚动时候动态改变此值,放在scrollView/collectionview上有效）
+ 弹出视图的Y值 可动态改变 （例如滚动时候动态改变此值）
 */
 - (CGFloat)popFrameY;
 
@@ -227,6 +234,15 @@ NS_ASSUME_NONNULL_BEGIN
 *监听打开视图 可做修改标题文本和颜色的操作
 */
 - (void)menu:(WMZDropDownMenu *)menu openWithBtn:(WMZDropMenuBtn*)selectBtn   index:(NSInteger )index;
+
+/*
+*更改选中后的标题
+ @param currentTitle 为当前的标题 返回nil 表示用默认的标题
+ @param selectBtn 为当前的标题按钮
+ @return 可传字符串(更改的字符串标题)
+         可传字典(标题和标题颜色) @{@"name":@"标题",@"selectColor":[UIColor redColor]}
+*/
+- (nullable id)menu:(WMZDropDownMenu *)menu changeTitle:(NSString*)currentTitle selectBtn:(WMZDropMenuBtn*)selectBtn atDropIndexPath:(WMZDropIndexPath *)dropIndexPath dataIndexPath:(NSInteger)row;
 
 @end
 

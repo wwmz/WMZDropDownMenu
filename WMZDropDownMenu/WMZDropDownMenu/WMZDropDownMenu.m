@@ -243,7 +243,7 @@ static NSString* const notificationRemove = @"notificationRemove";
 #pragma -mark 关闭方法
 - (void)closeView{
     if (self.keyBoardShow) {
-       [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+       [MenuWindow endEditing:YES];
     };
    //移除嵌套层
    BOOL exist = NO;
@@ -291,7 +291,6 @@ static NSString* const notificationRemove = @"notificationRemove";
            [self dataChangeActionSection:[self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].section WithKey:nil];
         }
         [self changeTitleArr:YES update:YES];
-        [self changeTitleConfig:@{} withBtn:self.selectTitleBtn];
         if (self.param.wMenuLine) {
             [self.selectTitleBtn showLine:@{}];
              if (self.param.wJDCustomLine) {
@@ -442,9 +441,9 @@ static NSString* const notificationRemove = @"notificationRemove";
             rect.origin.y+= (sc.superview.frame.origin.y);
             self.menuOrignY = CGRectGetMaxY(rect);
         }
-        if (self.delegate&&[self.delegate respondsToSelector:@selector(popFrameY)]) {
-           self.menuOrignY = [self.delegate popFrameY];
-        }
+    }
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(popFrameY)]) {
+       self.menuOrignY = [self.delegate popFrameY];
     }
 }
 #pragma -mark 改变titleBtnArr中数据的状态
@@ -553,7 +552,7 @@ static NSString* const notificationRemove = @"notificationRemove";
                        }
                    }
                    close = YES;
-                   [self changeTitleConfig:@{@"name":tree.name} withBtn:self.selectTitleBtn];
+                   [self changeTitleConfig:@{@"name":tree.name,@"dropPath":dropPath,@"row":@(indexPath.row)} withBtn:self.selectTitleBtn];
                }
            }else if (dropPath.editStyle == MenuEditMoreCheck){
                tree.isSelected = !tree.isSelected;
@@ -589,7 +588,7 @@ static NSString* const notificationRemove = @"notificationRemove";
             }];
         }
     }
-    [self changeTitleConfig:@{@"name":tree.name} withBtn:self.selectTitleBtn];
+    [self changeTitleConfig:@{@"name":tree.name,@"dropPath":dropPath,@"row":@(row)} withBtn:self.selectTitleBtn];
     [self closeView];
 }
 #pragma -mark 展开方法
@@ -628,22 +627,26 @@ static NSString* const notificationRemove = @"notificationRemove";
         [self.delegate menu:self didConfirmAtSection:self.selectTitleBtn.tag - 1000 selectNoramelData:self.selectArr selectStringData:nameArr];
     }
     if(self.selectArr.count){
-        if ([self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].showAnimalStyle == MenuShowAnimalLeft||
-            [self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].showAnimalStyle == MenuShowAnimalRight) {
-            [self changeTitleConfig:@{@"name":self.selectTitleBtn.titleLabel.text} withBtn:self.selectTitleBtn];
+        WMZDropIndexPath *firstPath = [self getTitleFirstDropWthTitleBtn:self.selectTitleBtn];
+        if (firstPath.showAnimalStyle == MenuShowAnimalLeft||
+            firstPath.showAnimalStyle == MenuShowAnimalRight) {
+            [self changeTitleConfig:@{@"name":self.selectTitleBtn.titleLabel.text,@"dropPath":firstPath} withBtn:self.selectTitleBtn];
         }else{
             WMZDropTree *tree = self.selectArr[0];
-            [self changeTitleConfig:@{@"name":self.selectArr.count>1?@"多选":
-                                          (tree.name?:self.selectTitleBtn.titleLabel.text)} withBtn:self.selectTitleBtn];
+            [self changeTitleConfig:@{
+           @"name":self.selectArr.count>1?
+           @"多选":(tree.name?:self.selectTitleBtn.titleLabel.text),
+           @"dropPath":firstPath
+            }
+            withBtn:self.selectTitleBtn];
         }
     }else{
         [self changeNormalConfig:@{} withBtn:self.selectTitleBtn];
     }
-    
-    
     self.selectTitleBtn.selected = NO;
     [self closeView];
 }
+
 #pragma -mark 重置方法
 - (void)reSetAction{
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:didReSetAtSection:)]) {
@@ -655,6 +658,7 @@ static NSString* const notificationRemove = @"notificationRemove";
 - (BOOL)updateData:(NSArray*)arr ForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath{return YES;}
 - (BOOL)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row{return YES;}
 - (BOOL)updateDataConfig:(NSDictionary*)changeData AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row AtIndexPathRow:(NSInteger)indexPathRow{return YES;}
+- (NSArray*)getAllSelectArr{return @[];}
 - (NSArray*)getSelectArrWithPathSection:(NSInteger)section{return @[];}
 - (NSArray*)getSelectArrWithPathSection:(NSInteger)section row:(NSInteger)row{return @[];}
 @end

@@ -136,4 +136,22 @@
     confirmView.confirmBtn.backgroundColor = MenuColor(0x0096FF);
     [confirmView.confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
+
+//自定义更改标题
+- (nullable id)menu:(WMZDropDownMenu *)menu changeTitle:(NSString*)currentTitle selectBtn:(WMZDropMenuBtn*)selectBtn atDropIndexPath:(WMZDropIndexPath *)dropIndexPath dataIndexPath:(NSInteger)row{
+    if (dropIndexPath.section == 0) {
+        //自定义标题
+        if (row == 0) {
+            return @"自定义标题0";
+        }else if (row == 1){
+             return @"自定义标题1";
+        }
+        return @"自定义标题";
+    }else if (dropIndexPath.section == 3) {
+        //自定义标题和颜色
+        return @{@"name":@"自定义更改",@"selectColor":[UIColor redColor]};
+    }
+    //nil为保持默认的标题
+    return nil;
+}
 @end

@@ -25,8 +25,8 @@
             filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "-openView"
             landmarkType = "7">
          </BreakpointContent>
@@ -44,6 +44,22 @@
             startingLineNumber = "144"
             endingLineNumber = "144"
             landmarkName = "-addDropPathUI:type:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AC59BBC9-FB91-426C-8823-A688D7BF91BC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropMenuBase.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "-changeTitleConfig:withBtn:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

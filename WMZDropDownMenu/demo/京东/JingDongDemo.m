@@ -36,7 +36,7 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-        @{@"name":@"综合",@"selectTitle":@"改变"},
+        @{@"name":@"综合"},
         @{@"name":@"销量",@"selectTitle":@"改变",@"hideDefatltImage":@(YES)},
         @{@"name":@"距离价格",
           @"selectTitle":@"由小到大",

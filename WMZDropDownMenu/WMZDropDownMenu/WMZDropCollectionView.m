@@ -60,18 +60,19 @@
         }
         return cell;
     }else{
-          //默认视图
+         //默认视图
          WMZMenuCell *cell = (WMZMenuCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([WMZMenuCell class]) forIndexPath:indexPath];
          if ([tree isKindOfClass:[WMZDropTree class]]) {
-             cell.btn.backgroundColor = tree.checkMore?[UIColor whiteColor]:
-             (tree.isSelected? self.menu.param.wCollectionViewCellSelectBgColor:
-              self.menu.param.wCollectionViewCellBgColor);
+             cell.btn.layer.backgroundColor = tree.checkMore?[UIColor whiteColor].CGColor:
+             (tree.isSelected? self.menu.param.wCollectionViewCellSelectBgColor.CGColor:
+              self.menu.param.wCollectionViewCellBgColor.CGColor);
              [cell.btn setTitleColor:tree.checkMore?self.menu.param.wCollectionViewCellSelectTitleColor:(
               tree.isSelected? self.menu.param.wCollectionViewCellSelectTitleColor:self.menu.param.wCollectionViewCellTitleColor) forState:UIControlStateNormal];
              [cell.btn setTitle:tree.name forState:UIControlStateNormal];
              [cell.btn setImage:tree.image?[UIImage bundleImage:tree.image]:nil forState:UIControlStateNormal];
              cell.btn.layer.borderColor = tree.checkMore?[UIColor whiteColor].CGColor:(tree.isSelected? self.menu.param.wCollectionViewCellSelectTitleColor.CGColor:self.menu.param.wCollectionViewCellTitleColor.CGColor);
              cell.btn.layer.borderWidth = tree.checkMore?0:(tree.isSelected?self.menu.param.wCollectionViewCellBorderWith:0);
+             cell.btn.layer.cornerRadius = 8;
          }
          return cell;
     }
@@ -141,7 +142,7 @@
 }
 - (void)collectionView:(WMZDropCollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.menu.keyBoardShow) {
-       [[[UIApplication sharedApplication] keyWindow] endEditing:YES]; return;
+       [MenuWindow endEditing:YES]; return;
     };
     //点击处理
     WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
@@ -157,7 +158,6 @@
     self = [super initWithFrame:frame];
     if (self){
         [self.contentView addSubview:self.btn];
-        self.btn.layer.masksToBounds = YES;
         self.btn.userInteractionEnabled = NO;
         self.btn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.btn.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -167,7 +167,6 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
      self.btn.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-     self.btn.layer.cornerRadius = 8;
 }
 - (UIButton *)btn{
     if (!_btn) {
