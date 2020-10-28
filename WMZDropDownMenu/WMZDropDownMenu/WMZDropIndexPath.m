@@ -40,6 +40,7 @@
     if (self = [super init]) {
         self.cellHeight = footHeadHeight;
         self.tapClose = YES;
+        self.canEdit = YES;
     }
     return self;
 }

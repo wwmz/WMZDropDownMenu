@@ -85,6 +85,12 @@ NS_ASSUME_NONNULL_BEGIN
 //点击关闭 default YES
 @property(nonatomic,assign)BOOL tapClose;
 
+
+//textField 可以输入 default YES （输入框）
+@property(nonatomic,assign)BOOL canEdit;
+//textField 第几个 输入框）
+@property(nonatomic,assign)NSInteger index;
+
 - (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID;
 @end
 

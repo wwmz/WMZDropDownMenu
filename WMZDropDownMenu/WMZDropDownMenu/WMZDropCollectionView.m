@@ -25,12 +25,17 @@
          //默认视图
         WMZMenuTextFieldCell *cell = (WMZMenuTextFieldCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([WMZMenuTextFieldCell class]) forIndexPath:indexPath];
         if ([tree isKindOfClass:[WMZDropTree class]]) {
+            cell.tree = tree;
+            cell.tree.canEdit = tree.config[@"canEdit"]?[tree.config[@"canEdit"] boolValue]:YES;
+            UIColor *lowBg = tree.config[@"lowBgColor"]?:self.menu.param.wCollectionViewCellBgColor;
+            UIColor *highBg = tree.config[@"highBgColor"]?:self.menu.param.wCollectionViewCellBgColor;
+            UIColor *textColor = tree.config[@"textColor"]?:MenuColor(0x333333);
+            UIColor *textSelectColor = tree.config[@"textSelectColor"]?:MenuColor(0x333333);
             tree.lowPlaceholder = tree.config[@"lowPlaceholder"]?:tree.lowPlaceholder;
             tree.highPlaceholder = tree.config[@"highPlaceholder"]?:tree.highPlaceholder;
             tree.lowPlaceholder =
             cell.lowText.placeholder =  tree.lowPlaceholder;
             cell.highText.placeholder = tree.highPlaceholder;
-            
             cell.lowText.text = tree.rangeArr.count>1?tree.rangeArr[0]:@"";
             cell.highText.text = tree.rangeArr.count>1?tree.rangeArr[1]:@"";
             if (!tree.normalRangeArr||!tree.normalRangeArr.count) {
@@ -54,9 +59,16 @@
                 }
                 tree.isSelected = YES;
             };
+            __weak WMZDropCollectionView *weak = self;
+            cell.clickBlock = ^(UITextField * _Nonnull textField, NSString * _Nonnull string) {
+                 __strong WMZDropCollectionView *strong = weak;
+                [strong tapAction:textField dropPath:path indexPath:indexPath data:tree];
+            };
             tree.isSelected = ([cell.lowText.text length]>0||[cell.highText.text length]>0);
-            cell.lowText.backgroundColor = self.menu.param.wCollectionViewCellBgColor;
-            cell.highText.backgroundColor = self.menu.param.wCollectionViewCellBgColor;
+            cell.lowText.textColor = [cell.lowText.text length]>0?textSelectColor:textColor;
+            cell.highText.textColor = [cell.lowText.text length]>0?textSelectColor:textColor;;
+            cell.lowText.backgroundColor = lowBg;
+            cell.highText.backgroundColor = highBg;
         }
         return cell;
     }else{
@@ -150,6 +162,14 @@
     [self.menu cellTap:path data:arr indexPath:indexPath];
 }
 
+//点击
+- (void)tapAction:(UITextField*)sender dropPath:(WMZDropIndexPath*)dropPath indexPath:(NSIndexPath*)indexPath data:(WMZDropTree*)tree{
+    if (self.menu.delegate && [self.menu.delegate respondsToSelector:@selector(menu:didSelectRowAtDropIndexPath:dataIndexPath:data:)]) {
+        tree.index = sender.tag;
+        [self.menu.delegate menu:self.menu didSelectRowAtDropIndexPath:dropPath dataIndexPath:indexPath data:tree];
+    }
+}
+
 @end
 
 @implementation WMZMenuCell
@@ -217,6 +237,15 @@
     self.myBlock(textField,mainText);
     return YES;
 }
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (!self.tree.canEdit) {
+        if (self.clickBlock) {
+            self.clickBlock(textField, textField.text);
+        }
+    }
+    return self.tree.canEdit;
+}
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.lowText.frame = CGRectMake(0, 0, self.frame.size.width*0.45, self.frame.size.height);
@@ -230,6 +259,7 @@
     if (!_lowText) {
         _lowText = [UITextField new];
         _lowText.leftViewMode = UITextFieldViewModeAlways;
+        _lowText.tag = 0;
     }
     return _lowText;
 }
@@ -237,6 +267,7 @@
     if (!_highText) {
         _highText = [UITextField new];
         _highText.leftViewMode = UITextFieldViewModeAlways;
+        _highText.tag = 1;
     }
     return _highText;
 }

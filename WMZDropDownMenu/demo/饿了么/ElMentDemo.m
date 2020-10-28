@@ -8,7 +8,7 @@
 
 #import "ElMentDemo.h"
 @interface ElMentDemo ()
-
+@property(nonatomic,strong)NSMutableArray *marr;
 @end
 
 @implementation ElMentDemo
@@ -67,7 +67,10 @@
             @{@"name":@"食安保",@"image":@"menu_xinyong"},
             @{@"name":@"开发票",@"image":@"menu_xinyong"},
             ];
-        if (dropIndexPath.row == 2) return @[@{@"config":@{@"lowPlaceholder":@"最低价",@"highPlaceholder":@"最高价",}}];
+        if (dropIndexPath.row == 2) return @[@{@"config":@{
+                                                       @"canEdit":@(NO), //不可编辑
+                                                       @"lowPlaceholder":@"最低价",
+                                                       @"highPlaceholder":@"最高价",}}];
     }
     return @[];
 }
@@ -153,5 +156,36 @@
     }
     //nil为保持默认的标题
     return nil;
+}
+
+- (void)menu:(WMZDropDownMenu *)menu didSelectRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath dataIndexPath:(NSIndexPath *)indexpath data:(WMZDropTree *)data{
+    if (dropIndexPath.section == 3 &&dropIndexPath.row == 2) {
+        //最低价点击
+        if (data.index == 0) {
+           //做操作
+            
+           //更新数据
+          [self.marr replaceObjectAtIndex:0 withObject:@"index0"];
+           [menu updateDataConfig:@{@"rangeArr":self.marr} AtDropIndexPathSection:dropIndexPath.section AtDropIndexPathRow:dropIndexPath.row AtIndexPathRow:indexpath.row];
+        } //最高价点击
+        else if (data.index == 1) {
+           //做操作
+
+            //模拟更新数据
+            [self.marr replaceObjectAtIndex:1 withObject:@"index1"];
+            [menu updateDataConfig:@{@"rangeArr":self.marr} AtDropIndexPathSection:dropIndexPath.section AtDropIndexPathRow:dropIndexPath.row AtIndexPathRow:indexpath.row];
+        }
+    }
+}
+
+- (void)menu:(WMZDropDownMenu *)menu didConfirmAtSection:(NSInteger)section selectNoramelData:(NSMutableArray *)selectNoramalData selectStringData:(NSMutableArray *)selectData{
+    
+}
+
+- (NSMutableArray *)marr{
+    if (!_marr) {
+        _marr = [NSMutableArray arrayWithArray:@[@"",@""]];
+    }
+    return _marr;
 }
 @end

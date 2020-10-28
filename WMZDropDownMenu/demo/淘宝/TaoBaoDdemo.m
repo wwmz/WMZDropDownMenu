@@ -31,12 +31,12 @@
     menu.delegate = self;
     [self.view addSubview:menu];
     
+    //主动调用
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [menu.titleBtnArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        [menu.titleBtnArr enumerateObjectsUsingBlock:^(WMZDropMenuBtn*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 //            if (idx == menu.titleBtnArr.count-1) {
-//                WMZDropMenuBtn *btn = (WMZDropMenuBtn*)obj;
-//                if ([btn isKindOfClass:[WMZDropMenuBtn class]]) {
-//                    [btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+//                if ([obj isKindOfClass:[WMZDropMenuBtn class]]) {
+//                    [obj sendActionsForControlEvents:UIControlEventTouchUpInside];
 //                }
 //            }
 //        }];

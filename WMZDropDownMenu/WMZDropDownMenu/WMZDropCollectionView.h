@@ -32,7 +32,9 @@ typedef void (^MenuTextFieldCellBlock)(UITextField *textField,NSString *string);
 @property(nonatomic,strong)UITextField *lowText;
 @property(nonatomic,strong)UILabel *lineLa;
 @property(nonatomic,strong)UITextField *highText;
+@property(nonatomic,strong)WMZDropTree *tree;
 @property(nonatomic,copy)MenuTextFieldCellBlock myBlock;
+@property(nonatomic,copy)MenuTextFieldCellBlock clickBlock;
 @end
 
 //自定义collectionView head
