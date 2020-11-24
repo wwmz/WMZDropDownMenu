@@ -54,6 +54,12 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (NSArray*)getSelectArrWithPathSection:(NSInteger)section row:(NSInteger)row;
 
+/*
+*点击左侧 右侧滚动到指定位置
+*/
+- (NSArray<WMZDropTableView*>*)tableViewCurrentInRow:(NSInteger)currentRow
+                                tableViewchangeInRow:(NSInteger)changeRow
+                                       scrollTowPath:(NSIndexPath*)indexPath;
 @end
 
 

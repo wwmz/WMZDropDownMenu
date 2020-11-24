@@ -661,4 +661,5 @@ static NSString* const notificationRemove = @"notificationRemove";
 - (NSArray*)getAllSelectArr{return @[];}
 - (NSArray*)getSelectArrWithPathSection:(NSInteger)section{return @[];}
 - (NSArray*)getSelectArrWithPathSection:(NSInteger)section row:(NSInteger)row{return @[];}
+- (NSArray<WMZDropTableView*>*)tableViewCurrentInRow:(NSInteger)currentRow tableViewchangeInRow:(NSInteger)changeRow scrollTowPath:(NSIndexPath*)indexPath{return @[];}
 @end

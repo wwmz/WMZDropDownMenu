@@ -279,4 +279,32 @@
     }
     return nil;
 }
+
+#pragma -mark tableView联动
+
+- (NSArray<WMZDropTableView *> *)tableViewCurrentInRow:(NSInteger)currentRow          tableViewchangeInRow:(NSInteger)changeRow scrollTowPath:(NSIndexPath *)indexPath{
+    __block NSMutableArray<WMZDropTableView *> *marr = [NSMutableArray new];
+    __block  WMZDropTableView *leftTa = nil;
+    __block  WMZDropTableView *rightTa = nil;
+    [self.showView enumerateObjectsUsingBlock:^(UIView*  _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([view isKindOfClass:[WMZDropTableView class]]) {
+               WMZDropTableView *tableView = (WMZDropTableView*)view;
+            if (tableView.dropIndex.row == currentRow) {
+                leftTa = tableView;
+                [marr addObject:leftTa];
+            }else if (tableView.dropIndex.row == changeRow){
+                rightTa = tableView;
+                [marr addObject:rightTa];
+            }
+        }
+    }];
+
+    if (leftTa&&rightTa) {
+        [rightTa selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+        [rightTa scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    return [NSArray arrayWithArray:marr];
+
+}
+
 @end
