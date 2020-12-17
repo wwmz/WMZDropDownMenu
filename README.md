@@ -1,4 +1,4 @@
-# WMZDropDownMenu (pod 已更新至1.1.2，有问题加群937909825哈)
+# WMZDropDownMenu (pod 已更新至1.1.3，有问题加群937909825哈)
 
 实现功能
 ==============
@@ -295,7 +295,7 @@ Aspects（注意检查下项目有没有已经用过这个AOP库哈,有就删掉
 
 ### CocoaPods
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDropDownMenu'`。
+2. 在 Podfile 中添加 `pod 'WMZDropDownMenu', '~> 1.1.3'`。
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDropDownMenu.h"。
 
@@ -329,3 +329,4 @@ ios问题交流群 937909825(有问题加群哈)
 - 20200801 cocopods 更新至1.1.0  新增重置代理/修复bug
 - 20200901 cocopods 更新至1.1.1  
 - 20201023 cocopods 更新至1.1.2  新增自定义更新标题
+- 20201217 cocopods 更新至1.1.3  新增自适应cell宽度样式 新增手动触发选中
