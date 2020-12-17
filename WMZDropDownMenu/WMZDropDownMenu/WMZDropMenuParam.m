@@ -15,6 +15,8 @@
 WMZDropMenuParam * MenuParam(void){
     return  [WMZDropMenuParam  new];
 }
+WMZMenuSetFuncImplementation(WMZDropMenuParam, UIFont*,            wCellTitleFont)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, UIFont*,            wCellSelectTitleFont)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, UIColor*,           wShadowColor)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, UIColor*,           wCollectionViewCellBgColor)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, UIColor*,           wCollectionViewCellTitleColor)
@@ -74,6 +76,8 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wBorderUpDown
         _wPopViewWidth = Menu_Width/3;
         _wFixBtnWidth = 80;
         _wCellSelectShowCheck = YES;
+        _wCellTitleFont = [UIFont systemFontOfSize:15.0f];
+        _wCellSelectTitleFont = [UIFont systemFontOfSize:15.0f];
     }
     return self;
 }

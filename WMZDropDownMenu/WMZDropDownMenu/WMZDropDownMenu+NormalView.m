@@ -168,8 +168,9 @@
              }
            }
         }
+        WMZDropIndexPath *firstPath = dropArr.firstObject;
         CGFloat y = (screnFrame&&screnFrame!= MenuShowAnimalBoss)?Menu_StatusBarHeight:0;
-        UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+        WMZDropMenuCollectionLayout *layout = [[WMZDropMenuCollectionLayout alloc]initWithType:firstPath.alignType betweenOfCell:self.param.wCollectionViewCellSpace];
         layout.minimumLineSpacing = self.param.wCollectionViewCellSpace;
         layout.minimumInteritemSpacing = self.param.wCollectionViewCellSpace;
         layout.sectionInset = UIEdgeInsetsMake(0, self.param.wCollectionViewCellSpace, 0, self.param.wCollectionViewCellSpace);

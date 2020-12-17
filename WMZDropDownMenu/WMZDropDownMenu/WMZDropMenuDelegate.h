@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WMZDropMenuEnum.h"
 @class WMZDropDownMenu,WMZDropIndexPath,WMZDropDwonMenuConfig,WMZDropTree,WMZDropTableView,WMZDropCollectionView,WMZDropConfirmView;
-
 NS_ASSUME_NONNULL_BEGIN
 @protocol WMZDropMenuDelegate <NSObject>
 #pragma -mark data相关代理
@@ -44,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
    @{@"name":@"1",@"otherData":model}
  ]
  字典里 WMZDropTree类的属性都可以传 为对应的key
+ 
+ 
  例如@{@"isSelected":@(YES),@"ID":@""...1}
 */
 - (NSArray*)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
@@ -151,6 +152,17 @@ NS_ASSUME_NONNULL_BEGIN
 *返回WMZDropIndexPath每行 每列的编辑类型 单选|多选  默认单选
 */
 - (MenuEditStyle)menu:(WMZDropDownMenu *)menu editStyleForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
+
+/*
+*返回collectionview的每行 的编辑类型 固定宽度|自适应宽度  默认固定宽度 只对collectionviewcell生效
+*/
+- (MenuCollectionUIStyle)menu:(WMZDropDownMenu *)menu cellFixStyleForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
+
+/*
+*返回collectionview的每行自定义宽度的对齐方式  MenuCollectionUIStyle = MenuCollectionUIFit有效
+*/
+- (MenuCellAlignType)menu:(WMZDropDownMenu *)menu collectionAlignFitTypeForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
+
 /*
 *返回WMZDropIndexPath每行 每列 显示的个数
  注:

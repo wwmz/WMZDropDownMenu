@@ -38,6 +38,8 @@
     
     WMZDropDownMenu *menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];
     menu.delegate = self;
+    //更换背景颜色
+//    menu.titleView.backgroundColor = [UIColor redColor];
     menu.tag = 111;
     [self.view addSubview:menu];
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F303DB0F258B544A00F274E6 /* WMZDropMenuCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F303DB0E258B544A00F274E6 /* WMZDropMenuCollectionLayout.m */; };
+		F303DB13258B5B5200F274E6 /* DemoTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = F303DB12258B5B5200F274E6 /* DemoTwo.m */; };
 		F31399A724BD9A88007161B2 /* WMZDropTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F31399A624BD9A88007161B2 /* WMZDropTableView.m */; };
 		F31399AA24BD9AC9007161B2 /* WMZDropCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F31399A924BD9AC9007161B2 /* WMZDropCollectionView.m */; };
 		F31399AD24BD9B9A007161B2 /* WMZDropIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = F31399AC24BD9B9A007161B2 /* WMZDropIndexPath.m */; };
@@ -66,6 +68,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F303DB0C258B53F100F274E6 /* WMZDropMenuEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuEnum.h; sourceTree = "<group>"; };
+		F303DB0D258B544A00F274E6 /* WMZDropMenuCollectionLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuCollectionLayout.h; sourceTree = "<group>"; };
+		F303DB0E258B544A00F274E6 /* WMZDropMenuCollectionLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropMenuCollectionLayout.m; sourceTree = "<group>"; };
+		F303DB11258B5B5200F274E6 /* DemoTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoTwo.h; sourceTree = "<group>"; };
+		F303DB12258B5B5200F274E6 /* DemoTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoTwo.m; sourceTree = "<group>"; };
 		F31399A524BD9A88007161B2 /* WMZDropTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropTableView.h; sourceTree = "<group>"; };
 		F31399A624BD9A88007161B2 /* WMZDropTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDropTableView.m; sourceTree = "<group>"; };
 		F31399A824BD9AC9007161B2 /* WMZDropCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropCollectionView.h; sourceTree = "<group>"; };
@@ -172,6 +179,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F303DB10258B5B4200F274E6 /* 实际项目实例2(自适应cell宽度) */ = {
+			isa = PBXGroup;
+			children = (
+				F303DB11258B5B5200F274E6 /* DemoTwo.h */,
+				F303DB12258B5B5200F274E6 /* DemoTwo.m */,
+			);
+			path = "实际项目实例2(自适应cell宽度)";
+			sourceTree = "<group>";
+		};
 		F31EFA37238BD7FB000C9258 /* 美团 */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				F3D8F62F2383BE50000FF9B4 /* WMZDropDwonMenuConfig.h */,
+				F303DB0C258B53F100F274E6 /* WMZDropMenuEnum.h */,
 				F37A48A323842BA500DB173C /* WMZDropMenuDelegate.h */,
 				F3D8F62C2383BE37000FF9B4 /* WMZDropDownMenu.h */,
 				F3D8F62D2383BE37000FF9B4 /* WMZDropDownMenu.m */,
@@ -351,6 +368,8 @@
 				F31399A924BD9AC9007161B2 /* WMZDropCollectionView.m */,
 				F31399AB24BD9B9A007161B2 /* WMZDropIndexPath.h */,
 				F31399AC24BD9B9A007161B2 /* WMZDropIndexPath.m */,
+				F303DB0D258B544A00F274E6 /* WMZDropMenuCollectionLayout.h */,
+				F303DB0E258B544A00F274E6 /* WMZDropMenuCollectionLayout.m */,
 				F31BFAC02392C5B500A60D4D /* WMZDropMenu.bundle */,
 			);
 			path = WMZDropDownMenu;
@@ -359,6 +378,7 @@
 		F3DC8683238A4C860055BA98 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				F303DB10258B5B4200F274E6 /* 实际项目实例2(自适应cell宽度) */,
 				F3DC868C238ACB720055BA98 /* 展示全部属性和代理 */,
 				F3DC8688238ACB450055BA98 /* 闲鱼 */,
 				F31EFA37238BD7FB000C9258 /* 美团 */,
@@ -571,11 +591,13 @@
 				F3D8F6352383C17E000FF9B4 /* WMZDropMenuParam.m in Sources */,
 				F3D8F63B2383C6AE000FF9B4 /* WMZDropMenuTool.m in Sources */,
 				F3EDDAA5238D5C0700F9C608 /* JianShuDemo.m in Sources */,
+				F303DB13258B5B5200F274E6 /* DemoTwo.m in Sources */,
 				F31399AD24BD9B9A007161B2 /* WMZDropIndexPath.m in Sources */,
 				F3D8F6382383C60E000FF9B4 /* WMZDropMenuBase.m in Sources */,
 				F3D8F5FE2383BCEE000FF9B4 /* ViewController.m in Sources */,
 				F3615333238E07C3006DFFB2 /* MeiTuanWMDemo.m in Sources */,
 				F3AEACA123A4A9E00052A9F1 /* WMZDropDownMenu+DealDelegate.m in Sources */,
+				F303DB0F258B544A00F274E6 /* WMZDropMenuCollectionLayout.m in Sources */,
 				F31399A724BD9A88007161B2 /* WMZDropTableView.m in Sources */,
 				F3DC868F238ACB7A0055BA98 /* ShowDemo.m in Sources */,
 				F3D8F5F82383BCEE000FF9B4 /* AppDelegate.m in Sources */,

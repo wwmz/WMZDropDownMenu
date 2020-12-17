@@ -33,6 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)MenuShowAnimalStyle showAnimalStyle;
 //消失的动画类型 默认最后一个 MenuHideAnimalLeft 其他 MenuShowAnimalBottom
 @property(nonatomic,assign)MenuHideAnimalStyle hideAnimalStyle;
+//collectionview的每行 的编辑类型 固定宽度|自适应宽度  默认固定宽度 只对collectionviewcell生效
+@property(nonatomic,assign)MenuCollectionUIStyle collectionUIStyle;
+//自定义宽度对齐方式
+@property(nonatomic,assign)MenuCellAlignType alignType;
 //是否展开 default YES
 @property(nonatomic,assign)BOOL expand;
 //是否显示展开 default NO
@@ -84,12 +88,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL hide;
 //点击关闭 default YES
 @property(nonatomic,assign)BOOL tapClose;
-
-
 //textField 可以输入 default YES （输入框）
 @property(nonatomic,assign)BOOL canEdit;
 //textField 第几个 输入框）
 @property(nonatomic,assign)NSInteger index;
+
+//字体大小  default nil
+@property(nonatomic,assign)UIFont *font;
+//选中的字体大小 default nil
+@property(nonatomic,assign)UIFont *selectFont;
+
+//cell宽度 default 0 
+@property(nonatomic,assign)CGFloat cellWidth;
 
 - (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID;
 @end

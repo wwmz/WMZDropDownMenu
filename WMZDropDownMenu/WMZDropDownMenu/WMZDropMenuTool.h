@@ -85,24 +85,6 @@ typedef enum :NSInteger{
                 endColor:(UIColor*)endColor;
 @end
 
-@interface NSObject (MenuSafeKVO)
-/*!
- @method
- @abstract   移除所有观察的keypath
- */
-- (void)removeAllObserverdKeyPath:(NSObject*)VC withKey:(NSString*)key;
-/*!
-@method
-@abstract   安全增加观察者
-*/
-- (void)pageAddObserver:(nonnull NSObject *)observer forKeyPath:(nonnull NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(nullable void *)context;
-/*!
-@method
-@abstract   安全删除观察者
-*/
-- (void)paegRemoveObserver:(nonnull NSObject *)observer forKeyPath:(nonnull NSString *)keyPath context:(nullable void *)context;
-@end
-
 
 @interface UIImage (MenuImageName)
 //从bundle获取图片

@@ -32,7 +32,6 @@
                 }
             }
         }
-        
         if (hadSelected) {
             return data.count;
         }else{
@@ -63,7 +62,7 @@
         cell.textLabel.text = tree.name;
         cell.textLabel.textAlignment = self.menu.param.wTextAlignment;
         cell.textLabel.textColor = tree.isSelected? self.menu.param.wCollectionViewCellSelectTitleColor:self.menu.param.wCollectionViewCellTitleColor;
-        cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
+        cell.textLabel.font = self.menu.param.wCellTitleFont;
         cell.backgroundColor = tableView.backgroundColor;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UIImage *icon = nil;

@@ -22,6 +22,8 @@
         self.expand = YES;
         self.tapClose = YES;
         self.connect = YES;
+        self.collectionUIStyle = MenuCollectionUINormal;
+        self.alignType = MenuCellAlignWithLeft;
     }
     return self;
 }

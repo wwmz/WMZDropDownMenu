@@ -56,6 +56,19 @@
             MenuUIStyle uiStyle =  [self.delegate menu:self uiStyleForRowIndexPath:path];
             path.UIStyle = uiStyle;
         }
+        
+        //CellFixStyle
+        if (self.delegate && [self.delegate respondsToSelector:@selector(menu:cellFixStyleForRowAtDropIndexPath:)]) {
+            MenuCollectionUIStyle collectionUIStyle =  [self.delegate menu:self cellFixStyleForRowAtDropIndexPath:path];
+            path.collectionUIStyle = collectionUIStyle;
+        }
+        
+         //CellFixAlign
+        if (self.delegate && [self.delegate respondsToSelector:@selector(menu:collectionAlignFitTypeForRowAtDropIndexPath:)]) {
+            MenuCellAlignType alignType =  [self.delegate menu:self collectionAlignFitTypeForRowAtDropIndexPath:path];
+            path.alignType = alignType;
+        }
+        
         //showAnimal
         if (self.delegate && [self.delegate respondsToSelector:@selector(menu:showAnimalStyleForRowInSection:)]) {
             MenuShowAnimalStyle showAnimalStyle =  [self.delegate menu:self showAnimalStyleForRowInSection:path.section];
@@ -66,6 +79,7 @@
                 path.showAnimalStyle = MenuShowAnimalRight;
             }
         }
+        
         //hideAnimal
         if (self.delegate && [self.delegate respondsToSelector:@selector(menu:hideAnimalStyleForRowInSection:)]) {
             MenuHideAnimalStyle hideAnimalStyle =  [self.delegate menu:self hideAnimalStyleForRowInSection:path.section];
@@ -75,6 +89,7 @@
                 path.hideAnimalStyle = MenuHideAnimalLeft;
             }
         }
+        
         //editStyle
         if (self.delegate && [self.delegate respondsToSelector:@selector(menu:editStyleForRowAtDropIndexPath:)]) {
             MenuEditStyle editStyle =  [self.delegate menu:self editStyleForRowAtDropIndexPath:path];

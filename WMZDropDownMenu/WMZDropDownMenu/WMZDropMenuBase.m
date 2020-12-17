@@ -356,8 +356,7 @@
 }
 
 - (void)dealloc{
-    [self removeAllObserverdKeyPath:self withKey:@"contentOffset"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+   
 }
 
 @end

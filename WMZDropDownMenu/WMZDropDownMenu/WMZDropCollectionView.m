@@ -69,6 +69,8 @@
             cell.highText.textColor = [cell.lowText.text length]>0?textSelectColor:textColor;;
             cell.lowText.backgroundColor = lowBg;
             cell.highText.backgroundColor = highBg;
+            cell.lowText.font = tree.font?:self.menu.param.wCellTitleFont;
+            cell.highText.font = tree.font?:self.menu.param.wCellTitleFont;
         }
         return cell;
     }else{
@@ -80,11 +82,15 @@
               self.menu.param.wCollectionViewCellBgColor.CGColor);
              [cell.btn setTitleColor:tree.checkMore?self.menu.param.wCollectionViewCellSelectTitleColor:(
               tree.isSelected? self.menu.param.wCollectionViewCellSelectTitleColor:self.menu.param.wCollectionViewCellTitleColor) forState:UIControlStateNormal];
+             cell.btn.titleLabel.font = tree.isSelected?
+             tree.font?:self.menu.param.wCellTitleFont:
+             tree.selectFont?:self.menu.param.wCellSelectTitleFont;
              [cell.btn setTitle:tree.name forState:UIControlStateNormal];
              [cell.btn setImage:tree.image?[UIImage bundleImage:tree.image]:nil forState:UIControlStateNormal];
              cell.btn.layer.borderColor = tree.checkMore?[UIColor whiteColor].CGColor:(tree.isSelected? self.menu.param.wCollectionViewCellSelectTitleColor.CGColor:self.menu.param.wCollectionViewCellTitleColor.CGColor);
              cell.btn.layer.borderWidth = tree.checkMore?0:(tree.isSelected?self.menu.param.wCollectionViewCellBorderWith:0);
              cell.btn.layer.cornerRadius = 8;
+             
          }
          return cell;
     }
@@ -104,8 +110,24 @@
     return self.menu.collectionView.dropArr.count;
 }
 - (CGSize)collectionView:(WMZDropCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];;
-    return CGSizeMake((floor((collectionView.frame.size.width - self.menu.param.wCollectionViewCellSpace*(path.collectionCellRowCount+1))/(CGFloat)path.collectionCellRowCount)) , path.cellHeight);
+    WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
+    if (path.collectionUIStyle == MenuCollectionUINormal) {
+       return CGSizeMake((floor((collectionView.frame.size.width - self.menu.param.wCollectionViewCellSpace*(path.collectionCellRowCount+1))/(CGFloat)path.collectionCellRowCount)) , path.cellHeight);
+    }else{
+        if (path.UIStyle == MenuUICollectionRangeTextField) {
+            return CGSizeMake((floor((collectionView.frame.size.width - self.menu.param.wCollectionViewCellSpace*(path.collectionCellRowCount+1))/(CGFloat)path.collectionCellRowCount)) , path.cellHeight);
+        }else{
+            NSArray *arr = [self.menu getArrWithKey:path.key withoutHide:YES withInfo:self.menu.dataDic];
+            WMZDropTree *tree = arr[indexPath.row];
+            UIFont *font = tree.isSelected?
+            tree.font?:self.menu.param.wCellTitleFont:
+            tree.selectFont?:self.menu.param.wCellSelectTitleFont;
+            if (!tree.cellWidth) {
+                tree.cellWidth = [WMZDropMenuTool boundingRectWithSize:tree.name Font:font Size:CGSizeMake(MAXFLOAT,MAXFLOAT)].width + 30;
+            }
+            return CGSizeMake(tree.cellWidth , path.cellHeight);
+        }
+    }
 }
 - (UICollectionReusableView *)collectionView:(WMZDropCollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     if (kind == UICollectionElementKindSectionHeader){
@@ -145,7 +167,7 @@
     return nil;
 }
 - (CGSize)collectionView:(WMZDropCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-     WMZDropIndexPath *path = collectionView.dropArr[section];
+         WMZDropIndexPath *path = collectionView.dropArr[section];
     return CGSizeMake(self.menu.dataView.frame.size.width,path.headViewHeight );
 }
 - (CGSize)collectionView:(WMZDropCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
@@ -191,7 +213,6 @@
 - (UIButton *)btn{
     if (!_btn) {
         _btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     }
     return _btn;
 }
@@ -212,8 +233,6 @@
         self.highText.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 8)];
         self.lowText.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 8)];
         self.lowText.delegate = self;
-        self.lowText.font = [UIFont systemFontOfSize:15.0];
-        self.highText.font = [UIFont systemFontOfSize:15.0];
         self.highText.delegate = self;
         self.highText.textAlignment = NSTextAlignmentCenter;
         self.lowText.textAlignment = NSTextAlignmentCenter;

@@ -36,7 +36,10 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSInteger,  
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wMenuLine)
 // 标题图文间距 default 2
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wMenuTitleSpace)
-
+//cell font default 15.0f
+WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, UIFont*,          wCellTitleFont)
+//cell selectFont 15.0f
+WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, UIFont*,          wCellSelectTitleFont)
 
 //固定弹出显示数据层的高度  default 自动计算~>最大为屏幕高度的0.4倍
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wFixDataViewHeight)
@@ -73,7 +76,7 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSTextAlignm
 //tableViewCell 选中显示打钩图片 default YES
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wCellSelectShowCheck)
 //京东样式自定义底部划线
-WMZMenuStatementAndPropSetFuncStatement(copy,     WMZDropMenuParam, MenuCustomLine,                wJDCustomLine)
+WMZMenuStatementAndPropSetFuncStatement(copy,     WMZDropMenuParam, MenuCustomLine,   wJDCustomLine)
 
 
 
@@ -103,6 +106,7 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSInteger,  
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,         wCollectionViewDefaultFootViewMarginY)
 //colletionViewFootView 距离顶部的距离 默认0
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,         wCollectionViewDefaultFootViewPaddingY)
+
 
 @end
 

@@ -12,6 +12,7 @@
 #import "WMZDropTableView.h"
 #import "WMZDropCollectionView.h"
 #import "Aspects.h"
+#import "WMZDropMenuCollectionLayout.h"
 NS_ASSUME_NONNULL_BEGIN
 //基类
 @interface WMZDropMenuBase : UIView
