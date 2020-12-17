@@ -655,6 +655,19 @@ static NSString* const notificationRemove = @"notificationRemove";
     [self dealDataWithDelete:MenuDataDelete btn:self.selectTitleBtn];
     [self updateSubView:[self getTitleFirstDropWthTitleBtn:self.selectTitleBtn] more:YES];
 }
+/*
+*手动选中标题 可做默认
+*/
+- (void)defaultSelectIndex:(NSInteger)index{
+    for (int i = 0; i<self.titleBtnArr.count; i++) {
+        if (i == index) {
+            WMZDropMenuBtn *btn = self.titleBtnArr[i];
+            [btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+            break;
+        }
+    }
+}
+
 - (BOOL)updateData:(NSArray*)arr ForRowAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath{return YES;}
 - (BOOL)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row{return YES;}
 - (BOOL)updateDataConfig:(NSDictionary*)changeData AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row AtIndexPathRow:(NSInteger)indexPathRow{return YES;}

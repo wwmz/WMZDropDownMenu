@@ -39,6 +39,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)closeWith:(WMZDropIndexPath*)dropPath row:(NSInteger)row data:(WMZDropTree*)tree;
 
 /*
+*手动选中标题 可做默认
+*/
+- (void)defaultSelectIndex:(NSInteger)index;
+
+
+/*
 *获取所有选中
 */
 - (NSArray*)getAllSelectArr;
