@@ -1,4 +1,4 @@
-# WMZDropDownMenu (pod 已更新至1.1.3，有问题加群937909825哈)
+# WMZDropDownMenu (pod 已更新至1.1.3)
 
 实现功能
 ==============
