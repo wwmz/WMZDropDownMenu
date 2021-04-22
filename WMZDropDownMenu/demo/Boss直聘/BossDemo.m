@@ -204,7 +204,7 @@
         bar.barTintColor = [UIColor whiteColor];
         bar.backgroundColor = [UIColor whiteColor];
         bar.searchBarStyle = UISearchBarStyleMinimal;
-        bar.searchTextField.textAlignment = NSTextAlignmentCenter;
+//        bar.searchTextField.textAlignment = NSTextAlignmentCenter;
         bar.placeholder = @"请搜索";
         bar.frame = CGRectMake(10, 0, Menu_Width-20, 70);
         [back addSubview:bar];

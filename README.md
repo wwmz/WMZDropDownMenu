@@ -1,4 +1,4 @@
-# WMZDropDownMenu (pod 已更新至1.1.3)
+# WMZDropDownMenu (pod 已更新至1.1.4)
 
 实现功能
 ==============
@@ -295,12 +295,9 @@ Aspects（注意检查下项目有没有已经用过这个AOP库哈,有就删掉
 
 ### CocoaPods
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDropDownMenu', '~> 1.1.3'`。
+2. 在 Podfile 中添加 `pod 'WMZDropDownMenu', '~> 1.1.4'`。
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDropDownMenu.h"。
-
-### 注:要消除链式编程的警告 
-要在Buildding Settings 把CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF 设为NO
 
 ### 手动安装
 1. 下载 WMZDropDownMenu 文件夹内的所有内容。
@@ -308,9 +305,7 @@ Aspects（注意检查下项目有没有已经用过这个AOP库哈,有就删掉
 3. 导入 #import "WMZDropDownMenu.h"
 
 使用过程中如果有什么bug或者使用的问题欢迎给我提issue或者加我qq  我看到就会解决
-觉得有用的话给个star
 [简书地址](https://www.jianshu.com/p/366d5bb08766)
-ios问题交流群 937909825(有问题加群哈)
 
 
 ### 更新日记
@@ -330,3 +325,4 @@ ios问题交流群 937909825(有问题加群哈)
 - 20200901 cocopods 更新至1.1.1  
 - 20201023 cocopods 更新至1.1.2  新增自定义更新标题
 - 20201217 cocopods 更新至1.1.3  新增自适应cell宽度样式 新增手动触发选中
+- 20210422 cocopods 更新至1.1.4  修复若干问题,去除警告

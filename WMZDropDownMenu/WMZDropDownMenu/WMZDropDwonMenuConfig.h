@@ -19,7 +19,7 @@
 #define WMZMenuSetFuncImplementation(className, propertyPointerType, propertyName)                                       \
 - (className * (^) (propertyPointerType propertyName))propertyName##Set{                                                \
 return ^(propertyPointerType propertyName) {                                                                            \
-_##propertyName = propertyName;                                                                                         \
+self->_##propertyName = propertyName;                                                                                         \
 return self;                                                                                                            \
 };                                                                                                                      \
 }
