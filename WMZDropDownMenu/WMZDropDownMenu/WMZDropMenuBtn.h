@@ -58,4 +58,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)hidenLine;
 @end
 
+
+@interface WMZDropMenuBtn (Time)
+/* 防止button重复点击，设置间隔 */
+@property (nonatomic, assign) NSTimeInterval tj_acceptEventInterval;
+@end
+
 NS_ASSUME_NONNULL_END

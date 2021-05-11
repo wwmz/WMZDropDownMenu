@@ -15,6 +15,7 @@
 @implementation WMZDropMenuBtn
 
 - (void)setUpParam:(WMZDropMenuParam*)param withDic:(id)dic{
+    self.tj_acceptEventInterval = 0.3;
     self.param = param;
     BOOL dictionary = [dic isKindOfClass:[NSDictionary class]];
     self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -123,4 +124,46 @@ static char lineViewKey;
 }
 
 
+@end
+
+#import <objc/runtime.h>
+@implementation WMZDropMenuBtn (Time)
+static const char *UIButton_acceptEventInterval = "UIButton_TJ_acceptEventInterval";
+static const char *UIButton_acceptEventTime     = "UIButton_TJ_acceptEventTime";
+- (NSTimeInterval )tj_acceptEventInterval{
+    return [objc_getAssociatedObject(self, UIButton_acceptEventInterval) doubleValue];
+}
+-(void)setTj_acceptEventInterval:(NSTimeInterval)tj_acceptEventInterval{
+    objc_setAssociatedObject(self, UIButton_acceptEventInterval, @(tj_acceptEventInterval), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (NSTimeInterval )tj_acceptEventTime{
+    return [objc_getAssociatedObject(self, UIButton_acceptEventTime) doubleValue];
+}
+- (void)setTj_acceptEventTime:(NSTimeInterval)tj_acceptEventTime{
+    objc_setAssociatedObject(self, UIButton_acceptEventTime, @(tj_acceptEventTime), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
++ (void)load{
+    Method systemMethod = class_getInstanceMethod(self, @selector(sendAction:to:forEvent:));
+    SEL sysSEL = @selector(sendAction:to:forEvent:);
+    Method myMethod = class_getInstanceMethod(self, @selector(tj_sendAction:to:forEvent:));
+    SEL mySEL = @selector(tj_sendAction:to:forEvent:);
+    BOOL didAddMethod = class_addMethod(self, sysSEL, method_getImplementation(myMethod), method_getTypeEncoding(myMethod));
+    if (didAddMethod) {
+        class_replaceMethod(self, mySEL, method_getImplementation(systemMethod), method_getTypeEncoding(systemMethod));
+    }else{
+        method_exchangeImplementations(systemMethod, myMethod);
+    }
+}
+- (void)tj_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event{
+    //判断时间差
+    if (NSDate.date.timeIntervalSince1970 - self.tj_acceptEventTime < self.tj_acceptEventInterval) {
+        return;
+    }
+    //记录时间
+    if (self.tj_acceptEventInterval > 0) {
+        self.tj_acceptEventTime = NSDate.date.timeIntervalSince1970;
+    }
+    //执行点击事件
+    [self tj_sendAction:action to:target forEvent:event];
+}
 @end
