@@ -45,6 +45,13 @@
     return self.ta;
 }
 
+//如果距离不对 可以自行修改此处 
+//- (CGFloat)popFrameY{
+//    CGRect rect = [self.ta convertRect:[self.ta rectForHeaderInSection:0] toView:[self.ta superview]];
+//    rect.origin.y+= (self.ta.superview.frame.origin.y);
+//    return CGRectGetMaxY(rect);
+//}
+
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
          @{@"name":@"人气排序",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},

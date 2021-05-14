@@ -39,21 +39,15 @@ static NSString *const CollectionViewCell = @"CollectionViewCell";
 
 #pragma -mark menuDeleagte
 
-//⚠️重点
-//返回所在视图
-- (UIScrollView *)inScrollView{
-    return self.collectionView;
-}
-//动态高度
+//弹出高度
 - (CGFloat)popFrameY{
-    CGRect rect = [self.collectionView convertRect:self.menu.superview.frame toView:[self.collectionView superview]];
-    return rect.origin.y+self.menu.frame.size.height;
+    return Menu_NavigationBar + self.menu.frame.size.height;
 }
 //点击第一个标题的时候置顶
 - (void)menu:(WMZDropDownMenu *)menu didSelectTitleInSection:(NSInteger)section btn:(WMZDropMenuBtn *)selectBtn{
     if (section == 0) {
         //动画关闭
-//        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
     }
 }
 
