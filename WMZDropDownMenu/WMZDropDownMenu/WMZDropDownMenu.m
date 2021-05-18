@@ -254,6 +254,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         }
     }
     if (!exist) return;
+    
     if (!self.selectArr.count) {
         //查看更多取消选中 单独处理
         if (checkMore) {
@@ -529,11 +530,6 @@ static NSString* const notificationRemove = @"notificationRemove";
                for (WMZDropTree *tmpTree in arr) {
                    if (tmpTree != tree) {
                        tmpTree.isSelected = NO;
-                   }
-                   if (!tmpTree.isSelected) {
-                       if ([self.selectArr indexOfObject:tmpTree]!=NSNotFound) {
-                           [self.selectArr removeObject:tmpTree];
-                       }
                    }
                }
                
