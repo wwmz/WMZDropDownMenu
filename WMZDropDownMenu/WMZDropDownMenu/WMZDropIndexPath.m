@@ -79,8 +79,4 @@
     return _children;
 }
 
-- (NSString *)description{
-    return [NSString stringWithFormat:@"name = %@ ，isSeleted = %d",self.name,self.isSelected];
-}
-
 @end

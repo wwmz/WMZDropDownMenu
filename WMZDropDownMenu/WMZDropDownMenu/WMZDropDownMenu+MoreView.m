@@ -9,7 +9,7 @@
 #import "WMZDropDownMenu+MoreView.h"
 
 @implementation WMZDropDownMenu (MoreView)
-#pragma -mark 查看更多
+/// 查看更多
 - (void)setUpMoreView:(WMZDropIndexPath*)dropPath{
     [MenuWindow addSubview:self.moreView];
     self.moreView.frame = self.dataView.frame;
@@ -84,7 +84,7 @@
     [footView.resetBtn setTitle:@"返回" forState:UIControlStateNormal];
     [self.moreView addSubview:footView];
 }
-#pragma -mark 查看更多 返回上一级
+/// 查看更多 返回上一级
 - (void)backAction{
     [self closeView];
 }

@@ -9,24 +9,25 @@
 #import "WMZDropIndexPath.h"
 #import "WMZDropMenuParam.h"
 @class WMZDropDownMenu;
+
 NS_ASSUME_NONNULL_BEGIN
 
-//自定义tableview
+/// 自定义tableview
 @interface WMZDropTableView : UITableView
 @property(nonatomic,nullable)WMZDropDownMenu *menu;
 @property(nonatomic,strong)WMZDropIndexPath* dropIndex;
 @end
 
-//自定义tableviewCell
+/// 自定义tableviewCell
 @interface WMZDropTableViewCell : UITableViewCell
 @end
 
-//自定义tableview headView
+/// 自定义tableview headView
 @interface WMZDropTableViewHeadView : UITableViewHeaderFooterView
 @property(nonatomic,strong)UILabel* textLa;
 @end
 
-//自定义tableview footView
+/// 自定义tableview footView
 @interface WMZDropTableViewFootView : WMZDropTableViewHeadView
 @end
 

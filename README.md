@@ -1,4 +1,4 @@
-# WMZDropDownMenu (pod 已更新至1.1.6)
+# WMZDropDownMenu (pod 更新至1.2.0)
 
 实现功能
 ==============
@@ -295,7 +295,7 @@ Aspects（注意检查下项目有没有已经用过这个AOP库哈,有就删掉
 
 ### CocoaPods
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDropDownMenu', '~> 1.1.4'`。
+2. 在 Podfile 中添加 `pod 'WMZDropDownMenu', '~> 1.2.0'`。
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDropDownMenu.h"。
 
@@ -309,22 +309,23 @@ Aspects（注意检查下项目有没有已经用过这个AOP库哈,有就删掉
 
 
 ### 更新日记
-- 20191206 新增代理 - (void)menu:(WMZDropDownMenu *)menu getAllSelectData:(NSArray*)selectData;（获取所有选中的数据）
-- 20191206 新增代理 - (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu;（互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)）
-- 20191206 新增实例方法 - (void)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row （更新所有位置的数据 section表示所在行 row表示所在列）
-- 20191206 cocopods 更新至1.0.1
-- 20191213 cocopods 更新至1.0.2  新增更新任意数据的方法
-- 20191220 cocopods 更新至1.0.3  修复退出后台数据源被自动清理掉的bug
-- 20200117 cocopods 更新至1.0.4  过年前更一波
-- 20200328 cocopods 更新至1.0.5  新增查看更多功能 详情看京东demo
-- 20200328 cocopods 更新至1.0.6  修复bug
-- 20200606 cocopods 更新至1.0.7  新增一些代理方法
-- 20200716 cocopods 更新至1.0.8  新增动态弹出视图位置的代理/新增弹出视图放置的视图的代理(collectionview/scrollView)
-- 20200801 cocopods 更新至1.0.9  新增自定义修改弹出视图frame的属性
-- 20200801 cocopods 更新至1.1.0  新增重置代理/修复bug
-- 20200901 cocopods 更新至1.1.1  
-- 20201023 cocopods 更新至1.1.2  新增自定义更新标题
-- 20201217 cocopods 更新至1.1.3  新增自适应cell宽度样式 新增手动触发选中
-- 20210422 cocopods 更新至1.1.4  修复若干问题,去除警告
-- 20210511 cocopods 更新至1.1.5  修复快速点击的问题
+- 20211015 cocopods 更新至1.2.0  适配ios15 
 - 20210519 cocopods 更新至1.1.6  修复#39
+- 20210511 cocopods 更新至1.1.5  修复快速点击的问题
+- 20210422 cocopods 更新至1.1.4  修复若干问题,去除警告
+- 20201217 cocopods 更新至1.1.3  新增自适应cell宽度样式 新增手动触发选中
+- 20201023 cocopods 更新至1.1.2  新增自定义更新标题
+- 20200901 cocopods 更新至1.1.1  
+- 20200801 cocopods 更新至1.1.0  新增重置代理/修复bug
+- 20200801 cocopods 更新至1.0.9  新增自定义修改弹出视图frame的属性
+- 20200716 cocopods 更新至1.0.8  新增动态弹出视图位置的代理/新增弹出视图放置的视图的代理(collectionview/scrollView)
+- 20200606 cocopods 更新至1.0.7  新增一些代理方法
+- 20200328 cocopods 更新至1.0.6  修复bug
+- 20200328 cocopods 更新至1.0.5  新增查看更多功能 详情看京东demo
+- 20200117 cocopods 更新至1.0.4  过年前更一波
+- 20191220 cocopods 更新至1.0.3  修复退出后台数据源被自动清理掉的bug
+- 20191213 cocopods 更新至1.0.2  新增更新任意数据的方法
+- 20191206 cocopods 更新至1.0.1
+- 20191206 新增实例方法 - (void)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row （更新所有位置的数据 section表示所在行 row表示所在列）
+- 20191206 新增代理 - (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu;（互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)）
+- 20191206 新增代理 - (void)menu:(WMZDropDownMenu *)menu getAllSelectData:(NSArray*)selectData;（获取所有选中的数据）

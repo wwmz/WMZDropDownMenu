@@ -10,10 +10,11 @@
 #import "WMZDropMenuEnum.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface WMZDropMenuCollectionLayout : UICollectionViewFlowLayout
-//两个Cell之间的距离
+/// 两个Cell之间的距离
 @property (nonatomic,assign)CGFloat betweenOfCell;
-//cell对齐方式
+/// cell对齐方式
 @property (nonatomic,assign)MenuCellAlignType cellType;
+
 -(instancetype)initWithType:(MenuCellAlignType) cellType betweenOfCell:(CGFloat)betweenOfCell;
 @end
 

@@ -9,9 +9,9 @@
 #import "WMZDropDownMenu+FootHeaderView.h"
 
 @implementation WMZDropDownMenu (FootHeaderView)
-#pragma -mark 添加全局的头尾
+/// 添加全局的头尾
 - (void)addHeadFootView:(NSArray*)connectViews screnFrame:(MenuShowAnimalStyle)screnFrame{
-    //头部
+    /// 头部
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:userInteractionHeadViewInSection:)]) {
         UIView *headView = [self.delegate menu:self userInteractionHeadViewInSection:self.selectTitleBtn.tag - 1000];
         if (headView) {
@@ -40,7 +40,7 @@
     }else{
        [self addDefaultHeadView:connectViews screnFrame:screnFrame];
     }
-    //尾部
+    /// 尾部
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:userInteractionFootViewInSection:)]) {
         UIView *footView = [self.delegate menu:self userInteractionFootViewInSection:self.selectTitleBtn.tag - 1000];
         if (footView) {
@@ -63,7 +63,7 @@
         [self addDefaultFootView:connectViews screnFrame:screnFrame];
     }
 }
-#pragma -mark 默认footView
+/// 默认footView
 - (void)addDefaultFootView:(NSArray*)connectViews
                 screnFrame:(MenuShowAnimalStyle)screnFrame{
    BOOL insert = NO;
@@ -110,7 +110,7 @@
    self.confirmView = footView;
    [self.dataView addSubview:self.confirmView];
 }
-#pragma -mark 默认headView
+/// 默认headView
 - (void)addDefaultHeadView:(NSArray*)connectViews
                 screnFrame:(MenuShowAnimalStyle)screnFrame{
     if (screnFrame == MenuShowAnimalBoss) {

@@ -159,4 +159,8 @@
     NSLog(@"%@",selectData);
 }
 
+- (BOOL)menu:(WMZDropDownMenu *)menu dropIndexPathConnectInSection:(NSInteger)section{
+    return NO;
+}
+
 @end

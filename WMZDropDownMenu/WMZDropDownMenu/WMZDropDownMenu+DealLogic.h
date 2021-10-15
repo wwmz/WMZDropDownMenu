@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDropDownMenu (DealLogic)
-//获取当前标题对应的首个drop
+/// 获取当前标题对应的首个drop
 - (WMZDropIndexPath*)getTitleFirstDropWthTitleBtn:(WMZDropMenuBtn*)btn;
 @end
 

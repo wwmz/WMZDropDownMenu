@@ -40,9 +40,12 @@
     }
     return data.count;
 }
+
 - (UITableViewCell *)tableView:(WMZDropTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *data = [self.menu getArrWithKey:tableView.dropIndex.key withoutHide:YES  withInfo:self.menu.dataDic];
     WMZDropTree *tree = data[indexPath.row];
+    tree.indexPath = indexPath;
+    tree.dropPath = tableView.dropIndex;
     //自定义
     if (self.menu.delegate&&[self.menu.delegate respondsToSelector:@selector(menu:cellForUITableView:AtIndexPath:dataForIndexPath:)]) {
         UITableViewCell *cell = [self.menu.delegate menu:self.menu cellForUITableView:tableView AtIndexPath:indexPath dataForIndexPath:tree];

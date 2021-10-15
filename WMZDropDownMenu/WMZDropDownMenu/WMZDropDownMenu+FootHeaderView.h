@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDropDownMenu (FootHeaderView)
-//添加全局的头尾
+/// 添加全局的头尾
 - (void)addHeadFootView:(NSArray*)connectViews screnFrame:(MenuShowAnimalStyle)screnFrame;
 @end
 

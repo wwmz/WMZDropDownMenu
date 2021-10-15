@@ -191,7 +191,7 @@ void verticalMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAn
 }
 
 //垂直从下移动出现
-void verticalBottomMoveShowAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){    
+void verticalBottomMoveShowAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){        
     CGRect rect = view.frame;
     view.frame = CGRectMake(rect.origin.x, [UIScreen mainScreen].bounds.size.height , rect.size.width, rect.size.height);
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{

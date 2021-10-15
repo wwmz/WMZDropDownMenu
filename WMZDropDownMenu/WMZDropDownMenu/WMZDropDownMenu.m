@@ -651,15 +651,48 @@ static NSString* const notificationRemove = @"notificationRemove";
     [self dealDataWithDelete:MenuDataDelete btn:self.selectTitleBtn];
     [self updateSubView:[self getTitleFirstDropWthTitleBtn:self.selectTitleBtn] more:YES];
 }
-/*
-*手动选中标题 可做默认
-*/
+
 - (void)defaultSelectIndex:(NSInteger)index{
     for (int i = 0; i<self.titleBtnArr.count; i++) {
         if (i == index) {
             WMZDropMenuBtn *btn = self.titleBtnArr[i];
             [btn sendActionsForControlEvents:UIControlEventTouchUpInside];
             break;
+        }
+    }
+}
+
+/// 重置所有数据 恢复原来
+- (void)resetAll{
+    [self.titleBtnArr enumerateObjectsUsingBlock:^(WMZDropMenuBtn  * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.selected = NO;
+        obj.click = NO;
+        obj.selectType = 0;
+        [obj setTitleColor:obj.normalColor forState:UIControlStateNormal];
+        [obj setTitleColor:obj.normalColor forState:UIControlStateSelected];
+        [obj setTitle:obj.normalTitle forState:UIControlStateNormal];
+        [obj hidenLine];
+    }];
+    for (WMZDropIndexPath *drop in self.dropPathArr) {
+        NSArray *arr = [self getArrWithKey:drop.key withoutHide:YES];
+        [arr enumerateObjectsUsingBlock:^(WMZDropTree*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.isSelected = NO;
+            obj.rangeArr = [NSMutableArray arrayWithObjects:@"",@"",nil];
+            obj.normalRangeArr = [NSArray new];
+            if ([self.selectArr indexOfObject:obj] != NSNotFound) [self.selectArr removeObject:obj];
+        }];
+    }
+    for (UIView *view in self.showView) {
+        if ([view isKindOfClass:[WMZDropTableView class]]) {
+            WMZDropTableView *ta = (WMZDropTableView*)view;
+            [UIView performWithoutAnimation:^{
+                [ta reloadData];
+            }];
+        }else if ([view isKindOfClass:[WMZDropCollectionView class]]){
+            WMZDropCollectionView *collectionView = (WMZDropCollectionView*)view;
+            [UIView performWithoutAnimation:^{
+               [collectionView reloadData];
+            }];
         }
     }
 }

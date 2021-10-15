@@ -11,7 +11,7 @@
 #import "WMZDropMenuEnum.h"
 #import <UIKit/UIKit.h>
 @class WMZDropIndexPath;
-//implicit retain of 'self'改为NO
+
 #define WMZMenuStatementAndPropSetFuncStatement(propertyModifier,className, propertyPointerType, propertyName)           \
 @property(nonatomic,propertyModifier)propertyPointerType  propertyName;                                                 \
 - (className * (^) (propertyPointerType propertyName)) propertyName##Set;

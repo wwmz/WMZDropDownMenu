@@ -94,8 +94,7 @@
 static char lineViewKey;
 @implementation WMZDropMenuBtn (WMZLine)
 
-- (void)showLine:(NSDictionary*)config
-{
+- (void)showLine:(NSDictionary*)config{
     if (self.line == nil||[[self subviews] indexOfObject:self.line]==NSNotFound) {
         CGRect frame = CGRectMake((self.frame.size.width - 30)/2, self.frame.size.height-5, 30, 3);
         self.line = [[UIView alloc] initWithFrame:frame];
@@ -105,21 +104,18 @@ static char lineViewKey;
     }
 }
 
-- (void)hidenLine
-{
+- (void)hidenLine{
     if (self.line) {
         [self.line removeFromSuperview];
     }
 }
 
 #pragma mark - GetterAndSetter
-- (UIView *)line
-{
+- (UIView *)line{
     return objc_getAssociatedObject(self, &lineViewKey);
 }
 
-- (void)setLine:(UIView *)line
-{
+- (void)setLine:(UIView *)line{
     objc_setAssociatedObject(self, &lineViewKey, line, OBJC_ASSOCIATION_RETAIN);
 }
 

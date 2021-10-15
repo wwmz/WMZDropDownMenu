@@ -84,7 +84,7 @@
     [self updateSubView:currentDrop more:NO];
     return result;
 }
-//自动增加数组的配置
+
 - (void)updateWithData:(NSArray*)arr dropPath:(WMZDropIndexPath*)currentDrop normalDropPath:(WMZDropIndexPath*)dropIndexPath more:(BOOL)more{
     NSMutableArray *treeArr = [NSMutableArray new];
     if (arr.count) {
@@ -120,7 +120,7 @@
         [self updateSubView:dropIndexPath more:more];
     }
 }
-//更新标题
+
 - (void)updateTitle:(WMZDropIndexPath*)currentDrop changeArr:(NSArray*)arr changeTree:(WMZDropTree*)tree{
     //当前展开的列 不需要更新标题 视图关闭后会更新
     if (currentDrop.section == self.selectTitleBtn.tag - 1000) return;
@@ -194,11 +194,10 @@
     }
 }
 
-//获取某一行 所有列选中的数据
 - (NSArray*)getSelectArrWithPathSection:(NSInteger)section{
     return [self getSelectArrWithPathSection:section row:-1];
 }
-//获取某一行 某一列选中的数据
+
 - (NSArray*)getSelectArrWithPathSection:(NSInteger)section row:(NSInteger)row{
     NSMutableArray *allSelectArr = [NSMutableArray new];
      for (WMZDropIndexPath *drop in self.dropPathArr) {
@@ -304,7 +303,6 @@
         [rightTa scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     return [NSArray arrayWithArray:marr];
-
 }
 
 @end

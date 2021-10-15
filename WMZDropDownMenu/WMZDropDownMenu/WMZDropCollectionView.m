@@ -14,7 +14,8 @@
     WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
     NSArray *arr = [self.menu getArrWithKey:path.key withoutHide:YES withInfo:self.menu.dataDic];
     WMZDropTree *tree = arr[indexPath.row];
-    
+    tree.indexPath = indexPath;
+    tree.dropPath = path;
     if (self.menu.delegate&&[self.menu.delegate respondsToSelector:@selector(menu:cellForUICollectionView:AtDropIndexPath:AtIndexPath:dataForIndexPath:)]) {
         UICollectionViewCell *cell = [self.menu.delegate menu:self.menu cellForUICollectionView:collectionView AtDropIndexPath:path AtIndexPath:indexPath dataForIndexPath:tree];
         if (cell&&[cell isKindOfClass:[UICollectionViewCell class]]) {
@@ -36,11 +37,11 @@
             tree.lowPlaceholder =
             cell.lowText.placeholder =  tree.lowPlaceholder;
             cell.highText.placeholder = tree.highPlaceholder;
-            cell.lowText.text = tree.rangeArr.count>1?tree.rangeArr[0]:@"";
-            cell.highText.text = tree.rangeArr.count>1?tree.rangeArr[1]:@"";
+            NSString *lowStr = tree.rangeArr.count>1?[NSString stringWithFormat:@"%@",tree.rangeArr[0]]:@"";
+            NSString *maxStr = tree.rangeArr.count>1?[NSString stringWithFormat:@"%@",tree.rangeArr[1]]:@"";
             if (!tree.normalRangeArr||!tree.normalRangeArr.count) {
-                if ([cell.lowText.text length]&&[cell.highText.text length]) {
-                    tree.normalRangeArr = @[cell.lowText.text,cell.highText.text];
+                if ([lowStr length]&&[maxStr length]) {
+                    tree.normalRangeArr = @[lowStr,maxStr];
                 }
             }
             MenuWeakSelf(cell)
@@ -64,13 +65,15 @@
                  __strong WMZDropCollectionView *strong = weak;
                 [strong tapAction:textField dropPath:path indexPath:indexPath data:tree];
             };
-            tree.isSelected = ([cell.lowText.text length]>0||[cell.highText.text length]>0);
-            cell.lowText.textColor = [cell.lowText.text length]>0?textSelectColor:textColor;
-            cell.highText.textColor = [cell.lowText.text length]>0?textSelectColor:textColor;;
+            tree.isSelected = ([lowStr length]>0||[maxStr length]>0);
+            cell.lowText.textColor = tree.isSelected?textSelectColor:textColor;
+            cell.highText.textColor = tree.isSelected?textSelectColor:textColor;;
             cell.lowText.backgroundColor = lowBg;
             cell.highText.backgroundColor = highBg;
             cell.lowText.font = tree.font?:self.menu.param.wCellTitleFont;
             cell.highText.font = tree.font?:self.menu.param.wCellTitleFont;
+            cell.lowText.text  = lowStr;
+            cell.highText.text = maxStr;
         }
         return cell;
     }else{

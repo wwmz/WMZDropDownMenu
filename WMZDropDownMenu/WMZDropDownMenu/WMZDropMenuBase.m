@@ -8,6 +8,7 @@
 
 #import "WMZDropMenuBase.h"
 @implementation WMZDropMenuBase
+
 #pragma -mark 初始化
 - (instancetype)initWithFrame:(CGRect)frame withParam:(WMZDropMenuParam*)param{
     if (self = [super initWithFrame:frame]) {
@@ -28,23 +29,19 @@
     if (self.param.wPopOraignY) {
         self.menuOrignY = self.param.wPopOraignY;
     }
-     self.close = YES;
-     self.lastSelectIndex = -999;
-     [self notifications];
+    self.close = YES;
+    self.lastSelectIndex = -999;
+    [self notifications];
 }
 
 
-//通知
 - (void)notifications{
-    //监听键盘出现
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    //监听键盘出现
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-//键盘弹出
-- (void)keyboardWillShow:(NSNotification *)note
-{
+
+- (void)keyboardWillShow:(NSNotification *)note{
     self.keyBoardShow = YES;
     NSDictionary* info = [note userInfo];
     CGFloat height = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height+20;
@@ -52,12 +49,12 @@
         self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, height, 0);
     }
 }
+
 - (void)keyboardWillHide:(NSNotification *)note{
     self.keyBoardShow = NO;
     self.collectionView.contentInset = UIEdgeInsetsZero;
 }
 
-//获取tableviewView
 - (WMZDropTableView*)getTableVieww:(WMZDropIndexPath*)path{
     WMZDropTableView *tableView = [[WMZDropTableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.scrollsToTop = NO;
@@ -70,6 +67,9 @@
         tableView.estimatedSectionHeaderHeight = 0.01;
         tableView.estimatedSectionFooterHeight = 0.01;
     }
+    if (@available(iOS 15.0, *)) {
+        tableView.sectionHeaderTopPadding = 0;
+    }
     if (path&&path.key) {
         tableView.dropIndex = path;
     }
@@ -77,7 +77,7 @@
     tableView.dataSource = (id)tableView;
     return tableView;
 }
-//获取collectionView
+
 - (WMZDropCollectionView*)getCollectonView:(WMZDropIndexPath*)path layout:(UICollectionViewFlowLayout*)layout{
     WMZDropCollectionView *collection = [[WMZDropCollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
     collection.backgroundColor = [UIColor whiteColor];
@@ -121,9 +121,7 @@
         }
     }];
 }
-/*
-*出现的动画
-*/
+
 - (void)showAnimal:(MenuShowAnimalStyle)animalStyle view:(UIView*)view durtion:(NSTimeInterval)durtion block:(DropMenuAnimalBlock)block{
     if (animalStyle == MenuShowAnimalBottom) {
         verticalMoveShowAnimation(view, durtion, block);
@@ -133,15 +131,15 @@
         landscapeMoveShowAnimation(view, durtion,NO, block);
     }else if (animalStyle == MenuShowAnimalBoss){
         BossMoveShowAnimation(view, durtion, block);
+    }else if (animalStyle == MenuShowAnimalTop){
+        verticalBottomMoveShowAnimation(view, durtion, block);
     }else{
        if (block) {
           block();
        }
     }
 }
-/*
-*消失的动画
-*/
+
 - (void)hideAnimal:(MenuHideAnimalStyle)animalStyle  view:(UIView*)view durtion:(NSTimeInterval)durtion block:(DropMenuAnimalBlock)block{
     if (animalStyle == MenuHideAnimalTop) {
         verticalMoveHideAnimation(view, durtion, block);
@@ -196,7 +194,6 @@
     
 }
 
-//不同动画frame不同 dataView的frame
 - (NSMutableDictionary*)dataViewFrameDic{
     _dataViewFrameDic = [NSMutableDictionary dictionaryWithDictionary:@{
                  @(MenuShowAnimalNone):[NSValue valueWithCGRect:CGRectMake(0, self.menuOrignY, Menu_Width,(Menu_Height - self.menuOrignY)/2)],
@@ -204,12 +201,12 @@
                  @(MenuShowAnimalLeft):[NSValue valueWithCGRect:CGRectMake(0, 0, (self.param.wMaxWidthScale>1?1:self.param.wMaxWidthScale)*Menu_Width, Menu_Height)],
                  @(MenuShowAnimalRight):[NSValue valueWithCGRect:CGRectMake(Menu_Width - (self.param.wMaxWidthScale>1?1:self.param.wMaxWidthScale)*Menu_Width, 0, (self.param.wMaxWidthScale>1?1:self.param.wMaxWidthScale)*Menu_Width, Menu_Height)],
                  @(MenuShowAnimalBoss):[NSValue valueWithCGRect:CGRectMake(0, 0, Menu_Width, Menu_Height)],
-                 @(MenuShowAnimalPop):[NSValue valueWithCGRect:CGRectMake(CGRectGetMinX(self.selectTitleBtn.frame)+15>(Menu_Width-15-self.param.wPopViewWidth?:Menu_Width/3)?(Menu_Width-15-self.param.wPopViewWidth?:Menu_Width/3):(CGRectGetMinX(self.selectTitleBtn.frame)+15), self.menuOrignY, self.param.wPopViewWidth?:Menu_Width/3, Menu_Height)]
+                 @(MenuShowAnimalPop):[NSValue valueWithCGRect:CGRectMake(CGRectGetMinX(self.selectTitleBtn.frame)+15>(Menu_Width-15-self.param.wPopViewWidth?:Menu_Width/3)?(Menu_Width-15-self.param.wPopViewWidth?:Menu_Width/3):(CGRectGetMinX(self.selectTitleBtn.frame)+15), self.menuOrignY, self.param.wPopViewWidth?:Menu_Width/3, Menu_Height)],
+                 @(MenuShowAnimalTop):[NSValue valueWithCGRect:CGRectMake(0, 0, Menu_Width, Menu_Height*self.param.wMaxHeightScale)],
     }];
     return _dataViewFrameDic;
 }
 
-//不同动画frame不同 shadomView的frame
 - (NSMutableDictionary*)shadomViewFrameDic{
     _shadomViewFrameDic = [NSMutableDictionary dictionaryWithDictionary:@{
              @(MenuShowAnimalNone):[NSValue valueWithCGRect:CGRectMake(0, self.menuOrignY, Menu_Width,(Menu_Height - self.menuOrignY))],
@@ -218,9 +215,11 @@
              @(MenuShowAnimalRight):[NSValue valueWithCGRect:CGRectMake(0, 0, Menu_Width, Menu_Height)],
              @(MenuShowAnimalPop):[NSValue valueWithCGRect:CGRectMake(0, 0, Menu_Width, Menu_Height)],
              @(MenuShowAnimalBoss):[NSValue valueWithCGRect:CGRectMake(0, 0, 0, 0)],
+             @(MenuShowAnimalTop):[NSValue valueWithCGRect:CGRectMake(0, 0, Menu_Width, Menu_Height)],
     }];
     return _shadomViewFrameDic;
 }
+
 - (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide withInfo:(NSDictionary*)info{
     if ([key isEqualToString:moreTableViewKey]) {
         return [info objectForKey:key];
@@ -242,9 +241,7 @@
 - (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide{
     return [self getArrWithKey:key withoutHide:hide withInfo:self.dataDic];
 }
-/**
- 配置贝塞尔曲线
- */
+
 - (UIBezierPath*)getMyDownPath{
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(0, 0)];
@@ -264,7 +261,6 @@
     return path;
 }
 
-
 - (void)closeView{}
 - (void)confirmAction:(nullable UIButton*)sender{}
 - (void)reSetAction{}
@@ -278,6 +274,7 @@
     }
     return _menuOrignY;
 }
+
 - (UIScrollView *)titleView{
     if (!_titleView) {
         _titleView = [UIScrollView new];
@@ -291,6 +288,7 @@
     }
     return _titleView;
 }
+
 - (UIView *)shadowView{
     if (!_shadowView) {
         _shadowView = [UIView new];
@@ -298,6 +296,7 @@
     }
     return _shadowView;
 }
+
 - (UIView *)dataView{
     if (!_dataView) {
         _dataView = [UIView new];
@@ -307,6 +306,7 @@
     }
     return _dataView;
 }
+
 - (UIView *)moreView{
     if (!_moreView) {
         _moreView = [UIView new];
@@ -316,6 +316,7 @@
     }
     return _moreView;
 }
+
 - (UIView *)emptyView{
     if (!_emptyView) {
         _emptyView = [UIView new];
