@@ -533,16 +533,18 @@ static NSString* const notificationRemove = @"notificationRemove";
                    }
                }
                
-               if (dropPath.tapClose&&tree.isSelected&&tree.tapClose) {
+               if (dropPath.tapClose && tree.isSelected && tree.tapClose) {
                    
                    for (WMZDropIndexPath *drop in self.dropPathArr) {
                        if (drop.section == dropPath.section) {
                            NSArray *arr = [self getArrWithKey:drop.key withoutHide:NO];
                            [arr enumerateObjectsUsingBlock:^(WMZDropTree *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                                if (obj.isSelected) {
-                                   if ([self.selectArr indexOfObject:obj]==NSNotFound) {
+                                   if ([self.selectArr indexOfObject:obj]==NSNotFound)
                                        [self.selectArr addObject:obj];
-                                   }
+                               }else{
+                                   if ([self.selectArr indexOfObject:obj] != NSNotFound)
+                                       [self.selectArr removeObject:obj];
                                }
                            }];
                        }
