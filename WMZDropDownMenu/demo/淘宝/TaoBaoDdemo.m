@@ -22,6 +22,8 @@
     MenuParam()
     .wMainRadiusSet(0)
     .wMaxWidthScaleSet(0.8)
+    .wCollectionCellTextFieldStyleSet(MenuInputStyleOne)
+    .wCollectionCellTextFieldKeyTypeSet(UIKeyboardTypeDefault)
     .wCollectionViewCellSelectTitleColorSet([UIColor redColor])
     .wMenuTitleEqualCountSet(5)
     .wCollectionViewDefaultFootViewMarginYSet(10)
@@ -71,7 +73,7 @@
         if (dropIndexPath.row == 0) return @[@"Apple/苹果",@"华为",@"vivo",@"小米",@"OPPO",@"三星"];
         if (dropIndexPath.row == 1) return @[@"包邮",@"天猫",@"淘金币抵钱",@"全球购",@"天猫国际",@"天猫奢品",@"天猫超市",@"天猫国际",@"消费品保障",@"极速发货",@"货到付款",@"7+退货"];
         if (dropIndexPath.row == 2) return @[@{@"config":@{@"lowPlaceholder":@"最低价",@"highPlaceholder":@"最高价",}}];
-        if (dropIndexPath.row == 3) return @[@"购买过的店"];
+        if (dropIndexPath.row == 3) return @[@{@"config":@{@"lowPlaceholder":@"最低价",@"highPlaceholder":@"最高价"},@"inputStyle":@(MenuInputStyleMore)}];
         if (dropIndexPath.row == 4) return @[@"512GB",@"2256GB",@"128GB",@"64GB",@"32GB",@"16GB"];
         if (dropIndexPath.row == 5) return @[@"中国大陆",@"美版",@"日版",@"港版"];
         if (dropIndexPath.row == 6) return @[@"B级95新",@"A级99新",@"C级9新",@"S级准新",@"D级8新"];
@@ -90,7 +92,7 @@
 
 - (NSInteger)menu:(WMZDropDownMenu *)menu countForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 4) {
-        if (dropIndexPath.row == 2) {
+        if (dropIndexPath.row == 2 || dropIndexPath.row == 3) {
             return 1;
         }
         return 3;
@@ -108,7 +110,7 @@
     if (dropIndexPath.section == 0) {
         return MenuUITableView;
     }else if (dropIndexPath.section == 4) {
-        if (dropIndexPath.row == 2) {
+        if (dropIndexPath.row == 2 || dropIndexPath.row == 3) {
             return MenuUICollectionRangeTextField;
         }
         return MenuUICollectionView;
@@ -131,7 +133,7 @@
 
 - (BOOL)menu:(WMZDropDownMenu *)menu showExpandAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 4) {
-        if (dropIndexPath.row>2) {
+        if (dropIndexPath.row>3) {
             return YES;
         }
     }

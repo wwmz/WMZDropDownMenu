@@ -10,7 +10,6 @@
 
 @implementation WMZDropMenuTool
 
-//设置图文位置
 + (void)TagSetImagePosition:(MenuBtnPosition)postion spacing:(CGFloat)spacing button:(UIButton*)btn {
     CGFloat imgW = btn.imageView.image.size.width;
     CGFloat imgH = btn.imageView.image.size.height;
@@ -54,7 +53,7 @@
 }
 
 
-+(CGSize)boundingRectWithSize:(NSString*)txt Font:(UIFont*) font Size:(CGSize)size{
++ (CGSize)boundingRectWithSize:(NSString*)txt Font:(UIFont*) font Size:(CGSize)size{
     CGSize _size;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1
     NSDictionary *attribute = @{NSFontAttributeName: font};
@@ -71,7 +70,6 @@
 
 
 + (void)viewPathWithColor:(UIColor *)shadowColor  PathType:(MenuShadowPathType)shadowPathType PathWidth:(CGFloat)shadowPathWidth heightScale:(CGFloat)sacle button:(UIView*)btn{
-    
     CGRect shadowRect = CGRectZero;
     CGFloat originX,originY,sizeWith,sizeHeight;
     originX = 0;
@@ -99,8 +97,7 @@
     [btn.layer addSublayer:layer];
 }
 
-//设置圆角 单边
-+(void)setView:(UIView*)view Radii:(CGSize)size RoundingCorners:(UIRectCorner)rectCorner {
++ (void)setView:(UIView*)view Radii:(CGSize)size RoundingCorners:(UIRectCorner)rectCorner {
     if (size.width == 0 && size.height == 0) return;
     //设置只有一半圆角
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:rectCorner cornerRadii:size];
@@ -110,19 +107,13 @@
     view.layer.mask = maskLayer;
 }
 
-
-/*
- * 获取当前VC
- */
-+ (UIViewController *)getCurrentVC
-{
++ (UIViewController *)getCurrentVC{
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
     return currentVC;
 }
 
-+ (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC
-{
++ (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC{
     UIViewController *currentVC;
     if ([rootVC presentedViewController]) {
         rootVC = [rootVC presentedViewController];
@@ -141,94 +132,76 @@
 
 
 @implementation WMZDropMenuAnimal
-//Boss样式移动出现
+
 void BossMoveShowAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){
     CGRect rect = view.frame;
     view.frame = CGRectMake(rect.origin.x, [UIScreen mainScreen].bounds.size.height , rect.size.width, rect.size.height);
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.frame = rect;
     } completion:^(BOOL finished) {
-        if (block) {
-            block();
-        }
+        if (block) block();
     }];
 }
-//Boss样式移动消失
+
 void BossMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){
     CGRect rect = view.frame;
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.frame = CGRectMake(rect.origin.x, [UIScreen mainScreen].bounds.size.height , rect.size.width, rect.size.height);
     } completion:^(BOOL finished) {
-        if (block) {
-            block();
-        }
+        if (block) block();
     }];
 }
 
-//垂直移动出现
 void verticalMoveShowAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){
     CGRect rect = view.frame;
     view.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 0);
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.frame = rect;
     } completion:^(BOOL finished) {
-        if (block) {
-            block();
-        }
+        if (block) block();
     }];
 }
-//垂直移移动消失
+
 void verticalMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){
     CGRect rect = view.frame;
     rect.size.height = 0;
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         view.frame = rect;
     } completion:^(BOOL finished) {
-        if (block) {
-            block();
-        }
+        if (block) block();
     }];
 }
 
-//垂直从下移动出现
 void verticalBottomMoveShowAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){        
     CGRect rect = view.frame;
     view.frame = CGRectMake(rect.origin.x, [UIScreen mainScreen].bounds.size.height , rect.size.width, rect.size.height);
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.frame = rect;
     } completion:^(BOOL finished) {
-        if (block) {
-            block();
-        }
+        if (block) block();
     }];
 }
 
-//垂直从上移动消失
 void verticalTopMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block){
     CGRect rect = view.frame;
     rect.size.height = 0;
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         view.frame = rect;
     } completion:^(BOOL finished) {
-        if (block) {
-            block();
-        }
+        if (block) block();
     }];
 }
 
-//横向移动
 void landscapeMoveShowAnimation(UIView *view ,NSTimeInterval duration,BOOL right,DropMenuAnimalBlock block){
     CGRect rect = view.frame;
     view.frame = CGRectMake(right?(rect.origin.x+rect.size.width):rect.origin.x, rect.origin.y, 0, rect.size.height);
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.frame = rect;
     } completion:^(BOOL finished) {
-        if (block) {
-            block();
-        }
+        if (block) block();
     }];
 }
-//横向移动消失
+
 void landscapeMoveHideAnimation(UIView *view ,NSTimeInterval duration,BOOL right,DropMenuAnimalBlock block){
     CGRect rect = view.frame;
     if (right) {
@@ -238,9 +211,7 @@ void landscapeMoveHideAnimation(UIView *view ,NSTimeInterval duration,BOOL right
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         view.frame = rect;
     } completion:^(BOOL finished) {
-        if (block) {
-            block();
-        }
+        if (block) block();
     }];
 }
 

@@ -8,7 +8,9 @@
 
 #import "WMZDropCollectionView.h"
 #import "WMZDropDownMenu.h"
+
 @implementation WMZDropCollectionView
+
 #pragma -mark collectionDelagete
 - (UICollectionViewCell *)collectionView:(WMZDropCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
@@ -37,6 +39,10 @@
             tree.lowPlaceholder =
             cell.lowText.placeholder =  tree.lowPlaceholder;
             cell.highText.placeholder = tree.highPlaceholder;
+            cell.highText.textAlignment = self.menu.param.wCollectionCellTextFieldAlignment;
+            cell.lowText.textAlignment = self.menu.param.wCollectionCellTextFieldAlignment;
+            cell.lowText.keyboardType = self.menu.param.wCollectionCellTextFieldKeyType;
+            cell.highText.keyboardType = self.menu.param.wCollectionCellTextFieldKeyType;
             NSString *lowStr = tree.rangeArr.count>1?[NSString stringWithFormat:@"%@",tree.rangeArr[0]]:@"";
             NSString *maxStr = tree.rangeArr.count>1?[NSString stringWithFormat:@"%@",tree.rangeArr[1]]:@"";
             if (!tree.normalRangeArr||!tree.normalRangeArr.count) {
@@ -75,6 +81,25 @@
             cell.lowText.text  = lowStr;
             cell.highText.text = maxStr;
         }
+        [cell layoutSubviews];
+        MenuInputStyle style = MenuInputStyleMore;
+        if (tree.inputStyle ) {
+            style = tree.inputStyle;
+        }else{
+            style = self.menu.param.wCollectionCellTextFieldStyle;
+        }
+        if (style == MenuInputStyleMore) {
+            cell.lowText.frame = CGRectMake(0, 0, cell.frame.size.width*0.45, cell.frame.size.height);
+            cell.lineLa.frame = CGRectMake(0, 0, cell.frame.size.width*0.1, cell.frame.size.height);
+            cell.lineLa.center = cell.contentView.center;
+            cell.highText.frame = CGRectMake(cell.frame.size.width*0.55, 0, cell.frame.size.width*0.45, cell.frame.size.height);
+            cell.highText.layer.cornerRadius = 8;
+            cell.lowText.layer.cornerRadius = 8;
+        }else{
+            cell.lowText.frame = CGRectMake(0, 0, cell.frame.size.width , cell.frame.size.height);
+            cell.highText.frame = cell.lineLa.frame = CGRectZero;
+            cell.lowText.layer.cornerRadius = 8;
+        }
         return cell;
     }else{
          //默认视图
@@ -98,8 +123,8 @@
          return cell;
     }
 }
-- (NSInteger)collectionView:(WMZDropCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+
+- (NSInteger)collectionView:(WMZDropCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
    WMZDropIndexPath *path = collectionView.dropArr[section];
     NSInteger count = [[self.menu getArrWithKey:path.key withoutHide:YES withInfo:self.menu.dataDic] count];
     if (!path.expand) {
@@ -109,9 +134,11 @@
     }
     return count;
 }
+
 - (NSInteger)numberOfSectionsInCollectionView:(WMZDropCollectionView *)collectionView{
     return self.menu.collectionView.dropArr.count;
 }
+
 - (CGSize)collectionView:(WMZDropCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
     if (path.collectionUIStyle == MenuCollectionUINormal) {
@@ -132,6 +159,7 @@
         }
     }
 }
+
 - (UICollectionReusableView *)collectionView:(WMZDropCollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     if (kind == UICollectionElementKindSectionHeader){
         if (self.menu.delegate&&[self.menu.delegate respondsToSelector:@selector(menu:headViewForUICollectionView:AtDropIndexPath:AtIndexPath:)]) {
@@ -169,25 +197,27 @@
     }
     return nil;
 }
+
 - (CGSize)collectionView:(WMZDropCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-         WMZDropIndexPath *path = collectionView.dropArr[section];
-    return CGSizeMake(self.menu.dataView.frame.size.width,path.headViewHeight );
+    WMZDropIndexPath *path = collectionView.dropArr[section];
+    return CGSizeMake(self.menu.dataView.frame.size.width,path.headViewHeight);
 }
+
 - (CGSize)collectionView:(WMZDropCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
     WMZDropIndexPath *path = collectionView.dropArr[section];
     return CGSizeMake(self.menu.dataView.frame.size.width, path.footViewHeight);
 }
+
 - (void)collectionView:(WMZDropCollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.menu.keyBoardShow) {
        [MenuWindow endEditing:YES]; return;
-    };
+    }
     //点击处理
     WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
     NSArray *arr = [self.menu getArrWithKey:path.key withoutHide:YES withInfo:self.menu.dataDic];
     [self.menu cellTap:path data:arr indexPath:indexPath];
 }
 
-//点击
 - (void)tapAction:(UITextField*)sender dropPath:(WMZDropIndexPath*)dropPath indexPath:(NSIndexPath*)indexPath data:(WMZDropTree*)tree{
     if (self.menu.delegate && [self.menu.delegate respondsToSelector:@selector(menu:didSelectRowAtDropIndexPath:dataIndexPath:data:)]) {
         tree.index = sender.tag;
@@ -198,8 +228,8 @@
 @end
 
 @implementation WMZMenuCell
--(instancetype)initWithFrame:(CGRect)frame
-{
+
+-(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
         [self.contentView addSubview:self.btn];
@@ -209,23 +239,28 @@
     }
     return self;
 }
+
 - (void)layoutSubviews{
     [super layoutSubviews];
      self.btn.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 }
+
 - (UIButton *)btn{
     if (!_btn) {
         _btn = [UIButton buttonWithType:UIButtonTypeCustom];
     }
     return _btn;
 }
+
 @end
+
 @interface WMZMenuTextFieldCell()<UITextFieldDelegate>
 
 @end
+
 @implementation WMZMenuTextFieldCell
--(instancetype)initWithFrame:(CGRect)frame
-{
+
+-(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
         [self.contentView addSubview:self.lowText];
@@ -237,27 +272,23 @@
         self.lowText.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 8)];
         self.lowText.delegate = self;
         self.highText.delegate = self;
-        self.highText.textAlignment = NSTextAlignmentCenter;
-        self.lowText.textAlignment = NSTextAlignmentCenter;
-        self.lowText.keyboardType = UIKeyboardTypeDecimalPad;
-        self.highText.keyboardType = UIKeyboardTypeDecimalPad;
+        self.lowText.returnKeyType = UIReturnKeyDone;
+        self.highText.returnKeyType = UIReturnKeyDone;
+        [self.lowText addTarget:self action:@selector(textAction:) forControlEvents:UIControlEventEditingChanged];
+        [self.highText addTarget:self action:@selector(textAction:) forControlEvents:UIControlEventEditingChanged];
     }
     return self;
 }
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    NSString *mainText = @"";
-    if ([string isEqual:@""]) {
-        if (![textField.text isEqualToString:@""]) {
-            mainText = [textField.text substringToIndex:[textField.text length] - 1];
-        }else{
-            mainText = textField.text;
-        }
-    }else{
-        mainText = [NSString stringWithFormat:@"%@%@",textField.text,string];
-    }
-    
-    self.myBlock(textField,mainText);
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
     return YES;
+}
+
+- (void)textAction:(UITextField*)textField{
+    if (self.myBlock) {
+        self.myBlock(textField,textField.text);
+    }
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
@@ -268,15 +299,7 @@
     }
     return self.tree.canEdit;
 }
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    self.lowText.frame = CGRectMake(0, 0, self.frame.size.width*0.45, self.frame.size.height);
-    self.lowText.layer.cornerRadius = 8;
-    self.lineLa.frame = CGRectMake(0, 0, self.frame.size.width*0.1, self.frame.size.height);
-    self.lineLa.center = self.contentView.center;
-    self.highText.frame = CGRectMake(self.frame.size.width*0.55, 0, self.frame.size.width*0.45, self.frame.size.height);
-    self.highText.layer.cornerRadius = 8;
-}
+
 - (UITextField *)lowText{
     if (!_lowText) {
         _lowText = [UITextField new];
@@ -285,6 +308,7 @@
     }
     return _lowText;
 }
+
 - (UITextField *)highText{
     if (!_highText) {
         _highText = [UITextField new];
@@ -293,6 +317,7 @@
     }
     return _highText;
 }
+
 - (UILabel *)lineLa{
     if (!_lineLa) {
         _lineLa = [UILabel new];
@@ -301,18 +326,25 @@
     }
     return _lineLa;
 }
+
 @end
 
 @implementation WMZDropCollectionViewHeadView
+
 - (instancetype)initWithFrame:(CGRect)frame{
     if ([super initWithFrame:frame]) {
         [self addSubview:self.textLa];
-        self.textLa.frame = CGRectMake(Menu_GetWNum(30), 0, frame.size.width*0.85, frame.size.height);
         [self addSubview:self.accessTypeBtn];
-        self.accessTypeBtn.frame = CGRectMake(CGRectGetMaxX(self.textLa.frame) , 0, 30, frame.size.height);
     }
     return self;
 }
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    self.textLa.frame = CGRectMake(Menu_GetWNum(30), 0, self.frame.size.width * 0.85, self.frame.size.height);
+    self.accessTypeBtn.frame = CGRectMake(CGRectGetMaxX(self.textLa.frame) , 0, 30, self.frame.size.height);
+}
+
 - (UILabel *)textLa{
     if (!_textLa) {
         _textLa = [UILabel new];
@@ -322,18 +354,22 @@
     }
     return _textLa;
 }
+
 - (UIButton *)accessTypeBtn{
     if (!_accessTypeBtn) {
         _accessTypeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     }
     return _accessTypeBtn;
 }
+
 @end
 
 @implementation WMZDropCollectionViewFootView
+
 @end
 
 @implementation WMZDropConfirmView
+
 - (instancetype)init{
     if(self = [super init]){
         [self addSubview:self.resetBtn];
@@ -347,6 +383,7 @@
     }
     return self;
 }
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.resetBtn.frame = [self.resetFrame CGRectValue];
@@ -385,9 +422,11 @@
     }
     return _confirmBtn;
 }
+
 @end
 
 @implementation WMZDropBossHeadView
+
 - (instancetype)init{
     if(self = [super init]){
         [self addSubview:self.leftBtn];
@@ -404,28 +443,128 @@
     }
     return self;
 }
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.leftBtn.frame = CGRectMake(15, 0, self.frame.size.width*0.2, self.frame.size.height);
     self.titleLa.frame = CGRectMake(self.frame.size.width*0.25, 0, self.frame.size.width*0.5, self.frame.size.height);
     self.rightbtn.frame = CGRectMake(CGRectGetMaxX(self.titleLa.frame)+0.05, 0, self.frame.size.width*0.2, self.frame.size.height);
 }
+
 - (UIButton *)leftBtn{
     if (!_leftBtn) {
         _leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     }
     return _leftBtn;
 }
+
 - (UIButton *)rightbtn{
     if (!_rightbtn) {
         _rightbtn = [UIButton buttonWithType:UIButtonTypeCustom];
     }
     return _rightbtn;
 }
+
 - (UILabel *)titleLa{
     if (!_titleLa) {
         _titleLa = [UILabel new];
     }
     return _titleLa;
 }
+
+@end
+
+@interface WMZDropMenuCollectionLayout(){
+    CGFloat _sumCellWidth ;
+}
+@end
+
+@implementation WMZDropMenuCollectionLayout
+
+-(instancetype)initWithType:(MenuCellAlignType)cellType betweenOfCell:(CGFloat)betweenOfCell{
+    self = [super init];
+    if (self){
+        _betweenOfCell = betweenOfCell;
+        _cellType = cellType;
+    }
+    return self;
+}
+
+- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
+    NSArray * layoutAttributes_t = [super layoutAttributesForElementsInRect:rect];
+    NSArray * layoutAttributes = [[NSArray alloc]initWithArray:layoutAttributes_t copyItems:YES];
+    NSMutableArray * layoutAttributesTemp = [[NSMutableArray alloc]init];
+    for (NSUInteger index = 0; index < layoutAttributes.count ; index++) {
+        
+        UICollectionViewLayoutAttributes *currentAttr = layoutAttributes[index];
+        UICollectionViewLayoutAttributes *previousAttr = index == 0 ? nil : layoutAttributes[index-1];
+        UICollectionViewLayoutAttributes *nextAttr = index + 1 == layoutAttributes.count ?
+        nil : layoutAttributes[index+1];
+        [layoutAttributesTemp addObject:currentAttr];
+        _sumCellWidth += currentAttr.frame.size.width;
+        CGFloat previousY = previousAttr == nil ? 0 : CGRectGetMaxY(previousAttr.frame);
+        CGFloat currentY = CGRectGetMaxY(currentAttr.frame);
+        CGFloat nextY = nextAttr == nil ? 0 : CGRectGetMaxY(nextAttr.frame);
+        if (currentY != previousY && currentY != nextY){
+            if ([currentAttr.representedElementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+                [layoutAttributesTemp removeAllObjects];
+                _sumCellWidth = 0.0;
+            }else if ([currentAttr.representedElementKind isEqualToString:UICollectionElementKindSectionFooter]){
+                [layoutAttributesTemp removeAllObjects];
+                _sumCellWidth = 0.0;
+            }else{
+                [self setCellFrameWith:layoutAttributesTemp];
+            }
+        }
+        else if( currentY != nextY) {
+            [self setCellFrameWith:layoutAttributesTemp];
+        }
+    }
+    return layoutAttributes;
+}
+
+-(void)setCellFrameWith:(NSMutableArray*)layoutAttributes{
+    CGFloat nowWidth = 0.0;
+    switch (_cellType) {
+        case MenuCellAlignWithLeft:{
+            nowWidth = self.sectionInset.left;
+            for (UICollectionViewLayoutAttributes * attributes in layoutAttributes) {
+                CGRect nowFrame = attributes.frame;
+                nowFrame.origin.x = nowWidth;
+                attributes.frame = nowFrame;
+                nowWidth += nowFrame.size.width + self.betweenOfCell;
+            }
+            _sumCellWidth = 0.0;
+            [layoutAttributes removeAllObjects];
+            break;
+        }
+        case MenuCellAlignWithCenter:{
+            nowWidth = (self.collectionView.frame.size.width - _sumCellWidth - ((layoutAttributes.count - 1) * _betweenOfCell)) / 2;
+            for (UICollectionViewLayoutAttributes * attributes in layoutAttributes) {
+                CGRect nowFrame = attributes.frame;
+                nowFrame.origin.x = nowWidth;
+                attributes.frame = nowFrame;
+                nowWidth += nowFrame.size.width + self.betweenOfCell;
+            }
+            _sumCellWidth = 0.0;
+            [layoutAttributes removeAllObjects];
+            break;
+        }
+            
+        case MenuCellAlignWithRight:{
+            nowWidth = self.collectionView.frame.size.width - self.sectionInset.right;
+            for (NSInteger index = layoutAttributes.count - 1 ; index >= 0 ; index-- ) {
+                UICollectionViewLayoutAttributes * attributes = layoutAttributes[index];
+                CGRect nowFrame = attributes.frame;
+                nowFrame.origin.x = nowWidth - nowFrame.size.width;
+                attributes.frame = nowFrame;
+                nowWidth = nowWidth - nowFrame.size.width - _betweenOfCell;
+            }
+            _sumCellWidth = 0.0;
+            [layoutAttributes removeAllObjects];
+            break;
+        }
+    }
+}
+
 @end

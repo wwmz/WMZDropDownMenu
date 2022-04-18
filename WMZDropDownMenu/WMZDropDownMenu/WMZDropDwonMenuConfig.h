@@ -95,13 +95,10 @@ else \
 #define Menu_GetWNum(A)   (A)/2.0*(Menu_Width/375)
 #define MenuColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define MenuK1px (1 / UIScreen.mainScreen.scale)
-
 #define MenuWeakSelf(obj) __weak typeof(obj) weakObject = obj;
 #define MenuStrongSelf(obj) __strong typeof(obj) strongObject = weakObject;
 
-
 #define footHeadHeight 35
-#define menuAnimalTime 0.3
 #define moreTableViewKey @"moreTableViewKey"
 #define menuMainClor [UIColor whiteColor]
 

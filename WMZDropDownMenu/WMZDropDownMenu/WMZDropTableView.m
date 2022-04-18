@@ -8,6 +8,7 @@
 
 #import "WMZDropTableView.h"
 #import "WMZDropDownMenu.h"
+
 @implementation WMZDropTableView
 
 #pragma -mark tablViewDeleagte
@@ -49,7 +50,8 @@
     //自定义
     if (self.menu.delegate&&[self.menu.delegate respondsToSelector:@selector(menu:cellForUITableView:AtIndexPath:dataForIndexPath:)]) {
         UITableViewCell *cell = [self.menu.delegate menu:self.menu cellForUITableView:tableView AtIndexPath:indexPath dataForIndexPath:tree];
-        if (cell&&[cell isKindOfClass:[UITableViewCell class]]) {
+        if (cell&&
+            [cell isKindOfClass:[UITableViewCell class]]) {
             return cell;
         }
     }
@@ -58,7 +60,7 @@
         cell = [[WMZDropTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([WMZDropTableViewCell class])];
     }
     if ([tree isKindOfClass:[WMZDropTree class]]) {
-        UIImageView *image = [[UIImageView alloc]initWithImage:[UIImage bundleImage:@"menu_check"]];
+        UIImageView *image = [[UIImageView alloc]initWithImage:self.menu.param.wCellCheckImage];
         image.frame = CGRectMake(0, 0, 20, 20);
         image.hidden = !tree.isSelected;
         cell.accessoryView = self.menu.param.wCellSelectShowCheck?image:nil;
@@ -84,18 +86,21 @@
     }
     return cell;
 }
+
 - (CGFloat)tableView:(WMZDropTableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return tableView.dropIndex.footViewHeight == 0?0.01:tableView.dropIndex.footViewHeight;
+    return tableView.dropIndex.footViewHeight == 0 ? 0.01 : tableView.dropIndex.footViewHeight;
 }
+
 - (CGFloat)tableView:(WMZDropTableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return tableView.dropIndex.headViewHeight == 0?0.01:tableView.dropIndex.headViewHeight;
+    NSLog(@"%f",tableView.dropIndex.headViewHeight);
+    return tableView.dropIndex.headViewHeight == 0 ? 0.01 : tableView.dropIndex.headViewHeight;
 }
+
 - (UIView*)tableView:(WMZDropTableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (self.menu.delegate&&[self.menu.delegate respondsToSelector:@selector(menu:footViewForUITableView:AtDropIndexPath:)]) {
         UITableViewHeaderFooterView *footView = [self.menu.delegate menu:self.menu footViewForUITableView:tableView AtDropIndexPath:tableView.dropIndex];
-        if (footView&&[footView isKindOfClass:[UITableViewHeaderFooterView class]]) {
+        if (footView&&[footView isKindOfClass:[UITableViewHeaderFooterView class]])
             return footView;
-        }
     }
     WMZDropTableViewFootView *footView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([WMZDropTableViewFootView class])];
     if (self.menu.delegate && [self.menu.delegate respondsToSelector:@selector(menu:titleForFootViewAtDropIndexPath:)]) {
@@ -103,14 +108,14 @@
         footView.textLa.text = title;
     }
     return footView;
-    
 }
+
 - (UIView*)tableView:(WMZDropTableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (self.menu.delegate&&[self.menu.delegate respondsToSelector:@selector(menu:headViewForUITableView:AtDropIndexPath:)]) {
            UITableViewHeaderFooterView *headView = [self.menu.delegate menu:self.menu headViewForUITableView:tableView AtDropIndexPath:tableView.dropIndex];
-        if (headView&&[headView isKindOfClass:[UITableViewHeaderFooterView class]]) {
+        if (headView &&
+            [headView isKindOfClass:[UITableViewHeaderFooterView class]])
             return headView;
-        }
     }
     WMZDropTableViewHeadView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([WMZDropTableViewHeadView class])];
     
@@ -120,11 +125,13 @@
     }
     return headView;
 }
+
 - (CGFloat)tableView:(WMZDropTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *data = [self.menu getArrWithKey:tableView.dropIndex.key withoutHide:YES withInfo:self.menu.dataDic];
     WMZDropTree *tree = data[indexPath.row];
     return tree.cellHeight;
 }
+
 - (void)tableView:(WMZDropTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.menu.keyBoardShow) {
        [MenuWindow endEditing:YES]; return;
@@ -133,21 +140,24 @@
     //点击处理
     [self.menu cellTap:tableView.dropIndex data:data indexPath:indexPath];
 }
+
 @end
 
 
 @implementation WMZDropTableViewHeadView
+
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         [self.contentView addSubview:self.textLa];
     }
     return self;
 }
+
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.textLa.frame = CGRectMake(10, 0, self.frame.size.width-20, self.frame.size.height);
-    
+    self.textLa.frame = CGRectMake(10, 0, self.contentView.frame.size.width - 20, self.contentView.frame.size.height);
 }
+
 - (UILabel *)textLa{
     if (!_textLa) {
         _textLa = [UILabel new];
@@ -157,13 +167,16 @@
     }
     return _textLa;
 }
+
 @end
 
 @implementation WMZDropTableViewFootView
+
 @end
 
 
 @implementation WMZDropTableViewCell
+
 @end
 
 

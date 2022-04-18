@@ -105,4 +105,12 @@ typedef enum : NSUInteger{
     MenuCellAlignWithRight
 }MenuCellAlignType;
 
+/// inputText
+typedef enum : NSUInteger{
+    /// 两个
+    MenuInputStyleMore = 1,
+    /// 单个
+    MenuInputStyleOne,
+}MenuInputStyle;
+
 #endif /* WMZDropMenuEnum_h */

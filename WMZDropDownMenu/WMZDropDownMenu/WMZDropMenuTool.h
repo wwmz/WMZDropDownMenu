@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// 设置阴影
@@ -20,26 +21,25 @@ typedef enum :NSInteger{
 }MenuShadowPathType;
 
 typedef enum :NSInteger{
-    MenuBtnPositionLeft     = 1,            //图片在左，文字在右，默认
-    MenuBtnPositionRight    = 2,            //图片在右，文字在左
-    MenuBtnPositionTop      = 3,            //图片在上，文字在下
-    MenuBtnPositionBottom   = 4,            //图片在下，文字在上
+    ///图片在左，文字在右，默认
+    MenuBtnPositionLeft     = 1,
+    ///图片在右，文字在左
+    MenuBtnPositionRight    = 2,
+    ///图片在上，文字在下
+    MenuBtnPositionTop      = 3,
+    ///图片在下，文字在上
+    MenuBtnPositionBottom   = 4,
 }MenuBtnPosition;
 
 @interface WMZDropMenuTool : NSObject
-
 /// 设置图文位置
 + (void)TagSetImagePosition:(MenuBtnPosition)postion spacing:(CGFloat)spacing button:(UIButton*)btn;
-
 /// 计算按钮字体宽高
 +(CGSize)boundingRectWithSize:(NSString*)txt Font:(UIFont*) font Size:(CGSize)size;
-
 /// 设置单边框
 + (void)viewPathWithColor:(UIColor *)shadowColor  PathType:(MenuShadowPathType)shadowPathType PathWidth:(CGFloat)shadowPathWidth heightScale:(CGFloat)sacle button:(UIView*)btn;
-
 /// 设置圆角 单边
 +(void)setView:(UIView*)view Radii:(CGSize)size RoundingCorners:(UIRectCorner)rectCorner;
-
 /// 获取当前VC
 + (UIViewController *)getCurrentVC;
 
@@ -65,14 +65,19 @@ void BossMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimal
 void verticalBottomMoveShowAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block);
 /// 垂直从上移动消失
 void verticalTopMoveHideAnimation (UIView *view ,NSTimeInterval duration,DropMenuAnimalBlock block);
+
 @end
 
 /// 渐变色
 typedef enum :NSInteger{
-    MenuGradientChangeDirectionLevel,                    //水平方向渐变
-    MenuGradientChangeDirectionVertical,                 //垂直方向渐变
-    MenuGradientChangeDirectionUpwardDiagonalLine,       //主对角线方向渐变
-    MenuGradientChangeDirectionDownDiagonalLine,         //副对角线方向渐变
+    ///水平方向渐变
+    MenuGradientChangeDirectionLevel,
+    ///垂直方向渐变
+    MenuGradientChangeDirectionVertical,
+    ///主对角线方向渐变
+    MenuGradientChangeDirectionUpwardDiagonalLine,
+    ///副对角线方向渐变
+    MenuGradientChangeDirectionDownDiagonalLine,         
 }MenuGradientChangeDirection;
 
 @interface UIColor (MenuGradientColor)
@@ -87,5 +92,9 @@ typedef enum :NSInteger{
 @interface UIImage (MenuImageName)
 /// 从bundle获取图片
 + (UIImage*)bundleImage:(NSString*)name;
+
 @end
+
 NS_ASSUME_NONNULL_END
+
+

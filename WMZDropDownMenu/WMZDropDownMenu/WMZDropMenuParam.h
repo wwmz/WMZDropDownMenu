@@ -12,17 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDropMenuParam : NSObject
 
-//初始化
+/// 初始化
 WMZDropMenuParam * MenuParam(void);
 
 /// 如果弹出位置不准确自行设置此属性 default CGRectGetMaxY(menu.frame)
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wPopOraignY)
-
-
-
-/// 以下三个为新增属性 适配放在tableview/collectionview上的情况
-/// 所在父视图的类型 放在tableview/collectionview/scrollview上 可以传此属性
-/// WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, MenuInView,             wTapViewType)
 
 /// 标题视图是否显示边框 default NO （显示标题右边框）
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wBorderShow)
@@ -40,6 +34,11 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,    
 WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, UIFont*,          wCellTitleFont)
 /// cell selectFont 15.0f
 WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, UIFont*,          wCellSelectTitleFont)
+/// cell选中的图片 default menu_check
+WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, UIImage* ,        wCellCheckImage)
+
+/// 动画时间 默认0.25
+WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wMenuDurtion)
 
 /// 固定弹出显示数据层的高度  default 自动计算~>最大为屏幕高度的0.4倍
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wFixDataViewHeight)
@@ -70,7 +69,9 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,       
 
 
 /// tableview的颜色 default @[FFFFFF,F6F7FA,EBECF0,FFFFFF]
-WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, NSArray* ,        wTableViewColor)
+WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, NSArray<UIColor*>* ,        wTableViewColor)
+/// tableview的宽度 default nil 等宽
+WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, NSArray<NSNumber*>* ,        wTableViewWidth)
 /// cell文本居中样式 default left
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSTextAlignment,  wTextAlignment)
 /// tableViewCell 选中显示打钩图片 default YES
@@ -80,7 +81,7 @@ WMZMenuStatementAndPropSetFuncStatement(copy,     WMZDropMenuParam, MenuCustomLi
 
 
 
-/// 注册自定义的collectionViewCell  如果使用了自定义collectionView 必填否则会崩溃
+/// 注册自定义的collectionViewCell  如果使用了自定义collectionView 必填否则会崩溃 传入Class则使用xib String则使用常规
 WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, NSArray*,        wReginerCollectionCells)
 /// 注册自定义的collectionViewHeadView  如果使用了自定义collectionViewHeadView 必填否则会崩溃
 WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, NSArray*,        wReginerCollectionHeadViews)
@@ -106,8 +107,12 @@ WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSInteger,  
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,         wCollectionViewDefaultFootViewMarginY)
 /// colletionViewFootView 距离顶部的距离 默认0
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,         wCollectionViewDefaultFootViewPaddingY)
-
-
+///键盘 default UIKeyboardTypeDecimalPad
+WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, UIKeyboardType,         wCollectionCellTextFieldKeyType)
+///type为输入框的时候 的textFieldAlign default Center
+WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, NSTextAlignment,         wCollectionCellTextFieldAlignment)
+///type为输入框的时候 样式 defaylt more
+WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, MenuInputStyle,         wCollectionCellTextFieldStyle)
 @end
 
 NS_ASSUME_NONNULL_END

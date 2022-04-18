@@ -251,6 +251,7 @@
     [path closePath];
     return path;
 }
+
 - (UIBezierPath*)getMyDownRightPath{
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(0, 0)];
@@ -354,10 +355,6 @@
 
 - (void)setDelegate:(id<WMZDropMenuDelegate>)delegate{
     _delegate = delegate;
-}
-
-- (void)dealloc{
-   
 }
 
 @end

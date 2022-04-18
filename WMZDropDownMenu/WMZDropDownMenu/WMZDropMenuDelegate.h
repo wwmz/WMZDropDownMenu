@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "WMZDropMenuEnum.h"
-@class WMZDropDownMenu,WMZDropIndexPath,WMZDropDwonMenuConfig,WMZDropTree,WMZDropTableView,WMZDropCollectionView,WMZDropConfirmView;
+
+@class WMZDropDownMenu,WMZDropIndexPath,WMZDropDwonMenuConfig,
+       WMZDropTree,WMZDropTableView,WMZDropCollectionView,
+       WMZDropConfirmView,WMZDropMenuBtn;
 NS_ASSUME_NONNULL_BEGIN
 @protocol WMZDropMenuDelegate <NSObject>
 #pragma -mark data相关代理
@@ -58,29 +61,29 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma -mark cell相关代理
 
 /// 自定义tableviewCell内容 默认WMZDropTableViewCell 如果要使用默认的cell返回 nil
-- (UITableViewCell*)menu:(WMZDropDownMenu *)menu cellForUITableView:(WMZDropTableView*)tableView AtIndexPath:(NSIndexPath*)indexpath dataForIndexPath:(WMZDropTree*)model;
+- (nullable UITableViewCell*)menu:(WMZDropDownMenu *)menu cellForUITableView:(WMZDropTableView*)tableView AtIndexPath:(NSIndexPath*)indexpath dataForIndexPath:(WMZDropTree*)model;
 
 /// 自定义tableView headView
-- (UITableViewHeaderFooterView*)menu:(WMZDropDownMenu *)menu headViewForUITableView:(WMZDropTableView*)tableView AtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
+- (nullable UITableViewHeaderFooterView*)menu:(WMZDropDownMenu *)menu headViewForUITableView:(WMZDropTableView*)tableView AtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
 
 /// 自定义tableView footView
-- (UITableViewHeaderFooterView*)menu:(WMZDropDownMenu *)menu footViewForUITableView:(WMZDropTableView*)tableView AtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
+- (nullable UITableViewHeaderFooterView*)menu:(WMZDropDownMenu *)menu footViewForUITableView:(WMZDropTableView*)tableView AtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
 
 /// 自定义collectionViewCell内容
-- (UICollectionViewCell*)menu:(WMZDropDownMenu *)menu cellForUICollectionView:(WMZDropCollectionView*)collectionView
+- (nullable UICollectionViewCell*)menu:(WMZDropDownMenu *)menu cellForUICollectionView:(WMZDropCollectionView*)collectionView
     AtDropIndexPath:(WMZDropIndexPath*)dropIndexPath AtIndexPath:(NSIndexPath*)indexpath dataForIndexPath:(WMZDropTree*)model;
 
 /// 自定义collectionView headView
-- (UICollectionReusableView*)menu:(WMZDropDownMenu *)menu headViewForUICollectionView:(WMZDropCollectionView*)collectionView AtDropIndexPath:(WMZDropIndexPath*)dropIndexPath AtIndexPath:(NSIndexPath*)indexpath;
+- (nullable UICollectionReusableView*)menu:(WMZDropDownMenu *)menu headViewForUICollectionView:(WMZDropCollectionView*)collectionView AtDropIndexPath:(WMZDropIndexPath*)dropIndexPath AtIndexPath:(NSIndexPath*)indexpath;
 
 /// 自定义collectionView footView
-- (UICollectionReusableView*)menu:(WMZDropDownMenu *)menu footViewForUICollectionView:(WMZDropCollectionView*)collectionView AtDropIndexPath:(WMZDropIndexPath*)dropIndexPath AtIndexPath:(NSIndexPath*)indexpath;
+- (nullable UICollectionReusableView*)menu:(WMZDropDownMenu *)menu footViewForUICollectionView:(WMZDropCollectionView*)collectionView AtDropIndexPath:(WMZDropIndexPath*)dropIndexPath AtIndexPath:(NSIndexPath*)indexpath;
 
 /// headView标题
-- (NSString*)menu:(WMZDropDownMenu *)menu titleForHeadViewAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
+- (nullable NSString*)menu:(WMZDropDownMenu *)menu titleForHeadViewAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
 
 /// footView标题
-- (NSString*)menu:(WMZDropDownMenu *)menu titleForFootViewAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
+- (nullable NSString*)menu:(WMZDropDownMenu *)menu titleForFootViewAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath;
 
 /// 返回WMZDropIndexPath每行 每列 indexpath的cell的高度 默认35
 - (CGFloat)menu:(WMZDropDownMenu *)menu heightAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath AtIndexPath:(NSIndexPath*)indexpath;
@@ -93,10 +96,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma -mark 自定义用户交互的每行的头尾视图
 /// 自定义每行全局头部视图 多用于交互事件 传入[UIView new]为不需要此头部 传入nil为默认的头部
-- (UIView*)menu:(WMZDropDownMenu *)menu userInteractionHeadViewInSection:(NSInteger)section;
+- (nullable UIView*)menu:(WMZDropDownMenu *)menu userInteractionHeadViewInSection:(NSInteger)section;
 
 /// 自定义每行全局尾部视图 多用于交互事件 传入[UIView new]为不需要此尾部 传入nil为默认的尾部
-- (UIView*)menu:(WMZDropDownMenu *)menu userInteractionFootViewInSection:(NSInteger)section;
+- (nullable UIView*)menu:(WMZDropDownMenu *)menu userInteractionFootViewInSection:(NSInteger)section;
 
 #pragma -mark 样式动画相关代理
 /// 返回WMZDropIndexPath每行 每列的UI样式  默认MenuUITableView
@@ -166,12 +169,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 自定义标题按钮视图  返回配置 参数说明
 /// @return offset       按钮的间距
 ///          y            按钮的y坐标   自动会居中
-- (NSDictionary*)menu:(WMZDropDownMenu *)menu  customTitleInSection:(NSInteger)section withTitleBtn:(WMZDropMenuBtn*)menuBtn;
+- (nullable NSDictionary*)menu:(WMZDropDownMenu *)menu  customTitleInSection:(NSInteger)section withTitleBtn:(WMZDropMenuBtn*)menuBtn;
 
 /// 自定义修改默认collectionView尾部视图
 - (void)menu:(WMZDropDownMenu *)menu  customDefauultCollectionFootView:(WMZDropConfirmView*)confirmView;
 
-///监听关闭视图 可做修改标题文本和颜色的操作
+/// 监听关闭视图 可做修改标题文本和颜色的操作
 - (void)menu:(WMZDropDownMenu *)menu closeWithBtn:(WMZDropMenuBtn*)selectBtn   index:(NSInteger )index;
 
 /// 监听打开视图 可做修改标题文本和颜色的操作

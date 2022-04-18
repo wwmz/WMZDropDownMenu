@@ -10,11 +10,13 @@
 //
 
 #import "WMZDropMenuParam.h"
+#import "WMZDropMenuTool.h"
 
 @implementation WMZDropMenuParam
 WMZDropMenuParam * MenuParam(void){
     return  [WMZDropMenuParam  new];
 }
+WMZMenuSetFuncImplementation(WMZDropMenuParam, UIImage* ,          wCellCheckImage)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, UIFont*,            wCellTitleFont)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, UIFont*,            wCellSelectTitleFont)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, UIColor*,           wShadowColor)
@@ -23,7 +25,8 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, UIColor*,           wCollectionVi
 WMZMenuSetFuncImplementation(WMZDropMenuParam, UIColor*,           wCollectionViewCellSelectBgColor)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, UIColor*,           wCollectionViewCellSelectTitleColor)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, NSTextAlignment,    wTextAlignment)
-WMZMenuSetFuncImplementation(WMZDropMenuParam, NSArray* ,          wTableViewColor)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, NSArray<UIColor*>* ,wTableViewColor)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, NSArray<NSNumber*>*,wTableViewWidth)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, NSArray*,           wReginerCollectionCells)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, NSArray*,           wReginerCollectionHeadViews)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, NSArray*,           wReginerCollectionFootViews)
@@ -36,6 +39,7 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wMaxWidthScal
 WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wMaxHeightScale)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wPopViewWidth)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wFixBtnWidth)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wMenuDurtion)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wCollectionViewDefaultFootViewMarginY)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wCollectionViewDefaultFootViewPaddingY)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, CGFloat,            wPopOraignY)
@@ -53,6 +57,9 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wBorderShow)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wCellSelectShowCheck)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wMenuLine)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wBorderUpDownShow)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, UIKeyboardType,     wCollectionCellTextFieldKeyType)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, NSTextAlignment,    wCollectionCellTextFieldAlignment)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, MenuInputStyle,     wCollectionCellTextFieldStyle)
 - (instancetype)init{
     if (self = [super init]) {
         _wMenuTitleSpace = 2;
@@ -78,6 +85,11 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wBorderUpDown
         _wCellSelectShowCheck = YES;
         _wCellTitleFont = [UIFont systemFontOfSize:15.0f];
         _wCellSelectTitleFont = [UIFont systemFontOfSize:15.0f];
+        _wCellCheckImage = [UIImage bundleImage:@"menu_check"];
+        _wMenuDurtion = 0.25;
+        _wCollectionCellTextFieldKeyType = UIKeyboardTypeDecimalPad;
+        _wCollectionCellTextFieldAlignment = NSTextAlignmentCenter;
+        _wCollectionCellTextFieldStyle = MenuInputStyleMore;
     }
     return self;
 }

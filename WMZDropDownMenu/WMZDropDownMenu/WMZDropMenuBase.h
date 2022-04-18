@@ -7,14 +7,14 @@
 //
 
 #import "WMZDropMenuParam.h"
-#import "WMZDropMenuBtn.h"
 #import "WMZDropMenuDelegate.h"
 #import "WMZDropTableView.h"
 #import "WMZDropCollectionView.h"
 #import "Aspects.h"
-#import "WMZDropMenuCollectionLayout.h"
+#import "WMZDropMenuBtn.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 @interface WMZDropMenuBase : UIView
 /// 配置
 @property (nonatomic, strong) WMZDropMenuParam *param;
@@ -103,12 +103,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)hideAnimal:(MenuHideAnimalStyle)animalStyle  view:(UIView*)view durtion:(NSTimeInterval)durtion block:(DropMenuAnimalBlock)block;
 /// 配置贝塞尔曲线
 - (UIBezierPath*)getMyDownPath;
+
 - (UIBezierPath*)getMyDownRightPath;
 
 - (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide withInfo:(NSDictionary*)info;
+
 - (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide;
 /// 点击选中方法
 - (void)cellTap:(WMZDropIndexPath*)dropPath data:(NSArray*)arr indexPath:(NSIndexPath*)indexPath;
+
 @end
 
 NS_ASSUME_NONNULL_END

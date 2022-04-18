@@ -10,6 +10,7 @@
 //
 
 #import "ShowDemo.h"
+#import "XibCollectionCell.h"
 @interface ShowDemo ()<WMZDropMenuDelegate>
 
 @end
@@ -47,7 +48,7 @@
     //显示标题选中下划线
     .wMenuLineSet(NO)
     //注册自定义collectionViewCell 类名 如果使用了自定义collectionView 必填否则会崩溃
-    .wReginerCollectionCellsSet(@[@"ViewCustomCollectionViewCell"])
+    .wReginerCollectionCellsSet(@[@"ViewCustomCollectionViewCell",XibCollectionCell.class])
     //注册自定义的collectionViewHeadView  如果使用了自定义collectionViewHeadView 必填否则会崩溃
     .wReginerCollectionHeadViewsSet(@[@"CollectionViewCustomHeadView"])
     //注册自定义的collectionViewFoootView  如果使用了自定义collectionViewFoootView 必填否则会崩溃
@@ -219,6 +220,10 @@
         ViewCustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([ViewCustomCollectionViewCell class]) forIndexPath:indexpath];
         cell.textLa.text = model.name;
         cell.textLa.textColor = model.isSelected?[UIColor orangeColor]:[UIColor blackColor];
+        return cell;
+    }
+    else if (dropIndexPath.section == 3 && dropIndexPath.row ==1 && indexpath.row == 3) {
+        XibCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([XibCollectionCell class]) forIndexPath:indexpath];
         return cell;
     }
     //返回默认的
@@ -487,22 +492,6 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @implementation ViewCustomCell

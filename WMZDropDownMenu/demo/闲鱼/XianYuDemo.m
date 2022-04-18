@@ -22,17 +22,19 @@
 
     WMZDropMenuParam *param =
     MenuParam()
-    //自定义弹出视图frame
+    ///自定义弹出视图frame
 //    .wCustomDataViewRectSet(^CGRect(CGRect currentRect) {
 //        currentRect.size.width = Menu_Width*0.8;
 //        currentRect.origin.x = 0.1*Menu_Width;
 //        return currentRect;
 //    })
-    //自定义弹出阴影frame
+//    ///自定义弹出阴影frame
 //    .wCustomShadomViewRectSet(^CGRect(CGRect currentRect) {
 //        return currentRect;
 //    })
     .wMainRadiusSet(0)
+    ///默认 平分 自定义宽度
+    .wTableViewWidthSet(@[@(0.3),@(0.35),@(0.35)])
     .wCollectionViewCellSelectBgColorSet(MenuColor(0xfff2f0))
     .wCollectionViewCellSelectTitleColorSet([UIColor orangeColor]);
     
@@ -226,9 +228,6 @@
 }
 
 @end
-
-
-
 
 
 

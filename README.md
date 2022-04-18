@@ -1,4 +1,8 @@
-# WMZDropDownMenu (pod 更新至1.2.0)
+# WMZDropDownMenu 
+
+ [![Platform](https://img.shields.io/badge/platform-iOS-red.svg)](https://developer.apple.com/iphone/index.action) 
+ [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/WMZDropDownMenu.svg)](https://img.shields.io/cocoapods/v/WMZDropDownMenu.svg)
+ [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://mit-license.org) 
 
 实现功能
 ==============
@@ -18,7 +22,7 @@
 - 链式实现所有配置的自定义修改
 (总之，你想要的基本都有,不想要的也有)
 
-
+### 下一步 优化使用，增加自定义View的支持 --- ing
 
 #目前已经用这控件实现的效果图
 ⚠️⚠️⚠️⚠️无须改变源码 只需要调用我的代理组合功能即可⚠️⚠️⚠️⚠️
@@ -26,7 +30,6 @@
 ### 注意：如果弹出的视图的y值不准确 你可以手动设置menu的menuOrignY属性 
 ### 也可以设置wPopOraignY属性 
 ### 也可以在新增的代理  - (CGFloat)popFrameY; 设置 （1.0.8后才有）
-
 
 | app筛选菜单                | 图片                       |
 |-----------------------|-----------------------------------------------------|
@@ -290,6 +293,7 @@
 ### 依赖
 Aspects（注意检查下项目有没有已经用过这个AOP库哈,有就删掉一个就行了 一个.h一个.m文件哈）文件比较少 就懒得pod引用其他库了。~ ~直接拉在里面的 
 
+
 安装
 ==============
 
@@ -309,23 +313,21 @@ Aspects（注意检查下项目有没有已经用过这个AOP库哈,有就删掉
 
 
 ### 更新日记
-- 20211015 cocopods 更新至1.2.0  适配ios15 
-- 20210519 cocopods 更新至1.1.6  修复#39
-- 20210511 cocopods 更新至1.1.5  修复快速点击的问题
-- 20210422 cocopods 更新至1.1.4  修复若干问题,去除警告
-- 20201217 cocopods 更新至1.1.3  新增自适应cell宽度样式 新增手动触发选中
-- 20201023 cocopods 更新至1.1.2  新增自定义更新标题
-- 20200901 cocopods 更新至1.1.1  
-- 20200801 cocopods 更新至1.1.0  新增重置代理/修复bug
-- 20200801 cocopods 更新至1.0.9  新增自定义修改弹出视图frame的属性
-- 20200716 cocopods 更新至1.0.8  新增动态弹出视图位置的代理/新增弹出视图放置的视图的代理(collectionview/scrollView)
-- 20200606 cocopods 更新至1.0.7  新增一些代理方法
-- 20200328 cocopods 更新至1.0.6  修复bug
-- 20200328 cocopods 更新至1.0.5  新增查看更多功能 详情看京东demo
-- 20200117 cocopods 更新至1.0.4  过年前更一波
-- 20191220 cocopods 更新至1.0.3  修复退出后台数据源被自动清理掉的bug
-- 20191213 cocopods 更新至1.0.2  新增更新任意数据的方法
-- 20191206 cocopods 更新至1.0.1
-- 20191206 新增实例方法 - (void)updateData:(NSArray*)arr AtDropIndexPathSection:(NSInteger)section AtDropIndexPathRow:(NSInteger)row （更新所有位置的数据 section表示所在行 row表示所在列）
-- 20191206 新增代理 - (NSArray*)mutuallyExclusiveSectionsWithMenu:(WMZDropDownMenu *)menu;（互斥的标题数组 即互斥不能同时选中 返回标题对应的section (配合关联代理使用更加)）
-- 20191206 新增代理 - (void)menu:(WMZDropDownMenu *)menu getAllSelectData:(NSArray*)selectData;（获取所有选中的数据）
+- 20220418 v1.2.1  适配ios15 
+- 20211015 v1.2.0  适配ios15 
+- 20210519 v1.1.6  修复#39
+- 20210511 v1.1.5  修复快速点击的问题
+- 20210422 v1.1.4  修复若干问题,去除警告
+- 20201217 v1.1.3  新增自适应cell宽度样式 新增手动触发选中
+- 20201023 v1.1.2  新增自定义更新标题
+- 20200901 v1.1.1  
+- 20200801 v1.1.0  新增重置代理/修复bug
+- 20200801 v1.0.9  新增自定义修改弹出视图frame的属性
+- 20200716 v1.0.8  新增动态弹出视图位置的代理/新增弹出视图放置的视图的代理(collectionview/scrollView)
+- 20200606 v1.0.7  新增一些代理方法
+- 20200328 v1.0.6  修复bug
+- 20200328 v1.0.5  新增查看更多功能 详情看京东demo
+- 20200117 v1.0.4  过年前更一波
+- 20191220 v1.0.3  修复退出后台数据源被自动清理掉的bug
+- 20191213 v1.0.2  新增更新任意数据的方法
+- 20191206 v1.0.0
