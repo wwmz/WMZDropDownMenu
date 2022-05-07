@@ -56,7 +56,7 @@
 }
 
 - (WMZDropTableView*)getTableVieww:(WMZDropIndexPath*)path{
-    WMZDropTableView *tableView = [[WMZDropTableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+    WMZDropTableView *tableView = [[WMZDropTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.scrollsToTop = NO;
     tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

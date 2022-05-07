@@ -29,10 +29,6 @@
     WMZDropDownMenu *menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];
     menu.delegate = self;
     [self.view addSubview:menu];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.navigationController pushViewController:UIViewController.new animated:YES];
-    });
 }
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
