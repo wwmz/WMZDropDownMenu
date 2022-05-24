@@ -209,9 +209,9 @@
 }
 
 - (void)collectionView:(WMZDropCollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.menu.keyBoardShow) {
-       [MenuWindow endEditing:YES]; return;
-    }
+    if (self.menu.keyBoardShow)
+       [MenuWindow endEditing:YES]; 
+    
     //点击处理
     WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
     NSArray *arr = [self.menu getArrWithKey:path.key withoutHide:YES withInfo:self.menu.dataDic];

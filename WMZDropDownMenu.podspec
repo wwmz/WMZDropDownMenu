@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "WMZDropDownMenu"
-  s.version      = "1.2.1"
+  s.version      = "1.2.2"
   s.platform     = :ios, "8.0"
   s.requires_arc = true
   s.frameworks   = 'UIKit'

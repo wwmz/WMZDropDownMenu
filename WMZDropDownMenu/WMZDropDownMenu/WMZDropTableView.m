@@ -133,9 +133,9 @@
 }
 
 - (void)tableView:(WMZDropTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.menu.keyBoardShow) {
-       [MenuWindow endEditing:YES]; return;
-    };
+    if (self.menu.keyBoardShow)
+       [MenuWindow endEditing:YES];
+    
     NSArray *data = [self.menu getArrWithKey:tableView.dropIndex.key withoutHide:YES  withInfo:self.menu.dataDic];
     //点击处理
     [self.menu cellTap:tableView.dropIndex data:data indexPath:indexPath];

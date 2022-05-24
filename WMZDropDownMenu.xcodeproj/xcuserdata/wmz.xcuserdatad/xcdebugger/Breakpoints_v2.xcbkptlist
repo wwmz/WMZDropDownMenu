@@ -31,5 +31,99 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D5749F0-89A6-49FC-8244-1782AE1EF3B1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
+            landmarkName = "-closeView"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9D5749F0-89A6-49FC-8244-1782AE1EF3B1 - 82d2a92bc6cfbba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WMZDropDownMenu closeView]"
+                  moduleName = "WMZDropDownMenu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wmz/Desktop/wmz/github/WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "424"
+                  endingLineNumber = "424"
+                  offsetFromSymbolStart = "74">
+               </Location>
+               <Location
+                  uuid = "9D5749F0-89A6-49FC-8244-1782AE1EF3B1 - 82d2a92bc6cfbba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WMZDropDownMenu closeView]"
+                  moduleName = "WMZDropDownMenu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wmz/Desktop/wmz/github/WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "424"
+                  endingLineNumber = "424"
+                  offsetFromSymbolStart = "130">
+               </Location>
+               <Location
+                  uuid = "9D5749F0-89A6-49FC-8244-1782AE1EF3B1 - 82d2a92bc6cfbba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WMZDropDownMenu closeView]"
+                  moduleName = "WMZDropDownMenu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wmz/Desktop/wmz/github/WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "424"
+                  endingLineNumber = "424"
+                  offsetFromSymbolStart = "464">
+               </Location>
+               <Location
+                  uuid = "9D5749F0-89A6-49FC-8244-1782AE1EF3B1 - 82d2a92bc6cfbba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WMZDropDownMenu closeView]"
+                  moduleName = "WMZDropDownMenu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wmz/Desktop/wmz/github/WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu/WMZDropDownMenu.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "424"
+                  endingLineNumber = "424"
+                  offsetFromSymbolStart = "1186">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5BDE38E-1392-4758-B3B8-7C4FA461DAFA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZDropDownMenu/WMZDropDownMenu/WMZDropTableView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
