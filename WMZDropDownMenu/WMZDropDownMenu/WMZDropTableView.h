@@ -7,14 +7,10 @@
 //
 #import "WMZDropMenuParam.h"
 
-@class WMZDropDownMenu;
-
 NS_ASSUME_NONNULL_BEGIN
 
 /// 自定义tableview
 @interface WMZDropTableView : UITableView
-///menu
-@property (nonatomic, nullable) WMZDropDownMenu *menu;
 ///dropIndex
 @property (nonatomic, strong) WMZDropIndexPath* dropIndex;
 

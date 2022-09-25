@@ -106,7 +106,6 @@
         for (int i = 0; i< dropArr.count; i++) {
             WMZDropIndexPath *path = dropArr[i];
             WMZDropTableView *tableView = [self getTableVieww:path];
-            tableView.menu = self;
             CGFloat width = self.dataView.frame.size.width / dropArr.count;
             if ([self.param.wTableViewWidth isKindOfClass:NSArray.class] &&
                 dropArr.count == self.param.wTableViewWidth.count) {
@@ -216,9 +215,8 @@
                 }
             }
         }
-        self.collectionView.delegate = (id)self.collectionView;
-        self.collectionView.dataSource = (id)self.collectionView;
-        self.collectionView.menu = self;
+        self.collectionView.delegate = (id)self;
+        self.collectionView.dataSource = (id)self;
         self.collectionView.dropArr = [NSArray arrayWithArray:dropArr];
         self.collectionView.alwaysBounceVertical = YES;
         self.collectionView.frame = CGRectMake(0, y , self.dataView.frame.size.width, height - y);
@@ -708,7 +706,6 @@
     }
     
     WMZDropTableView *tableView = [self getTableVieww:path];
-    tableView.menu = self;
     tableView.frame = CGRectMake(0, Menu_StatusBarHeight, self.moreView.frame.size.width, self.moreView.frame.size.height - (Menu_StatusBarHeight+(MenuisIphoneX?20:0)+self.confirmView.frame.size.height));
     if (self.delegate && [self.delegate respondsToSelector:@selector(menu:moreDataForRowAtDropIndexPath:)]) {
         NSArray *arr = [self.delegate menu:self moreDataForRowAtDropIndexPath:dropPath];

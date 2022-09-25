@@ -51,6 +51,7 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, NSInteger,          wCollectionVi
 WMZMenuSetFuncImplementation(WMZDropMenuParam, MenuCustomLine,                wJDCustomLine)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, MenuCusotmDataViewRect,                wCustomDataViewRect)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, MenuCusotmShadomViewRect,                wCustomShadomViewRect)
+WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wNumOfLine)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wShadowCanTap)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wShadowShow)
 WMZMenuSetFuncImplementation(WMZDropMenuParam, BOOL,               wBorderShow)
@@ -83,9 +84,10 @@ WMZMenuSetFuncImplementation(WMZDropMenuParam, MenuInputStyle,     wCollectionCe
         _wPopViewWidth = Menu_Width/3;
         _wFixBtnWidth = 80;
         _wCellSelectShowCheck = YES;
+        _wNumOfLine = YES;
         _wCellTitleFont = [UIFont systemFontOfSize:15.0f];
         _wCellSelectTitleFont = [UIFont systemFontOfSize:15.0f];
-        _wCellCheckImage = [UIImage bundleImage:@"menu_check"];
+        _wCellCheckImage = [[UIImage bundleImage:@"menu_check"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _wMenuDurtion = 0.25;
         _wCollectionCellTextFieldKeyType = UIKeyboardTypeDecimalPad;
         _wCollectionCellTextFieldAlignment = NSTextAlignmentCenter;

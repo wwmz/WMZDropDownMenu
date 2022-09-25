@@ -212,27 +212,35 @@ static NSString* const notificationRemove = @"notificationRemove";
 
 - (void)menuTitle{
     self.backgroundColor = menuMainClor;
-    //移除
+    ///移除
    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeView) name:notificationRemove object:nil];
-   if([[WMZDropMenuTool getCurrentVC] respondsToSelector:@selector(viewWillDisappear:)]){
-       //hook监听当前控制器消失
-       MenuWeakSelf(self)
-       [[WMZDropMenuTool getCurrentVC] aspect_hookSelector:@selector(viewWillDisappear:) withOptions:AspectOptionAutomaticRemoval usingBlock:^(id<AspectInfo> aspectInfo)
-       {
-         MenuStrongSelf(weakObject);
-         strongObject.hook = YES;
-         [strongObject closeView];
-         strongObject.hook = NO;
+   if([[WMZDropMenuTool getCurrentVC] respondsToSelector:@selector(viewWillDisappear:)] ||
+      [[WMZDropMenuTool getCurrentVC] respondsToSelector:@selector(viewDidDisappear:)]){
+       ///hook监听当前控制器消失
+       @MenuWeakSelf(self);
+       [[WMZDropMenuTool getCurrentVC] aspect_hookSelector:@selector(viewWillDisappear:) withOptions:AspectOptionAutomaticRemoval usingBlock:^(id<AspectInfo> aspectInfo){
+         @MenuStrongSelf(self);
+         self.hook = YES;
+         [self closeView];
+         self.hook = NO;
+       } error:NULL];
+       
+       [[WMZDropMenuTool getCurrentVC] aspect_hookSelector:@selector(viewDidDisappear:) withOptions:AspectOptionAutomaticRemoval usingBlock:^(id<AspectInfo> aspectInfo){
+         @MenuStrongSelf(self);
+           if(!self.close){
+               self.hook = YES;
+               [self closeView];
+               self.hook = NO;
+           }
        } error:NULL];
    }
    self.userInteractionEnabled = YES;
    [self addSubview:self.titleView];
    
    NSArray *indexArr = @[];
-   //相互排斥的标题
-   if (self.delegate && [self.delegate respondsToSelector:@selector(mutuallyExclusiveSectionsWithMenu:)]) {
+   ///相互排斥的标题
+   if (self.delegate && [self.delegate respondsToSelector:@selector(mutuallyExclusiveSectionsWithMenu:)])
        indexArr =  [self.delegate mutuallyExclusiveSectionsWithMenu:self];
-   }
    
    UIButton *tmp = nil;
    for (int i = 0; i<self.titleArr.count; i++) {
@@ -241,20 +249,19 @@ static NSString* const notificationRemove = @"notificationRemove";
        WMZDropMenuBtn *btn = [WMZDropMenuBtn buttonWithType:UIButtonTypeCustom];
        [btn setUpParam:self.param withDic:dic];
        btn.frame = CGRectMake(tmp?CGRectGetMaxX(tmp.frame):0, 0, self.titleView.frame.size.width/(self.param.wMenuTitleEqualCount<self.titleArr.count?self.titleArr.count:self.param.wMenuTitleEqualCount), self.titleView.frame.size.height);
-       //外部自定义标题按钮
+       ///外部自定义标题按钮
        NSDictionary *config = nil;
        if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:customTitleInSection:withTitleBtn:)]) {
            config =  [self.delegate menu:self customTitleInSection:i withTitleBtn:btn];
        }
        CGFloat offset = config[@"offset"]?[config[@"offset"] floatValue]:0;
        CGFloat y = config[@"y"]?[config[@"y"] floatValue]:0;
-       btn.frame = CGRectMake(tmp?(CGRectGetMaxX(tmp.frame)+offset):offset, y, btn.frame.size.width-offset-offset/self.titleArr.count, btn.frame.size.height-y*2);
-       
+       btn.frame = CGRectMake(tmp?(CGRectGetMaxX(tmp.frame)+offset):offset, y, btn.frame.size.width , btn.frame.size.height-y*2);
        [WMZDropMenuTool TagSetImagePosition:btn.position spacing:self.param.wMenuTitleSpace button:btn];
        [btn addTarget:self action:@selector(titleAction:) forControlEvents:UIControlEventTouchUpInside];
        btn.tag = 1000+i;
-       if (i == self.titleArr.count - 1&&i!=0) {
-           if (dictionary&&dic[@"lastFix"]) {
+       if (i == self.titleArr.count - 1 && i!=0) {
+           if (dictionary && dic[@"lastFix"]) {
                btn.frame = CGRectMake(CGRectGetWidth(self.frame)-self.param.wFixBtnWidth, 0, self.param.wFixBtnWidth, self.titleView.frame.size.height);
                if ([[self subviews] indexOfObject:btn] == NSNotFound) {
                    [self addSubview:btn];
@@ -326,12 +333,12 @@ static NSString* const notificationRemove = @"notificationRemove";
         [self.delegate respondsToSelector:@selector(menu:didSelectTitleInSection:btn:)]) {
         [self.delegate menu:self didSelectTitleInSection:sender.tag-1000 btn:sender];
     }
-    MenuWeakSelf(self)
+    @MenuWeakSelf(self)
     //点击标题网络请求
     if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:didSelectTitleInSection:btn:networkBlock:)]) {
         [self.delegate menu:self didSelectTitleInSection:sender.tag-1000 btn:sender networkBlock:^{
-            MenuStrongSelf(weakObject)
-            [strongObject judgeBtnTitle:sender];
+            @MenuStrongSelf(self)
+            [self judgeBtnTitle:sender];
         }];
     }else{
         [self judgeBtnTitle:sender];
@@ -491,18 +498,18 @@ static NSString* const notificationRemove = @"notificationRemove";
     
       if ([MenuWindow viewWithTag:10088]!=nil) {
          //动画
-         MenuWeakSelf(self)
+         @MenuWeakSelf(self)
          [self hideAnimal:hideAnimal view:self.moreView durtion:self.param.wMenuDurtion block:^{
-             MenuStrongSelf(weakObject)
-             [strongObject.moreView removeFromSuperview];
+             @MenuStrongSelf(self)
+             [self.moreView removeFromSuperview];
          }];
          return;
       }
       //动画
-      MenuWeakSelf(self)
+      @MenuWeakSelf(self)
       [self hideAnimal:hideAnimal view:self.dataView durtion:self.param.wMenuDurtion block:^{
-          MenuStrongSelf(weakObject)
-          [strongObject.dataView removeFromSuperview];
+          @MenuStrongSelf(self)
+          [self.dataView removeFromSuperview];
       }];
       [self.shadowView removeFromSuperview];
       self.close = YES;
@@ -625,7 +632,7 @@ static NSString* const notificationRemove = @"notificationRemove";
         }
     }
     if (self.delegate&&[self.delegate respondsToSelector:@selector(popFrameY)]) {
-       self.menuOrignY = [self.delegate popFrameY];
+        self.menuOrignY = [self.delegate popFrameY];
     }
 }
 
@@ -882,6 +889,350 @@ static NSString* const notificationRemove = @"notificationRemove";
                [collectionView reloadData];
             }];
         }
+    }
+}
+
+#pragma -mark tablViewDeleagte
+- (NSInteger)tableView:(WMZDropTableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSArray *data = [self getArrWithKey:tableView.dropIndex.key withoutHide:YES withInfo:self.dataDic];
+    if (tableView.dropIndex.row>0) {
+        WMZDropIndexPath *lastDrop = nil;
+        for (WMZDropIndexPath *tmpDrop in self.dropPathArr) {
+            if (tmpDrop.section == tableView.dropIndex.section &&
+                tmpDrop.row == tableView.dropIndex.row-1) {
+                lastDrop = tmpDrop;
+                break;
+            }
+        }
+        BOOL hadSelected = NO;
+        if (lastDrop) {
+            NSArray *lastData = [self getArrWithKey:lastDrop.key withoutHide:YES  withInfo:self.dataDic];
+            for (WMZDropTree *tree in lastData) {
+                if (tree.isSelected) {
+                    hadSelected = YES;
+                    break;
+                }
+            }
+        }
+        if (hadSelected) {
+            return data.count;
+        }else{
+            return 0;
+        }
+    }
+    return data.count;
+}
+
+- (UITableViewCell *)tableView:(WMZDropTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *data = [self getArrWithKey:tableView.dropIndex.key withoutHide:YES  withInfo:self.dataDic];
+    WMZDropTree *tree = data[indexPath.row];
+    tree.indexPath = indexPath;
+    tree.dropPath = tableView.dropIndex;
+    //自定义
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:cellForUITableView:AtIndexPath:dataForIndexPath:)]) {
+        UITableViewCell *cell = [self.delegate menu:self cellForUITableView:tableView AtIndexPath:indexPath dataForIndexPath:tree];
+        if (cell&&
+            [cell isKindOfClass:[UITableViewCell class]]) {
+            return cell;
+        }
+    }
+    WMZDropTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([WMZDropTableViewCell class])];
+    if (!cell) {
+        cell = [[WMZDropTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([WMZDropTableViewCell class])];
+    }
+    if ([tree isKindOfClass:[WMZDropTree class]]) {
+        UIImageView *image = [[UIImageView alloc]initWithImage:self.param.wCellCheckImage];
+        image.tintColor = self.param.wCollectionViewCellSelectTitleColor;
+        image.frame = CGRectMake(0, 0, 20, 20);
+        image.hidden = !tree.isSelected;
+        cell.accessoryView = self.param.wCellSelectShowCheck?image:nil;
+        cell.textLabel.text = tree.name;
+        cell.textLabel.textAlignment = self.param.wTextAlignment;
+        cell.textLabel.textColor = tree.isSelected? self.param.wCollectionViewCellSelectTitleColor:self.param.wCollectionViewCellTitleColor;
+        cell.textLabel.font = self.param.wCellTitleFont;
+        cell.backgroundColor = tableView.backgroundColor;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UIImage *icon = nil;
+        cell.imageView.hidden = !tree.image;
+        if (tree.image) {
+            icon = [UIImage bundleImage:tree.image];
+            cell.imageView.image = icon;
+            CGSize itemSize = CGSizeMake(tree.cellHeight*0.7, tree.cellHeight*0.7);
+            UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0);
+            CGRect imageRect = CGRectMake(0, 0, itemSize.width, itemSize.height);
+            [icon drawInRect:imageRect];
+            cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+        }
+        
+    }
+    return cell;
+}
+
+- (CGFloat)tableView:(WMZDropTableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return tableView.dropIndex.footViewHeight == 0 ? 0.01 : tableView.dropIndex.footViewHeight;
+}
+
+- (CGFloat)tableView:(WMZDropTableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return tableView.dropIndex.headViewHeight == 0 ? 0.01 : tableView.dropIndex.headViewHeight;
+}
+
+- (UIView*)tableView:(WMZDropTableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:footViewForUITableView:AtDropIndexPath:)]) {
+        UITableViewHeaderFooterView *footView = [self.delegate menu:self footViewForUITableView:tableView AtDropIndexPath:tableView.dropIndex];
+        if (footView&&[footView isKindOfClass:[UITableViewHeaderFooterView class]])
+            return footView;
+    }
+    WMZDropTableViewFootView *footView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([WMZDropTableViewFootView class])];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(menu:titleForFootViewAtDropIndexPath:)]) {
+        NSString *title = [self.delegate menu:self titleForFootViewAtDropIndexPath:tableView.dropIndex];
+        footView.textLa.text = title;
+    }
+    return footView;
+}
+
+- (UIView*)tableView:(WMZDropTableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:headViewForUITableView:AtDropIndexPath:)]) {
+           UITableViewHeaderFooterView *headView = [self.delegate menu:self headViewForUITableView:tableView AtDropIndexPath:tableView.dropIndex];
+        if (headView &&
+            [headView isKindOfClass:[UITableViewHeaderFooterView class]])
+            return headView;
+    }
+    WMZDropTableViewHeadView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([WMZDropTableViewHeadView class])];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(menu:titleForHeadViewAtDropIndexPath:)]) {
+        NSString *title = [self.delegate menu:self titleForHeadViewAtDropIndexPath:tableView.dropIndex];
+        headView.textLa.text = title;
+    }
+    return headView;
+}
+
+- (CGFloat)tableView:(WMZDropTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *data = [self getArrWithKey:tableView.dropIndex.key withoutHide:YES withInfo:self.dataDic];
+    WMZDropTree *tree = data[indexPath.row];
+    return tree.cellHeight;
+}
+
+- (void)tableView:(WMZDropTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.keyBoardShow)
+       [MenuWindow endEditing:YES];
+    
+    NSArray *data = [self getArrWithKey:tableView.dropIndex.key withoutHide:YES  withInfo:self.dataDic];
+    //点击处理
+    [self cellTap:tableView.dropIndex data:data indexPath:indexPath];
+}
+
+#pragma -mark collectionDelagete
+- (UICollectionViewCell *)collectionView:(WMZDropCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
+    NSArray *arr = [self getArrWithKey:path.key withoutHide:YES withInfo:self.dataDic];
+    WMZDropTree *tree = arr[indexPath.row];
+    tree.indexPath = indexPath;
+    tree.dropPath = path;
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:cellForUICollectionView:AtDropIndexPath:AtIndexPath:dataForIndexPath:)]) {
+        UICollectionViewCell *cell = [self.delegate menu:self cellForUICollectionView:collectionView AtDropIndexPath:path AtIndexPath:indexPath dataForIndexPath:tree];
+        if (cell&&[cell isKindOfClass:[UICollectionViewCell class]]) {
+            return cell;
+        }
+    }
+    if (path.UIStyle == MenuUICollectionRangeTextField){
+         //默认视图
+        WMZMenuTextFieldCell *cell = (WMZMenuTextFieldCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([WMZMenuTextFieldCell class]) forIndexPath:indexPath];
+        if ([tree isKindOfClass:[WMZDropTree class]]) {
+            cell.tree = tree;
+            cell.tree.canEdit = tree.config[@"canEdit"]?[tree.config[@"canEdit"] boolValue]:YES;
+            UIColor *lowBg = tree.config[@"lowBgColor"]?:self.param.wCollectionViewCellBgColor;
+            UIColor *highBg = tree.config[@"highBgColor"]?:self.param.wCollectionViewCellBgColor;
+            UIColor *textColor = tree.config[@"textColor"]?:MenuColor(0x333333);
+            UIColor *textSelectColor = tree.config[@"textSelectColor"]?:MenuColor(0x333333);
+            tree.lowPlaceholder = tree.config[@"lowPlaceholder"]?:tree.lowPlaceholder;
+            tree.highPlaceholder = tree.config[@"highPlaceholder"]?:tree.highPlaceholder;
+            tree.lowPlaceholder =
+            cell.lowText.placeholder =  tree.lowPlaceholder;
+            cell.highText.placeholder = tree.highPlaceholder;
+            cell.highText.textAlignment = self.param.wCollectionCellTextFieldAlignment;
+            cell.lowText.textAlignment = self.param.wCollectionCellTextFieldAlignment;
+            cell.lowText.keyboardType = self.param.wCollectionCellTextFieldKeyType;
+            cell.highText.keyboardType = self.param.wCollectionCellTextFieldKeyType;
+            NSString *lowStr = tree.rangeArr.count>1?[NSString stringWithFormat:@"%@",tree.rangeArr[0]]:@"";
+            NSString *maxStr = tree.rangeArr.count>1?[NSString stringWithFormat:@"%@",tree.rangeArr[1]]:@"";
+            if (!tree.normalRangeArr||!tree.normalRangeArr.count) {
+                if ([lowStr length]&&[maxStr length]) {
+                    tree.normalRangeArr = @[lowStr,maxStr];
+                }
+            }
+            @MenuWeakSelf(cell)
+            cell.myBlock = ^(UITextField * _Nonnull textField, NSString * _Nonnull string) {
+                @MenuStrongSelf(cell)
+                if (textField == cell.lowText) {
+                    cell.lowT = string;
+                    if (cell.lowT) {
+                        tree.rangeArr[0] = cell.lowT;
+                    }
+                }else{
+                    cell.highT = string;
+                    if (cell.highT) {
+                        tree.rangeArr[1] = cell.highT;
+                    }
+                }
+                tree.isSelected = YES;
+            };
+            __weak WMZDropDownMenu *weak = self;
+            cell.clickBlock = ^(UITextField * _Nonnull textField, NSString * _Nonnull string) {
+                 __strong WMZDropDownMenu *strong = weak;
+                [strong tapAction:textField dropPath:path indexPath:indexPath data:tree];
+            };
+            tree.isSelected = ([lowStr length]>0||[maxStr length]>0);
+            cell.lowText.textColor = tree.isSelected?textSelectColor:textColor;
+            cell.highText.textColor = tree.isSelected?textSelectColor:textColor;;
+            cell.lowText.backgroundColor = lowBg;
+            cell.highText.backgroundColor = highBg;
+            cell.lowText.font = tree.font?:self.param.wCellTitleFont;
+            cell.highText.font = tree.font?:self.param.wCellTitleFont;
+            cell.lowText.text  = lowStr;
+            cell.highText.text = maxStr;
+        }
+        [cell layoutSubviews];
+        MenuInputStyle style = MenuInputStyleMore;
+        if (tree.inputStyle ) {
+            style = tree.inputStyle;
+        }else{
+            style = self.param.wCollectionCellTextFieldStyle;
+        }
+        if (style == MenuInputStyleMore) {
+            cell.lowText.frame = CGRectMake(0, 0, cell.frame.size.width*0.45, cell.frame.size.height);
+            cell.lineLa.frame = CGRectMake(0, 0, cell.frame.size.width*0.1, cell.frame.size.height);
+            cell.lineLa.center = cell.contentView.center;
+            cell.highText.frame = CGRectMake(cell.frame.size.width*0.55, 0, cell.frame.size.width*0.45, cell.frame.size.height);
+            cell.highText.layer.cornerRadius = 8;
+            cell.lowText.layer.cornerRadius = 8;
+        }else{
+            cell.lowText.frame = CGRectMake(0, 0, cell.frame.size.width , cell.frame.size.height);
+            cell.highText.frame = cell.lineLa.frame = CGRectZero;
+            cell.lowText.layer.cornerRadius = 8;
+        }
+        return cell;
+    }else{
+         //默认视图
+         WMZMenuCell *cell = (WMZMenuCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([WMZMenuCell class]) forIndexPath:indexPath];
+         if ([tree isKindOfClass:[WMZDropTree class]]) {
+             cell.btn.layer.backgroundColor = tree.checkMore?[UIColor whiteColor].CGColor:
+             (tree.isSelected? self.param.wCollectionViewCellSelectBgColor.CGColor:
+              self.param.wCollectionViewCellBgColor.CGColor);
+             [cell.btn setTitleColor:tree.checkMore?self.param.wCollectionViewCellSelectTitleColor:(
+              tree.isSelected? self.param.wCollectionViewCellSelectTitleColor:self.param.wCollectionViewCellTitleColor) forState:UIControlStateNormal];
+             cell.btn.titleLabel.font = tree.isSelected?
+             tree.font?:self.param.wCellTitleFont:
+             tree.selectFont?:self.param.wCellSelectTitleFont;
+             [cell.btn setTitle:tree.name forState:UIControlStateNormal];
+             [cell.btn setImage:tree.image?[UIImage bundleImage:tree.image]:nil forState:UIControlStateNormal];
+             cell.btn.layer.borderColor = tree.checkMore?[UIColor whiteColor].CGColor:(tree.isSelected? self.param.wCollectionViewCellSelectTitleColor.CGColor:self.param.wCollectionViewCellTitleColor.CGColor);
+             cell.btn.layer.borderWidth = tree.checkMore?0:(tree.isSelected?self.param.wCollectionViewCellBorderWith:0);
+             cell.btn.layer.cornerRadius = 8;
+             
+         }
+         return cell;
+    }
+}
+
+- (NSInteger)collectionView:(WMZDropCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+   WMZDropIndexPath *path = collectionView.dropArr[section];
+    NSInteger count = [[self getArrWithKey:path.key withoutHide:YES withInfo:self.dataDic] count];
+    if (!path.expand) {
+        if (count>=self.param.wCollectionViewSectionRecycleCount) {
+            count = self.param.wCollectionViewSectionRecycleCount;
+        }
+    }
+    return count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(WMZDropCollectionView *)collectionView{
+    return self.collectionView.dropArr.count;
+}
+
+- (CGSize)collectionView:(WMZDropCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
+    if (path.collectionUIStyle == MenuCollectionUINormal) {
+       return CGSizeMake((floor((collectionView.frame.size.width - self.param.wCollectionViewCellSpace*(path.collectionCellRowCount+1))/(CGFloat)path.collectionCellRowCount)) , path.cellHeight);
+    }else{
+        if (path.UIStyle == MenuUICollectionRangeTextField) {
+            return CGSizeMake((floor((collectionView.frame.size.width - self.param.wCollectionViewCellSpace*(path.collectionCellRowCount+1))/(CGFloat)path.collectionCellRowCount)) , path.cellHeight);
+        }else{
+            NSArray *arr = [self getArrWithKey:path.key withoutHide:YES withInfo:self.dataDic];
+            WMZDropTree *tree = arr[indexPath.row];
+            UIFont *font = tree.isSelected?
+            tree.font?:self.param.wCellTitleFont:
+            tree.selectFont?:self.param.wCellSelectTitleFont;
+            if (!tree.cellWidth) {
+                tree.cellWidth = [WMZDropMenuTool boundingRectWithSize:tree.name Font:font Size:CGSizeMake(MAXFLOAT,MAXFLOAT)].width + 30;
+            }
+            return CGSizeMake(tree.cellWidth , path.cellHeight);
+        }
+    }
+}
+
+- (UICollectionReusableView *)collectionView:(WMZDropCollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    if (kind == UICollectionElementKindSectionHeader){
+        if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:headViewForUICollectionView:AtDropIndexPath:AtIndexPath:)]) {
+            UICollectionReusableView *headView = [self.delegate menu:self headViewForUICollectionView:collectionView AtDropIndexPath:collectionView.dropArr[indexPath.section] AtIndexPath:indexPath];
+            if (headView&&[headView isKindOfClass:[UICollectionReusableView class]]) {
+                return headView;
+            }
+        }
+        WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
+        WMZDropCollectionViewHeadView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([WMZDropCollectionViewHeadView class]) forIndexPath:indexPath];
+        headerView.accessTypeBtn.hidden = !path.showExpand;
+        headerView.accessTypeBtn.selected = !path.expand;
+        [headerView.accessTypeBtn setImage:[UIImage bundleImage:@"menu_xiangshang"] forState:UIControlStateNormal];
+        [headerView.accessTypeBtn setImage:[UIImage bundleImage:@"menu_xiangxia"] forState:UIControlStateSelected];
+        headerView.dropIndexPath = path;
+        [headerView.accessTypeBtn addTarget:self action:NSSelectorFromString(@"expandAction:") forControlEvents:UIControlEventTouchUpInside];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(menu:titleForHeadViewAtDropIndexPath:)]) {
+            NSString *title = [self.delegate menu:self titleForHeadViewAtDropIndexPath:collectionView.dropArr[indexPath.section]];
+            headerView.textLa.text = title;
+        }
+        return headerView;
+    }else if(kind == UICollectionElementKindSectionFooter){
+        if (self.delegate&&[self.delegate respondsToSelector:@selector(menu:footViewForUICollectionView:AtDropIndexPath:AtIndexPath:)]) {
+            UICollectionReusableView *footView = [self.delegate menu:self footViewForUICollectionView:collectionView AtDropIndexPath:collectionView.dropArr[indexPath.section] AtIndexPath:indexPath];
+            if (footView&&[footView isKindOfClass:[UICollectionReusableView class]]) {
+                return footView;
+            }
+        }
+        WMZDropCollectionViewFootView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([WMZDropCollectionViewFootView class]) forIndexPath:indexPath];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(menu:titleForFootViewAtDropIndexPath:)]) {
+               NSString *title = [self.delegate menu:self titleForFootViewAtDropIndexPath:collectionView.dropArr[indexPath.section]];
+               footerView.textLa.text = title;
+        }
+        return footerView;
+    }
+    return nil;
+}
+
+- (CGSize)collectionView:(WMZDropCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    WMZDropIndexPath *path = collectionView.dropArr[section];
+    return CGSizeMake(self.dataView.frame.size.width,path.headViewHeight);
+}
+
+- (CGSize)collectionView:(WMZDropCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    WMZDropIndexPath *path = collectionView.dropArr[section];
+    return CGSizeMake(self.dataView.frame.size.width, path.footViewHeight);
+}
+
+- (void)collectionView:(WMZDropCollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.keyBoardShow)
+       [MenuWindow endEditing:YES];
+    
+    //点击处理
+    WMZDropIndexPath *path = collectionView.dropArr[indexPath.section];
+    NSArray *arr = [self getArrWithKey:path.key withoutHide:YES withInfo:self.dataDic];
+    [self cellTap:path data:arr indexPath:indexPath];
+}
+
+- (void)tapAction:(UITextField*)sender dropPath:(WMZDropIndexPath*)dropPath indexPath:(NSIndexPath*)indexPath data:(WMZDropTree*)tree{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(menu:didSelectRowAtDropIndexPath:dataIndexPath:data:)]) {
+        tree.index = sender.tag;
+        [self.delegate menu:self didSelectRowAtDropIndexPath:dropPath dataIndexPath:indexPath data:tree];
     }
 }
 

@@ -37,6 +37,8 @@ WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, UIFont*,    
 /// cell选中的图片 default menu_check
 WMZMenuStatementAndPropSetFuncStatement(strong,   WMZDropMenuParam, UIImage* ,        wCellCheckImage)
 
+/// 是否换行 default YES
+WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, BOOL,             wNumOfLine)
 /// 动画时间 默认0.25
 WMZMenuStatementAndPropSetFuncStatement(assign,   WMZDropMenuParam, CGFloat,          wMenuDurtion)
 

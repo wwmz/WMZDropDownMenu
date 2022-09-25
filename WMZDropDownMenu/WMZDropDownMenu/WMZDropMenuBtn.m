@@ -14,7 +14,11 @@
     self.tj_acceptEventInterval = 0.3;
     self.param = param;
     BOOL dictionary = [dic isKindOfClass:[NSDictionary class]];
-    self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    if(param.wNumOfLine){
+        self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    }else{
+        self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    }
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     if ([dic isKindOfClass:[NSString class]]) {
         [self setTitle:dic forState:UIControlStateNormal];

@@ -73,8 +73,8 @@
     if (path&&path.key) {
         tableView.dropIndex = path;
     }
-    tableView.delegate = (id)tableView;
-    tableView.dataSource = (id)tableView;
+    tableView.delegate = (id)self;
+    tableView.dataSource = (id)self;
     return tableView;
 }
 
@@ -185,6 +185,7 @@
             }
         }
     }
+    [WMZDropMenuTool TagSetImagePosition:currentBtn.position spacing:self.param.wMenuTitleSpace button:currentBtn];
 }
 #pragma -mark 回复原来的标题和文字
 - (void)changeNormalConfig:(NSDictionary*)config withBtn:(WMZDropMenuBtn*)currentBtn{
@@ -355,6 +356,10 @@
 
 - (void)setDelegate:(id<WMZDropMenuDelegate>)delegate{
     _delegate = delegate;
+}
+
+- (void)dealloc{
+    NSLog(@"dealloc");
 }
 
 @end

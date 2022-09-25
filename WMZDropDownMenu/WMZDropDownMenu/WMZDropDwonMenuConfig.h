@@ -8,6 +8,7 @@
 
 #ifndef WMZDropDwonMenuConfig_h
 #define WMZDropDwonMenuConfig_h
+
 #import "WMZDropMenuEnum.h"
 #import <UIKit/UIKit.h>
 @class WMZDropIndexPath;
@@ -95,8 +96,38 @@ else \
 #define Menu_GetWNum(A)   (A)/2.0*(Menu_Width/375)
 #define MenuColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define MenuK1px (1 / UIScreen.mainScreen.scale)
-#define MenuWeakSelf(obj) __weak typeof(obj) weakObject = obj;
-#define MenuStrongSelf(obj) __strong typeof(obj) strongObject = weakObject;
+
+#ifndef MenuWeakSelf
+    #if DEBUG
+        #if __has_feature(objc_arc)
+            #define MenuWeakSelf(obj) autoreleasepool{} __weak __typeof__(obj) obj##Weak = obj;
+        #else
+            #define MenuWeakSelf(obj) autoreleasepool{} __block __typeof__(obj) obj##Block = obj;
+        #endif
+    #else
+        #if __has_feature(objc_arc)
+            #define MenuWeakSelf(obj) try{} @finally{} {} __weak __typeof__(obj) obj##Weak = obj;
+        #else
+            #define MenuWeakSelf(obj) try{} @finally{} {} __block __typeof__(obj) obj##Block = obj;
+        #endif
+    #endif
+#endif
+
+#ifndef MenuStrongSelf
+    #if DEBUG
+        #if __has_feature(objc_arc)
+            #define MenuStrongSelf(obj) autoreleasepool{} __typeof__(obj) obj = obj##Weak;
+        #else
+            #define MenuStrongSelf(obj) autoreleasepool{} __typeof__(obj) obj = obj##Block;
+        #endif
+    #else
+        #if __has_feature(objc_arc)
+            #define MenuStrongSelf(obj) try{} @finally{} __typeof__(obj) obj = obj##Weak;
+        #else
+            #define MenuStrongSelf(obj) try{} @finally{} __typeof__(obj) obj = obj##Block;
+        #endif
+    #endif
+#endif
 
 #define footHeadHeight 35
 #define moreTableViewKey @"moreTableViewKey"

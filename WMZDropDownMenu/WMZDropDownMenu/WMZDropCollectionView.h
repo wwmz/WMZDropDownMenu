@@ -9,8 +9,6 @@
 #import "WMZDropMenuBtn.h"
 #import "WMZDropMenuEnum.h"
 
-@class WMZDropDownMenu;
-
 NS_ASSUME_NONNULL_BEGIN
 
 /// 自定义collection
@@ -19,8 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) WMZDropIndexPath* dropIndex;
 
 @property (nonatomic, strong) NSArray* dropArr;
-
-@property (nonatomic, nullable) WMZDropDownMenu *menu;
 
 @end
 
