@@ -33,11 +33,11 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-         @{@"name":@"综合排序"},
+         @{WMZMenuTitleNormal:@"综合排序"},
          @"销量最高",
          @"距离最近",
-         @{@"name":@"筛选",@"lastFix":@(YES),@"normalImage":@"menu_shaixuan",
-           @"selectImage":@"menu_shaixuan"},
+         @{WMZMenuTitleNormal:@"筛选",WMZMenuTitleLastFix:@(YES),WMZMenuTitleImage:@"menu_shaixuan",
+           WMZMenuTitleSelectImage:@"menu_shaixuan"},
     ];
 }
 
@@ -56,16 +56,16 @@
         return @[@"综合排序",@"好评优先",@"起送价最低",@"配送最快",@"通用排序"];
     }else if (dropIndexPath.section == 3) {
         if (dropIndexPath.row == 0)
-            return @[@{@"name":@"会员领红包",@"image":@"menu_xinyong"},
+            return @[@{WMZMenuTitleNormal:@"会员领红包",@"image":@"menu_xinyong"},
                      @"首单立减",@"津贴联盟",@"首次光顾立减",@"满减优惠",@"下单返红包",
                      @"进店领红包",@"赠品优惠",@"特价商品"];
         if (dropIndexPath.row == 1)
             return @[
-            @{@"name":@"峰鸟专送",@"image":@"menu_xinyong"},
-            @{@"name":@"品牌商家",@"image":@"menu_xinyong"},
-            @{@"name":@"新店",@"image":@"menu_xinyong"},
-            @{@"name":@"食安保",@"image":@"menu_xinyong"},
-            @{@"name":@"开发票",@"image":@"menu_xinyong"},
+            @{WMZMenuTitleNormal:@"峰鸟专送",@"image":@"menu_xinyong"},
+            @{WMZMenuTitleNormal:@"品牌商家",@"image":@"menu_xinyong"},
+            @{WMZMenuTitleNormal:@"新店",@"image":@"menu_xinyong"},
+            @{WMZMenuTitleNormal:@"食安保",@"image":@"menu_xinyong"},
+            @{WMZMenuTitleNormal:@"开发票",@"image":@"menu_xinyong"},
             ];
         if (dropIndexPath.row == 2) return @[@{@"config":@{
                                                        @"canEdit":@(NO), //不可编辑
@@ -152,7 +152,7 @@
         return @"自定义标题";
     }else if (dropIndexPath.section == 3) {
         //自定义标题和颜色
-        return @{@"name":@"自定义更改",@"selectColor":[UIColor redColor]};
+        return @{WMZMenuTitleNormal:@"自定义更改",WMZMenuTitleSelectColor:[UIColor redColor]};
     }
     //nil为保持默认的标题
     return nil;

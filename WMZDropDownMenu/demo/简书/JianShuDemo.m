@@ -38,7 +38,7 @@
     return @[
          @"按相关度",
          @"按热度",
-         @{@"name":@"按最新排序",@"lastFix":@(YES)},
+         @{WMZMenuTitleNormal:@"按最新排序",WMZMenuTitleLastFix:@(YES)},
     ];
 }
 

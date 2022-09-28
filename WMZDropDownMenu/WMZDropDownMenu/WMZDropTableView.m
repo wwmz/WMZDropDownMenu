@@ -10,7 +10,8 @@
 #import "WMZDropDownMenu.h"
 
 @implementation WMZDropTableView
-
+@synthesize dropIndex = _dropIndex;
+@synthesize dropArray = _dropArray;
 @end
 
 

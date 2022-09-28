@@ -11,7 +11,7 @@
 @implementation WMZDropDownMenu (NormalView)
 
 #pragma -mark 添加数据
-- (void)addTableView{
+- (void)addShowUI{
     //移除之前的view
     for (UIView *view in [self.dataView subviews]) {
         [view removeFromSuperview];
@@ -31,9 +31,10 @@
     MenuUIStyle showType = MenuUITableView;
     //判断需要显示的WMZDropIndexPath
     NSInteger index = self.selectTitleBtn.tag - 1000;
-    NSMutableArray *dorpArr = [NSMutableArray new];
+    NSMutableArray <WMZDropIndexPath*>*dorpArr = [NSMutableArray new];
     for (WMZDropIndexPath *path in self.dropPathArr) {
-        if (path.section == index&&![path.key isEqualToString:moreTableViewKey]) {
+        if (path.section == index &&
+            ![path.key isEqualToString:MoreTableViewKey]) {
             [dorpArr addObject:path];
             showType = path.UIStyle;
         }
@@ -43,8 +44,9 @@
 }
 
 #pragma -mark 根据dic添加显示的UI
-- (void)addDropPathUI:(NSArray*)dropArr type:(MenuUIStyle)type{
+- (void)addDropPathUI:(NSArray<WMZDropIndexPath*>*)dropArray type:(MenuUIStyle)type{
     CGFloat height = self.param.wFixDataViewHeight;
+    CGRect rect = CGRectZero;
     //全屏
     MenuShowAnimalStyle screnFrame = MenuShowAnimalNone;
     BOOL pop = NO;
@@ -56,7 +58,7 @@
         if (height == 0) {
             //计算高度 获取最大的tableview的高度
             NSMutableArray *heightArr = [NSMutableArray new];
-            for (WMZDropIndexPath *path in dropArr) {
+            for (WMZDropIndexPath *path in dropArray) {
                 if (path.showAnimalStyle == MenuShowAnimalLeft ||
                     path.showAnimalStyle == MenuShowAnimalRight||
                     path.showAnimalStyle == MenuShowAnimalBoss) {
@@ -67,7 +69,7 @@
                     if (path.showAnimalStyle == MenuShowAnimalPop) {
                         pop = YES;
                     }
-                    NSArray *dataArr = [self getArrWithKey:path.key withoutHide:YES];
+                    NSArray *dataArr = [self getArrWithPath:path withoutHide:YES];
                     CGFloat sonHeight = 0;
                     for (WMZDropTree *tree in dataArr) {
                         if ([tree isKindOfClass:[WMZDropTree class]]) {
@@ -88,7 +90,7 @@
                 }
             }
         }else{
-            for (WMZDropIndexPath *path in dropArr) {
+            for (WMZDropIndexPath *path in dropArray) {
                 if (path.showAnimalStyle == MenuShowAnimalLeft ||
                     path.showAnimalStyle == MenuShowAnimalRight||
                     path.showAnimalStyle == MenuShowAnimalBoss) {
@@ -99,28 +101,27 @@
              }
            }
         }
-        
         CGFloat y = 0;
         //添加tableview
         WMZDropTableView *tmpTa = nil;
-        for (int i = 0; i< dropArr.count; i++) {
-            WMZDropIndexPath *path = dropArr[i];
+        for (int i = 0; i< dropArray.count; i++) {
+            WMZDropIndexPath *path = dropArray[i];
             WMZDropTableView *tableView = [self getTableVieww:path];
-            CGFloat width = self.dataView.frame.size.width / dropArr.count;
+            CGFloat width = self.dataView.frame.size.width / dropArray.count;
             if ([self.param.wTableViewWidth isKindOfClass:NSArray.class] &&
-                dropArr.count == self.param.wTableViewWidth.count) {
+                dropArray.count == self.param.wTableViewWidth.count) {
                 if (self.param.wTableViewWidth.count > i &&
                     [self.param.wTableViewWidth[i] isKindOfClass:NSNumber.class]) {
                     width = [self.param.wTableViewWidth[i] floatValue] * self.dataView.frame.size.width;
                 }
             }
             tableView.frame = CGRectMake(tmpTa ? CGRectGetMaxX(tmpTa.frame):0, y, width, height-y);
-            if (i<self.param.wTableViewColor.count) {
+            if (i < self.param.wTableViewColor.count) {
                 tableView.backgroundColor = self.param.wTableViewColor[i];
             }else{
                 tableView.backgroundColor = MenuColor(0xffffff);
             }
-            if (screnFrame&&screnFrame!= MenuShowAnimalBoss) {
+            if (screnFrame && screnFrame!= MenuShowAnimalBoss) {
                 self.emptyView.frame = CGRectMake(0, 0, tableView.frame.size.width, Menu_StatusBarHeight);
                 tableView.tableHeaderView = self.emptyView;
             }
@@ -129,12 +130,12 @@
             tmpTa = tableView;
         }
         [self addHeadFootView:self.showView screnFrame:screnFrame];
-    }else if (type == MenuUICollectionView||
-              type == MenuUICollectionRangeTextField) {  //单collectionView
-        
+    }
+    else if (type == MenuUICollectionView||
+             type == MenuUICollectionRangeTextField) {  //单collectionView
         if (height == 0) {
-            for (WMZDropIndexPath *path in dropArr) {
-                NSArray *arr = [self getArrWithKey:path.key withoutHide:YES];
+            for (WMZDropIndexPath *path in dropArray) {
+                NSArray *arr = [self getArrWithPath:path withoutHide:YES];
                 if (arr.count) {
                     if (path.showAnimalStyle == MenuShowAnimalLeft||
                         path.showAnimalStyle == MenuShowAnimalRight||
@@ -143,30 +144,20 @@
                         screnFrame = path.showAnimalStyle;
                         break;
                     }else{
-                        if (path.showAnimalStyle == MenuShowAnimalPop) {
-                              pop = YES;
-                        }
+                        if (path.showAnimalStyle == MenuShowAnimalPop) pop = YES;
                         NSInteger count = ceil((CGFloat)arr.count/path.collectionCellRowCount);
                         height += (count * (path.cellHeight));
-                        if (count>1) {
-                            height += (count*self.param.wCollectionViewCellSpace);
-                        }
+                        if (count > 1) height += (count*self.param.wCollectionViewCellSpace);
                         height += (path.headViewHeight + path.footViewHeight);
-                        
                     }
                 }
             }
             if (!screnFrame) {
-                //最大为maxHeight
-                if (height > (Menu_Height*(self.param.wMaxHeightScale>1?
-                1:self.param.wMaxHeightScale))) {
-                    height = (Menu_Height*(self.param.wMaxHeightScale>1?
-                    1:self.param.wMaxHeightScale));
-                }
+                ///最大为maxHeight
+                height = MIN(Menu_Height * MIN(1, self.param.wMaxHeightScale), height);
             }
         }else{
-            
-            for (WMZDropIndexPath *path in dropArr) {
+            for (WMZDropIndexPath *path in dropArray) {
                 if (path.showAnimalStyle == MenuShowAnimalLeft ||
                     path.showAnimalStyle == MenuShowAnimalRight||
                     path.showAnimalStyle == MenuShowAnimalBoss) {
@@ -175,8 +166,8 @@
              }
            }
         }
-        WMZDropIndexPath *firstPath = dropArr.firstObject;
-        CGFloat y = (screnFrame&&screnFrame!= MenuShowAnimalBoss)?Menu_StatusBarHeight:0;
+        WMZDropIndexPath *firstPath = dropArray.firstObject;
+        CGFloat y = (screnFrame && screnFrame != MenuShowAnimalBoss)? Menu_StatusBarHeight : 0;
         WMZDropMenuCollectionLayout *layout = [[WMZDropMenuCollectionLayout alloc]initWithType:firstPath.alignType betweenOfCell:self.param.wCollectionViewCellSpace];
         layout.minimumLineSpacing = self.param.wCollectionViewCellSpace;
         layout.minimumInteritemSpacing = self.param.wCollectionViewCellSpace;
@@ -217,12 +208,26 @@
         }
         self.collectionView.delegate = (id)self;
         self.collectionView.dataSource = (id)self;
-        self.collectionView.dropArr = [NSArray arrayWithArray:dropArr];
+        self.collectionView.dropArray = [NSArray arrayWithArray:dropArray];
         self.collectionView.alwaysBounceVertical = YES;
         self.collectionView.frame = CGRectMake(0, y , self.dataView.frame.size.width, height - y);
         [self.dataView addSubview:self.collectionView];
         [self.showView addObject:self.collectionView];
         [self addHeadFootView:self.showView screnFrame:screnFrame];
+    }
+    ///自定义
+    else if (type == MenuUICustom){
+        if(self.delegate && [self.delegate respondsToSelector:@selector(menu:customViewInSection:)]){
+            UIView <WMZDropShowViewProcotol>*customView = [self.delegate menu:self customViewInSection:dropArray.firstObject.section];
+            if(customView && [customView conformsToProtocol:@protocol(WMZDropShowViewProcotol)]){
+                [self.dataView addSubview:customView];
+                [self.showView addObject:customView];
+                [customView layoutIfNeeded];
+                NSLog(@"%@",customView);
+                height = customView.bounds.size.height;
+                
+            }
+        }
     }
     
     if (!screnFrame) {
@@ -230,19 +235,17 @@
             height += CGRectGetHeight(self.confirmView.frame);
             height += self.param.wCollectionViewDefaultFootViewPaddingY;
         }
-        if ([[self.dataView subviews] indexOfObject:self.tableVieHeadView]!= NSNotFound) {
+        if ([[self.dataView subviews] indexOfObject:self.tableVieHeadView] != NSNotFound) {
             height += CGRectGetHeight(self.tableVieHeadView.frame);
         }
     }
-    CGRect rect = [[self.dataViewFrameDic objectForKey:@([self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].showAnimalStyle)] CGRectValue];
+    rect = [[self.dataViewFrameDic objectForKey:@([self getTitleFirstDropWthTitleBtn:self.selectTitleBtn].showAnimalStyle)] CGRectValue];
     rect.size.height  = height;
     self.dataView.frame = rect;
     if (self.param.wCustomDataViewRect) {
-        CGRect rect =  self.param.wCustomDataViewRect(self.dataView.frame);
-        self.dataView.frame = rect;
+        CGRect finalRect =  self.param.wCustomDataViewRect(self.dataView.frame);
+        self.dataView.frame = finalRect;
     }
-    
-    
     ///动画是pop
     self.dataView.layer.masksToBounds = !pop;
     self.shadowView.backgroundColor = pop?[UIColor clearColor]:self.param.wShadowColor;
@@ -274,7 +277,6 @@
         }
     }
 }
-
 /// 添加全局的头尾
 - (void)addHeadFootView:(NSArray*)connectViews screnFrame:(MenuShowAnimalStyle)screnFrame{
     /// 头部
@@ -337,7 +339,7 @@
        if ([connectView isKindOfClass:[WMZDropCollectionView class]]) {
            WMZDropCollectionView *collectionView = (WMZDropCollectionView*)connectView;
            insert = YES;
-           for (WMZDropIndexPath *path in collectionView.dropArr) {
+           for (WMZDropIndexPath *path in collectionView.dropArray) {
                if (path.tapClose) {
                    insert = NO;break;
                }
@@ -432,7 +434,7 @@
     }
     [self updateWithData:arr dropPath:currentDrop normalDropPath:currentDrop more:NO];
     //更新标题
-    [self updateTitle:currentDrop changeArr:[self getArrWithKey:currentDrop.key withoutHide:YES] changeTree:nil];
+    [self updateTitle:currentDrop changeArr:[self getArrWithPath:currentDrop withoutHide:YES] changeTree:nil];
     return result;
 }
 
@@ -450,7 +452,7 @@
         return result;
     }
     __block WMZDropTree *tree = nil;
-    NSArray *dataArr = [self getArrWithKey:currentDrop.key withoutHide:YES];
+    NSArray *dataArr = [self getArrWithPath:currentDrop withoutHide:YES];
     __weak WMZDropDownMenu *weak = self;
     [dataArr enumerateObjectsUsingBlock:^(WMZDropTree *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx == indexPathRow) {
@@ -460,7 +462,7 @@
         }
     }];
     //更新标题
-    [self updateTitle:currentDrop changeArr:[self getArrWithKey:currentDrop.key withoutHide:YES] changeTree:tree];
+    [self updateTitle:currentDrop changeArr:[self getArrWithPath:currentDrop withoutHide:YES] changeTree:tree];
     [self updateSubView:currentDrop more:NO];
     return result;
 }
@@ -496,7 +498,7 @@
     //更新数据源
     if (currentDrop.key&&treeArr) {
         self.selectArr = [NSMutableArray new];
-        [self.dataDic setObject:treeArr forKey:currentDrop.key];
+        currentDrop.treeArr = treeArr;
         [self updateSubView:dropIndexPath more:more];
     }
 }
@@ -506,11 +508,11 @@
     if (currentDrop.section == self.selectTitleBtn.tag - 1000) return;
     WMZDropMenuBtn *currentBtn = self.titleBtnArr[currentDrop.section];
     NSMutableArray *selectArr = [NSMutableArray new];
-    NSMutableArray *dropArr = [NSMutableArray new];
+    NSMutableArray *dropArray = [NSMutableArray new];
     for (WMZDropIndexPath *dropPath in self.dropPathArr) {
         if (dropPath.section == currentDrop.section) {
-            [dropArr addObject:dropPath];
-            NSArray *data = [self getArrWithKey:dropPath.key withoutHide:YES];
+            [dropArray addObject:dropPath];
+            NSArray *data = [self getArrWithPath:dropPath withoutHide:YES];
             NSMutableArray *sectionSelectArr = [NSMutableArray new];
             [data enumerateObjectsUsingBlock:^(WMZDropTree * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (obj.isSelected) {
@@ -541,8 +543,8 @@
     if (selectArr.count>0) {
         NSString *showTitle = nil;
         if (currentDrop.UIStyle == MenuUITableView) {
-            WMZDropIndexPath *lastDrop = dropArr.lastObject;
-            NSArray *arr = [self getArrWithKey:lastDrop.key withoutHide:YES];
+            WMZDropIndexPath *lastDrop = dropArray.lastObject;
+            NSArray *arr = [self getArrWithPath:lastDrop withoutHide:YES];
             NSMutableArray *lastSelectArr = [NSMutableArray new];
             [selectArr enumerateObjectsUsingBlock:^(WMZDropTree *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([arr indexOfObject:obj]!=NSNotFound) {
@@ -567,7 +569,7 @@
             }
         }
         if (showTitle) {
-           [self changeTitleConfig:@{@"name":showTitle} withBtn:currentBtn];
+           [self changeTitleConfig:@{WMZMenuTitleNormal:showTitle} withBtn:currentBtn];
         }
     }else{
          [self changeNormalConfig:@{} withBtn:currentBtn];
@@ -584,7 +586,7 @@
          if (drop.section == section) {
              if (row>=0) {
                  if (drop.row == row) {
-                     NSArray *arr = [self getArrWithKey:drop.key withoutHide:NO];
+                     NSArray *arr = [self getArrWithPath:drop withoutHide:NO];
                      [arr enumerateObjectsUsingBlock:^(WMZDropTree*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                         if ([obj isKindOfClass:[WMZDropTree class]]) {
                             if (obj.isSelected) {
@@ -595,7 +597,7 @@
                      break;
                  }
              }else{
-                 NSArray *arr = [self getArrWithKey:drop.key withoutHide:NO];
+                 NSArray *arr = [self getArrWithPath:drop withoutHide:NO];
                  [arr enumerateObjectsUsingBlock:^(WMZDropTree*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if ([obj isKindOfClass:[WMZDropTree class]]) {
                         if (obj.isSelected) {
@@ -614,7 +616,7 @@
 - (void)updateSubView:(WMZDropIndexPath*)dropPath more:(BOOL)more{
       //获取需要更新的drop
       NSMutableArray *updateDrop = [NSMutableArray new];
-      if ([dropPath.key isEqualToString:moreTableViewKey]) {
+      if ([dropPath.key isEqualToString:MoreTableViewKey]) {
           [updateDrop addObject:dropPath];
       }else{
           for (WMZDropIndexPath *tmpDrop in self.dropPathArr) {
@@ -692,13 +694,13 @@
     [self showAnimal:dropPath.showAnimalStyle view:self.moreView durtion:self.param.wMenuDurtion block:^{}];
     WMZDropIndexPath *path = nil;
     for (WMZDropIndexPath *tmpPath in self.dropPathArr) {
-        if ([tmpPath.key isEqualToString:moreTableViewKey]) {
+        if ([tmpPath.key isEqualToString:MoreTableViewKey]) {
             path = tmpPath; break;
         }
     }
     if (!path) {
         path = [WMZDropIndexPath new];
-        path.key = moreTableViewKey;
+        path.key = MoreTableViewKey;
         path.editStyle = dropPath.editStyle;
         path.headViewHeight = dropPath.headViewHeight;
         path.UIStyle = MenuUITableView;
@@ -710,8 +712,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(menu:moreDataForRowAtDropIndexPath:)]) {
         NSArray *arr = [self.delegate menu:self moreDataForRowAtDropIndexPath:dropPath];
         NSMutableArray *treeArr = [NSMutableArray new];
-        if (![self getArrWithKey:moreTableViewKey withoutHide:NO]) {
-            
+        if (!path.treeArr) {
             for (int k = 0; k<arr.count; k++) {
                 id dic = arr[k];
                 WMZDropTree *tree = [WMZDropTree new];
@@ -730,16 +731,15 @@
                 }
             }
             if (treeArr) {
-                [self.dataDic setObject:treeArr forKey:path.key];
-                NSArray *nowArr = [self getArrWithKey:dropPath.key withoutHide:YES];
+                path.treeArr = treeArr;
+                NSArray *nowArr = [self getArrWithPath:dropPath withoutHide:YES];
                 NSMutableArray *marr = [NSMutableArray arrayWithArray:nowArr];
                 for (WMZDropTree *tree in treeArr) {
                     if (tree) {
                         [marr addObject:tree];
                     }
                 }
-                
-                [self.dataDic setObject:marr forKey:dropPath.key];
+                path.treeArr = marr;
             }
         }
         [self.moreView addSubview:tableView];

@@ -1,23 +1,26 @@
-
-
 //
-//  TaoBaoDdemo.m
+//  CustomVC.m
 //  WMZDropDownMenu
 //
-//  Created by wmz on 2019/11/26.
-//  Copyright © 2019 wmz. All rights reserved.
+//  Created by wmz on 2022/9/27.
+//  Copyright © 2022 wmz. All rights reserved.
 //
 
-#import "TaoBaoDdemo.h"
-@interface TaoBaoDdemo ()
+#import "CustomVC.h"
+#import "CustomView.h"
 
+@interface CustomVC ()
+@property (nonatomic, strong) WMZDropDownMenu *menu;
+@property (nonatomic, strong) CustomView *customView;
 @end
 
-@implementation TaoBaoDdemo
+@implementation CustomVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.customView = [[CustomView alloc]initWithFrame:CGRectMake(0, 0, Menu_Width, 150)];
+    
     WMZDropMenuParam *param =
     MenuParam()
     .wMainRadiusSet(0)
@@ -31,27 +34,24 @@
     
     WMZDropDownMenu *menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];
     menu.delegate = self;
+    self.menu = menu;
     [self.view addSubview:menu];
-    
-    //主动调用
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [menu.titleBtnArr enumerateObjectsUsingBlock:^(WMZDropMenuBtn*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            if (idx == menu.titleBtnArr.count-1) {
-//                if ([obj isKindOfClass:[WMZDropMenuBtn class]]) {
-//                    [obj sendActionsForControlEvents:UIControlEventTouchUpInside];
-//                }
-//            }
-//        }];
-//    });
 }
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-         @{WMZMenuTitleNormal:@"综合",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"综合",
+           WMZMenuTitleImage:@"menu_dowm",
+           WMZMenuTitleSelectImage:@"menu_up"},
          @"销量",
-         @{WMZMenuTitleNormal:@"视频",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
-         @{WMZMenuTitleImage:@"menu_pubu_2",WMZMenuTitleSelectImage:@"menu_pubu_1"},
-         @{WMZMenuTitleNormal:@"筛选",WMZMenuTitleImage:@"menu_shaixuan",WMZMenuTitleSelectImage:@"menu_shaixuan"},
+         @{WMZMenuTitleNormal:@"视频",
+           WMZMenuTitleImage:@"menu_dowm",
+           WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleImage:@"menu_pubu_2",
+           WMZMenuTitleSelectImage:@"menu_pubu_1"},
+         @{WMZMenuTitleNormal:@"筛选",
+           WMZMenuTitleImage:@"menu_shaixuan",
+           WMZMenuTitleSelectImage:@"menu_shaixuan"},
     ];
 }
 
@@ -108,7 +108,7 @@
 }
 - (MenuUIStyle)menu:(WMZDropDownMenu *)menu uiStyleForRowIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 0) {
-        return MenuUITableView;
+        return MenuUICustom;
     }else if (dropIndexPath.section == 4) {
         if (dropIndexPath.row == 2 || dropIndexPath.row == 3) {
             return MenuUICollectionRangeTextField;
@@ -119,6 +119,7 @@
 }
 
 - (MenuEditStyle)menu:(WMZDropDownMenu *)menu editStyleForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
+    if (dropIndexPath.section == 0) return MenuEditCustom;
     if (dropIndexPath.section == 1) return MenuEditNone;
     if (dropIndexPath.section == 2 ||dropIndexPath.section == 3 ) return MenuEditCheck;
     return MenuEditOneCheck;
@@ -130,26 +131,10 @@
     }
     return 35;
 }
-
-- (BOOL)menu:(WMZDropDownMenu *)menu showExpandAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
-    if (dropIndexPath.section == 4) {
-        if (dropIndexPath.row>3) {
-            return YES;
-        }
+- (UIView<WMZDropShowViewProcotol> *)menu:(WMZDropDownMenu *)menu customViewInSection:(NSInteger)section{
+    if(section == 0){
+        return self.customView;
     }
-    return NO;
+    return nil;
 }
-
-- (void)menu:(WMZDropDownMenu *)menu customDefauultCollectionFootView:(WMZDropConfirmView *)confirmView{
-    confirmView.showBorder = NO;
-    CGFloat width = 80;
-    confirmView.resetFrame = [NSValue valueWithCGRect:CGRectMake(confirmView.frame.size.width*0.45, 0,width , confirmView.frame.size.height)];
-    confirmView.confirmFrame = [NSValue valueWithCGRect:CGRectMake(confirmView.frame.size.width*0.45+width, 0,width , confirmView.frame.size.height)];
-    //渐变色
-    confirmView.confirmBtn.backgroundColor = [UIColor menuColorGradientChangeWithSize:CGSizeMake(width, confirmView.frame.size.height) direction:MenuGradientChangeDirectionLevel startColor:MenuColor(0xffc13d) endColor:MenuColor(0xff9233)];
-    confirmView.resetBtn.backgroundColor = [UIColor menuColorGradientChangeWithSize:CGSizeMake(width, confirmView.frame.size.height) direction:MenuGradientChangeDirectionLevel startColor:MenuColor(0xff752d) endColor:MenuColor(0xff4f2b)];
-    //半边圆角 淘宝样式
-    confirmView.showRdio = YES;
-}
-
 @end

@@ -12,6 +12,7 @@
 #import "WMZDropCollectionView.h"
 #import "Aspects.h"
 #import "WMZDropMenuBtn.h"
+#import "WMZDropShowViewProcotol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 标题数组
 @property (nonatomic, strong) NSArray *titleArr;
 /// DeopindexPath的数组
-@property (nonatomic, strong) NSMutableArray *dropPathArr;
+@property (nonatomic, strong) NSMutableArray <WMZDropIndexPath*>*dropPathArr;
 /// 显示的view的数组
 @property (nonatomic, strong) NSMutableArray *showView;
 /// 代理
@@ -64,8 +65,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) WMZDropMenuBtn *selectTitleBtn;
 /// 上次选中的标题
 @property (nonatomic, assign) NSInteger lastSelectIndex;
-/// 全部的数据源
-@property (nonatomic, strong) NSMutableDictionary *dataDic;
 /// 选中的数据源
 @property (nonatomic, strong) NSMutableArray *selectArr;
 /// 相互排斥的标题数组
@@ -106,9 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIBezierPath*)getMyDownRightPath;
 
-- (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide withInfo:(NSDictionary*)info;
-
-- (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide;
+- (NSArray*)getArrWithPath:(WMZDropIndexPath*)path withoutHide:(BOOL)hide;
 /// 点击选中方法
 - (void)cellTap:(WMZDropIndexPath*)dropPath data:(NSArray*)arr indexPath:(NSIndexPath*)indexPath;
 

@@ -7,16 +7,13 @@
 //
 
 #import "WMZDropMenuBtn.h"
-#import "WMZDropMenuEnum.h"
+#import "WMZDropDwonMenuConfig.h"
+#import "WMZDropShowViewProcotol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 自定义collection
-@interface WMZDropCollectionView : UICollectionView
-
-@property (nonatomic, strong) WMZDropIndexPath* dropIndex;
-
-@property (nonatomic, strong) NSArray* dropArr;
+@interface WMZDropCollectionView : UICollectionView<WMZDropShowViewProcotol>
 
 @end
 

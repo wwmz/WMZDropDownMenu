@@ -12,6 +12,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDropMenuParam : NSObject
 
+/// 标题可选参数
+typedef NSString *WMZMenuTitleKey NS_STRING_ENUM;
+/// 标题
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleNormal;
+/// 选中的标题
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleSelect;
+/// 选中状态下再次点中的标题
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleReSelect;
+/// 字体大小
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleFontNum;
+/// 字体对象
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleFont;
+/// 字体颜色
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleColor;
+/// 选中的字体颜色
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleSelectColor;
+/// 图片
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleImage;
+/// 图片
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleSelectImage;
+/// 选中状态下再点击的图片~>用于点击两次才回到原来的场景
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleReSelectImage;
+/// 最后一个固定
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleLastFix;
+/// 隐藏默认给的图标
+FOUNDATION_EXPORT WMZMenuTitleKey const WMZMenuTitleHideDefaultImage;
+
 /// 初始化
 WMZDropMenuParam * MenuParam(void);
 

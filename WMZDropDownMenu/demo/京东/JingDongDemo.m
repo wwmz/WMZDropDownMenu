@@ -36,15 +36,15 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-        @{@"name":@"综合"},
-        @{@"name":@"销量",@"selectTitle":@"改变",@"hideDefatltImage":@(YES)},
-        @{@"name":@"距离价格",
-          @"selectTitle":@"由小到大",
-          @"reSelectTitle":@"由大到小",
-          @"normalImage":@"menu_shangxia",
-          @"selectImage":@"menu_xiangshang",
-          @"reSelectImage":@"menu_xiangxia"},
-         @{@"name":@"筛选",@"normalImage":@"menu_shaixuan"},
+        @{WMZMenuTitleNormal:@"综合"},
+        @{WMZMenuTitleNormal:@"销量",WMZMenuTitleSelect:@"改变",WMZMenuTitleHideDefaultImage:@(YES)},
+        @{WMZMenuTitleNormal:@"距离价格",
+          WMZMenuTitleSelect:@"由小到大",
+          WMZMenuTitleReSelect:@"由大到小",
+          WMZMenuTitleImage:@"menu_shangxia",
+          WMZMenuTitleSelectImage:@"menu_xiangshang",
+          WMZMenuTitleReSelectImage:@"menu_xiangxia"},
+         @{WMZMenuTitleNormal:@"筛选",WMZMenuTitleImage:@"menu_shaixuan"},
     ];
 }
 
@@ -63,7 +63,7 @@
 - (NSArray *)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 0) {
         //默认选中
-        return @[@{@"name":@"综合排序",@"isSelected":@(YES)},@"评论数从高到低"];
+        return @[@{WMZMenuTitleNormal:@"综合排序",@"isSelected":@(YES)},@"评论数从高到低"];
     }else if (dropIndexPath.section == 3) {
         if (dropIndexPath.row == 0)
             return @[@"京东物流",@"货到d付款",@"仅看有货",@"促销",@"京东国际",@"Plus专项",
@@ -78,7 +78,7 @@
                  @"手机配件",
                  @"影音娱乐",
                  ////查看更多 checkMore传YES
-                 @{@"name":@"更多分类>>",@"checkMore":@(YES)
+                 @{WMZMenuTitleNormal:@"更多分类>>",@"checkMore":@(YES)
                  }
         ];
         if (dropIndexPath.row == 4)
@@ -95,7 +95,7 @@
 - (NSString*)menu:(WMZDropDownMenu *)menu titleForHeadViewAtDropIndexPath:(WMZDropIndexPath*)dropIndexPath{
     if (dropIndexPath.section == 3) {
         return titleArr[dropIndexPath.row];
-    }else if ([dropIndexPath.key isEqualToString:moreTableViewKey]) {
+    }else if ([dropIndexPath.key isEqualToString:MoreTableViewKey]) {
         return @"全部分类";
     }
     return @"";
@@ -157,7 +157,7 @@
 
 - (UITableViewCell*)menu:(WMZDropDownMenu *)menu cellForUITableView:(WMZDropTableView*)tableView AtIndexPath:(NSIndexPath*)indexpath dataForIndexPath:(WMZDropTree*)model{
     //自定义查看更多的样式 其他自定义代理也是根据这个判断
-    if ([tableView.dropIndex.key isEqualToString:moreTableViewKey]) {
+    if ([tableView.dropIndex.key isEqualToString:MoreTableViewKey]) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
@@ -227,13 +227,13 @@
 - (NSArray *)menu:(WMZDropDownMenu *)menu moreDataForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
     if (dropIndexPath.section == 3 && dropIndexPath.row == 3) {
         return @[
-            @{@"name":@"手机",@"cellHeight":@(50)},
-            @{@"name":@"手机111",@"cellHeight":@(50)},
-            @{@"name":@"手机222",@"cellHeight":@(50)},
-            @{@"name":@"手机333",@"cellHeight":@(50)},
-            @{@"name":@"手机444",@"cellHeight":@(50)},
-            @{@"name":@"手机555",@"cellHeight":@(50)},
-            @{@"name":@"手机0000000",@"cellHeight":@(50)}];
+            @{WMZMenuTitleNormal:@"手机",@"cellHeight":@(50)},
+            @{WMZMenuTitleNormal:@"手机111",@"cellHeight":@(50)},
+            @{WMZMenuTitleNormal:@"手机222",@"cellHeight":@(50)},
+            @{WMZMenuTitleNormal:@"手机333",@"cellHeight":@(50)},
+            @{WMZMenuTitleNormal:@"手机444",@"cellHeight":@(50)},
+            @{WMZMenuTitleNormal:@"手机555",@"cellHeight":@(50)},
+            @{WMZMenuTitleNormal:@"手机0000000",@"cellHeight":@(50)}];
     }
     return @[];
 }

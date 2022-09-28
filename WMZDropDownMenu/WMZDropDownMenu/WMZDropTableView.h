@@ -6,13 +6,12 @@
 //  Copyright © 2020 wmz. All rights reserved.
 //
 #import "WMZDropMenuParam.h"
+#import "WMZDropShowViewProcotol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 自定义tableview
-@interface WMZDropTableView : UITableView
-///dropIndex
-@property (nonatomic, strong) WMZDropIndexPath* dropIndex;
+@interface WMZDropTableView : UITableView<WMZDropShowViewProcotol>
 
 @end
 

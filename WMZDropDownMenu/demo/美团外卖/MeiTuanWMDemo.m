@@ -30,10 +30,10 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-         @{@"name":@"综合排序",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
-         @{@"name":@"品类",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
-         @{@"name":@"速度",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
-         @{@"name":@"全部筛选",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
+         @{WMZMenuTitleNormal:@"综合排序",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"品类",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"速度",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"全部筛选",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
     ];
 }
 
@@ -66,8 +66,8 @@
                                                 @"优惠商家",@"满减优惠",@"近端领券",@"折扣商品",
                                                 @"优惠商家",@"满减优惠",@"近端领券",@"折扣商品"];
            if (dropIndexPath.row == 3) return @[@"跨天预定",@"开发票",
-                                                @{@"name":@"赠准时宝",@"image":@"menu_xinyong"},
-                                                @{@"name":@"极速退款",@"image":@"menu_xinyong"}];
+                                                @{WMZMenuTitleNormal:@"赠准时宝",@"image":@"menu_xinyong"},
+                                                @{WMZMenuTitleNormal:@"极速退款",@"image":@"menu_xinyong"}];
           if (dropIndexPath.row == 4) return @[@"30分钟内",@"40分钟内",@"50分钟内",@"60分钟内",
                                                @"30km内",@"40km内",@"50km内",@"60km内"];
       }

@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDropDownMenu (NormalView)
 /// 添加ui
-- (void)addTableView;
+- (void)addShowUI;
 /// 添加全局的头尾
 - (void)addHeadFootView:(NSArray*)connectViews screnFrame:(MenuShowAnimalStyle)screnFrame;
 /// 获取当前标题对应的首个drop

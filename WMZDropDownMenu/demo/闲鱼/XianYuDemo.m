@@ -49,10 +49,10 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-        @{@"name":@"综合排序"},
+        @{WMZMenuTitleNormal:@"综合排序"},
         @"信用优先",   //取消默认图片
-        @{@"name":@"区域"},
-        @{@"name":@"筛选",@"normalImage":@"menu_shaixuan"},
+        @{WMZMenuTitleNormal:@"区域"},
+        @{WMZMenuTitleNormal:@"筛选",WMZMenuTitleImage:@"menu_shaixuan"},
     ];
 }
 
@@ -80,9 +80,9 @@
             return @[@"全新",@"实拍",@"包邮",@"支持验货",@"玩家宝贝"];
         }else if (dropIndexPath.row == 1) {
             return @[
-                @{@"image":@"menu_xinyong",@"name":@"芝麻信用 极好(700分)以上"},
-                @{@"image":@"menu_xinyong",@"name":@"芝麻信用 优秀(650分)以上"},
-                @{@"image":@"menu_xinyong",@"name":@"芝麻信用 良好(600分)以上"},
+                @{@"image":@"menu_xinyong",WMZMenuTitleNormal:@"芝麻信用 极好(700分)以上"},
+                @{@"image":@"menu_xinyong",WMZMenuTitleNormal:@"芝麻信用 优秀(650分)以上"},
+                @{@"image":@"menu_xinyong",WMZMenuTitleNormal:@"芝麻信用 良好(600分)以上"},
             ];
         }else if (dropIndexPath.row == 2) {
             return @[

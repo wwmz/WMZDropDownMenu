@@ -23,46 +23,46 @@
     if ([dic isKindOfClass:[NSString class]]) {
         [self setTitle:dic forState:UIControlStateNormal];
     }else if([dic isKindOfClass:[NSDictionary class]]){
-        [self setTitle:dic[@"name"] forState:UIControlStateNormal];
+        [self setTitle:dic[WMZMenuTitleNormal] forState:UIControlStateNormal];
     }
     CGFloat font = 14.0;
-    if (dictionary&&dic[@"font"]) {font = [dic[@"font"]floatValue];}
-    if (dictionary&&dic[@"fontObject"]&&[dic[@"fontObject"] isKindOfClass:[UIFont class]]) {
-        self.titleLabel.font = dic[@"fontObject"];
+    if (dictionary&&dic[WMZMenuTitleFontNum]) {font = [dic[WMZMenuTitleFontNum]floatValue];}
+    if (dictionary&&dic[WMZMenuTitleFont]&&[dic[WMZMenuTitleFont] isKindOfClass:[UIFont class]]) {
+        self.titleLabel.font = dic[WMZMenuTitleFont];
     }else{
         self.titleLabel.font = [UIFont systemFontOfSize:font];
     }
     UIColor *normalColor = self.param.wCollectionViewCellTitleColor;
-    if (dictionary&&dic[@"normalColor"]) {normalColor = dic[@"normalColor"];}
+    if (dictionary&&dic[WMZMenuTitleColor]) {normalColor = dic[WMZMenuTitleColor];}
     UIColor *selectColor = self.param.wCollectionViewCellSelectTitleColor;
-    if (dictionary&&dic[@"selectColor"]) {selectColor = dic[@"selectColor"];}
-    if (dictionary&&dic[@"reSelectImage"]) {self.reSelectImage = dic[@"reSelectImage"];}
-    if (dictionary&&dic[@"selectTitle"]) {self.selectTitle = dic[@"selectTitle"];}
-    if (dictionary&&dic[@"reSelectTitle"]) {self.reSelectTitle = dic[@"reSelectTitle"];}
+    if (dictionary&&dic[WMZMenuTitleSelectColor]) {selectColor = dic[WMZMenuTitleSelectColor];}
+    if (dictionary&&dic[WMZMenuTitleReSelectImage]) {self.reSelectImage = dic[WMZMenuTitleReSelectImage];}
+    if (dictionary&&dic[WMZMenuTitleSelect]) {self.selectTitle = dic[WMZMenuTitleSelect];}
+    if (dictionary&&dic[WMZMenuTitleReSelect]) {self.reSelectTitle = dic[WMZMenuTitleReSelect];}
     NSString *seletImage = nil;
-    if (dictionary&&dic[@"selectImage"]) {
-        seletImage = dic[@"selectImage"];
+    if (dictionary&&dic[WMZMenuTitleSelectImage]) {
+        seletImage = dic[WMZMenuTitleSelectImage];
     }else{
         if (dictionary) {
-            if (!dic[@"hideDefatltImage"]||
-                (dic[@"hideDefatltImage"]&&![dic[@"hideDefatltImage"] boolValue])) {
+            if (!dic[WMZMenuTitleHideDefaultImage]||
+                (dic[WMZMenuTitleHideDefaultImage]&&![dic[WMZMenuTitleHideDefaultImage] boolValue])) {
                  seletImage = @"menu_xiangshang";
             }
         }
     }
     NSString *normalImage = nil;
-    if (dictionary&&dic[@"normalImage"]) {
-        normalImage = dic[@"normalImage"];
+    if (dictionary&&dic[WMZMenuTitleImage]) {
+        normalImage = dic[WMZMenuTitleImage];
     }else{
         if (dictionary) {
-            if (!dic[@"hideDefatltImage"]||
-                (dic[@"hideDefatltImage"]&&![dic[@"hideDefatltImage"] boolValue])) {
+            if (!dic[WMZMenuTitleHideDefaultImage]||
+                (dic[WMZMenuTitleHideDefaultImage]&&![dic[WMZMenuTitleHideDefaultImage] boolValue])) {
                 normalImage = @"menu_xiangxia";
             }
         }
     }
-    if ((dictionary&&dic[@"normalImage"])&&(dictionary&&!dic[@"selectImage"])) {
-        seletImage = dic[@"normalImage"];
+    if ((dictionary&&dic[WMZMenuTitleImage])&&(dictionary&&!dic[WMZMenuTitleSelectImage])) {
+        seletImage = dic[WMZMenuTitleImage];
     }
     [self setTitleColor:normalColor forState:UIControlStateNormal];
     self.normalImage = normalImage;

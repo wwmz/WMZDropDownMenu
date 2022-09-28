@@ -34,10 +34,10 @@
     [self notifications];
 }
 
-
 - (void)notifications{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeView) name:CloseMenuNotificationContentKey object:nil];
 }
 
 
@@ -70,7 +70,7 @@
     if (@available(iOS 15.0, *)) {
         tableView.sectionHeaderTopPadding = 0;
     }
-    if (path&&path.key) {
+    if (path && path.key) {
         tableView.dropIndex = path;
     }
     tableView.delegate = (id)self;
@@ -157,28 +157,30 @@
 }
 #pragma -mark 改变标题颜色和文字
 - (void)changeTitleConfig:(NSDictionary*)config withBtn:(WMZDropMenuBtn*)currentBtn{
-    if (currentBtn.selectTitle) {
-        [currentBtn setTitle:currentBtn.selectTitle forState:UIControlStateNormal];
+    if (config[WMZMenuTitleNormal]) {
+        [currentBtn setTitle:config[WMZMenuTitleNormal] forState:UIControlStateNormal];
     }else{
-        if (config[@"name"]) {
-            [currentBtn setTitle:config[@"name"]?:@"" forState:UIControlStateNormal];
+        if (currentBtn.selectTitle) {
+            [currentBtn setTitle:currentBtn.selectTitle forState:UIControlStateNormal];
         }
     }
+    
     WMZDropIndexPath *path = config[@"dropPath"];
     NSNumber *row = config[@"row"];
     [currentBtn setTitleColor:currentBtn.selectColor forState:UIControlStateNormal];
     [currentBtn setTitleColor:currentBtn.selectColor forState:UIControlStateSelected];
     
-    if(self.delegate&&[self.delegate respondsToSelector:@selector(menu:changeTitle:selectBtn:atDropIndexPath:dataIndexPath:)]){
+    if(self.delegate &&
+       [self.delegate respondsToSelector:@selector(menu:changeTitle:selectBtn:atDropIndexPath:dataIndexPath:)]){
         id customInfo =  [self.delegate menu:(WMZDropDownMenu*)self changeTitle:[currentBtn titleForState:UIControlStateNormal]  selectBtn:currentBtn atDropIndexPath:path dataIndexPath:row?[row integerValue]:NSNotFound];
         if (customInfo) {
             if ([customInfo isKindOfClass:[NSDictionary class]]) {
-                if (customInfo[@"name"]) {
-                    [currentBtn setTitle:customInfo[@"name"] forState:UIControlStateNormal];
+                if (customInfo[WMZMenuTitleNormal]) {
+                    [currentBtn setTitle:customInfo[WMZMenuTitleNormal] forState:UIControlStateNormal];
                 }
-                if (customInfo[@"selectColor"]) {
-                    [currentBtn setTitleColor:customInfo[@"selectColor"] forState:UIControlStateNormal];
-                    [currentBtn setTitleColor:customInfo[@"selectColor"] forState:UIControlStateSelected];
+                if (customInfo[WMZMenuTitleSelectColor]) {
+                    [currentBtn setTitleColor:customInfo[WMZMenuTitleSelectColor] forState:UIControlStateNormal];
+                    [currentBtn setTitleColor:customInfo[WMZMenuTitleSelectColor] forState:UIControlStateSelected];
                 }
             }else if ([customInfo isKindOfClass:[NSString class]]){
                [currentBtn setTitle:(NSString*)customInfo forState:UIControlStateNormal];
@@ -192,7 +194,6 @@
     [currentBtn setTitleColor:currentBtn.normalColor forState:UIControlStateNormal];
     [currentBtn setTitleColor:currentBtn.normalColor forState:UIControlStateSelected];
     [currentBtn setTitle:currentBtn.normalTitle forState:UIControlStateNormal];
-    
 }
 
 - (NSMutableDictionary*)dataViewFrameDic{
@@ -221,34 +222,27 @@
     return _shadomViewFrameDic;
 }
 
-- (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide withInfo:(NSDictionary*)info{
-    if ([key isEqualToString:moreTableViewKey]) {
-        return [info objectForKey:key];
+- (NSArray*)getArrWithPath:(WMZDropIndexPath*)path withoutHide:(BOOL)hide{
+    if ([path.key isEqualToString:MoreTableViewKey] || !hide) {
+        return path.treeArr;
     }
     NSMutableArray *marr = [NSMutableArray new];
-    NSArray *arr = [info objectForKey:key];
-    [arr enumerateObjectsUsingBlock:^(WMZDropTree * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [path.treeArr enumerateObjectsUsingBlock:^(WMZDropTree * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (hide) {
             if (!obj.hide) {
                 [marr addObject:obj];
             }
-        }else{
-            [marr addObject:obj];
         }
     }];
     return [NSArray arrayWithArray:marr];
 }
 
-- (NSArray*)getArrWithKey:(NSString*)key withoutHide:(BOOL)hide{
-    return [self getArrWithKey:key withoutHide:hide withInfo:self.dataDic];
-}
-
 - (UIBezierPath*)getMyDownPath{
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(0, 0)];
-    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width*0.25-10,0)];
-    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width*0.25, -10)];
-    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width*0.25+10, 0) ];
+    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width * 0.25 - 10,0)];
+    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width * 0.25, -10)];
+    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width * 0.25 + 10, 0) ];
     [path closePath];
     return path;
 }
@@ -256,9 +250,9 @@
 - (UIBezierPath*)getMyDownRightPath{
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(0, 0)];
-    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width*0.75-10,0)];
+    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width*0.75 - 10,0)];
     [path addLineToPoint:CGPointMake(self.dataView.frame.size.width*0.75, -10)];
-    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width*0.75+10, 0) ];
+    [path addLineToPoint:CGPointMake(self.dataView.frame.size.width*0.75 + 10, 0) ];
     [path closePath];
     return path;
 }
@@ -286,7 +280,6 @@
         if (@available(iOS 11.0, *)) {
             _titleView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
-        _titleView.frame = self.bounds;
     }
     return _titleView;
 }
@@ -340,13 +333,6 @@
     return _titleBtnArr;
 }
 
-- (NSMutableDictionary *)dataDic{
-    if (!_dataDic) {
-        _dataDic = [NSMutableDictionary new];
-    }
-    return _dataDic;
-}
-
 - (NSMutableArray *)mutuallyExclusiveArr{
     if (!_mutuallyExclusiveArr) {
         _mutuallyExclusiveArr = [NSMutableArray new];
@@ -357,9 +343,4 @@
 - (void)setDelegate:(id<WMZDropMenuDelegate>)delegate{
     _delegate = delegate;
 }
-
-- (void)dealloc{
-    NSLog(@"dealloc");
-}
-
 @end

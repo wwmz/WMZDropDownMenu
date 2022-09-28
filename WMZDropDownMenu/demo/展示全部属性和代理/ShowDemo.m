@@ -85,21 +85,21 @@
  1 传字符串数组 其余属性为默认
  2 可传带字典的数组
  字典参数@{
- @"name":@"标题",
- @"font":@(15)(字体大小)
- @"normalColor":[UIColor blackClor](普通状态下的字体颜色)
- @"selectColor":[UIColor redColor](选中状态下的字体颜色)
- @"normalImage":@"1"(普通状态下的图片)
- @"selectImage":@"2"(选中状态下的图片)
- @"reSelectImage":@"3"(选中状态下再点击的图片~>用于点击两次才回到原来的场景)
- @"lastFix":@(YES) (最后一个固定在在右边,仅最后一个有效)
+ WMZMenuTitleNormal:@"标题",
+ WMZMenuTitleFontNum:@(15)(字体大小)
+ WMZMenuTitleColor:[UIColor blackClor](普通状态下的字体颜色)
+ WMZMenuTitleSelectColor:[UIColor redColor](选中状态下的字体颜色)
+ WMZMenuTitleImage:@"1"(普通状态下的图片)
+ WMZMenuTitleSelectImage:@"2"(选中状态下的图片)
+ WMZMenuTitleReSelectImage:@"3"(选中状态下再点击的图片~>用于点击两次才回到原来的场景)
+ WMZMenuTitleLastFix:@(YES) (最后一个固定在在右边,仅最后一个有效)
  }
 */
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-        @{@"name":@"综合"},
-        @{@"name":@"品类",@"normalImage":@"menu_twoCheck",
-        @"selectImage":@"menu_xiangshang",@"reSelectImage":@"menu_xiangxia"},
+        @{WMZMenuTitleNormal:@"综合"},
+        @{WMZMenuTitleNormal:@"品类",WMZMenuTitleImage:@"menu_twoCheck",
+        WMZMenuTitleSelectImage:@"menu_xiangshang",WMZMenuTitleReSelectImage:@"menu_xiangxia"},
         @"速度",
         @"筛选",
         ];
@@ -133,11 +133,11 @@
             {
                 //带图片
                 return @[
-                    @{@"name":@"11",@"image":@"menu_xinyong"},
-                    @{@"name":@"22",@"image":@"menu_xinyong"},
-                    @{@"name":@"33",@"image":@"menu_xinyong"},
-                    @{@"name":@"44",@"image":@"menu_xinyong"},
-                    @{@"name":@"55",@"image":@"menu_xinyong"},
+                    @{WMZMenuTitleNormal:@"11",@"image":@"menu_xinyong"},
+                    @{WMZMenuTitleNormal:@"22",@"image":@"menu_xinyong"},
+                    @{WMZMenuTitleNormal:@"33",@"image":@"menu_xinyong"},
+                    @{WMZMenuTitleNormal:@"44",@"image":@"menu_xinyong"},
+                    @{WMZMenuTitleNormal:@"55",@"image":@"menu_xinyong"},
                 ];
             }
             break;

@@ -48,13 +48,13 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     if (menu.tag == 111) {
-        return @[@{@"name":@"综合",},
+        return @[@{WMZMenuTitleNormal:@"综合",},
                  @"销量",
-                 @{@"name":@"品牌",@"normalImage":@"menu_shaixuan",@"selectImage":@"menu_shaixuan"},
-                 @{@"name":@"筛选",@"normalImage":@"menu_shaixuan",@"selectImage":@"menu_shaixuan"},
-                 @{@"normalImage":@"menu_pubu_2",@"selectImage":@"menu_pubu_1"}];
+                 @{WMZMenuTitleNormal:@"品牌",WMZMenuTitleImage:@"menu_shaixuan",WMZMenuTitleSelectImage:@"menu_shaixuan"},
+                 @{WMZMenuTitleNormal:@"筛选",WMZMenuTitleImage:@"menu_shaixuan",WMZMenuTitleSelectImage:@"menu_shaixuan"},
+                 @{WMZMenuTitleImage:@"menu_pubu_2",WMZMenuTitleSelectImage:@"menu_pubu_1"}];
     }
-    return @[@"黑色星期五",@"新货",@"唯品自营",@{@"name":@"布衣"}];
+    return @[@"黑色星期五",@"新货",@"唯品自营",@{WMZMenuTitleNormal:@"布衣"}];
 }
 
 - (NSInteger)menu:(WMZDropDownMenu *)menu numberOfRowsInSection:(NSInteger)section{
@@ -71,14 +71,14 @@
     if (menu.tag == 111) {
         if (dropIndexPath.section == 0) return @[@"综合排序",@"折扣优先",@"价格由高到低",@"价格由低到高"];
         if (dropIndexPath.section == 2)
-            return @[@{@"name":@"奥索洛",@"image":@"menu_image2"},
-                     @{@"name":@"奥莎尼",@"image":@"menu_image2"},
-                     @{@"name":@"奥玛芭莎",@"image":@"menu_image2"},
-                     @{@"name":@"奥玛芭思",@"image":@"menu_image2"},
-                     @{@"name":@"安踏",@"image":@"menu_image2"},
-                     @{@"name":@"乔丹",@"image":@"menu_image2"},
-                     @{@"name":@"安所",@"image":@"menu_image2"},
-                     @{@"name":@"安居兔",@"image":@"menu_image2"}];
+            return @[@{WMZMenuTitleNormal:@"奥索洛",@"image":@"menu_image2"},
+                     @{WMZMenuTitleNormal:@"奥莎尼",@"image":@"menu_image2"},
+                     @{WMZMenuTitleNormal:@"奥玛芭莎",@"image":@"menu_image2"},
+                     @{WMZMenuTitleNormal:@"奥玛芭思",@"image":@"menu_image2"},
+                     @{WMZMenuTitleNormal:@"安踏",@"image":@"menu_image2"},
+                     @{WMZMenuTitleNormal:@"乔丹",@"image":@"menu_image2"},
+                     @{WMZMenuTitleNormal:@"安所",@"image":@"menu_image2"},
+                     @{WMZMenuTitleNormal:@"安居兔",@"image":@"menu_image2"}];
         if (dropIndexPath.section == 3){
             if (dropIndexPath.row == 0)
                 return @[@{@"config":@{@"lowPlaceholder":@"最低价",@"highPlaceholder":@"最高价"}}];

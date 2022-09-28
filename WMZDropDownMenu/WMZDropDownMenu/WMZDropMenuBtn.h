@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
+@class WMZDropTree;
 @interface WMZDropIndexPath : NSObject
 /// section对应标题的列
 @property (nonatomic, assign) NSInteger section;
@@ -100,6 +100,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL connect;
 /// 标题
 @property (nonatomic, copy) NSString* title;
+/// 数据源
+@property (nonatomic, strong) NSMutableArray<WMZDropTree*>* treeArr;
 /// 初始化方法
 - (instancetype)initWithSection:(NSInteger)section row:(NSInteger)row;
 

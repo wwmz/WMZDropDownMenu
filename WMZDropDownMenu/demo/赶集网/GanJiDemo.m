@@ -35,6 +35,7 @@
     menu = [[WMZDropDownMenu alloc] initWithFrame:CGRectMake(0, Menu_NavigationBar, Menu_Width, 40) withParam:param];
     menu.delegate = self;
     [self.view addSubview:menu];
+
 }
 
 
@@ -61,10 +62,10 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-         @{@"name":@"全广州",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
-         @{@"name":@"租金",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
-         @{@"name":@"户型",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
-         @{@"name":@"更多",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
+         @{WMZMenuTitleNormal:@"全广州",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"租金",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"户型",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"更多",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
     ];
 }
 
@@ -83,7 +84,7 @@
 
 - (NSArray *)menu:(WMZDropDownMenu *)menu dataForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
       if (dropIndexPath.section == 0){
-          if (dropIndexPath.row == 0) return @[@"附近",@{@"name":@"区域"},@"地铁",@"学校"];
+          if (dropIndexPath.row == 0) return @[@"附近",@{WMZMenuTitleNormal:@"区域"},@"地铁",@"学校"];
           if (dropIndexPath.row == 1) return @[@"1号线",@"2号线",@"3号线",@"4号线",@"5号线",
                                                @"1号线",@"2号线",@"3号线",@"4号线",@"5号线",
                                                @"1号线",@"2号线",@"3号线",@"4号线",@"5号线"];
@@ -117,9 +118,7 @@
 - (NSInteger)menu:(WMZDropDownMenu *)menu countForRowAtDropIndexPath:(WMZDropIndexPath *)dropIndexPath{
     return 3;
 }
-/*
-*是否关联 其他标题 即选中其他标题 此标题会不会取消选中状态 default YES 
-*/
+
 - (BOOL)menu:(WMZDropDownMenu *)menu dropIndexPathConnectInSection:(NSInteger)section{
     return NO;
 }

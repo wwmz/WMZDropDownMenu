@@ -37,10 +37,10 @@
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
          @"全部",
-         @{@"name":@"合/整租"},
-         @{@"name":@"租金"},
-         @{@"name":@"筛选",@"normalImage":@"menu_shaixuan",
-           @"selectImage":@"menu_shaixuan"},
+         @{WMZMenuTitleNormal:@"合/整租"},
+         @{WMZMenuTitleNormal:@"租金"},
+         @{WMZMenuTitleNormal:@"筛选",WMZMenuTitleImage:@"menu_shaixuan",
+           WMZMenuTitleSelectImage:@"menu_shaixuan"},
     ];
 }
 
@@ -204,7 +204,7 @@
     //有个特殊场景 点击全部 取消其他选中 点击其他 取消全部
     if (dropIndexPath.section == 3 && dropIndexPath.row == 3) {
         if (indexpath.row == 0) {
-            NSArray *arr = [menu.dataDic objectForKey:dropIndexPath.key];
+            NSArray *arr = dropIndexPath.treeArr;
             [arr enumerateObjectsUsingBlock:^(WMZDropTree * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
               if (idx != 0 && obj.isSelected) {
                 [menu updateDataConfig:@{@"isSelected":@(NO)} AtDropIndexPathSection:dropIndexPath.section AtDropIndexPathRow:dropIndexPath.row AtIndexPathRow:idx];

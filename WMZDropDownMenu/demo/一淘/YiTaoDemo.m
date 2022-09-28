@@ -54,13 +54,13 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-         @{@"name":@"人气排序",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
+         @{WMZMenuTitleNormal:@"人气排序",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
          @"",
-         @{@"name":@"人气排序",@"normalImage":@"menu_treeCheck",
-           @"selectImage":@"menu_treeCheckSelect"},
-         @{@"name":@"人气排序",@"normalImage":@"menu_treeCheck",
-           @"selectImage":@"menu_treeCheckSelect"},
-         @{@"name":@"筛选",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"}
+         @{WMZMenuTitleNormal:@"人气排序",WMZMenuTitleImage:@"menu_treeCheck",
+           WMZMenuTitleSelectImage:@"menu_treeCheckSelect"},
+         @{WMZMenuTitleNormal:@"人气排序",WMZMenuTitleImage:@"menu_treeCheck",
+           WMZMenuTitleSelectImage:@"menu_treeCheckSelect"},
+         @{WMZMenuTitleNormal:@"筛选",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"}
     ];
 }
 

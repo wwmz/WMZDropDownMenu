@@ -13,6 +13,33 @@
 #import "WMZDropMenuTool.h"
 
 @implementation WMZDropMenuParam
+
+/// 标题
+WMZMenuTitleKey const WMZMenuTitleNormal = @"name";
+/// 选中的标题
+WMZMenuTitleKey const WMZMenuTitleSelect = @"selectTitle";
+/// 选中状态下再次点中的标题
+WMZMenuTitleKey const WMZMenuTitleReSelect = @"reSelectTitle";
+/// 字体大小
+WMZMenuTitleKey const WMZMenuTitleFontNum = @"font";
+/// 字体对象
+WMZMenuTitleKey const WMZMenuTitleFont = @"fontObject";
+/// 字体颜色
+WMZMenuTitleKey const WMZMenuTitleColor = @"normalColor";
+/// 选中的字体颜色
+WMZMenuTitleKey const WMZMenuTitleSelectColor = @"selectColor";
+/// 图片
+WMZMenuTitleKey const WMZMenuTitleImage = @"normalImage";
+/// 图片
+WMZMenuTitleKey const WMZMenuTitleSelectImage = @"selectImage";
+/// 选中状态下再点击的图片~>用于点击两次才回到原来的场景
+WMZMenuTitleKey const WMZMenuTitleReSelectImage = @"reSelectImage";
+/// 最后一个固定
+WMZMenuTitleKey const WMZMenuTitleLastFix = @"lastFix";
+/// 隐藏默认给的图标
+WMZMenuTitleKey const WMZMenuTitleHideDefaultImage = @"hideDefatltImage";
+
+
 WMZDropMenuParam * MenuParam(void){
     return  [WMZDropMenuParam  new];
 }

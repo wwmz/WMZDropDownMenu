@@ -40,9 +40,9 @@
          @"推荐",
          @"最新",
          @"",//占位
-         @{@"name":@"广州",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
-         @{@"name":@"筛选",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
-         @{@"name":@"关键词",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
+         @{WMZMenuTitleNormal:@"广州",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"筛选",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"关键词",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
     ];
 }
 

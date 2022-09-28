@@ -32,13 +32,13 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-         @{@"name":@"排序",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
-         @{@"name":@"信用优先",@"normalImage":@"menu_chaoshi",@"selectImage":@"menu_chaoshi"},
+         @{WMZMenuTitleNormal:@"排序",WMZMenuTitleImage:@"menu_dowm",WMZMenuTitleSelectImage:@"menu_up"},
+         @{WMZMenuTitleNormal:@"信用优先",WMZMenuTitleImage:@"menu_chaoshi",WMZMenuTitleSelectImage:@"menu_chaoshi"},
          @"0元起送",
          @"赠准时宝",
          @"首单立减",
          @"满减优惠",
-         @{@"name":@"更多",@"normalImage":@"menu_shaixuan",@"lastFix":@(YES)},  //最后一个固定
+         @{WMZMenuTitleNormal:@"更多",WMZMenuTitleImage:@"menu_shaixuan",WMZMenuTitleLastFix:@(YES)},  //最后一个固定
     ];
 }
 

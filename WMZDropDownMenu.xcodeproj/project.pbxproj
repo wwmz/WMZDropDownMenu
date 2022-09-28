@@ -17,6 +17,8 @@
 		F325D483238D1EE20018705E /* PinDDDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F325D482238D1EE20018705E /* PinDDDemo.m */; };
 		F33C07D2280845FA0000984A /* XibCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F33C07D0280845FA0000984A /* XibCollectionCell.m */; };
 		F33C07D3280845FA0000984A /* XibCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F33C07D1280845FA0000984A /* XibCollectionCell.xib */; };
+		F3430AD128E3505600C55B15 /* CustomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3430AD028E3505600C55B15 /* CustomVC.m */; };
+		F3430AD428E350D900C55B15 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3430AD328E350D900C55B15 /* CustomView.m */; };
 		F34F866A2805BA400071F9E8 /* WMZDropDownMenuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F34F86692805BA400071F9E8 /* WMZDropDownMenuTests.m */; };
 		F35F1CEC2390FE3F00F740C6 /* WeiPinDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F35F1CEB2390FE3F00F740C6 /* WeiPinDemo.m */; };
 		F35F1CF023911EEA00F740C6 /* YiTaoDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F35F1CEF23911EEA00F740C6 /* YiTaoDemo.m */; };
@@ -64,7 +66,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F303DB0C258B53F100F274E6 /* WMZDropMenuEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropMenuEnum.h; sourceTree = "<group>"; };
 		F303DB11258B5B5200F274E6 /* DemoTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoTwo.h; sourceTree = "<group>"; };
 		F303DB12258B5B5200F274E6 /* DemoTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoTwo.m; sourceTree = "<group>"; };
 		F31399A524BD9A88007161B2 /* WMZDropTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropTableView.h; sourceTree = "<group>"; };
@@ -83,6 +84,11 @@
 		F33C07CF280845FA0000984A /* XibCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XibCollectionCell.h; sourceTree = "<group>"; };
 		F33C07D0280845FA0000984A /* XibCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XibCollectionCell.m; sourceTree = "<group>"; };
 		F33C07D1280845FA0000984A /* XibCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XibCollectionCell.xib; sourceTree = "<group>"; };
+		F3430ACD28E33F5300C55B15 /* WMZDropShowViewProcotol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDropShowViewProcotol.h; sourceTree = "<group>"; };
+		F3430ACF28E3505600C55B15 /* CustomVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomVC.h; sourceTree = "<group>"; };
+		F3430AD028E3505600C55B15 /* CustomVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomVC.m; sourceTree = "<group>"; };
+		F3430AD228E350D900C55B15 /* CustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
+		F3430AD328E350D900C55B15 /* CustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
 		F34F86692805BA400071F9E8 /* WMZDropDownMenuTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDropDownMenuTests.m; sourceTree = "<group>"; };
 		F35F1CEA2390FE3F00F740C6 /* WeiPinDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeiPinDemo.h; sourceTree = "<group>"; };
 		F35F1CEB2390FE3F00F740C6 /* WeiPinDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeiPinDemo.m; sourceTree = "<group>"; };
@@ -211,6 +217,17 @@
 			path = "拼多多";
 			sourceTree = "<group>";
 		};
+		F3430ACE28E3503A00C55B15 /* 自定义展开视图 */ = {
+			isa = PBXGroup;
+			children = (
+				F3430ACF28E3505600C55B15 /* CustomVC.h */,
+				F3430AD028E3505600C55B15 /* CustomVC.m */,
+				F3430AD228E350D900C55B15 /* CustomView.h */,
+				F3430AD328E350D900C55B15 /* CustomView.m */,
+			);
+			path = "自定义展开视图";
+			sourceTree = "<group>";
+		};
 		F35F1CE92390FE3800F740C6 /* 唯品会 */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,8 +344,8 @@
 				F3FB9A7027E76DCC00F59E35 /* Aspects.h */,
 				F3FB9A6F27E76DCC00F59E35 /* Aspects.m */,
 				F3D8F62F2383BE50000FF9B4 /* WMZDropDwonMenuConfig.h */,
-				F303DB0C258B53F100F274E6 /* WMZDropMenuEnum.h */,
 				F37A48A323842BA500DB173C /* WMZDropMenuDelegate.h */,
+				F3430ACD28E33F5300C55B15 /* WMZDropShowViewProcotol.h */,
 				F3D8F62C2383BE37000FF9B4 /* WMZDropDownMenu.h */,
 				F3D8F62D2383BE37000FF9B4 /* WMZDropDownMenu.m */,
 				F395FCC424BEAC6100CAC7FE /* WMZDropDownMenu+Expand.h */,
@@ -353,6 +370,7 @@
 		F3DC8683238A4C860055BA98 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				F3430ACE28E3503A00C55B15 /* 自定义展开视图 */,
 				F303DB10258B5B4200F274E6 /* 实际项目实例2(自适应cell宽度) */,
 				F3DC868C238ACB720055BA98 /* 展示全部属性和代理 */,
 				F3DC8688238ACB450055BA98 /* 闲鱼 */,
@@ -576,6 +594,7 @@
 				F3D8F5F82383BCEE000FF9B4 /* AppDelegate.m in Sources */,
 				F325D483238D1EE20018705E /* PinDDDemo.m in Sources */,
 				F325D478238CC5080018705E /* TaoBaoDdemo.m in Sources */,
+				F3430AD128E3505600C55B15 /* CustomVC.m in Sources */,
 				F35F1CF023911EEA00F740C6 /* YiTaoDemo.m in Sources */,
 				F3DC8687238A6E4A0055BA98 /* JingDongDemo.m in Sources */,
 				F38738762408B44100D4D2AD /* DemoOne.m in Sources */,
@@ -583,6 +602,7 @@
 				F33C07D2280845FA0000984A /* XibCollectionCell.m in Sources */,
 				F3FB9A7127E76DCC00F59E35 /* Aspects.m in Sources */,
 				F3EDDAA9238D646400F9C608 /* GanJiDemo.m in Sources */,
+				F3430AD428E350D900C55B15 /* CustomView.m in Sources */,
 				F31EFA3A238BD815000C9258 /* MeiTuanDemo.m in Sources */,
 				F361533A238E1CD8006DFFB2 /* BossDemo.m in Sources */,
 			);

@@ -38,12 +38,18 @@
 
 - (NSArray*)titleArrInMenu:(WMZDropDownMenu *)menu{
     return @[
-         @{@"name":@"综合",@"normalImage":@"menu_dowm",@"selectImage":@"menu_up"},
+         @{WMZMenuTitleNormal:@"综合",
+           WMZMenuTitleImage:@"menu_dowm",
+           WMZMenuTitleSelectImage:@"menu_up"},
          @"销量价格",
-         @{@"name":@"价格",@"normalImage":@"menu_shangxia",
-           @"selectImage":@"menu_xiangshang",@"reSelectImage":@"menu_xiangxia"},
+         @{WMZMenuTitleNormal:@"价格",
+           WMZMenuTitleImage:@"menu_shangxia",
+           WMZMenuTitleSelectImage:@"menu_xiangshang",
+           WMZMenuTitleReSelectImage:@"menu_xiangxia"},
          @"品牌",
-         @{@"name":@"筛选",@"normalImage":@"menu_shaixuan",@"selectImage":@"menu_shaixuan"},
+         @{WMZMenuTitleNormal:@"筛选",
+           WMZMenuTitleImage:@"menu_shaixuan",
+           WMZMenuTitleSelectImage:@"menu_shaixuan"},
     ];
 }
 

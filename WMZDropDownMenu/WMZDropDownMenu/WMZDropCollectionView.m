@@ -9,7 +9,8 @@
 #import "WMZDropCollectionView.h"
 
 @implementation WMZDropCollectionView
-
+@synthesize dropIndex = __dropIndex;
+@synthesize dropArray = _dropArray;
 @end
 
 @implementation WMZMenuCell
@@ -71,9 +72,7 @@
 }
 
 - (void)textAction:(UITextField*)textField{
-    if (self.myBlock) {
-        self.myBlock(textField,textField.text);
-    }
+    if (self.myBlock) self.myBlock(textField,textField.text);
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
